@@ -1,3 +1,5 @@
+https://nextjs-netease-music.vercel.app/
+
 ## Dev
 
 - api 3000
