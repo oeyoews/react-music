@@ -1,9 +1,9 @@
-// import { unstable_cache } from 'next/cache';
-
 const baseurl = process.env.MUSIC_API;
 
 export async function getMusicURL(id: number): Promise<MusicURL> {
   const res = await fetch(`${baseurl}/song/url?id=${id}`, {
+    // https://github.com/vercel/next.js/discussions/48324
+    cache: 'no-cache', // 仍然提示 fetch for over 2MB of data can not be cached
     credentials: 'include',
   });
   const data = await res.json();

@@ -1,5 +1,7 @@
 import { search, searchTop, getPlayList, getMusicURL } from '~lib/search';
 
+import { unstable_cache } from 'next/cache';
+
 export default async function Home() {
   const { result } = await search('海阔天空');
   const songstop = await searchTop(6542);
