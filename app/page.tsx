@@ -11,7 +11,7 @@ export default async function Home() {
   // const {
   //   data: { dailySongs },
   // } = await getRecommendations();
-  // const { playlists } = await getHotPlayList();
+  const { playlists } = await getHotPlayList();
   // const songstop = await searchHot();
 
   return (
@@ -49,7 +49,7 @@ export default async function Home() {
             </li>
           ))}
         </ol>
-      </div>
+      </div> */}
 
       <div className='mx-1'>
         <h2>热门歌单</h2>
@@ -72,7 +72,7 @@ export default async function Home() {
             </li>
           ))}
         </ol>
-      </div> */}
+      </div>
 
       {/* hot songs */}
       {/* <div>
