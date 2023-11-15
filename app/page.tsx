@@ -1,10 +1,5 @@
 import {
-  getSongLyric,
-  search,
   searchHot,
-  getPlayList,
-  getMusicURL,
-  getMusicURLNEW,
   getbanners,
   getHotPlayList,
   getRecommendations,
@@ -15,24 +10,12 @@ export default async function Home() {
   const {
     data: { dailySongs },
   } = await getRecommendations();
-  // const { result } = await search('海阔天空');
   const songstop = await searchHot();
-  // const { playlist } = await getPlayList(24381616);
   const { banners } = await getbanners();
-  const { playlists } = await getHotPlayList();
-  // const { data } = await getMusicURL(28798452);
-  // const { data } = await getMusicURLNEW(28798452, 'standard');
-  // const lyric = await getSongLyric(28798452);
+  // const { playlists } = await getHotPlayList();
 
   return (
     <div className='prose mx-auto max-w-4xl p-1'>
-      {/* <audio controls>
-        <source src={data?.[0].url} type='audio/mpeg' />
-      </audio> */}
-      {/* {result.songs.map(({ name, artists, id }) => (
-        <div key={id}>{name}</div>
-      ))} */}
-
       {/* banner */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-3 not-prose m-2'>
         {banners.map((banner) => (
@@ -91,18 +74,21 @@ export default async function Home() {
         </ol>
       </div>
 
-      <h2>热门歌曲</h2>
-      <hr />
-      <ol className='columns-1 md:columns-2'>
-        {songstop.data.map((song) => (
-          <li key={song.searchWord}>
-            <div className='flex items-center'>
-              <div key={song.searchWord}>{song.searchWord}</div>
-              {song.content && <div> -- {song.content}</div>}
-            </div>
-          </li>
-        ))}
-      </ol>
+      {/* hot songs */}
+      {/* <div>
+        <h2>热门歌曲</h2>
+        <hr />
+        <ol className='columns-1 md:columns-2'>
+          {songstop.data.map((song) => (
+            <li key={song.searchWord}>
+              <div className='flex items-center'>
+                <div key={song.searchWord}>{song.searchWord}</div>
+                {song.content && <div> -- {song.content}</div>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div> */}
     </div>
   );
 }
