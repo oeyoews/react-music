@@ -1,4 +1,4 @@
-export default function RecommendSongs({ data }: { data: SonhDetail[] }) {
+export default function RecommendSongs({ data }: { data: SongDetail[] }) {
   return (
     <div>
       <h2>每日推荐</h2>
