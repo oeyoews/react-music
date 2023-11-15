@@ -3,6 +3,6 @@ module.exports = {
   trailingComma: 'all',
   singleQuote: true,
   endOfLine: 'lf',
-  jsxSingleQuote: true,
+  jsxSingleQuote: false, // vscode 即使开启, 也没用
   bracketSameLine: true,
 };
