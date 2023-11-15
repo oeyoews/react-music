@@ -1,5 +1,8 @@
 https://nextjs-netease-music.vercel.app/
 
+- nextjs, react
+- Tailwindcss: 还没上UI框架, 目前使用tailwindcss 手写ui
+
 ## Dev
 
 - api 3001

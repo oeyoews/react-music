@@ -1,4 +1,4 @@
-export default async function HotSongs({ data }: { data: HotDetail[] }) {
+export default function HotSongs({ data }: { data: HotDetail[] }) {
   return (
     <div>
       <h2>热门歌曲</h2>

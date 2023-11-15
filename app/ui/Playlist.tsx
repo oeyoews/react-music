@@ -1,5 +1,5 @@
 import Image from 'next/image';
-export default async function Playlist({ data }: { data: Playlist[] }) {
+export default function Playlist({ data }: { data: Playlist[] }) {
   return (
     <div>
       <h2>热门歌单</h2>
