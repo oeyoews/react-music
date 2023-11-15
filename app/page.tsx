@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <div className="prose mx-auto max-w-4xl p-1">
       <Banners data={bannerData.banners} />
-      <RecommendSongs data={recommendSongs.data.dailySongs} />
+      {songsHot && <RecommendSongs data={recommendSongs.data.dailySongs} />}
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
     </div>
