@@ -7,7 +7,29 @@ import { useRouter } from 'next/navigation';
 export default function Banners({ data }: { data: Banner[] }) {
   const router = useRouter();
   const handleClick = (banner: Banner) => {
-    router.push(`/song/${banner.targetId}`);
+    const { targetType: type, targetId: id } = banner;
+    switch (type) {
+      case 1:
+        // 歌曲页
+        router.push(`/song/${id}`);
+        break;
+      case 10:
+        // 专辑页
+        router.push(`/album?id=${id}`);
+        break;
+      case 1000:
+        // 歌单页
+        router.push(`/playlist?id=${id}&page=1`);
+        break;
+      case 1004:
+        // MV页
+        router.push(`/video?id=${id}`);
+        break;
+      case 3000:
+      // 站外链接
+      default:
+        break;
+    }
   };
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 not-prose m-2">
