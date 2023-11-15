@@ -12,10 +12,11 @@ https://nextjs-netease-music.vercel.app/
 
 ## TODO
 
-- 如何支持 ts(music api)
-- download url not available
-- recent song
-- qrcode use svg(or use canvas)
+- [ ] cookie login
+- [ ] 如何支持 ts(music api)
+- [ ] download url not available
+- [ ] recent song
+- [ ] qrcode use svg(or use canvas)
 
 <!-- https://github.com/imsyy/SPlayer/blob/dev/src/api/home.js -->
 
