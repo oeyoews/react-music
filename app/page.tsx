@@ -41,9 +41,9 @@ export default async function Home() {
             <Image
               src={banner.imageUrl}
               alt={banner.typeTitle}
-              loading='eager'
-              width={300}
-              height={300}
+              priority={true}
+              width={1080}
+              height={480}
               className='rounded w-full'
             />
           </div>
