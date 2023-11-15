@@ -1,10 +1,13 @@
 'use client';
-import { useEffect } from 'react';
+
+// Import necessary dependencies and API functions
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getqrKey, qrCheck, getQrStatus, qrCreate } from '~lib/login'; // Assuming you have these API functions.
 
 const LoginPage = () => {
   const router = useRouter();
+  const [qrimg, setQrImg] = useState('');
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -17,7 +20,8 @@ const LoginPage = () => {
         const qrcreate = await qrCreate(key);
         const qrimg = qrcreate.data.qrimg;
 
-        // Display QR Code to the user or do something with qrimg
+        // Display QR Code to the user
+        setQrImg(qrimg);
 
         // Step 3: Check QR Code Status
         let qrCodeChecked = false;
@@ -54,7 +58,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <p>Logging in...</p>
+      {qrimg ? <img src={qrimg} alt="QR Code" /> : <p>Logging in...</p>}
     </div>
   );
 };
