@@ -1,3 +1,72 @@
+// song detail
+interface ISongDetail {
+  songs: SongDetail[];
+  privileges: Privilege[];
+  code: number;
+}
+
+interface ChargeInfoList {
+  rate: number;
+  chargeUrl: null;
+  chargeMessage: null;
+  chargeType: number;
+}
+
+interface FreeTrialPrivilege {
+  resConsumable: boolean;
+  userConsumable: boolean;
+  listenType: null;
+}
+
+interface SongDetail {
+  name: string;
+  id: number;
+  pst: number;
+  t: number;
+  ar: Ar[];
+  alia: any[];
+  pop: number;
+  st: number;
+  rt: string;
+  fee: number;
+  v: number;
+  crbt: null;
+  cf: string;
+  al: Al;
+  dt: number;
+  h: H;
+  m: H;
+  l: H;
+  sq: H;
+  hr: H;
+  a: null;
+  cd: string;
+  no: number;
+  rtUrl: null;
+  ftype: number;
+  rtUrls: any[];
+  djId: number;
+  copyright: number;
+  s_id: number;
+  mark: number;
+  originCoverType: number;
+  originSongSimpleData: null;
+  tagPicList: null;
+  resourceState: boolean;
+  version: number;
+  songJumpInfo: null;
+  entertainmentTags: null;
+  awardTags: null;
+  single: number;
+  noCopyrightRcmd: null;
+  rtype: number;
+  rurl: null;
+  mst: number;
+  cp: number;
+  mv: number;
+  publishTime: number;
+}
+
 // recommend songs
 interface IRecommendSongs {
   code: number;
@@ -371,13 +440,18 @@ interface Lrc {
 
 interface MusicURL {
   code: number;
-  data: Data[];
+  data: IMuiscURL[];
 }
 
-interface Data {
+interface IMuiscURL {
   id: number;
   url: string;
+  level: Level;
   size: number;
+  type: string;
+  code: number;
+  size: number;
+  time: number;
 }
 
 // search
@@ -758,13 +832,6 @@ interface Video {
   alias: null;
 }
 
-interface ChargeInfoList {
-  rate: number;
-  chargeUrl: null;
-  chargeMessage: null;
-  chargeType: number;
-}
-
 enum Level {
   Exhigh = 'exhigh',
   Higher = 'higher',
@@ -774,11 +841,4 @@ enum Level {
   None = 'none',
   Sky = 'sky',
   Standard = 'standard',
-}
-
-interface FreeTrialPrivilege {
-  resConsumable: boolean;
-  userConsumable: boolean;
-  listenType: number;
-  cannotListenReason: number;
 }

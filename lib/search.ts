@@ -42,7 +42,17 @@ export async function getPlayListDetail(id: number): Promise<IPlaylist> {
   return await fetchData(url);
 }
 
-export async function getMusicURL(id: number): Promise<Data> {
+//  v1 有时会失效
+export async function getMusicURL(
+  id: number,
+  // level: any = 'standard',
+): Promise<MusicURL> {
   const url = createApiUrl('/song/url', { id });
+  console.log(url);
+  return await fetchData(url);
+}
+
+export async function getSongDetail(ids: number): Promise<ISongDetail> {
+  const url = createApiUrl('/song/detail', { ids });
   return await fetchData(url);
 }
