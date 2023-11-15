@@ -3,7 +3,7 @@
 // TODO: add enable timestampe params
 export function createApiUrl(
   endpoint: string,
-  params?: Record<string, string | number>,
+  params?: Record<string, string | number | boolean>,
 ): string {
   const baseUrl = process.env.NEXT_PUBLIC_MUSIC_API;
   let apiUrl = `${baseUrl}${endpoint}`;
@@ -12,7 +12,7 @@ export function createApiUrl(
   if (params) {
     // Include timestamp only if not already present in params
     // if (!params.hasOwnProperty('timestamp')) {
-    //   params.timestamp = new Date().getTime();
+    //   params.timestamp = Date.now();
     // }
     const queryString = Object.keys(params)
       .map(

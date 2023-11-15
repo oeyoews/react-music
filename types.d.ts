@@ -1,3 +1,50 @@
+interface ILoginStatus {
+  data: LoginStatus;
+}
+
+interface LoginStatus {
+  code: number;
+  account: Account;
+  profile: null;
+}
+
+interface Account {
+  id: number;
+  userName: string;
+  type: number;
+  status: number;
+  whitelistAuthority: number;
+  createTime: number;
+  tokenVersion: number;
+  ban: number;
+  baoyueVersion: number;
+  donateVersion: number;
+  vipType: number;
+  anonimousUser: boolean;
+  paidFee: boolean;
+}
+
+// login
+interface IQRCodeData {
+  code: number;
+  data: QRCodeData;
+}
+
+interface QRCodeData {
+  qrurl: string;
+  qrimg: string;
+}
+
+interface IQRCode {
+  data: QRCode;
+  code: number;
+}
+
+interface QRCode {
+  code: number;
+  unikey: string;
+}
+
 // song detail
 interface ISongDetail {
   songs: SongDetail[];

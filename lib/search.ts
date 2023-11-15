@@ -55,3 +55,8 @@ export async function getSongDetail(ids: number): Promise<ISongDetail> {
   const url = createApiUrl('/song/detail', { ids });
   return await fetchData(url);
 }
+
+// export async function getSongDetail(id: number): {
+//   const url = createApiUrl('/comment/music', { id });
+//   return await fetchData(url);
+// }
