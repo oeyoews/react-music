@@ -323,11 +323,11 @@ interface Banner {
 // hot detail
 interface IHotDetail {
   code: number;
-  data: Datum[];
+  data: HotDetail[];
   message: string;
 }
 
-interface Datum {
+interface HotDetail {
   searchWord: string;
   score: number;
   content: string;
