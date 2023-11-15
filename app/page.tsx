@@ -8,10 +8,10 @@ import Image from 'next/image';
 
 export default async function Home() {
   const { banners } = await getbanners();
-  const {
-    data: { dailySongs },
-  } = await getRecommendations();
-  const { playlists } = await getHotPlayList();
+  // const {
+  //   data: { dailySongs },
+  // } = await getRecommendations();
+  // const { playlists } = await getHotPlayList();
   // const songstop = await searchHot();
 
   return (
@@ -34,7 +34,7 @@ export default async function Home() {
       </div>
 
       {/* recommend songs */}
-      <div className='mx-1'>
+      {/* <div className='mx-1'>
         <h2>推荐歌曲</h2>
         <hr />
         <ol className='columns-1 md:columns-2'>
@@ -72,7 +72,7 @@ export default async function Home() {
             </li>
           ))}
         </ol>
-      </div>
+      </div> */}
 
       {/* hot songs */}
       {/* <div>
