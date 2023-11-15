@@ -1,0 +1,17 @@
+import { FaHome, FaMusic } from 'react-icons/fa';
+import Link from 'next/link';
+
+export default function Nav() {
+  return (
+    <>
+      <div className="flex items-center mx-auto justify-end print:hidden mb-8 sticky top-0 left-0 right-0 z-[1000] backdrop-blur-sm p-4 bg-white/30 max-w-4xl space-x-4 ">
+        <Link href="/">
+          <FaHome className="h-5 w-5" />
+        </Link>
+        <Link href="/song">
+          <FaMusic className="h-5 w-5" />
+        </Link>
+      </div>
+    </>
+  );
+}
