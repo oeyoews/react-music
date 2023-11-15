@@ -22,28 +22,28 @@ export default async function Home() {
   // const lyric = await getSongLyric(28798452);
 
   return (
-    <div className='prose mx-auto max-w-2xl'>
+    <div className='prose mx-auto max-w-4xl'>
       {/* <audio controls>
         <source src={data?.[0].url} type='audio/mpeg' />
       </audio> */}
       {/* {result.songs.map(({ name, artists, id }) => (
         <div key={id}>{name}</div>
       ))} */}
-      {banners.map((banner) => (
-        <div
-          key={banner.imageUrl}
-          className='flex justify-between items-center'
-        >
-          <span>{banner.typeTitle}</span>
-          <Image
-            src={banner.imageUrl}
-            alt={banner.typeTitle}
-            width={300}
-            height={300}
-            className='rounded'
-          />
-        </div>
-      ))}
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-3 not-prose m-2'>
+        {banners.map((banner) => (
+          <div key={banner.imageUrl}>
+            {/* <span>{banner.typeTitle}</span> */}
+            <Image
+              src={banner.imageUrl}
+              alt={banner.typeTitle}
+              loading='eager'
+              width={300}
+              height={300}
+              className='rounded w-full'
+            />
+          </div>
+        ))}
+      </div>
       <h2>热门歌曲</h2>
       <hr />
       <ol>

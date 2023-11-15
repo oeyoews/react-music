@@ -8,6 +8,7 @@ https://nextjs-netease-music.vercel.app/
 ## TODO
 
 - 如何支持 ts(music api)
+- download url not available
 
 ```
 Error: ENOENT: no such file or directory, scandir 'D:\Workspace\react-music\.next\server\vendor-chunks\module'
