@@ -1,3 +1,50 @@
+// hot detail
+interface HotDetail {
+  code: number;
+  data: Datum[];
+  message: string;
+}
+
+interface Datum {
+  searchWord: string;
+  score: number;
+  content: string;
+  source: number;
+  iconType: number;
+  iconUrl: null | string;
+  url: string;
+  // alg: Alg;
+}
+
+// level
+type Level =
+  | 'standard'
+  | 'higher'
+  | 'exhigh'
+  | 'lossless'
+  | 'hires'
+  | 'sky'
+  | 'jymaster';
+
+// lyric
+interface Lyric {
+  transUser: TransUser;
+  lrc: Lrc;
+}
+interface TransUser {
+  id: number;
+  status: number;
+  demand: number;
+  userid: number;
+  nickname: string;
+  uptime: number;
+}
+
+interface Lrc {
+  lyric: string;
+  version: number;
+}
+
 // music url
 
 interface MusicURL {

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "NeteaseCloudMusicApi": "^4.13.6",
     "next": "14.0.2",
     "react": "^18",
