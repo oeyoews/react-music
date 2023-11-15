@@ -87,6 +87,7 @@ interface FreeTrialPrivilege {
 }
 
 interface SongDetail {
+  // success: boolean;
   name: string;
   id: number;
   pst: number;

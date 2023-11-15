@@ -3,6 +3,17 @@
 import { createApiUrl } from './createApiUrl';
 import { fetchData } from './fetchData';
 
+export const checkSong = async (
+  id: number,
+): Promise<{
+  code: number;
+  success: boolean;
+  message: string;
+}> => {
+  const url = createApiUrl('/check/music', { id });
+  return await fetchData(url);
+};
+
 /**
  * Retrieves a list of recommended songs.
  *
