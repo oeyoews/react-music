@@ -56,8 +56,8 @@ export default async function Home() {
         <hr />
         <ol className='columns-1 md:columns-2'>
           {dailySongs.map(({ name, id, recommendReason }) => (
-            <li>
-              <div className='flex space-x-2 items-center' key={id}>
+            <li key={id}>
+              <div className='flex space-x-2 items-center'>
                 <div>{name}</div>
                 <div className=''>
                   {recommendReason && <div> -- {recommendReason}</div>}
@@ -73,8 +73,8 @@ export default async function Home() {
         <hr />
         <ol className='space-y-2 columns-1 md:columns-2'>
           {playlists.map((playlist) => (
-            <li>
-              <div className='flex items-center space-x-2' key={playlist.name}>
+            <li key={playlist.name}>
+              <div className='flex items-center space-x-2'>
                 <div className='not-prose'>
                   <Image
                     src={playlist.coverImgUrl}
@@ -95,8 +95,8 @@ export default async function Home() {
       <hr />
       <ol className='columns-1 md:columns-2'>
         {songstop.data.map((song) => (
-          <li>
-            <div className='flex items-center' key={song.searchWord}>
+          <li key={song.searchWord}>
+            <div className='flex items-center'>
               <div key={song.searchWord}>{song.searchWord}</div>
               {song.content && <div> -- {song.content}</div>}
             </div>
