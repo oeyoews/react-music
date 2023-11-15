@@ -56,12 +56,14 @@ export default async function Home() {
         <hr />
         <ol className='columns-1 md:columns-2'>
           {dailySongs.map(({ name, id, recommendReason }) => (
-            <div className='flex space-x-2 items-center' key={id}>
-              <li>{name}</li>
-              <div className=''>
-                {recommendReason && <div> -- {recommendReason}</div>}
+            <li>
+              <div className='flex space-x-2 items-center' key={id}>
+                <div>{name}</div>
+                <div className=''>
+                  {recommendReason && <div> -- {recommendReason}</div>}
+                </div>
               </div>
-            </div>
+            </li>
           ))}
         </ol>
       </div>
@@ -71,18 +73,20 @@ export default async function Home() {
         <hr />
         <ol className='space-y-2 columns-1 md:columns-2'>
           {playlists.map((playlist) => (
-            <div className='flex items-center space-x-2' key={playlist.name}>
-              <li className='not-prose'>
-                <Image
-                  src={playlist.coverImgUrl}
-                  alt={playlist.name}
-                  width={22}
-                  height={22}
-                  className='rounded-full'
-                />
-              </li>
-              <div>{playlist.name}</div>
-            </div>
+            <li>
+              <div className='flex items-center space-x-2' key={playlist.name}>
+                <div className='not-prose'>
+                  <Image
+                    src={playlist.coverImgUrl}
+                    alt={playlist.name}
+                    width={22}
+                    height={22}
+                    className='rounded-full'
+                  />
+                </div>
+                <div>{playlist.name}</div>
+              </div>
+            </li>
           ))}
         </ol>
       </div>
@@ -91,10 +95,12 @@ export default async function Home() {
       <hr />
       <ol className='columns-1 md:columns-2'>
         {songstop.data.map((song) => (
-          <div className='flex items-center' key={song.searchWord}>
-            <li key={song.searchWord}>{song.searchWord}</li>
-            {song.content && <div> -- {song.content}</div>}
-          </div>
+          <li>
+            <div className='flex items-center' key={song.searchWord}>
+              <div key={song.searchWord}>{song.searchWord}</div>
+              {song.content && <div> -- {song.content}</div>}
+            </div>
+          </li>
         ))}
       </ol>
     </div>
