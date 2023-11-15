@@ -2,6 +2,7 @@
 // cache: 'no-cache', // 仍然提示 fetch for over 2MB of data can not be cached
 import { createApiUrl } from './createApiUrl';
 
+// NOTE: 需要登录才能获取推荐歌曲
 export async function getRecommendations(): Promise<IRecommendSongs> {
   const res = await fetch(createApiUrl('/recommend/songs'), {
     credentials: 'include',
