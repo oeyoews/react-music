@@ -48,7 +48,6 @@ export async function getMusicURL(
   // level: any = 'standard',
 ): Promise<MusicURL> {
   const url = createApiUrl('/song/url', { id });
-  console.log(url);
   return await fetchData(url);
 }
 
