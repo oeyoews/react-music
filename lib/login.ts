@@ -15,13 +15,13 @@ export const qrCreate = async (key: string): Promise<IQRCodeData> => {
   return await fetchData(url);
 };
 
-// export const qrCheck = async (key: string): Promise<IQRCodeData> => {
-//   const url = createApiUrl('/login/qr/check', {
-//     key,
-//     timestamp: Date.now(),
-//   });
-//   return await fetchData(url);
-// };
+export const qrCheck = async (key: string): Promise<CheckQrcode> => {
+  const url = createApiUrl('/login/qr/check', {
+    key,
+    timestamp: Date.now(),
+  });
+  return await fetchData(url);
+};
 
 export const getQrStatus = async (): Promise<ILoginStatus> => {
   const url = createApiUrl('/login/status', { timestamp: Date.now() });

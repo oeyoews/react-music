@@ -1,3 +1,9 @@
+interface CheckQrcode {
+  code: number;
+  message: string;
+  cookie: string;
+}
+
 interface ILoginStatus {
   data: LoginStatus;
 }
