@@ -1,3 +1,198 @@
+// recommend songs
+interface IRecommendSongs {
+  code: number;
+  data: RecommendSongsData;
+}
+
+interface RecommendSongsData {
+  dailySongs: DailySong[];
+  orderSongs: any[];
+  recommendReasons: RecommendReason[];
+  mvResourceInfos: null;
+}
+
+interface DailySong {
+  name: string;
+  id: number;
+  pst: number;
+  t: number;
+  ar: Ar[];
+  alia: string[];
+  pop: number;
+  st: number;
+  rt: Rt | null;
+  fee: number;
+  v: number;
+  crbt: null;
+  cf: string;
+  al: Al;
+  dt: number;
+  h: L | null;
+  m: L | null;
+  l: L;
+  sq: L | null;
+  hr: L | null;
+  a: null;
+  cd: string;
+  no: number;
+  rtUrl: null;
+  ftype: number;
+  rtUrls: any[];
+  djId: number;
+  copyright: number;
+  s_id: number;
+  mark: number;
+  originCoverType: number;
+  originSongSimpleData: OriginSongSimpleData | null;
+  tagPicList: null;
+  resourceState: boolean;
+  version: number;
+  songJumpInfo: null;
+  entertainmentTags: null;
+  single: number;
+  noCopyrightRcmd: null;
+  rtype: number;
+  rurl: null;
+  mst: number;
+  cp: number;
+  mv: number;
+  publishTime: number;
+  reason: null | string;
+  videoInfo: VideoInfo;
+  recommendReason: null | string;
+  privilege: Privilege;
+  alg: Alg;
+  tns?: string[];
+  s_ctrp?: string;
+}
+
+interface Al {
+  id: number;
+  name: string;
+  picUrl: string;
+  tns: string[];
+  pic_str?: string;
+  pic: number;
+}
+
+enum Alg {
+  DailyAuditionRecentArtist = 'daily_audition_recentArtist',
+  DailyAuditionRtLike = 'daily_audition_rt_like',
+  ItembasedOn = 'itembased_on',
+  OnMind34 = 'on_mind3_4',
+}
+
+interface Ar {
+  id: number;
+  name: string;
+  tns: any[];
+  alias: any[];
+}
+
+interface L {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+interface OriginSongSimpleData {
+  songId: number;
+  name: string;
+  artists: AlbumMeta[];
+  albumMeta: AlbumMeta;
+}
+
+interface AlbumMeta {
+  id: number;
+  name: string;
+}
+
+interface Privilege {
+  id: number;
+  fee: number;
+  payed: number;
+  st: number;
+  pl: number;
+  dl: number;
+  sp: number;
+  cp: number;
+  subp: number;
+  cs: boolean;
+  maxbr: number;
+  fl: number;
+  toast: boolean;
+  flag: number;
+  preSell: boolean;
+  playMaxbr: number;
+  downloadMaxbr: number;
+  maxBrLevel: MaxBrLevel;
+  playMaxBrLevel: MaxBrLevel;
+  downloadMaxBrLevel: MaxBrLevel;
+  plLevel: LLevel;
+  dlLevel: DLLevel;
+  flLevel: LLevel;
+  rscl: null;
+  freeTrialPrivilege: FreeTrialPrivilege;
+  chargeInfoList: ChargeInfoList[];
+}
+
+interface ChargeInfoList {
+  rate: number;
+  chargeUrl: null;
+  chargeMessage: null;
+  chargeType: number;
+}
+
+enum DLLevel {
+  Hires = 'hires',
+  None = 'none',
+}
+
+enum MaxBrLevel {
+  Sky = 'sky',
+}
+
+enum LLevel {
+  Exhigh = 'exhigh',
+  None = 'none',
+  Standard = 'standard',
+}
+
+interface FreeTrialPrivilege {
+  resConsumable: boolean;
+  userConsumable: boolean;
+  listenType: number;
+}
+
+enum Rt {
+  Empty = '',
+  The600902000008129682 = '600902000008129682',
+}
+
+interface VideoInfo {
+  moreThanOne: boolean;
+  video: Video | null;
+}
+
+interface Video {
+  vid: string;
+  type: number;
+  title: string;
+  playTime: number;
+  coverUrl: string;
+  publishTime: number;
+  artists: null;
+}
+
+interface RecommendReason {
+  songId: number;
+  reason: string;
+  reasonId: string;
+  targetUrl: null;
+}
+
 // top playlist
 interface IPlaylist {
   playlists: Playlist[];

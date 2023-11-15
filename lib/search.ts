@@ -1,30 +1,12 @@
 // https://github.com/vercel/next.js/discussions/48324
 // cache: 'no-cache', // 仍然提示 fetch for over 2MB of data can not be cached
+import { createApiUrl } from './createApiUrl';
 
-// 创建一个工具函数，用于生成完整的 API 地址
-// 模仿axios 的写法
-function createApiUrl(
-  endpoint: string,
-  params?: Record<string, string | number>
-): string {
-  const baseUrl = process.env.NEXT_PUBLIC_MUSIC_API;
-  let apiUrl = `${baseUrl}${endpoint}`;
-
-  // 添加参数到 URL
-  if (params) {
-    // Include timestamp only if not already present in params
-    // if (!params.hasOwnProperty('timestamp')) {
-    //   params.timestamp = new Date().getTime();
-    // }
-    const queryString = Object.keys(params)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
-      )
-      .join('&');
-    apiUrl = `${apiUrl}?${queryString}`;
-  }
-
-  return apiUrl;
+export async function getRecommendations(): Promise<IRecommendSongs> {
+  const res = await fetch(createApiUrl('/recommend/songs'), {
+    credentials: 'include',
+  });
+  return await res.json();
 }
 
 export async function getHotPlayList(): Promise<IPlaylist> {

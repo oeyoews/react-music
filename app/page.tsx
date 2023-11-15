@@ -7,16 +7,17 @@ import {
   getMusicURLNEW,
   getbanners,
   getHotPlayList,
+  getRecommendations,
 } from '~lib/search';
 import Image from 'next/image';
-import { use, useEffect, useState } from 'react';
-
-import { unstable_cache } from 'next/cache';
 
 export default async function Home() {
-  const { result } = await search('海阔天空');
+  const {
+    data: { dailySongs },
+  } = await getRecommendations();
+  // const { result } = await search('海阔天空');
   const songstop = await searchHot();
-  const { playlist } = await getPlayList(24381616);
+  // const { playlist } = await getPlayList(24381616);
   const { banners } = await getbanners();
   const { playlists } = await getHotPlayList();
   // const { data } = await getMusicURL(28798452);
@@ -32,6 +33,7 @@ export default async function Home() {
         <div key={id}>{name}</div>
       ))} */}
 
+      {/* banner */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-3 not-prose m-2'>
         {banners.map((banner) => (
           <div key={banner.imageUrl}>
@@ -48,15 +50,26 @@ export default async function Home() {
         ))}
       </div>
 
+      {/* recommend songs */}
+      <h2>推荐歌曲</h2>
+      <hr />
+      <ol className='columns-2'>
+        {dailySongs.map(({ name, id, recommendReason }) => (
+          <div className='flex space-x-2 items-center' key={id}>
+            <li>{name}</li>
+            <div className=''>
+              {recommendReason && <div> -- {recommendReason}</div>}
+            </div>
+          </div>
+        ))}
+      </ol>
+
       <h2>热门歌单</h2>
       <hr />
       <ol className='space-y-2 columns-2'>
         {playlists.map((playlist) => (
-          <div className='flex'>
-            <li key={playlist.id} className='space-x-2'>
-              <div>{playlist.name}</div>
-            </li>
-            {/* <div className='not-prose'>
+          <div className='flex items-center space-x-2' key={playlist.name}>
+            <li className='not-prose'>
               <Image
                 src={playlist.coverImgUrl}
                 alt={playlist.name}
@@ -64,7 +77,8 @@ export default async function Home() {
                 height={22}
                 className='rounded-full'
               />
-            </div> */}
+            </li>
+            <div>{playlist.name}</div>
           </div>
         ))}
       </ol>
