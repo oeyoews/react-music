@@ -321,7 +321,7 @@ interface Banner {
 }
 
 // hot detail
-interface HotDetail {
+interface IHotDetail {
   code: number;
   data: Datum[];
   message: string;

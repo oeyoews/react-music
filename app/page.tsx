@@ -1,18 +1,16 @@
 import {
-  searchHot,
-  getbanners,
+  getBanners,
   getHotPlayList,
   getRecommendations,
+  searchHot,
 } from '~lib/search';
 import Image from 'next/image';
 
 export default async function Home() {
-  const { banners } = await getbanners();
-  // const {
-  //   data: { dailySongs },
-  // } = await getRecommendations();
+  const { banners } = await getBanners();
+  // const recommendSongs = await getRecommendations();
   const { playlists } = await getHotPlayList();
-  const songstop = await searchHot();
+  const songsHot = await searchHot();
 
   return (
     <div className='prose mx-auto max-w-4xl p-1'>
@@ -35,19 +33,21 @@ export default async function Home() {
 
       {/* recommend songs */}
       {/* <div className='mx-1'>
-        <h2>推荐歌曲</h2>
+        <h2>每日推荐</h2>
         <hr />
         <ol className='columns-1 md:columns-2'>
-          {dailySongs.map(({ name, id, recommendReason }) => (
-            <li key={id}>
-              <div className='flex space-x-2 items-center'>
-                <div>{name}</div>
-                <div className=''>
-                  {recommendReason && <div> -- {recommendReason}</div>}
+          {recommendSongs.data.dailySongs.map(
+            ({ name, id, recommendReason }) => (
+              <li key={id}>
+                <div className='flex space-x-2 items-center'>
+                  <div>{name}</div>
+                  <div className=''>
+                    {recommendReason && <div> -- {recommendReason}</div>}
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            )
+          )}
         </ol>
       </div> */}
 
@@ -79,7 +79,7 @@ export default async function Home() {
         <h2>热门歌曲</h2>
         <hr />
         <ol className='columns-1 md:columns-2'>
-          {songstop.data.map((song) => (
+          {songsHot.data.map((song) => (
             <li key={song.searchWord}>
               <div className='flex items-center'>
                 <div key={song.searchWord}>{song.searchWord}</div>

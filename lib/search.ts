@@ -1,117 +1,48 @@
-// https://github.com/vercel/next.js/discussions/48324
-// cache: 'no-cache', // 仍然提示 fetch for over 2MB of data can not be cached
 import { createApiUrl } from './createApiUrl';
+import { fetchData } from './fetchData';
 
-// NOTE: 需要登录才能获取推荐歌曲
+/**
+ * Retrieves a list of recommended songs.
+ *
+ * @return {Promise<IRecommendSongs>} A promise that resolves to an object containing recommended songs.
+ */
 export async function getRecommendations(): Promise<IRecommendSongs> {
-  const res = await fetch(createApiUrl('/recommend/songs'), {
-    credentials: 'include',
-  });
-  return await res.json();
+  // need login
+  const url = createApiUrl('/recommend/songs');
+  return await fetchData(url);
 }
 
+/**
+ * Retrieves the hot playlist.
+ *
+ * @return {Promise<IPlaylist>} A promise that resolves to the hot playlist.
+ */
 export async function getHotPlayList(): Promise<IPlaylist> {
-  const res = await fetch(createApiUrl('/top/playlist/'), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
+  const url = createApiUrl('/top/playlist');
+  return await fetchData(url);
 }
 
-export async function getbanners(): Promise<IBanner> {
-  const res = await fetch(createApiUrl('/banner', { type: 0 }), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
+/**
+ * Retrieves the banners from the server.
+ *
+ * @return {Promise<IBanner>} A promise that resolves with the banners.
+ */
+export async function getBanners(): Promise<IBanner> {
+  const url = createApiUrl('/banner', { type: 0 });
+  return await fetchData(url);
 }
 
-export async function getMusicURLNEW(
-  id: number,
-  level: Level = 'standard'
-): Promise<MusicURL> {
-  const params = {
-    id,
-    level,
-  };
-  const res = await fetch(createApiUrl('/song/url/v1', params), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
+export async function searchHot(): Promise<IHotDetail> {
+  const url = createApiUrl('/search/hot/detail');
+  return await fetchData(url);
 }
 
-// 获取音乐URL
-export async function getMusicURL(id: number): Promise<MusicURL> {
-  const res = await fetch(createApiUrl('/song/url', { id }), {
-    // cache: 'force-cache',
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
+export async function getPlayListDetail(id: number): Promise<IPlaylist> {
+  const url = createApiUrl('/playlist/detail', { id });
+  return await fetchData(url);
 }
 
-// 获取播放列表详情
-export async function getPlayList(id: number): Promise<PlayListDetails> {
-  const res = await fetch(createApiUrl('/playlist/detail', { id }), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
+export async function getMusicURL(id: number): Promise<Data> {
+  const url = createApiUrl('/song/url', { id });
+  return await fetchData(url);
 }
-
-// 搜索音乐
-export async function search(keywords: string): Promise<Search> {
-  const res = await fetch(createApiUrl('/search/suggest', { keywords }), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
-}
-
-// 获取艺术家热门歌曲
-export async function searchHot(): Promise<HotDetail> {
-  const res = await fetch(createApiUrl('/search/hot/detail'), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
-}
-
-export async function getSongLyric(id: number): Promise<Lyric> {
-  const res = await fetch(createApiUrl('/lyric', { id }), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
-}
-
-export async function getSongNewLyric(id: number): Promise<Lyric> {
-  const res = await fetch(createApiUrl('/lyric/new', { id }), {
-    credentials: 'include',
-  });
-  const data = await res.json();
-  return data;
-}
-
-// 示例：获取推荐歌单
-// export async function getRecommendations(
-//   limit: number
-// ): Promise<Recommendations> {
-//   const res = await fetch(createApiUrl('personalized', { limit }), {
-//     credentials: 'include',
-//   });
-//   const data = await res.json();
-//   return data;
-// }
-
-// // 示例：获取歌曲详情
-// export async function getSongDetails(id: number): Promise<SongDetails> {
-//   const res = await fetch(createApiUrl('song/detail', { id }), {
-//     credentials: 'include',
-//   });
-//   const data = await res.json();
-//   return data;
-// }
-
-// // 添加更多的 API 函数...
