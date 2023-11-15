@@ -14,7 +14,6 @@ export default async function Home() {
   const songsHot = await searchHot();
   const PlaylistData = await getHotPlayList();
   const qrStatus = await getQrStatus();
-  // const recommendSongs = await getRecommendations();
 
   return (
     <div className="p-2">

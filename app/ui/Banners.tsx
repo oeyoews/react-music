@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 // TODO: click events
 // @see-also https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/components/Banner/index.vue#L38
 export default function Banners({ data }: { data: Banner[] }) {
@@ -31,6 +32,7 @@ export default function Banners({ data }: { data: Banner[] }) {
       default:
         break;
     }
+    toast.success(`跳转到${banner.typeTitle}`);
   };
   const container = {
     hidden: { opacity: 1, scale: 0 },

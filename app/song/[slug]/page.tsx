@@ -23,7 +23,7 @@ export default async function Page({ params }: any) {
       <div>音质: {musicdata.data[0].level}</div>
       <div className="flex justify-center items-center">
         <audio controls>
-          <source src={musicdata.data[0].url} type="audio/mp3" />
+          <source src={musicdata.data[0].url} />
         </audio>
       </div>
     </div>

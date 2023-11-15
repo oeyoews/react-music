@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getqrKey, qrCheck, getQrStatus, qrCreate } from '~lib/login'; // Assuming you have these API functions.
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const LoginPage = () => {
 
         // Display QR Code to the user
         setQrImg(qrimg);
-
+        toast.info('请使用手机扫描二维码登录');
         // Step 3: Check QR Code Status
         let qrCodeChecked = false;
         while (!qrCodeChecked) {
