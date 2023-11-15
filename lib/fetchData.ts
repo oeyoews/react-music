@@ -1,7 +1,7 @@
 // https://github.com/vercel/next.js/discussions/48324
 export async function fetchData<T>(
   url: string,
-  options?: RequestInit
+  options?: RequestInit,
 ): Promise<T> {
   const defaultOptions: RequestInit = { credentials: 'include' };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };

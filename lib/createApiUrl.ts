@@ -2,7 +2,7 @@
 // 模仿axios 的写法
 export function createApiUrl(
   endpoint: string,
-  params?: Record<string, string | number>
+  params?: Record<string, string | number>,
 ): string {
   const baseUrl = process.env.NEXT_PUBLIC_MUSIC_API;
   let apiUrl = `${baseUrl}${endpoint}`;
@@ -15,7 +15,8 @@ export function createApiUrl(
     // }
     const queryString = Object.keys(params)
       .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
       )
       .join('&');
     apiUrl = `${apiUrl}?${queryString}`;
