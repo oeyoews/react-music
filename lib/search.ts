@@ -27,6 +27,14 @@ function createApiUrl(
   return apiUrl;
 }
 
+export async function getHotPlayList(): Promise<IPlaylist> {
+  const res = await fetch(createApiUrl('/top/playlist/'), {
+    credentials: 'include',
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function getbanners(): Promise<IBanner> {
   const res = await fetch(createApiUrl('/banner', { type: 0 }), {
     credentials: 'include',

@@ -2,8 +2,8 @@ https://nextjs-netease-music.vercel.app/
 
 ## Dev
 
-- api 3000
-- dev 3001
+- api 3001
+- dev 3000
 
 ## TODO
 

@@ -6,6 +6,7 @@ import {
   getMusicURL,
   getMusicURLNEW,
   getbanners,
+  getHotPlayList,
 } from '~lib/search';
 import Image from 'next/image';
 import { use, useEffect, useState } from 'react';
@@ -17,6 +18,7 @@ export default async function Home() {
   const songstop = await searchHot();
   const { playlist } = await getPlayList(24381616);
   const { banners } = await getbanners();
+  const { playlists } = await getHotPlayList();
   // const { data } = await getMusicURL(28798452);
   // const { data } = await getMusicURLNEW(28798452, 'standard');
   // const lyric = await getSongLyric(28798452);
@@ -29,6 +31,7 @@ export default async function Home() {
       {/* {result.songs.map(({ name, artists, id }) => (
         <div key={id}>{name}</div>
       ))} */}
+
       <div className='grid grid-cols-1 md:grid-cols-3 gap-3 not-prose m-2'>
         {banners.map((banner) => (
           <div key={banner.imageUrl}>
@@ -44,9 +47,31 @@ export default async function Home() {
           </div>
         ))}
       </div>
+
+      <h2>热门歌单</h2>
+      <hr />
+      <ol className='space-y-2 columns-2'>
+        {playlists.map((playlist) => (
+          <div className='flex'>
+            <li key={playlist.id} className='space-x-2'>
+              <div>{playlist.name}</div>
+            </li>
+            {/* <div className='not-prose'>
+              <Image
+                src={playlist.coverImgUrl}
+                alt={playlist.name}
+                width={22}
+                height={22}
+                className='rounded-full'
+              />
+            </div> */}
+          </div>
+        ))}
+      </ol>
+
       <h2>热门歌曲</h2>
       <hr />
-      <ol>
+      <ol className='columns-2'>
         {songstop.data.map((song) => (
           <div className='flex flex-row' key={song.searchWord}>
             {/* {song.iconUrl && (
