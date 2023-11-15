@@ -24,7 +24,7 @@ export default async function Home() {
     <div className="prose p-2 prose-zinc max-w-none">
       <Banners data={bannerData.banners} />
       <div className="flex items-center my-2 space-x-2">
-        <FaUser /> {qrStatus.data.account.userName}
+        <FaUser /> {qrStatus.data.account?.userName}
       </div>
       {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
       <HotSongs data={songsHot.data} />
