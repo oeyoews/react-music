@@ -8,6 +8,8 @@ import { getqrKey, qrCheck, getQrStatus, qrCreate } from '~lib/login'; // Assumi
 const LoginPage = () => {
   const router = useRouter();
   const [qrimg, setQrImg] = useState('');
+  const [loginStatus, setLoginStatus] = useState({});
+  const [key, setKey] = useState('');
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -15,6 +17,7 @@ const LoginPage = () => {
         // Step 1: Get QR Code Key
         const qrkey = await getqrKey();
         const key = qrkey.data.unikey;
+        setKey(key);
 
         // Step 2: Create QR Code
         const qrcreate = await qrCreate(key);
@@ -39,11 +42,8 @@ const LoginPage = () => {
           }
         }
 
-        // Step 4: Get Login Status
-        const loginStatus = await getQrStatus();
-
         // Redirect or handle login status as needed
-        if (loginStatus.data.code === 200) {
+        if (loginStatus === 803) {
           router.push('/'); // Redirect to the dashboard after successful login
         } else {
           console.error('Login failed:', loginStatus);
@@ -54,7 +54,13 @@ const LoginPage = () => {
     };
 
     handleLogin();
-  }, [router]);
+    // Step 4: Get Login Status
+    setInterval(async () => {
+      const qrCodeChecked = await qrCheck(key);
+      setLoginStatus(qrCodeChecked.code);
+      console.log(JSON.stringify(qrCodeChecked));
+    }, 2000);
+  }, []);
 
   return (
     <div>

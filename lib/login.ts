@@ -1,3 +1,4 @@
+'use server';
 import { createApiUrl } from './createApiUrl';
 import { fetchData } from './fetchData';
 
@@ -25,5 +26,10 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
 
 export const getQrStatus = async (): Promise<ILoginStatus> => {
   const url = createApiUrl('/login/status', { timestamp: Date.now() });
+  return await fetchData(url);
+};
+
+export const loginAnonymous = async (): Promise<any> => {
+  const url = createApiUrl('/register/anonymous', { timestamp: Date.now() });
   return await fetchData(url);
 };
