@@ -12,7 +12,7 @@ export default async function Home() {
   //   data: { dailySongs },
   // } = await getRecommendations();
   const { playlists } = await getHotPlayList();
-  // const songstop = await searchHot();
+  const songstop = await searchHot();
 
   return (
     <div className='prose mx-auto max-w-4xl p-1'>
@@ -75,7 +75,7 @@ export default async function Home() {
       </div>
 
       {/* hot songs */}
-      {/* <div>
+      <div>
         <h2>热门歌曲</h2>
         <hr />
         <ol className='columns-1 md:columns-2'>
@@ -88,7 +88,7 @@ export default async function Home() {
             </li>
           ))}
         </ol>
-      </div> */}
+      </div>
     </div>
   );
 }
