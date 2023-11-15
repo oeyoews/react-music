@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased `}>
         <NextTopLoader />
         <Nav />
-        <div className="mx-auto max-w-4xl">{children}</div>
+        <div className="prose mx-auto max-w-4xl">{children}</div>
       </body>
     </html>
   );

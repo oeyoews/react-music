@@ -14,16 +14,6 @@ export async function getRecommendations(): Promise<IRecommendSongs> {
 }
 
 /**
- * Retrieves the hot playlist.
- *
- * @return {Promise<IPlaylist>} A promise that resolves to the hot playlist.
- */
-export async function getHotPlayList(): Promise<IPlaylist> {
-  const url = createApiUrl('/top/playlist');
-  return await fetchData(url);
-}
-
-/**
  * Retrieves the banners from the server.
  *
  * @return {Promise<IBanner>} A promise that resolves with the banners.
@@ -35,11 +25,6 @@ export async function getBanners(): Promise<IBanner> {
 
 export async function searchHot(): Promise<IHotDetail> {
   const url = createApiUrl('/search/hot/detail');
-  return await fetchData(url);
-}
-
-export async function getPlayListDetail(id: number): Promise<IPlaylist> {
-  const url = createApiUrl('/playlist/detail', { id });
   return await fetchData(url);
 }
 

@@ -1,3 +1,18 @@
+interface PlaylistSong {
+  songs: SongDetail[];
+  privileges: Privilege[];
+  code: number;
+}
+
+interface ChargeInfoList {
+  rate: number;
+  chargeUrl: null;
+  chargeMessage: null;
+  chargeType: number;
+}
+
+// qrcode
+
 interface CheckQrcode {
   code: number;
   message: string;
@@ -127,65 +142,10 @@ interface IRecommendSongs {
 }
 
 interface RecommendSongsData {
-  dailySongs: DailySong[];
+  dailySongs: SongDetail[];
   orderSongs: any[];
   recommendReasons: RecommendReason[];
   mvResourceInfos: null;
-}
-
-interface DailySong {
-  name: string;
-  id: number;
-  pst: number;
-  t: number;
-  ar: Ar[];
-  alia: string[];
-  pop: number;
-  st: number;
-  rt: Rt | null;
-  fee: number;
-  v: number;
-  crbt: null;
-  cf: string;
-  al: Al;
-  dt: number;
-  h: L | null;
-  m: L | null;
-  l: L;
-  sq: L | null;
-  hr: L | null;
-  a: null;
-  cd: string;
-  no: number;
-  rtUrl: null;
-  ftype: number;
-  rtUrls: any[];
-  djId: number;
-  copyright: number;
-  s_id: number;
-  mark: number;
-  originCoverType: number;
-  originSongSimpleData: OriginSongSimpleData | null;
-  tagPicList: null;
-  resourceState: boolean;
-  version: number;
-  songJumpInfo: null;
-  entertainmentTags: null;
-  single: number;
-  noCopyrightRcmd: null;
-  rtype: number;
-  rurl: null;
-  mst: number;
-  cp: number;
-  mv: number;
-  publishTime: number;
-  reason: null | string;
-  videoInfo: VideoInfo;
-  recommendReason: null | string;
-  privilege: Privilege;
-  alg: Alg;
-  tns?: string[];
-  s_ctrp?: string;
 }
 
 interface Al {
@@ -249,12 +209,6 @@ interface Privilege {
   preSell: boolean;
   playMaxbr: number;
   downloadMaxbr: number;
-  maxBrLevel: MaxBrLevel;
-  playMaxBrLevel: MaxBrLevel;
-  downloadMaxBrLevel: MaxBrLevel;
-  plLevel: LLevel;
-  dlLevel: DLLevel;
-  flLevel: LLevel;
   rscl: null;
   freeTrialPrivilege: FreeTrialPrivilege;
   chargeInfoList: ChargeInfoList[];
@@ -267,30 +221,10 @@ interface ChargeInfoList {
   chargeType: number;
 }
 
-enum DLLevel {
-  Hires = 'hires',
-  None = 'none',
-}
-
-enum MaxBrLevel {
-  Sky = 'sky',
-}
-
-enum LLevel {
-  Exhigh = 'exhigh',
-  None = 'none',
-  Standard = 'standard',
-}
-
 interface FreeTrialPrivilege {
   resConsumable: boolean;
   userConsumable: boolean;
   listenType: number;
-}
-
-enum Rt {
-  Empty = '',
-  The600902000008129682 = '600902000008129682',
 }
 
 interface VideoInfo {
@@ -642,9 +576,6 @@ interface Privilege {
   maxBrLevel: MaxBrLevel;
   playMaxBrLevel: MaxBrLevel;
   downloadMaxBrLevel: MaxBrLevel;
-  plLevel: LLevel;
-  dlLevel: LLevel;
-  flLevel: LLevel;
   rscl: null;
   freeTrialPrivilege: FreeTrialPrivilege;
   chargeInfoList: ChargeInfoList[];
@@ -655,26 +586,6 @@ interface ChargeInfoList {
   chargeUrl: null;
   chargeMessage: null;
   chargeType: number;
-}
-
-enum LLevel {
-  Exhigh = 'exhigh',
-  Higher = 'higher',
-  None = 'none',
-  Standard = 'standard',
-}
-
-enum MaxBrLevel {
-  Higher = 'higher',
-  Lossless = 'lossless',
-  Sky = 'sky',
-  Standard = 'standard',
-}
-
-interface FreeTrialPrivilege {
-  resConsumable: boolean;
-  userConsumable: boolean;
-  listenType: null;
 }
 
 interface VideoInfo {

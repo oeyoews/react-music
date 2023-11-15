@@ -3,7 +3,11 @@ export async function fetchData<T>(
   url: string,
   options?: RequestInit,
 ): Promise<T> {
-  const defaultOptions: RequestInit = { credentials: 'include' };
+  const defaultOptions: RequestInit = {
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json', Cookie: '' },
+  };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
 
   try {

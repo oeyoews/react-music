@@ -16,15 +16,15 @@ export default function Banners({ data }: { data: Banner[] }) {
         break;
       case 10:
         // 专辑页
-        router.push(`/album?id=${id}`);
+        router.push(`/album/${id}`);
         break;
       case 1000:
         // 歌单页
-        router.push(`/playlist?id=${id}&page=1`);
+        router.push(`/playlist/${id}`);
         break;
       case 1004:
         // MV页
-        router.push(`/video?id=${id}`);
+        router.push(`/video/${id}`);
         break;
       case 3000:
       // 站外链接
@@ -59,14 +59,12 @@ export default function Banners({ data }: { data: Banner[] }) {
         className="grid grid-cols-1 md:grid-cols-3 gap-3 not-prose"
         variants={container}
         initial="hidden"
-        animate="visible"
-      >
+        animate="visible">
         {data.map((banner) => (
           <motion.div
             key={banner.imageUrl}
             onClick={() => handleClick(banner)}
-            variants={item}
-          >
+            variants={item}>
             {/* <span>{banner.typeTitle}</span> */}
             <Image
               src={banner.imageUrl}

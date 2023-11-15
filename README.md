@@ -12,6 +12,7 @@ https://nextjs-netease-music.vercel.app/
 
 ## TODO
 
+- [ ] 支持歌单播放
 - [ ] cookie login
 - [ ] 如何支持 ts(music api)
 - [ ] download url not available
