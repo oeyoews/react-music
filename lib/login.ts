@@ -21,7 +21,7 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
     key,
     timestamp: Date.now(),
   });
-  return await fetchData(url);
+  return await fetchData(url, { method: 'post' });
 };
 
 export const getQrStatus = async (): Promise<ILoginStatus> => {

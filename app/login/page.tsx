@@ -59,7 +59,7 @@ const LoginPage = () => {
       const qrCodeChecked = await qrCheck(key);
       setLoginStatus(qrCodeChecked.code);
       console.log(JSON.stringify(qrCodeChecked));
-    }, 2000);
+    }, 30000);
   }, []);
 
   return (
