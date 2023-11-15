@@ -54,6 +54,7 @@ export default function Banners({ data }: { data: Banner[] }) {
 
   return (
     <div>
+      {/* sticky 对于framermotion bug, 需要多加一个div */}
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-3 not-prose"
         variants={container}

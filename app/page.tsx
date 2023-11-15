@@ -16,7 +16,7 @@ export default async function Home() {
   const PlaylistData = await getHotPlayList();
 
   return (
-    <div className="prose mx-auto max-w-4xl p-2">
+    <div className="prose mx-auto max-w-4xl p-2 prose-zinc">
       <Banners data={bannerData.banners} />
       {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
       <HotSongs data={songsHot.data} />
