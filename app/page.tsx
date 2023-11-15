@@ -5,6 +5,7 @@ import {
   getPlayList,
   getMusicURL,
   getMusicURLNEW,
+  getbanners,
 } from '~lib/search';
 import Image from 'next/image';
 import { use, useEffect, useState } from 'react';
@@ -15,6 +16,7 @@ export default async function Home() {
   const { result } = await search('海阔天空');
   const songstop = await searchHot();
   const { playlist } = await getPlayList(24381616);
+  const { banners } = await getbanners();
   // const { data } = await getMusicURL(28798452);
   // const { data } = await getMusicURLNEW(28798452, 'standard');
   // const lyric = await getSongLyric(28798452);
@@ -27,11 +29,26 @@ export default async function Home() {
       {/* {result.songs.map(({ name, artists, id }) => (
         <div key={id}>{name}</div>
       ))} */}
+      {banners.map((banner) => (
+        <div
+          key={banner.imageUrl}
+          className='flex justify-between items-center'
+        >
+          <span>{banner.typeTitle}</span>
+          <Image
+            src={banner.imageUrl}
+            alt={banner.typeTitle}
+            width={300}
+            height={300}
+            className='rounded'
+          />
+        </div>
+      ))}
       <h2>热门歌曲</h2>
       <hr />
       <ol>
         {songstop.data.map((song) => (
-          <div className='flex flex-row'>
+          <div className='flex flex-row' key={song.searchWord}>
             {/* {song.iconUrl && (
               <div>
                 <Image

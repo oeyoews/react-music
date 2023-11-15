@@ -27,6 +27,14 @@ function createApiUrl(
   return apiUrl;
 }
 
+export async function getbanners(): Promise<IBanner> {
+  const res = await fetch(createApiUrl('/banner', { type: 0 }), {
+    credentials: 'include',
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function getMusicURLNEW(
   id: number,
   level: Level = 'standard'
