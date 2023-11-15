@@ -23,7 +23,7 @@ export default async function Home() {
   return (
     <div className="prose mx-auto max-w-4xl p-2 prose-zinc">
       <div>
-        status: {qrstatus.data.account.id} {qrstatus.data.account.userName}
+        status: {qrstatus.data.account?.id} {qrstatus.data.account?.userName}
       </div>
       <Image src={qrCode.data.qrimg} alt="login" width={225} height={225} />
       <Banners data={bannerData.banners} />
