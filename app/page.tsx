@@ -8,6 +8,13 @@ import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
 import HotSongs from './ui/HotSongs';
 import RecommendSongs from './ui/RecommendSongs';
+import { type Metadata } from 'next';
+
+export function generateMetadata({ params }: any): Metadata {
+  return {
+    title: 'react music | 首页',
+  };
+}
 
 export default async function Home() {
   const bannerData = await getBanners();
