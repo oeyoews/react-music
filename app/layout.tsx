@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'React Netease Cloud Music',
   description: 'React Netease Cloud Music',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
