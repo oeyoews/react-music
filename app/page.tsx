@@ -7,12 +7,12 @@ import {
 import Image from 'next/image';
 
 export default async function Home() {
+  const { banners } = await getbanners();
   const {
     data: { dailySongs },
   } = await getRecommendations();
-  const songstop = await searchHot();
-  const { banners } = await getbanners();
-  // const { playlists } = await getHotPlayList();
+  const { playlists } = await getHotPlayList();
+  // const songstop = await searchHot();
 
   return (
     <div className='prose mx-auto max-w-4xl p-1'>
