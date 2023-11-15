@@ -1,9 +1,10 @@
-const baseurl = process.env.MUSIC_API;
+const baseurl = process.env.NEXT_PUBLIC_MUSIC_API;
 
 export async function getMusicURL(id: number): Promise<MusicURL> {
   const res = await fetch(`${baseurl}/song/url?id=${id}`, {
     // https://github.com/vercel/next.js/discussions/48324
-    cache: 'no-cache', // 仍然提示 fetch for over 2MB of data can not be cached
+    // cache: 'no-cache', // 仍然提示 fetch for over 2MB of data can not be cached
+    cache: 'force-cache',
     credentials: 'include',
   });
   const data = await res.json();
@@ -39,9 +40,9 @@ export async function search(keywords: string): Promise<Search> {
  * @return {Promise<SearchTop>} A Promise that resolves to the top songs data.
  */
 export async function searchTop(id: number): Promise<SearchTop> {
-  const res = fetch(`${baseurl}/artist/top/song?id=${id}`, {
+  const res = await fetch(`${baseurl}/artist/top/song?id=${id}`, {
     credentials: 'include',
   });
-  const data = (await res).json();
+  const data = await res.json();
   return data;
 }
