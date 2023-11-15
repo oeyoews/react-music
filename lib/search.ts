@@ -12,6 +12,10 @@ function createApiUrl(
 
   // 添加参数到 URL
   if (params) {
+    // Include timestamp only if not already present in params
+    if (!params.hasOwnProperty('timestamp')) {
+      params.timestamp = new Date().getTime();
+    }
     const queryString = Object.keys(params)
       .map(
         (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
