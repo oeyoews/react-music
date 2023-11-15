@@ -1,6 +1,6 @@
 import { getMusicURL, getSongDetail } from '~lib/search';
 
-export async function getSongInfo(slug: string) {
+async function getSongInfo(slug: string) {
   const songdetail = await getSongDetail(Number(slug));
   return songdetail.songs[0];
 }
