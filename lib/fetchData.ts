@@ -1,14 +1,35 @@
-import { createApiUrl } from './createApiUrl';
-
 type Config = {
   url?: string;
   params?: Record<string, string | number | boolean>;
   options?: RequestInit;
 };
 
+function addParams(
+  finalURL: string,
+  params?: Record<string, string | number | boolean>,
+): string {
+  // 添加参数到 URL
+  let apiURL = finalURL;
+  if (params) {
+    // Include timestamp only if not already present in params
+    // if (!params.hasOwnProperty('timestamp')) {
+    //   params.timestamp = Date.now();
+    // }
+    const queryString = Object.keys(params)
+      .map(
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+      )
+      .join('&');
+    apiURL += `?${queryString}`;
+  }
+
+  return apiURL;
+}
+
 // https://github.com/vercel/next.js/discussions/48324
 async function fetchData(
-  url: string,
+  finalURL: string,
   params?: Record<string, string | number | boolean>,
   options?: RequestInit,
 ): Promise<any> {
@@ -18,7 +39,7 @@ async function fetchData(
     headers: { 'Content-Type': 'application/json' }, // cookie on header auto???
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
-  const urlWithParams = createApiUrl(url, params);
+  const urlWithParams = addParams(finalURL, params);
 
   try {
     const response = await fetch(urlWithParams, mergedOptions);

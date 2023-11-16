@@ -1,3 +1,3 @@
-export default function () {
+export default function Song() {
   return <div className="h-screen">coming</div>;
 }

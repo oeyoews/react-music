@@ -6,6 +6,6 @@ import { toast } from 'react-toastify';
 export default function Announcement({ text }: { text: string }) {
   useEffect(() => {
     process.env.NODE_ENV === 'production' && toast.info(text);
-  }, []);
+  }, [text]);
   return <div></div>;
 }
