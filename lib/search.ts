@@ -32,7 +32,13 @@ export async function getRecommendations(): Promise<IRecommendSongs> {
  */
 export async function getBanners(): Promise<IBanner> {
   const url = createApiUrl('/banner', { type: 0 });
-  return await fetchData(url);
+  return await fetchData(url, {
+    // cache: {re}
+    next: {
+      // one dary
+      revalidate: 3600 * 24,
+    },
+  });
 }
 
 export async function searchHot(): Promise<IHotDetail> {
