@@ -1,5 +1,9 @@
 'use client';
 
 export default function AudioSong({ src }: { src: string }) {
-  return <audio controls src={src} />;
+  return (
+    <div className="flex justify-center items-center">
+      <audio controls src={src} />;
+    </div>
+  );
 }
