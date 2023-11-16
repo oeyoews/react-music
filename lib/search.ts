@@ -56,7 +56,7 @@ export const searchHot = async (): Promise<IHotDetail> => {
 export const getMusicURL = async (
   id: number,
   // level: any = 'standard',
-): Promise<MusicURL> => {
+): Promise<IMusicURL> => {
   return fetch({
     url: '/song/url',
     params: {

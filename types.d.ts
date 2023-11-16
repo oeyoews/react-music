@@ -391,12 +391,12 @@ interface Lrc {
 
 // music url
 
-interface MusicURL {
+interface IMusicURL {
   code: number;
-  data: IMuiscURL[];
+  data: MusicURL[];
 }
 
-interface IMuiscURL {
+interface MusicURL {
   id: number;
   url: string;
   level: Level;
