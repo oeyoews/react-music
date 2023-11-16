@@ -3,6 +3,15 @@
 import { create } from './fetchData';
 const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
 
+export const getLyric = async (id: number): Promise<ILyric> => {
+  return await fetch({
+    url: '/lyric',
+    params: {
+      id,
+    },
+  });
+};
+
 export const checkSong = async (id: number): Promise<CheckSong> => {
   return await fetch({
     url: '/check/music',

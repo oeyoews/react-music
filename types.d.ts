@@ -143,6 +143,7 @@ interface FreeTrialPrivilege {
 }
 
 interface SongDetail {
+  ar: Ar[];
   name: string;
   id: number;
   pop: number;
@@ -157,6 +158,12 @@ interface SongDetail {
   single: number;
   noCopyrightRcmd: null;
   publishTime: number;
+}
+interface Ar {
+  id: number;
+  name: string;
+  tns: any[];
+  alias: any[];
 }
 
 interface DailySong extends SongDetail {
@@ -425,7 +432,7 @@ type Level =
   | 'jymaster';
 
 // lyric
-interface Lyric {
+interface ILyric {
   transUser: TransUser;
   lrc: Lrc;
 }

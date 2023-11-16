@@ -17,6 +17,7 @@
     "next": "14.0.2",
     "nextjs-toploader": "^1.6.4",
     "react": "^18",
+    "react-aplayer": "^1.0.0",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-toastify": "^9.1.3"
