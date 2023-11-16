@@ -5,21 +5,21 @@ import Playlist from '~app/ui/Playlist';
 import HotSongs from './ui/HotSongs';
 import RecommendSongs from './ui/RecommendSongs';
 import {
-  getQrStatus,
+  getLoginStatus,
   getqrKey,
   loginAnonymous,
   qrCheck,
   qrCreate,
 } from '~lib/login';
 import { getHotPlayList } from '~lib/playlist';
-import { toast } from 'react-toastify';
+import Announcement from './ui/announcement';
 
 export default async function Home() {
-  await getQrStatus();
+  await getLoginStatus();
   const bannerData = await getBanners();
   const songsHot = await searchHot();
   const PlaylistData = await getHotPlayList();
-  const qrStatus = await getQrStatus();
+  const loginStatus = await getLoginStatus();
   // 如何检查cookie 的expire
   // if (!qrStatus.data.account) {
   //   await loginAnonymous();
@@ -31,9 +31,10 @@ export default async function Home() {
 
   return (
     <div className="p-2">
+      <Announcement text="开发中..." />
       <Banners data={bannerData.banners} />
       <div className="flex items-center my-2 space-x-2">
-        <FaUser /> {qrStatus.data.account?.userName}
+        <FaUser /> {loginStatus.data.account?.userName}
       </div>
       {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
       <HotSongs data={songsHot.data} />

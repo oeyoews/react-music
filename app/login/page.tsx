@@ -3,7 +3,7 @@
 // Import necessary dependencies and API functions
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getqrKey, qrCheck, getQrStatus, qrCreate } from '~lib/login'; // Assuming you have these API functions.
+import { getqrKey, qrCheck, getLoginStatus, qrCreate } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {

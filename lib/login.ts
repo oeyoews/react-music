@@ -41,7 +41,7 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
  * check login status
  * @returns
  */
-export const getQrStatus = async (): Promise<ILoginStatus> => {
+export const getLoginStatus = async (): Promise<ILoginStatus> => {
   const url = createApiUrl('/login/status', { timestamp: Date.now() });
   return await fetchData(url);
 };
