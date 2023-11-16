@@ -1,5 +1,6 @@
 import { search } from '~lib/search';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function page({ params }: { params: Params }) {
   const { slug } = params;
@@ -13,6 +14,13 @@ export default async function page({ params }: { params: Params }) {
             <li className="" key={song.id}>
               <Link href={`/song/${song.id}`}>
                 <div className="flex">
+                  {/* <Image
+                    src={song.artists[0].img1v1Url}
+                    width={48}
+                    height={48}
+                    alt={song.artists[0].name}
+                    className="rounded-full"
+                  /> */}
                   <div>
                     {song.name} -- {song.artists[0].name}
                   </div>
