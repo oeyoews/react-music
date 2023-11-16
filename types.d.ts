@@ -120,15 +120,6 @@ interface RecommendSongsData {
   mvResourceInfos: null;
 }
 
-interface Al {
-  id: number;
-  name: string;
-  picUrl: string;
-  tns: string[];
-  pic_str?: string;
-  pic: number;
-}
-
 enum Alg {
   DailyAuditionRecentArtist = 'daily_audition_recentArtist',
   DailyAuditionRtLike = 'daily_audition_rt_like',
@@ -479,31 +470,7 @@ interface SearchTop {
 interface TopSong {
   name: string;
   id: number;
-  pst: number;
-  t: number;
-  ar: Ar[];
-  alia: any[];
-  pop: number;
-  st: number;
-  rt: string;
-  fee: number;
-  v: number;
-  crbt: null;
-  cf: string;
-  al: Al;
-  dt: number;
-  h: L | null;
-  m: L | null;
-  l: L;
-  sq: L | null;
-  hr: null;
-  a: null;
-  cd: string;
   no: number;
-  rtUrl: null;
-  ftype: number;
-  rtUrls: any[];
-  djId: number;
   copyright: number;
   s_id: number;
   mark: number;
@@ -517,11 +484,6 @@ interface TopSong {
   awardTags: null;
   single: number;
   noCopyrightRcmd: null;
-  rtype: number;
-  rurl: null;
-  mst: number;
-  cp: number;
-  mv: number;
   publishTime: number;
   videoInfo: VideoInfo;
   privilege: Privilege;
@@ -684,31 +646,6 @@ interface TrackID {
 interface Track {
   name: string;
   id: number;
-  pst: number;
-  t: number;
-  ar: Ar[];
-  alia: string[];
-  pop: number;
-  st: number;
-  rt: null | string;
-  fee: number;
-  v: number;
-  crbt: null;
-  cf: string;
-  al: Al;
-  dt: number;
-  h: H | null;
-  m: H | null;
-  l: H | null;
-  sq: H | null;
-  hr: H | null;
-  a: null;
-  cd: string;
-  no: number;
-  rtUrl: null;
-  ftype: number;
-  rtUrls: any[];
-  djId: number;
   copyright: number;
   s_id: number;
   mark: number;
@@ -722,14 +659,8 @@ interface Track {
   awardTags: null;
   single: number;
   noCopyrightRcmd: NoCopyrightRcmd | null;
-  rtype: number;
-  rurl: null;
-  mst: number;
-  cp: number;
-  mv: number;
   publishTime: number;
   videoInfo: VideoInfo;
-  tns?: string[];
 }
 
 interface NoCopyrightRcmd {
