@@ -21,12 +21,12 @@ export default async function Home() {
   const PlaylistData = await getHotPlayList();
   const qrStatus = await getQrStatus();
   // 如何检查cookie 的expire
-  if (!qrStatus.data.account) {
-    await loginAnonymous();
-    console.log('login success as vistor');
-  } else {
-    console.log('登录成功');
-  }
+  // if (!qrStatus.data.account) {
+  //   await loginAnonymous();
+  //   console.log('login success as vistor');
+  // } else {
+  //   console.log('登录成功');
+  // }
   // const recommendSongs = await getRecommendations();
 
   return (
