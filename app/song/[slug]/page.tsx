@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: Params }) {
     <div className="my-2">
       <h1>歌曲详情 - {songInfo.name} </h1>
       <div>音质: {musicInfo.level}</div>
-      {<AudioSong src={musicInfo.url} />}
+      <AudioSong src={musicInfo.url} />
     </div>
   );
 }
