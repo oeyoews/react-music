@@ -20,19 +20,19 @@ export const checkSong = async (
  *
  * @return {Promise<IRecommendSongs>} A promise that resolves to an object containing recommended songs.
  */
-export async function getRecommendations(): Promise<IRecommendSongs> {
+export const getRecommendations = async (): Promise<IRecommendSongs> => {
   // need login
   return await fetch({
     url: '/recommend/songs',
   });
-}
+};
 
 /**
  * Retrieves the banners from the server.
  *
  * @return {Promise<IBanner>} A promise that resolves with the banners.
  */
-export async function getBanners(): Promise<IBanner> {
+export const getBanners = async (): Promise<IBanner> => {
   return await fetch({
     url: '/banner',
     params: {
@@ -44,19 +44,19 @@ export async function getBanners(): Promise<IBanner> {
       },
     },
   });
-}
+};
 
-export async function searchHot(): Promise<IHotDetail> {
+export const searchHot = async (): Promise<IHotDetail> => {
   return await fetch({
     url: '/search/hot/detail',
   });
-}
+};
 
 //  v1 有时会失效
-export async function getMusicURL(
+export const getMusicURL = async (
   id: number,
   // level: any = 'standard',
-): Promise<MusicURL> {
+): Promise<MusicURL> => {
   return fetch({
     url: '/song/url',
     params: {
@@ -64,16 +64,16 @@ export async function getMusicURL(
       // level,
     },
   });
-}
+};
 
-export async function getSongDetail(ids: number): Promise<ISongDetail> {
+export const getSongDetail = async (ids: number): Promise<ISongDetail> => {
   return await fetch({
     url: '/song/detail',
     params: {
       ids,
     },
   });
-}
+};
 
 // export async function getSongComment(id: number): Promise<any> {
 //   return await fetch({

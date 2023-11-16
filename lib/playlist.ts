@@ -19,15 +19,15 @@ export const getPlayListSongs = async (id: number): Promise<PlaylistSong> => {
  *
  * @return {Promise<IPlaylist>} A promise that resolves to the hot playlist.
  */
-export async function getHotPlayList(): Promise<IPlaylist> {
+export const getHotPlayList = async (): Promise<IPlaylist> => {
   return await fetch({
     url: '/top/playlist',
   });
-}
+};
 
-export async function getPlayListDetail(id: number): Promise<IPlaylist> {
+export const getPlayListDetail = async (id: number): Promise<IPlaylist> => {
   return await fetch({
     url: '/playlist/detail',
     params: { id },
   });
-}
+};
