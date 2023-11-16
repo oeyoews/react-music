@@ -12,7 +12,6 @@ interface ChargeInfoList {
 }
 
 // qrcode
-
 interface CheckQrcode {
   code: number;
   message: string;
@@ -87,37 +86,9 @@ interface FreeTrialPrivilege {
 }
 
 interface SongDetail {
-  // success: boolean;
   name: string;
   id: number;
-  pst: number;
-  t: number;
-  ar: Ar[];
-  alia: any[];
   pop: number;
-  st: number;
-  rt: string;
-  fee: number;
-  v: number;
-  crbt: null;
-  cf: string;
-  al: Al;
-  dt: number;
-  h: H;
-  m: H;
-  l: H;
-  sq: H;
-  hr: H;
-  a: null;
-  cd: string;
-  no: number;
-  rtUrl: null;
-  ftype: number;
-  rtUrls: any[];
-  djId: number;
-  copyright: number;
-  s_id: number;
-  mark: number;
   originCoverType: number;
   originSongSimpleData: null;
   tagPicList: null;
@@ -128,12 +99,12 @@ interface SongDetail {
   awardTags: null;
   single: number;
   noCopyrightRcmd: null;
-  rtype: number;
-  rurl: null;
-  mst: number;
-  cp: number;
-  mv: number;
   publishTime: number;
+}
+
+interface DailySong extends SongDetail {
+  reason: string;
+  recommendReason: null | string;
 }
 
 // recommend songs
