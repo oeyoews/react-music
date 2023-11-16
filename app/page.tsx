@@ -1,6 +1,5 @@
 import { FaUser } from 'react-icons/fa';
-import Image from 'next/image';
-import { getBanners, getRecommendations, searchHot } from '~lib/search';
+import { getBanners, searchHot } from '~lib/search';
 import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
 import HotSongs from './ui/HotSongs';
