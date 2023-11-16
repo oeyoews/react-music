@@ -12,7 +12,7 @@ import {
   qrCreate,
 } from '~lib/login';
 import { getHotPlayList } from '~lib/playlist';
-import Announcement from './ui/announcement';
+import Announcement from './ui/Announcement';
 
 export default async function Home() {
   await getLoginStatus();
