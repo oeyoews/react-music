@@ -1,7 +1,5 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { getMusicURL, getSongDetail } from '~lib/search';
+import AudioSong from '~app/ui/AudioSong';
 
 // async function getSongInfo(slug: string) {
 //   const songdetail = await getSongDetail(Number(slug));
@@ -16,29 +14,16 @@ import { getMusicURL, getSongDetail } from '~lib/search';
 //   };
 // }
 
-export default function Page({ params }: { params: Params }) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
-  const [musicdata, setMusicData] = useState<MusicURL[]>();
-  const [songInfo, setSongInfo] = useState<SongDetail[]>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    getMusicURL(Number(slug))
-      .then((data) => setMusicData(data.data))
-      .then(() => setLoading(false));
-    getSongDetail(Number(slug)).then((data) => setSongInfo(data.songs));
-  }, [slug]);
+  const songInfo = await getSongDetail(Number(slug));
+  const musicData = await getMusicURL(Number(slug));
   return (
     <div className="my-2">
-      <h1>歌曲详情 - {songInfo?.[0].name} </h1>
-      <div>音质: {musicdata?.[0].level}</div>
+      <h1>歌曲详情 - {songInfo.songs?.[0].name} </h1>
+      <div>音质: {musicData.data[0].level}</div>
       <div className="flex justify-center items-center">
-        {loading ? (
-          <div>loading</div>
-        ) : (
-          <audio controls>
-            <source src={musicdata?.[0].url} />
-          </audio>
-        )}
+        {<AudioSong src={musicData.data[0].url} />}
       </div>
     </div>
   );
