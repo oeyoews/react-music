@@ -6,7 +6,8 @@ export async function fetchData<T>(
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json', Cookie: '' },
+    // cookie on header auto???
+    headers: { 'Content-Type': 'application/json' },
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
 

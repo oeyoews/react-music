@@ -114,7 +114,7 @@ interface IRecommendSongs {
 }
 
 interface RecommendSongsData {
-  dailySongs: SongDetail[];
+  dailySongs: DailySong[];
   orderSongs: any[];
   recommendReasons: RecommendReason[];
   mvResourceInfos: null;
