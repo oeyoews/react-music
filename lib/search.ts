@@ -69,6 +69,14 @@ export const getSongDetail = async (ids: number): Promise<ISongDetail> => {
   });
 };
 
+export const getAlbumDetail = async (id: number): Promise<IAlbumDetail> => {
+  return await fetch({
+    url: '/album',
+    params: {
+      id,
+    },
+  });
+};
 // export async function getSongComment(id: number): Promise<any> {
 //   return await fetch({
 //     url: '/comment/music',

@@ -1,3 +1,51 @@
+interface IAlbumDetail {
+  resourceState: boolean;
+  songs: Song[];
+  code: number;
+  album: {
+    songs: any[];
+    paid: boolean;
+    onSale: boolean;
+    mark: number;
+    awardTags: null;
+    blurPicUrl: string;
+    companyId: number;
+    briefDesc: null;
+    publishTime: number;
+    company: string;
+    pic: number;
+    picUrl: string;
+    copyrightId: number;
+    alias: any[];
+    artists: Artist[];
+    picId: number;
+    artist: Artist;
+    commentThreadId: string;
+    tags: string;
+    description: string;
+    status: number;
+    subType: string;
+    name: string;
+    id: number;
+    type: string;
+    size: number;
+    picId_str: string;
+    info: Info;
+  };
+}
+
+interface Info {
+  commentThread: CommentThread;
+  latestLikedUsers: null;
+  liked: boolean;
+  comments: null;
+  resourceType: number;
+  resourceId: number;
+  commentCount: number;
+  likedCount: number;
+  shareCount: number;
+  threadId: string;
+}
 interface CheckSong {
   success: string;
   message: string;
