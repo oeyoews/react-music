@@ -1,40 +1,12 @@
 'use client';
+import { getRoute } from '~lib/getRoute';
 
+import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
 // TODO: click events
 // @see-also https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/components/Banner/index.vue#L38
 export default function Banners({ data }: { data: Banner[] }) {
-  const router = useRouter();
-  const handleClick = (banner: Banner) => {
-    const { targetType: type, targetId: id } = banner;
-    switch (type) {
-      case 1:
-        // 歌曲页
-        router.push(`/song/${id}`);
-        break;
-      case 10:
-        // 专辑页
-        // router.push(`/album/${id}`);
-        break;
-      case 1000:
-        // 歌单页
-        router.push(`/playlist/${id}`);
-        break;
-      case 1004:
-        // MV页
-        // router.push(`/video/${id}`);
-        break;
-      case 3000:
-        // 站外链接
-        break;
-      default:
-        break;
-    }
-    toast.success(`跳转到${banner.typeTitle}`);
-  };
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -64,20 +36,19 @@ export default function Banners({ data }: { data: Banner[] }) {
         initial="hidden"
         animate="visible">
         {data.map((banner) => (
-          <motion.div
-            key={banner.imageUrl}
-            onClick={() => handleClick(banner)}
-            variants={item}>
+          <motion.div key={banner.imageUrl} variants={item}>
             {/* <span>{banner.typeTitle}</span> */}
-            <Image
-              src={banner.imageUrl}
-              alt={banner.typeTitle}
-              title={banner.typeTitle}
-              priority={true}
-              width={1080}
-              className="hover:cursor-pointer rounded w-full"
-              height={480}
-            />
+            <Link href={getRoute(banner)}>
+              <Image
+                src={banner.imageUrl}
+                alt={banner.typeTitle}
+                title={banner.typeTitle}
+                priority={true}
+                width={1080}
+                className="hover:cursor-pointer rounded w-full"
+                height={480}
+              />
+            </Link>
           </motion.div>
         ))}
       </motion.div>
