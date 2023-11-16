@@ -4,8 +4,15 @@ import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
 import HotSongs from './ui/HotSongs';
 import RecommendSongs from './ui/RecommendSongs';
-import { getQrStatus, getqrKey, qrCheck, qrCreate } from '~lib/login';
+import {
+  getQrStatus,
+  getqrKey,
+  loginAnonymous,
+  qrCheck,
+  qrCreate,
+} from '~lib/login';
 import { getHotPlayList } from '~lib/playlist';
+import { toast } from 'react-toastify';
 
 export default async function Home() {
   await getQrStatus();
@@ -13,6 +20,13 @@ export default async function Home() {
   const songsHot = await searchHot();
   const PlaylistData = await getHotPlayList();
   const qrStatus = await getQrStatus();
+  // 如何检查cookie 的expire
+  if (!qrStatus.data.account) {
+    await loginAnonymous();
+    console.log('login success as vistor');
+  } else {
+    console.log('登录成功');
+  }
   // const recommendSongs = await getRecommendations();
 
   return (
