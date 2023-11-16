@@ -1,16 +1,17 @@
 'use server';
-import { createApiUrl } from './createApiUrl';
 
-import { fetchData } from './fetchData';
+import { fetchData as fetch } from '~lib/fetchData';
 
-export const getPlayListSongs = (id: number): Promise<PlaylistSong> => {
-  const url = createApiUrl('/playlist/track/all', {
-    id,
-    limit: 30,
-    offset: 0,
-    timestamp: Date.now(),
+export const getPlayListSongs = async (id: number): Promise<PlaylistSong> => {
+  return await fetch({
+    url: '/playlist/track/all',
+    params: {
+      id,
+      limit: 30,
+      offset: 0,
+      timestamp: Date.now(),
+    },
   });
-  return fetchData(url);
 };
 
 /**
@@ -19,11 +20,14 @@ export const getPlayListSongs = (id: number): Promise<PlaylistSong> => {
  * @return {Promise<IPlaylist>} A promise that resolves to the hot playlist.
  */
 export async function getHotPlayList(): Promise<IPlaylist> {
-  const url = createApiUrl('/top/playlist');
-  return await fetchData(url);
+  return await fetch({
+    url: '/top/playlist',
+  });
 }
 
 export async function getPlayListDetail(id: number): Promise<IPlaylist> {
-  const url = createApiUrl('/playlist/detail', { id });
-  return await fetchData(url);
+  return await fetch({
+    url: '/playlist/detail',
+    params: { id },
+  });
 }

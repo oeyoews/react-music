@@ -1,18 +1,25 @@
+import { createApiUrl } from './createApiUrl';
+
 // https://github.com/vercel/next.js/discussions/48324
-export async function fetchData<T>(
-  url: string,
-  options?: RequestInit,
-): Promise<T> {
+export async function fetchData<T>({
+  url,
+  params,
+  options,
+}: {
+  url: string;
+  params?: Record<string, string | number | boolean>;
+  options?: RequestInit;
+}): Promise<T> {
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
-    // cookie on header auto???
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }, // cookie on header auto???
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
+  const urlWithParams = createApiUrl(url, params);
 
   try {
-    const response = await fetch(url, mergedOptions);
+    const response = await fetch(urlWithParams, mergedOptions);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data. Status: ${response.status}`);

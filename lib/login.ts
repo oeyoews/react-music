@@ -1,13 +1,15 @@
 'use server';
-import { createApiUrl } from './createApiUrl';
-import { fetchData } from './fetchData';
+
+import { fetchData as fetch } from './fetchData';
 
 /**
  * generate qr code key
  */
 export const getqrKey = async (): Promise<IQRCode> => {
-  const url = createApiUrl('/login/qr/key', { timestamp: Date.now() });
-  return await fetchData(url);
+  return await fetch({
+    url: '/login/qr/key',
+    params: { timestamp: Date.now() },
+  });
 };
 
 /**
@@ -16,12 +18,14 @@ export const getqrKey = async (): Promise<IQRCode> => {
  * @returns
  */
 export const qrCreate = async (key: string): Promise<IQRCodeData> => {
-  const url = createApiUrl('/login/qr/create', {
-    key,
-    qrimg: true,
-    timestamp: Date.now(),
+  return await fetch({
+    url: '/login/qr/create',
+    params: {
+      key,
+      qrimg: true,
+      timestamp: Date.now(),
+    },
   });
-  return await fetchData(url);
 };
 
 /**
@@ -30,11 +34,14 @@ export const qrCreate = async (key: string): Promise<IQRCodeData> => {
  * @returns
  */
 export const qrCheck = async (key: string): Promise<CheckQrcode> => {
-  const url = createApiUrl('/login/qr/check', {
-    key,
-    timestamp: Date.now(),
+  return await fetch({
+    url: '/login/qr/check',
+    params: {
+      key,
+      timestamp: Date.now(),
+    },
+    options: { method: 'post' },
   });
-  return await fetchData(url, { method: 'post' });
 };
 
 /**
@@ -42,8 +49,10 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
  * @returns
  */
 export const getLoginStatus = async (): Promise<ILoginStatus> => {
-  const url = createApiUrl('/login/status', { timestamp: Date.now() });
-  return await fetchData(url);
+  return await fetch({
+    url: '/login/status',
+    params: { timestamp: Date.now() },
+  });
 };
 
 /**
@@ -51,11 +60,15 @@ export const getLoginStatus = async (): Promise<ILoginStatus> => {
  * @returns
  */
 export const loginAnonymous = async (): Promise<any> => {
-  const url = createApiUrl('/register/anonymous', { timestamp: Date.now() });
-  return await fetchData(url);
+  return await fetch({
+    url: '/login/qr/code',
+    params: { timestamp: Date.now() },
+  });
 };
 
 export const refreshLogin = async () => {
-  const url = createApiUrl('/login/refresh', { timestamp: Date.now() });
-  return await fetchData(url);
+  return await fetch({
+    url: '/login/refresh',
+    params: { timestamp: Date.now() },
+  });
 };
