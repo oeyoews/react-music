@@ -45,7 +45,7 @@ export default function Banners({ data }: { data: Banner[] }) {
                 title={banner.typeTitle}
                 priority={true}
                 width={1080}
-                className="hover:cursor-pointer rounded w-full"
+                className="hover:cursor-pointer rounded w-full hover:scale-105 transition-all"
                 height={480}
               />
             </Link>

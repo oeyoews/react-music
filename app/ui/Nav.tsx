@@ -10,7 +10,8 @@ const navItems = [
 ];
 
 export default function Nav() {
-  const btnClasses = 'h-5 w-5 text-gray-400 hover:text-gray-600 transition-all';
+  const btnClasses =
+    'h-5 w-5 text-gray-400 hover:text-gray-600 transition-all hover:scale-105';
 
   return (
     <div className="sticky flex items-center mx-auto justify-end print:hidden top-0 left-0 right-0 z-[1000] backdrop-blur-sm p-4 bg-white/30 max-w-4xl space-x-4">
