@@ -5,7 +5,7 @@ async function getSongInfo(slug: string) {
   return songdetail.songs[0];
 }
 
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = params;
   const { name } = await getSongInfo(slug);
   return {
@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: any) {
   };
 }
 
-export default async function Page({ params }: any) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
-  const musicdata = await getMusicURL(slug);
+  const musicdata = await getMusicURL(Number(slug));
   const { name } = await getSongInfo(slug);
   return (
     <div className="my-2">

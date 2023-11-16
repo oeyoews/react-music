@@ -1,3 +1,6 @@
+interface Params {
+  slug: string;
+}
 interface PlaylistSong {
   songs: SongDetail[];
   privileges: Privilege[];
