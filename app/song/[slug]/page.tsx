@@ -24,9 +24,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <div className="my-2">
-      <h1>
-        歌曲详情 - {songInfo.name} {songInfo.id}{' '}
-      </h1>
+      {/* <h1> 歌曲详情 - {songInfo.name} {songInfo.id}{' '} </h1> */}
       {/* <div>音质: {musicInfo.level}</div> */}
       {/* TODO: 仍然不起作用, 部分歌曲403, 暂时采用outer */}
       <AudioSong
