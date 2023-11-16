@@ -9,6 +9,15 @@ export const checkSong = async (id: number): Promise<CheckSong> => {
   });
 };
 
+export const search = async (keywords: string): Promise<ISearch> => {
+  return await fetch({
+    url: '/search',
+    params: {
+      keywords,
+    },
+  });
+};
+
 /**
  * Retrieves a list of recommended songs.
  *

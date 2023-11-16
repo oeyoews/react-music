@@ -9,7 +9,7 @@ export default async function Page({ params }: any) {
   return (
     <div className="my-2">
       <h1>{name}</h1>
-      <p>{description}</p>
+      <p className="line-clamp-2">{description}</p>
       <hr />
       <ol>
         {songs.map((song) => (

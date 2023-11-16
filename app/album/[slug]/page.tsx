@@ -1,7 +1,6 @@
 import { getAlbumDetail } from '~lib/search';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Route } from 'next';
 
 export default async function Album({ params }: { params: Params }) {
   const { slug } = params;

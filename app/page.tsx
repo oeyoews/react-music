@@ -2,7 +2,7 @@ import { FaUser } from 'react-icons/fa';
 import { getBanners, getRecommendations, searchHot } from '~lib/search';
 import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
-import HotPlaylist from './ui/HotPlaylist';
+import HotSongs from './ui/HotSongs';
 import RecommendSongs from './ui/RecommendSongs';
 import {
   getLoginStatus,
@@ -37,7 +37,7 @@ export default async function Home() {
         <FaUser /> {loginStatus.data.account?.userName}
       </div>
       {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
-      <HotPlaylist data={songsHot.data} />
+      <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
     </div>
   );

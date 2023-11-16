@@ -462,7 +462,7 @@ interface MusicURL {
 }
 
 // search
-interface Search {
+interface ISearch {
   result: Result;
   code: number;
 }

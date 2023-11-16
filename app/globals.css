@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 /* hide scrollbar */
+a {
+  text-decoration: none !important;
+}
