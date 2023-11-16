@@ -1,3 +1,9 @@
+interface CheckSong {
+  success: string;
+  message: string;
+  code: number;
+}
+
 interface Params {
   slug: string;
 }
