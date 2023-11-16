@@ -1,4 +1,3 @@
-import { FaUser } from 'react-icons/fa';
 import { getBanners, getRecommendations, searchHot } from '~lib/search';
 import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
@@ -13,7 +12,6 @@ import {
 } from '~lib/login';
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
-import Search from './ui/Search';
 
 export default async function Home() {
   await getLoginStatus();
@@ -37,7 +35,6 @@ export default async function Home() {
       {/* <div className="flex items-center my-2 space-x-2">
         <FaUser /> {loginStatus.data.account?.userName}
       </div> */}
-      <Search />
       {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
