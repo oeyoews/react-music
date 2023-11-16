@@ -1,6 +1,8 @@
 'use server';
 
-import { fetchData as fetch } from '~lib/fetchData';
+import { create } from '~lib/fetchData';
+
+const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
 
 export const getPlayListSongs = async (id: number): Promise<PlaylistSong> => {
   return await fetch({

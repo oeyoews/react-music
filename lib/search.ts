@@ -1,6 +1,7 @@
 // 'use server';
 
-import { fetchData as fetch } from './fetchData';
+import { create } from './fetchData';
+const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
 
 export const checkSong = async (
   id: number,
@@ -11,7 +12,6 @@ export const checkSong = async (
 }> => {
   return await fetch({
     url: '/check/music',
-    params: { id },
   });
 };
 

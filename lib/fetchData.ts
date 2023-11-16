@@ -1,15 +1,17 @@
 import { createApiUrl } from './createApiUrl';
 
-// https://github.com/vercel/next.js/discussions/48324
-export async function fetchData<T>({
-  url,
-  params,
-  options,
-}: {
-  url: string;
+type Config = {
+  url?: string;
   params?: Record<string, string | number | boolean>;
   options?: RequestInit;
-}): Promise<T> {
+};
+
+// https://github.com/vercel/next.js/discussions/48324
+async function fetchData(
+  url: string,
+  params?: Record<string, string | number | boolean>,
+  options?: RequestInit,
+): Promise<any> {
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
@@ -24,7 +26,6 @@ export async function fetchData<T>({
     if (!response.ok) {
       throw new Error(`Failed to fetch data. Status: ${response.status}`);
     }
-
     const data = await response.json();
     return data;
   } catch (error) {
@@ -32,3 +33,11 @@ export async function fetchData<T>({
     throw error;
   }
 }
+
+export const create = (baseURL: string) => {
+  return (config: Config): Promise<any> => {
+    const { url, params, options } = config;
+    const finalURL = url ? baseURL + url : baseURL;
+    return fetchData(finalURL, params, options);
+  };
+};
