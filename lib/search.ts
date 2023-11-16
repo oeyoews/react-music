@@ -1,4 +1,4 @@
-'use server';
+// 'use server';
 
 import { createApiUrl } from './createApiUrl';
 import { fetchData } from './fetchData';

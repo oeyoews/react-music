@@ -17,7 +17,7 @@ export default function Banners({ data }: { data: Banner[] }) {
         break;
       case 10:
         // 专辑页
-        router.push(`/album/${id}`);
+        // router.push(`/album/${id}`);
         break;
       case 1000:
         // 歌单页
@@ -25,10 +25,11 @@ export default function Banners({ data }: { data: Banner[] }) {
         break;
       case 1004:
         // MV页
-        router.push(`/video/${id}`);
+        // router.push(`/video/${id}`);
         break;
       case 3000:
-      // 站外链接
+        // 站外链接
+        break;
       default:
         break;
     }
