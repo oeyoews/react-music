@@ -1,7 +1,7 @@
-export default function HotSongs({ data }: { data: HotDetail[] }) {
+export default function HotPlaylist({ data }: { data: HotDetail[] }) {
   return (
     <div>
-      <h2>热门歌曲</h2>
+      <h2>热门歌单</h2>
       <hr />
       <ol className="columns-1 md:columns-2">
         {data.map((song) => (

@@ -1,5 +1,5 @@
-import Song from '~app/ui/Song';
 import { getHotPlayList, getPlayListSongs } from '~lib/playlist';
+import Link from 'next/link';
 
 export default async function Page({ params }: any) {
   const { slug } = params;
@@ -13,7 +13,11 @@ export default async function Page({ params }: any) {
       <hr />
       <ol>
         {songs.map((song) => (
-          <Song data={song} key={song.id} />
+          <li key={song.id}>
+            <Link href={`/song/${song.id}`} className="no-underline">
+              {song.name}
+            </Link>
+          </li>
         ))}
       </ol>
     </div>
