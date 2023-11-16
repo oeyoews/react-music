@@ -13,13 +13,14 @@ import {
 } from '~lib/login';
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
+import Search from './ui/Search';
 
 export default async function Home() {
   await getLoginStatus();
   const bannerData = await getBanners();
   const songsHot = await searchHot();
   const PlaylistData = await getHotPlayList();
-  const loginStatus = await getLoginStatus();
+  // const loginStatus = await getLoginStatus();
   // 如何检查cookie 的expire
   // if (!qrStatus.data.account) {
   //   await loginAnonymous();
@@ -33,9 +34,10 @@ export default async function Home() {
     <div className="p-2">
       <Announcement text="开发中..." />
       <Banners data={bannerData.banners} />
-      <div className="flex items-center my-2 space-x-2">
+      {/* <div className="flex items-center my-2 space-x-2">
         <FaUser /> {loginStatus.data.account?.userName}
-      </div>
+      </div> */}
+      <Search />
       {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
