@@ -6,7 +6,6 @@ import {
   getSongDetail,
 } from '~lib/search';
 import AudioSong from '~app/ui/AudioSong';
-import SongComment from '~app/ui/SongComment';
 import SongCommentTab from '~app/ui/SongCommentTab';
 
 export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;

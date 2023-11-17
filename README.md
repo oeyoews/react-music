@@ -12,6 +12,7 @@ https://nextjs-netease-music.vercel.app/
 
 ## TODO
 
+- [ ] 评论分页
 - [ ] space shortcuts https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/App.vue#L201
 - [ ] 支持歌单播放
 - [ ] cookie login

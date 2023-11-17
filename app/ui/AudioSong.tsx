@@ -1,10 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-// import { toast } from 'react-toastify';
-
-// @ts-ignore
-import ReactAplayer from 'react-aplayer';
+import dynamic from 'next/dynamic';
 
 export default function AudioSong({
   // src,
@@ -22,9 +19,14 @@ export default function AudioSong({
     // toast.error(isAvailable.message);
     // return <></>;
   }
+
   const baseURL = 'https://music.163.com/song/media/outer/url?id=';
   // if (!songInfo.id) return <>loading ...</>;
   const url = `${baseURL}${songInfo.id}.mp3`;
+  // @ts-ignore
+  // 即使使用use-client, 客户端组件在服务端也会渲染, 除非使用useeffect, 这里使用dynamic
+  const ReactAplayer = dynamic(() => import('react-aplayer'), { ssr: false });
+
   const props = {
     theme: '#F57F17',
     lrcType: 3,
@@ -57,6 +59,7 @@ export default function AudioSong({
       <div className="w-full">
         <ReactAplayer
           {...props}
+          // @ts-ignore
           onInit={onInit}
           // onPlay={onPlay}
           // onPause={onPause}
