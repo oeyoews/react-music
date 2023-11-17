@@ -62,10 +62,10 @@ const LoginPage = () => {
     !cookie && handleLogin();
     updateStatus();
     setLoading(false);
-    getUserDetail(loginStatus?.data.account.id as Id).then((res) => {
-      const userid = res.profile?.userId;
-      setUserData(userid);
-    });
+    // getUserDetail(loginStatus?.data.account.id as Id).then((res) => {
+    //   const userid = res.profile?.userId;
+    //   setUserData(userid);
+    // });
   }, [cookie]);
 
   // setInterval(async () => {
@@ -82,12 +82,12 @@ const LoginPage = () => {
       )}
       <div>userid: {userData}</div>
       <div>
-        {loginStatus && (
+        {/* {loginStatus && (
           <div>
             <div>{loginStatus.data.account?.userName}</div>
             <div>{loginStatus.data.account?.id}</div>
           </div>
-        )}
+        )} */}
       </div>
       <div>
         <button
