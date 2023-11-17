@@ -49,10 +49,17 @@ export const search = async (keywords: string): Promise<ISearch> => {
  *
  * @return {Promise<IRecommendSongs>} A promise that resolves to an object containing recommended songs.
  */
-export const getRecommendations = async (): Promise<IRecommendSongs> => {
-  // need login
+export const getRecommendations = async (
+  cookie: string,
+): Promise<IRecommendSongs> => {
+  // NOTE: need login
   return await fetch({
     url: '/recommend/songs',
+    options: {
+      headers: {
+        cookie,
+      },
+    },
   });
 };
 

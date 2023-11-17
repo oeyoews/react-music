@@ -5,13 +5,13 @@ import { getRecommendations } from '~lib/search';
 
 export default function RecommendSongs() {
   const [data, setData] = useState<DailySong[]>();
-  const [hasCookie, setHasCookie] = useState(false);
+  const [hasCookie, setHasCookie] = useState(true);
   useEffect(() => {
     if (!localStorage.cookie) {
       setHasCookie(false);
       return;
     }
-    getRecommendations().then((recommendSongs) => {
+    getRecommendations(localStorage.cookie).then((recommendSongs) => {
       setData(recommendSongs.data.dailySongs);
     });
   }, []);
