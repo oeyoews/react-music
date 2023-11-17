@@ -37,7 +37,7 @@ const LoginPage = () => {
     const checkResult = await qrCheck(key);
     if (checkResult.code === 803) {
       statusStore.setCookie(checkResult.cookie);
-      localStorage.setItem('cookie', statusStore.cookie);
+      localStorage.setItem('cookie', checkResult.cookie);
       router.push('/');
       toast.success('登录成功');
     } else {
@@ -55,6 +55,11 @@ const LoginPage = () => {
     updateStatus();
     setLoading(false);
   }, [statusStore.cookie]);
+
+  const getUserIfno = async (id: Id) => {
+    const userInfo = await getUserDetail(id);
+    statusStore.setUserInfo(userInfo);
+  };
 
   return (
     <div>
@@ -78,6 +83,12 @@ const LoginPage = () => {
       <div>
         {statusStore.loginStatus?.data !== undefined && (
           <div>id: {statusStore.loginStatus.data.account?.id}</div>
+        )}
+        {statusStore.userInfo.profile?.nickname && (
+          <div>
+            <div>{JSON.stringify(statusStore.userInfo.profile)}</div>
+            <div>nickname: {statusStore.userInfo.profile?.nickname}</div>
+          </div>
         )}
       </div>
     </div>
