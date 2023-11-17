@@ -36,7 +36,10 @@ export default function Banners({ data }: { data: Banner[] }) {
         initial="hidden"
         animate="visible">
         {data.map((banner) => (
-          <motion.div key={banner.imageUrl} variants={item}>
+          <motion.div
+            key={banner.imageUrl}
+            variants={item}
+            className="overflow-hidden rounded-md">
             {/* <span>{banner.typeTitle}</span> */}
             <Link href={getRoute(banner)}>
               <Image
@@ -45,7 +48,7 @@ export default function Banners({ data }: { data: Banner[] }) {
                 title={banner.typeTitle}
                 priority={true}
                 width={1080}
-                className="hover:cursor-pointer rounded w-full hover:scale-105 transition-all"
+                className="hover:cursor-pointer rounded w-full hover:scale-105 transition-all duration-500"
                 height={480}
               />
             </Link>
