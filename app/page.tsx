@@ -5,6 +5,7 @@ import HotSongs from './ui/HotSongs';
 import RecommendSongs from './ui/RecommendSongs';
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
+import toast from 'react-hot-toast';
 
 export const revalidate = 3600;
 
@@ -15,7 +16,7 @@ export default async function Home() {
 
   return (
     <div className="p-2">
-      {/* <Announcement text="完善中..." /> */}
+      <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
       <RecommendSongs />
       {/* <div className="flex items-center my-2 space-x-2">

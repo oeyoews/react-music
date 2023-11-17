@@ -16,7 +16,7 @@ import {
   getAccount,
   getLevel,
 } from '~lib/login'; // Assuming you have these API functions.
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 const LoginPage = () => {
   const [qrimg, setQrImg] = useState('');
@@ -27,7 +27,7 @@ const LoginPage = () => {
     logout();
     statusStore.setCookie('');
     localStorage.removeItem('cookie');
-    toast.info('退出登录成功');
+    toast.success('退出登录成功');
     router.push('/');
   };
 
@@ -41,7 +41,7 @@ const LoginPage = () => {
     const qrimg = qrcreate.data.qrimg;
 
     setQrImg(qrimg);
-    toast.info('请使用手机扫描二维码登录');
+    toast('请使用手机扫描二维码登录');
   };
 
   const checkQr = async (key: string) => {
@@ -52,7 +52,7 @@ const LoginPage = () => {
       router.push('/');
       toast.success('登录成功');
     } else {
-      toast.info(checkResult.message);
+      toast(checkResult.message);
     }
   };
 
