@@ -59,6 +59,7 @@ const LoginPage = () => {
   const getUserIfno = async (id: Id) => {
     const userInfo = await getUserDetail(id);
     statusStore.setUserInfo(userInfo);
+    localStorage.userData = JSON.stringify(userInfo);
   };
 
   return (
@@ -74,6 +75,7 @@ const LoginPage = () => {
               onClick={() => {
                 updateStatus();
                 checkQr(key);
+                getUserDetail(statusStore.loginStatus.data.account?.id);
               }}>
               Login
             </button>
