@@ -6,6 +6,7 @@
 
 ## TODO
 
+- [ ] ssg(没有很大价值, api 一直在刷新歌单)
 - [ ] 添加游客登录
 - [ ] 将api, 和项目一起部署, 就可以自动传cookie
 - [x] 301 https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961
@@ -20,9 +21,8 @@
 
 <!-- https://github.com/imsyy/SPlayer/blob/dev/src/api/home.js -->
 
-```
+<!-- ```
 Error: ENOENT: no such file or directory, scandir 'D:\Workspace\react-music\.next\server\vendor-chunks\module'
-```
-
-- mp3 cache
+``` -->
+<!-- - mp3 cache -->
 <!-- - 跨域问题() -->
