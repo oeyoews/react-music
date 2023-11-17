@@ -36,7 +36,12 @@ async function fetchData(
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' }, // cookie on header auto???
+    next: {
+      revalidate: 3600,
+    },
+    headers: {
+      'Content-Type': 'application/json',
+    }, // cookie on header auto???
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
   const urlWithParams = addParams(finalURL, params);
