@@ -89,3 +89,9 @@ export const getUserDetail = async (id: Id): Promise<IUserDetail> => {
     params: { timestamp: Date.now(), id },
   });
 };
+
+export const logout = async (): Promise<any> => {
+  return await fetch({
+    url: '/logout',
+  });
+};

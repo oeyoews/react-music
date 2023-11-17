@@ -84,8 +84,8 @@ const LoginPage = () => {
       <div>
         {loginStatus && (
           <div>
-            <div>{loginStatus.data.account.userName}</div>
-            <div>{loginStatus.data.account.id}</div>
+            <div>{loginStatus.data.account?.userName}</div>
+            <div>{loginStatus.data.account?.id}</div>
           </div>
         )}
       </div>
