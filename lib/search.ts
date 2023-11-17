@@ -2,6 +2,24 @@
 
 import { customfetch as fetch } from './fetchData';
 
+export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
+  return await fetch({
+    url: '/artist/detail',
+    params: {
+      id,
+    },
+  });
+};
+
+export const getSimiSong = async (id: Id): Promise<ISimiSong> => {
+  return await fetch({
+    url: '/simi/song',
+    params: {
+      id,
+    },
+  });
+};
+
 export const getLyric = async (id: Id): Promise<ILyric> => {
   return await fetch({
     url: '/lyric',

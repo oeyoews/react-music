@@ -10,3 +10,7 @@ a {
 :focus-visible {
   outline: none;
 }
+
+hr {
+  margin: 0 auto !important;
+}
