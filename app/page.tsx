@@ -13,6 +13,8 @@ import {
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
 
+export const revalidate = 3600;
+
 export default async function Home() {
   await getLoginStatus();
   const bannerData = await getBanners();
