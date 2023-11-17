@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Search for songs, artists, or albums',
 };
 
-export const generatestaticParams = () => {
+export function generatestaticParams() {
   return ['search'];
 };
 
