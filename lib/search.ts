@@ -1,9 +1,8 @@
 // 'use server';
 
-import { create } from './fetchData';
-const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
+import { customfetch as fetch } from './fetchData';
 
-export const getLyric = async (id: number): Promise<ILyric> => {
+export const getLyric = async (id: Id): Promise<ILyric> => {
   return await fetch({
     url: '/lyric',
     params: {
@@ -12,7 +11,7 @@ export const getLyric = async (id: number): Promise<ILyric> => {
   });
 };
 
-export const checkSong = async (id: number): Promise<CheckSong> => {
+export const checkSong = async (id: Id): Promise<CheckSong> => {
   return await fetch({
     url: '/check/music',
   });
@@ -66,7 +65,7 @@ export const searchHot = async (): Promise<IHotDetail> => {
 
 //  v1 有时会失效
 export const getMusicURL = async (
-  id: number,
+  id: Id,
   // level: any = 'standard',
 ): Promise<IMusicURL> => {
   return fetch({
@@ -78,7 +77,7 @@ export const getMusicURL = async (
   });
 };
 
-export const getSongDetail = async (ids: number): Promise<ISongDetail> => {
+export const getSongDetail = async (ids: Id): Promise<ISongDetail> => {
   return await fetch({
     url: '/song/detail',
     params: {
@@ -87,7 +86,7 @@ export const getSongDetail = async (ids: number): Promise<ISongDetail> => {
   });
 };
 
-export const getAlbumDetail = async (id: number): Promise<IAlbumDetail> => {
+export const getAlbumDetail = async (id: Id): Promise<IAlbumDetail> => {
   return await fetch({
     url: '/album',
     params: {
@@ -95,11 +94,14 @@ export const getAlbumDetail = async (id: number): Promise<IAlbumDetail> => {
     },
   });
 };
-// export async function getSongComment(id: number): Promise<any> {
-//   return await fetch({
-//     url: '/comment/music',
-//     params: {
-//       id,
-//     },
-//   });
-// }
+
+export const getSongComment = async (id: Id): Promise<ISongComment> => {
+  return await fetch({
+    url: '/comment/music',
+    params: {
+      id,
+      limit: 99,
+      timestamp: Date.now(),
+    },
+  });
+};

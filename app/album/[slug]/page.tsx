@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default async function Album({ params }: { params: Params }) {
   const { slug } = params;
-  const albumDetail = await getAlbumDetail(Number(slug));
+  const albumDetail = await getAlbumDetail(slug);
   return (
     <>
       <div className="justify-center items-center flex">

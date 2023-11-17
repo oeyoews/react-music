@@ -20,6 +20,7 @@
     "react-aplayer": "^1.0.0",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "react-tabs": "^6.0.2",
     "react-toastify": "^9.1.3"
   },
   "devDependencies": {

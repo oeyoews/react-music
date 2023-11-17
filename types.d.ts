@@ -1,3 +1,139 @@
+type Id = number | string;
+
+// song comment
+interface ISongComment {
+  isMusician: boolean;
+  cnum: number;
+  userId: number;
+  topComments: any[];
+  moreHot: boolean;
+  hotComments: HotComment[];
+  commentBanner: null;
+  code: number;
+  comments: SongComment[];
+  total: number;
+  more: boolean;
+}
+
+interface SongComment {
+  user: User;
+  beReplied: BeReplied[];
+  pendantData: PendantData | null;
+  showFloorComment: null;
+  status: number;
+  commentId: number;
+  content: string;
+  richContent: null | string;
+  contentResource: null;
+  time: number;
+  timeStr: string;
+  needDisplayTime: boolean;
+  likedCount: number;
+  expressionUrl: null;
+  commentLocationType: number;
+  parentCommentId: number;
+  decoration: any;
+  repliedMark: null;
+  grade: null;
+  userBizLevels: null;
+  ipLocation: IPLocation;
+  owner: boolean;
+  liked: boolean;
+}
+
+interface BeReplied {
+  user: User;
+  beRepliedCommentId: number;
+  content: string;
+  richContent: null | string;
+  status: number;
+  expressionUrl: null;
+  ipLocation: IPLocation;
+}
+
+interface IPLocation {
+  ip: null;
+  location: string;
+  userId: number | null;
+}
+
+interface User {
+  locationInfo: null;
+  liveInfo: null;
+  anonym: number;
+  commonIdentity: null;
+  userType: number;
+  avatarDetail: AvatarDetail | null;
+  avatarUrl: string;
+  followed: boolean;
+  mutual: boolean;
+  remarkName: null;
+  socialUserId: null;
+  vipRights: VipRights | null;
+  nickname: string;
+  authStatus: number;
+  expertTags: string[] | null;
+  experts: { [key: string]: string } | null;
+  vipType: number;
+  userId: number;
+  target: null;
+}
+
+interface AvatarDetail {
+  userType: number;
+  identityLevel: number;
+  identityIconUrl: string;
+}
+
+interface VipRights {
+  associator: Associator | null;
+  musicPackage: Associator | null;
+  redplus: Associator | null;
+  redVipAnnualCount: number;
+  redVipLevel: number;
+}
+
+interface Associator {
+  vipCode: number;
+  rights: boolean;
+  iconUrl: string;
+}
+
+interface PendantData {
+  id: number;
+  imageUrl: string;
+}
+
+interface HotComment {
+  user: User;
+  beReplied: any[];
+  pendantData: PendantData | null;
+  showFloorComment: null;
+  status: number;
+  commentId: number;
+  content: string;
+  richContent: null | string;
+  contentResource: null;
+  time: number;
+  timeStr: string;
+  needDisplayTime: boolean;
+  likedCount: number;
+  expressionUrl: null;
+  commentLocationType: number;
+  parentCommentId: number;
+  decoration: HotCommentDecoration;
+  repliedMark: null;
+  grade: null;
+  userBizLevels: null;
+  ipLocation: IPLocation;
+  owner: boolean;
+  liked: boolean;
+}
+
+interface HotCommentDecoration {
+  bubbleId?: number;
+}
+
 interface IAlbumDetail {
   resourceState: boolean;
   songs: Song[];

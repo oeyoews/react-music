@@ -43,6 +43,7 @@ async function fetchData(
 
   try {
     const response = await fetch(urlWithParams, mergedOptions);
+    console.log(urlWithParams);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data. Status: ${response.status}`);
@@ -62,3 +63,5 @@ export const create = (baseURL: string) => {
     return fetchData(finalURL, params, options);
   };
 };
+
+export const customfetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
