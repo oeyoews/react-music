@@ -55,6 +55,10 @@ export const getRecommendations = async (
   // NOTE: need login
   return await fetch({
     url: '/recommend/songs',
+    params: {
+      cookie,
+      timestamp: Date.now(),
+    },
     options: {
       headers: {
         cookie,

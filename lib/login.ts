@@ -1,8 +1,6 @@
 'use server';
 
-import { create } from './fetchData';
-
-const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
+import { customfetch as fetch } from './fetchData';
 
 /**
  * 01: generate qr code key
