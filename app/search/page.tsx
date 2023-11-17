@@ -6,12 +6,8 @@ export const metadata: Metadata = {
   description: 'Search for songs, artists, or albums',
 };
 
-export const generatestaticParams = async () => {
-  return [
-    {
-      slug: 'search',
-    },
-  ];
+export const generatestaticParams = () => {
+  return ['search'];
 };
 
 export default function page() {
