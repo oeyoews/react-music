@@ -6,27 +6,31 @@ export default function Playlist({ data }: { data: Playlist[] }) {
     <div>
       <h2>热门歌单</h2>
       <hr />
-      <ol className="space-y-2 columns-1 md:columns-2">
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
         {data.map((playlist) => (
-          <li key={playlist.name} className="hover:cursor-pointer">
-            <Link href={`/playlist/${playlist.id}`} className="no-underline">
-              <div className="flex items-center space-x-2">
-                <div className="not-prose">
+          <div
+            key={playlist.name}
+            className="hover:cursor-pointer flex flex-col group">
+            <Link href={`/playlist/${playlist.id}`} className="rounded-md">
+              <div className="flex overflow-hidden rounded-md">
+                <div className="not-prose hover:scale-125 transition-all duration-500 ease-out">
                   <Image
-                    title={playlist.id.toString()}
+                    title="点击进入歌单"
                     src={playlist.coverImgUrl}
                     alt={playlist.name}
-                    width={22}
-                    height={22}
-                    className="rounded-full"
+                    width={256}
+                    height={256}
+                    className="rounded-md"
                   />
                 </div>
-                <div>{playlist.name}</div>
+              </div>
+              <div className="text-sm mt-2 hover:text-rose-500 transition-all">
+                {playlist.name}
               </div>
             </Link>
-          </li>
+          </div>
         ))}
-      </ol>
+      </div>
     </div>
   );
 }

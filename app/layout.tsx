@@ -25,7 +25,7 @@ export default function RootLayout({
         <NextTopLoader />
         <ToastContainer autoClose={2000} hideProgressBar />
         <Nav />
-        <div className="prose mx-auto max-w-4xl px-2">{children}</div>
+        <div className="prose mx-auto max-w-6xl px-2">{children}</div>
       </body>
     </html>
   );
