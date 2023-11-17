@@ -56,10 +56,10 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
  * @description 04: check login status
  * @returns
  */
-export const getLoginStatus = async (): Promise<ILoginStatus> => {
+export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
   return await fetch({
     url: '/login/status',
-    params: { timestamp: Date.now() },
+    params: { timestamp: Date.now(), cookie },
   });
 };
 
@@ -81,10 +81,18 @@ export const refreshLogin = async () => {
   });
 };
 
-export const getUserDetail = async (id: Id): Promise<IUserDetail> => {
+export const getUserDetail = async (
+  uid: Id,
+  cookie: string,
+): Promise<IUserDetail> => {
   return await fetch({
     url: '/user/detail',
-    params: { timestamp: Date.now(), id },
+    params: { uid, timestamp: Date.now() },
+    options: {
+      headers: {
+        cookie,
+      },
+    },
   });
 };
 

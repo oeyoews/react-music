@@ -1,6 +1,7 @@
 'use client';
 
 import useStore from '~lib/store';
+import Image from 'next/image';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -53,7 +54,7 @@ const LoginPage = () => {
   };
 
   const updateStatus = async () => {
-    const loginStatus = await getLoginStatus();
+    const loginStatus = await getLoginStatus(localStorage.cookie);
     statusStore.setLoginStatus(loginStatus);
   };
 
@@ -64,9 +65,10 @@ const LoginPage = () => {
   }, [statusStore.cookie]);
 
   const getUserIfno = async (id: Id) => {
-    const userInfo = await getUserDetail(id);
+    const userInfo = await getUserDetail(id, localStorage.cookie);
     statusStore.setUserInfo(userInfo);
     localStorage.userData = JSON.stringify(userInfo);
+    console.log(JSON.stringify(userInfo));
   };
 
   return (
@@ -82,27 +84,36 @@ const LoginPage = () => {
               onClick={() => {
                 updateStatus();
                 checkQr(key);
-                getUserDetail(statusStore.loginStatus.data.account?.id);
+                getUserIfno(statusStore.loginStatus.data.account.id);
               }}>
               Login
             </button>
           </div>
         )
       )}
+      <button
+        onClick={() => getUserIfno(statusStore.loginStatus.data.account.id)}
+        className="bg-neutral-200 rounded-sm p-1">
+        Get User info
+      </button>
+      {statusStore.userInfo?.profile && (
+        <div className="flex items-center space-x-2">
+          <Image
+            src={statusStore.userInfo.profile?.avatarUrl}
+            width={22}
+            height={22}
+            className="rounded-full not-prose"
+            alt={statusStore.userInfo.profile?.nickname}
+            title={statusStore.userInfo.profile.userId.toString()}
+          />
+          {statusStore.userInfo?.profile?.nickname}
+        </div>
+      )}
       <div>
         {statusStore.cookie && (
           <button className="bg-rose-200 rounded-sm p-1" onClick={handleLogout}>
             Logout
           </button>
-        )}
-        {statusStore.loginStatus?.data !== undefined && (
-          <div>id: {statusStore.loginStatus.data.account?.id}</div>
-        )}
-        {statusStore.userInfo.profile?.nickname && (
-          <div>
-            <div>{JSON.stringify(statusStore.userInfo.profile)}</div>
-            <div>nickname: {statusStore.userInfo.profile?.nickname}</div>
-          </div>
         )}
       </div>
     </div>

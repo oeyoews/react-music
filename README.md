@@ -5,11 +5,11 @@ https://nextjs-netease-music.vercel.app/
 
 ## TODO
 
-- [ ] 301 https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961
+- [x] 301 https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961
 - [ ] 评论分页
 - [ ] space shortcuts https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/App.vue#L201
 - [ ] 支持歌单播放
-- [ ] cookie login
+- [x] cookie login
 - [ ] 如何支持 ts(music api)
 - [ ] download url not available
 - [ ] recent song
