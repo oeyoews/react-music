@@ -1,9 +1,8 @@
-https://nextjs-netease-music.vercel.app/
+![](banner.png)
 
-> [IMPORTANT]
-> 开发中
+[preview page](https://nextjs-netease-music.vercel.app/)
 
-> 暂时使用了25个接口, 已经支持登录(共有200+ 接口)
+> 目前使用了25+个接口, 已支持登录 (共有200+ 接口)
 
 ## TODO
 
