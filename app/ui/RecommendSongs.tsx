@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getRecommendations } from '~lib/search';
+import Link from 'next/link';
 
 export default function RecommendSongs() {
   const [data, setData] = useState<DailySong[]>();
@@ -33,7 +34,7 @@ export default function RecommendSongs() {
             </li>
           ))
         ) : (
-          <>需要登录</>
+          <Link href="/login">需要登录</Link>
         )}
       </ol>
     </div>

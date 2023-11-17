@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import useStore from '~lib/store';
 
 import { useEffect, useState } from 'react';
@@ -11,6 +10,7 @@ import {
   getLoginStatus,
   qrCreate,
   getUserDetail,
+  logout,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-toastify';
 
@@ -19,6 +19,13 @@ const LoginPage = () => {
   const [key, setKey] = useState('');
   const [loading, setLoading] = useState(true);
   const statusStore = useStore();
+  const handleLogout = () => {
+    logout();
+    statusStore.setCookie('');
+    localStorage.removeItem('cookie');
+    toast.info('退出登录成功');
+    router.push('/');
+  };
 
   const router = useRouter();
   const handleLogin = async () => {
@@ -83,6 +90,11 @@ const LoginPage = () => {
         )
       )}
       <div>
+        {statusStore.cookie && (
+          <button className="bg-rose-200 rounded-sm p-1" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
         {statusStore.loginStatus?.data !== undefined && (
           <div>id: {statusStore.loginStatus.data.account?.id}</div>
         )}
