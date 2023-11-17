@@ -5,7 +5,6 @@ import HotSongs from './ui/HotSongs';
 import RecommendSongs from './ui/RecommendSongs';
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
-import toast from 'react-hot-toast';
 
 export const revalidate = 3600;
 
