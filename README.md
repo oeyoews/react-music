@@ -1,14 +1,7 @@
 https://nextjs-netease-music.vercel.app/
 
-> 借助RSC(不使用client component), 拥有极快的启动速度.
-
-- nextjs, react
-- Tailwindcss: 还没上UI框架, 目前使用tailwindcss 手写ui
-
-## Dev
-
-- api 3001
-- dev 3000
+> [IMPORTANT]
+> 开发中
 
 ## TODO
 
