@@ -14,7 +14,7 @@ https://nextjs-netease-music.vercel.app/
 - [ ] space shortcuts https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/App.vue#L201
 - [ ] 支持歌单播放
 - [x] cookie login
-- [ ] 如何支持 ts(music api)
+- [x] 如何支持 ts(music api) 返回值类型还是要自己写(baseurl 如何传进去没看懂, 只有接口的参数, axios 似乎没保留出来)
 - [ ] download url not available
 - [ ] recent song
 - [ ] qrcode use svg(or use canvas)
