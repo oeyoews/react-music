@@ -28,16 +28,15 @@ export default async function Home() {
   // } else {
   //   console.log('登录成功');
   // }
-  // const recommendSongs = await getRecommendations();
 
   return (
     <div className="p-2">
       <Announcement text="开发中..." />
       <Banners data={bannerData.banners} />
+      <RecommendSongs />
       {/* <div className="flex items-center my-2 space-x-2">
         <FaUser /> {loginStatus.data.account?.userName}
       </div> */}
-      {/* <RecommendSongs data={recommendSongs.data.dailySongs} /> */}
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
     </div>
