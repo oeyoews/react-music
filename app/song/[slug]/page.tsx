@@ -10,7 +10,6 @@ import {
 import AudioSong from '~app/ui/AudioSong';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 

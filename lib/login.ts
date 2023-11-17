@@ -5,17 +5,20 @@ import { create } from './fetchData';
 const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
 
 /**
- * generate qr code key
+ * 01: generate qr code key
  */
 export const getqrKey = async (): Promise<IQRCode> => {
   return await fetch({
     url: '/login/qr/key',
     params: { timestamp: Date.now() },
+    options: {
+      method: 'post',
+    },
   });
 };
 
 /**
- * generate qrcode image
+ * 02: generate qrcode image
  * @param key
  * @returns
  */
@@ -27,11 +30,14 @@ export const qrCreate = async (key: string): Promise<IQRCodeData> => {
       qrimg: true,
       timestamp: Date.now(),
     },
+    options: {
+      method: 'post',
+    },
   });
 };
 
 /**
- * check qrcode status
+ * @description 03: check qrcode status
  * @param key
  * @returns
  */
@@ -42,12 +48,14 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
       key,
       timestamp: Date.now(),
     },
-    options: { method: 'post' },
+    options: {
+      method: 'post',
+    },
   });
 };
 
 /**
- * check login status
+ * @description 04: check login status
  * @returns
  */
 export const getLoginStatus = async (): Promise<ILoginStatus> => {
@@ -72,5 +80,12 @@ export const refreshLogin = async () => {
   return await fetch({
     url: '/login/refresh',
     params: { timestamp: Date.now() },
+  });
+};
+
+export const getUserDetail = async (id: Id): Promise<IUserDetail> => {
+  return await fetch({
+    url: '/user/detail',
+    params: { timestamp: Date.now(), id },
   });
 };

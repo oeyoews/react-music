@@ -1,3 +1,104 @@
+interface IUserDetail {
+  identify: Identify;
+  level: number;
+  listenSongs: number;
+  userPoint: UserPoint;
+  mobileSign: boolean;
+  pcSign: boolean;
+  profile: Profile;
+  peopleCanSeeMyPlayRecord: boolean;
+  bindings: any[];
+  adValid: boolean;
+  code: number;
+  newUser: boolean;
+  recallUser: boolean;
+  createTime: number;
+  createDays: number;
+}
+
+interface Profile {
+  privacyItemUnlimit: PrivacyItemUnlimit;
+  avatarDetail: AvatarDetail;
+  createTime: number;
+  avatarImgIdStr: string;
+  backgroundImgIdStr: string;
+  accountStatus: number;
+  vipType: number;
+  userType: number;
+  birthday: number;
+  avatarUrl: string;
+  gender: number;
+  nickname: string;
+  avatarImgId: number;
+  mutual: boolean;
+  followed: boolean;
+  remarkName: null;
+  authStatus: number;
+  detailDescription: string;
+  experts: Experts;
+  expertTags: null;
+  djStatus: number;
+  province: number;
+  city: number;
+  defaultAvatar: boolean;
+  backgroundImgId: number;
+  backgroundUrl: string;
+  description: string;
+  userId: number;
+  signature: string;
+  authority: number;
+  allAuthTypes: AuthType[];
+  followeds: number;
+  follows: number;
+  blacklist: boolean;
+  artistId: number;
+  eventCount: number;
+  allSubscribedCount: number;
+  playlistBeSubscribedCount: number;
+  mainAuthType: AuthType;
+  followTime: null;
+  followMe: boolean;
+  artistIdentity: number[];
+  cCount: number;
+  inBlacklist: boolean;
+  sDJPCount: number;
+  artistName: string;
+  playlistCount: number;
+  sCount: number;
+  newFollows: number;
+}
+
+interface AuthType {
+  type: number;
+  desc: string;
+  tags: string[] | null;
+}
+
+interface AvatarDetail {
+  userType: null;
+  identityLevel: number;
+  identityIconUrl: string;
+}
+
+interface Experts {}
+
+interface PrivacyItemUnlimit {
+  area: boolean;
+  college: boolean;
+  gender: boolean;
+  age: boolean;
+  villageAge: boolean;
+}
+
+interface UserPoint {
+  userId: number;
+  balance: number;
+  updateTime: number;
+  version: number;
+  status: number;
+  blockBalance: number;
+}
+
 interface IArtistDetail {
   code: number;
   message: string;
@@ -310,6 +411,10 @@ interface ChargeInfoList {
 interface CheckQrcode {
   code: number;
   message: string;
+  // 800 为二维码过期.
+  // 801 为等待扫码.
+  // 802 为待确认.
+  // 803 为授权登录成功(803 状态码下会返回 cookies), 如扫码后返回502, 则需加上noCookie参数, 如 & noCookie=true
   cookie: string;
 }
 
