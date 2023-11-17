@@ -1,3 +1,20 @@
+interface ILevel {
+  full: boolean;
+  data: LevelInfo;
+  code: number;
+}
+
+interface LevelInfo {
+  userId: number;
+  info: string;
+  progress: number;
+  nextPlayCount: number;
+  nextLoginCount: number;
+  nowPlayCount: number;
+  nowLoginCount: number;
+  level: number;
+}
+
 interface IUserAccount {
   code: number;
   profile: Profile;

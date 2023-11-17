@@ -94,6 +94,15 @@ export const getAccount = async (cookie: string): Promise<IUserAccount> => {
   });
 };
 
+// need login
+export const getLevel = async (cookie: string): Promise<ILevel> => {
+  return await fetch({
+    url: '/user/level',
+    params: { timestamp: Date.now(), cookie },
+  });
+};
+
+// need login
 export const getUserDetail = async (uid: Id): Promise<IUserDetail> => {
   return await fetch({
     url: '/user/detail',
@@ -106,3 +115,5 @@ export const logout = async (): Promise<any> => {
     url: '/logout',
   });
 };
+
+// /user/playlist?uid=32953014

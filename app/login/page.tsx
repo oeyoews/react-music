@@ -3,6 +3,7 @@
 import useStore from '~lib/store';
 import Image from 'next/image';
 
+// TODO: 重构登录
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -13,6 +14,7 @@ import {
   getUserDetail,
   logout,
   getAccount,
+  getLevel,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-toastify';
 
