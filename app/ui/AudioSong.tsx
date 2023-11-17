@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { checkSong, getMusicURL } from '~lib/search';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export default function AudioSong({
   // src,

@@ -18,9 +18,6 @@ export default async function Home() {
       <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
       <RecommendSongs />
-      {/* <div className="flex items-center my-2 space-x-2">
-        <FaUser /> {loginStatus.data.account?.userName}
-      </div> */}
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
     </div>
