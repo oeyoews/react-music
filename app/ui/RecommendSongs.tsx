@@ -27,9 +27,9 @@ export default function RecommendSongs() {
             <li key={id}>
               <div className="flex space-x-2 items-center">
                 <div>{name}</div>
-                <div className="">
+                <Link href={`/song/${id}`}>
                   {recommendReason && <div> -- {recommendReason}</div>}
-                </div>
+                </Link>
               </div>
             </li>
           ))
