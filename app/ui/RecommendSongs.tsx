@@ -26,12 +26,12 @@ export default function RecommendSongs() {
         {hasCookie && data ? (
           data.map(({ name, id, recommendReason }) => (
             <li key={id}>
-              <div className="flex space-x-2 items-center">
-                <div>{name}</div>
-                <Link href={`/song/${id}`}>
+              <Link href={`/song/${id}`}>
+                <div className="flex space-x-2 items-center">
+                  <div>{name}</div>
                   {recommendReason && <div> -- {recommendReason}</div>}
-                </Link>
-              </div>
+                </div>
+              </Link>
             </li>
           ))
         ) : (
