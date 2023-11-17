@@ -1,4 +1,5 @@
 'use client';
+
 import Image from 'next/image';
 
 // Import necessary dependencies and API functions
@@ -17,7 +18,7 @@ const LoginPage = () => {
   const [qrimg, setQrImg] = useState('');
   const [key, setKey] = useState('');
   const [loginStatus, setLoginStatus] = useState<ILoginStatus>();
-  const [cookie, setCookie] = useState(localStorage.getItem('cookie'));
+  const [cookie, setCookie] = useState('');
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>();
 
@@ -42,7 +43,7 @@ const LoginPage = () => {
   const checkQr = async (key: string) => {
     const checkResult = await qrCheck(key);
     if (checkResult.code === 803) {
-      localStorage.setItem('cookie', checkResult.cookie);
+      setCookie(checkResult.cookie);
       // localStorage.setItem('userData', )
       router.push('/');
       toast.success('登录成功');
