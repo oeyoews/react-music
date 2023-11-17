@@ -7,6 +7,7 @@ https://nextjs-netease-music.vercel.app/
 
 ## TODO
 
+- [ ] 添加游客登录
 - [ ] 将api, 和项目一起部署, 就可以自动传cookie
 - [x] 301 https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961
 - [ ] 评论分页
