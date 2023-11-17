@@ -8,13 +8,13 @@ export default function AudioSong({
   isAvailable,
   songInfo,
   lrc,
-  cover,
+  artist,
 }: {
   // src: string;
   isAvailable: CheckSong;
   songInfo: SongDetail;
   lrc: Lrc;
-  cover: string;
+  artist: Artist;
 }) {
   if (!isAvailable.success) {
     // TODO: 即使能播放, 也提示无版权, thunder client 提示有版权, 需要登录吗 本地开发时默认登录的???
@@ -38,7 +38,7 @@ export default function AudioSong({
         artist: songInfo.ar[0].name,
         url,
         lrc: '', // 外链会自动获取???
-        cover,
+        cover: artist.avatar,
         // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
         // theme: 'lightred',
       },
@@ -54,7 +54,8 @@ export default function AudioSong({
   };
 
   return (
-    <div className="flex justify-center items-center">
+    // TODO: add suspense
+    <div className="flex justify-center items-center h-24">
       {/* <audio controls src={src} title={src} /> */}
       {/* TODO: use react-aplayer??? */}
       {/* <audio controls src={`${baseURL}/${id}.mp3`} // title={src} */}

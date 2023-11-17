@@ -10,6 +10,7 @@ import {
 import AudioSong from '~app/ui/AudioSong';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
@@ -39,7 +40,7 @@ export default async function Page({ params }: { params: Params }) {
   const { lrc } = await getLyric(slug);
   const simiSong = await getSimiSong(slug);
   const artistDetail = await getArtistDetail(songInfo.ar[0].id);
-  const avatar = artistDetail.data.artist.avatar;
+  const artist = artistDetail.data.artist;
 
   const SimiSong = ({ simiSong }: { simiSong: ISimiSong }) => {
     const { songs } = simiSong;
@@ -68,13 +69,27 @@ export default async function Page({ params }: { params: Params }) {
       {/* <h1> 歌曲详情 - {songInfo.name} {songInfo.id}{' '} </h1> */}
       {/* <div>音质: {musicInfo.level}</div> */}
       {/* TODO: 仍然不起作用, 部分歌曲403, 暂时采用outer */}
-      <AudioSong
-        // src={musicInfo.url}
-        isAvailable={isAvailable}
-        songInfo={songInfo}
-        lrc={lrc}
-        cover={avatar}
-      />
+      <Suspense fallback={<>loading ...</>}>
+        <AudioSong
+          // src={musicInfo.url}
+          isAvailable={isAvailable}
+          songInfo={songInfo}
+          lrc={lrc}
+          artist={artist}
+        />
+      </Suspense>
+      <div>
+        <hr />
+        <h2 className="my-2">歌手简介</h2>
+        <div>
+          <Link
+            href={`/artist/${artist.id}`}
+            className="no-underline font-bold">
+            {artist.name}
+          </Link>
+          <p className="my-2">{artist.briefDesc}</p>
+        </div>
+      </div>
       <SimiSong simiSong={simiSong} />
       <div className="flex justify-start items-center space-x-2 mt-8">
         <h2 className="my-2">评论</h2>

@@ -14,3 +14,7 @@ a {
 hr {
   margin: 0 auto !important;
 }
+
+.aplayer-pic {
+  border-radius: 50%;
+}
