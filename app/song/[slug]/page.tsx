@@ -90,10 +90,10 @@ export default async function Page({ params }: { params: Params }) {
       </div>
       <SimiSong simiSong={simiSong} />
       <div className="flex justify-start items-center space-x-2 mt-8">
-        <h2 className="my-2">评论</h2>
+        <h2 className="my-2">评论区</h2>
         <div>共{total.toLocaleString()} 条评论</div>
       </div>
-      <hr className="not-prose" />
+      <hr />
       <SongCommentTab songComment={songComment} />
     </div>
   );

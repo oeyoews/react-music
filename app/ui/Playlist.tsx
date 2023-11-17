@@ -7,8 +7,9 @@ export default function Playlist({ data }: { data: Playlist[] }) {
     <div>
       <h2>热门歌单</h2>
       <hr />
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
-        {data.map((playlist) => (
+      {/* TODO: add more */}
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-6 my-4">
+        {data.slice(0, 12).map((playlist) => (
           <div
             key={playlist.name}
             className="hover:cursor-pointer flex flex-col">

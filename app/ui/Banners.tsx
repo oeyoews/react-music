@@ -35,7 +35,8 @@ export default function Banners({ data }: { data: Banner[] }) {
         variants={container}
         initial="hidden"
         animate="visible">
-        {data.map((banner) => (
+        {/* 数量不固定 */}
+        {data.slice(0, 9).map((banner) => (
           <motion.div
             key={banner.imageUrl}
             variants={item}

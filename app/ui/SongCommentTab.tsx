@@ -2,7 +2,6 @@
 
 import { Tab } from '@headlessui/react';
 
-import React from 'react';
 import SongComment from './SongComment';
 
 export default function SongCommentTab({ songComment }: { songComment: any }) {
@@ -13,7 +12,7 @@ export default function SongCommentTab({ songComment }: { songComment: any }) {
     <Tab.Group>
       <Tab.List>
         <Tab className={className}>最新评论</Tab>
-        <Tab className={className}>热门评论</Tab>
+        <Tab className={className}>最热评论</Tab>
       </Tab.List>
       <Tab.Panels>
         <Tab.Panel>
