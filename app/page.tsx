@@ -23,7 +23,7 @@ export default async function Home() {
 
   return (
     <div className="p-2">
-      <Announcement text="开发中..." />
+      <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
       <RecommendSongs />
       {/* <div className="flex items-center my-2 space-x-2">

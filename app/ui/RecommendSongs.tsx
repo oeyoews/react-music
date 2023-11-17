@@ -10,7 +10,7 @@ export default function RecommendSongs() {
   useEffect(() => {
     if (!localStorage.cookie) {
       setHasCookie(false);
-      return;
+      // return;
     }
     getRecommendations(localStorage.cookie).then((recommendSongs) => {
       setData(recommendSongs.data.dailySongs);
@@ -22,7 +22,8 @@ export default function RecommendSongs() {
       <h2>每日推荐</h2>
       <hr />
       <ol className="columns-1 md:columns-2">
-        {hasCookie && data ? (
+        {/* TODO: 缓存 */}
+        {!hasCookie && data ? (
           data.map(({ name, id, recommendReason }) => (
             <li key={id}>
               <div className="flex space-x-2 items-center">

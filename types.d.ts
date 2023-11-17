@@ -1,3 +1,9 @@
+interface IUserAccount {
+  code: number;
+  profile: Profile;
+  account: Account;
+}
+
 interface IUserDetail {
   identify: Identify;
   level: number;

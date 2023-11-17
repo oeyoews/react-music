@@ -4,12 +4,12 @@ type Store = {
   cookie: string;
   userId: string;
   loginStatus: ILoginStatus;
-  userInfo: IUserDetail;
+  userInfo: IUserAccount;
 
   setCookie: (cookie: string) => void;
   setUserId: (userId: string) => void;
   setLoginStatus: (loginStatus: ILoginStatus) => void;
-  setUserInfo: (userInfo: IUserDetail) => void;
+  setUserInfo: (userInfo: IUserAccount) => void;
 };
 
 const useStore = create<Store>((set) => ({

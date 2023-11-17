@@ -12,6 +12,7 @@ import {
   qrCreate,
   getUserDetail,
   logout,
+  getAccount,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-toastify';
 
@@ -62,13 +63,13 @@ const LoginPage = () => {
     !localStorage.cookie && handleLogin();
     updateStatus();
     setLoading(false);
+    getUserIfno();
   }, [statusStore.cookie]);
 
-  const getUserIfno = async (id: Id) => {
-    const userInfo = await getUserDetail(id, localStorage.cookie);
+  const getUserIfno = async () => {
+    const userInfo = await getAccount(localStorage.cookie);
     statusStore.setUserInfo(userInfo);
     localStorage.userData = JSON.stringify(userInfo);
-    console.log(JSON.stringify(userInfo));
   };
 
   return (
@@ -84,25 +85,19 @@ const LoginPage = () => {
               onClick={() => {
                 updateStatus();
                 checkQr(key);
-                getUserIfno(statusStore.loginStatus.data.account.id);
               }}>
               Login
             </button>
           </div>
         )
       )}
-      <button
-        onClick={() => getUserIfno(statusStore.loginStatus.data.account.id)}
-        className="bg-neutral-200 rounded-sm p-1">
-        Get User info
-      </button>
       {statusStore.userInfo?.profile && (
         <div className="flex items-center space-x-2">
           <Image
             src={statusStore.userInfo.profile?.avatarUrl}
-            width={22}
-            height={22}
-            className="rounded-full not-prose"
+            width={48}
+            height={48}
+            className="rounded-full not-prose shadow-sm"
             alt={statusStore.userInfo.profile?.nickname}
             title={statusStore.userInfo.profile.userId.toString()}
           />
