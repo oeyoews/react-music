@@ -5,8 +5,12 @@ import { getRecommendations } from '~lib/search';
 
 export default function RecommendSongs() {
   const [data, setData] = useState<DailySong[]>();
+  const [hasCookie, setHasCookie] = useState(false);
   useEffect(() => {
-    if (!localStorage.cookie) return;
+    if (!localStorage.cookie) {
+      setHasCookie(false);
+      return;
+    }
     getRecommendations().then((recommendSongs) => {
       setData(recommendSongs.data.dailySongs);
     });
@@ -17,7 +21,7 @@ export default function RecommendSongs() {
       <h2>每日推荐</h2>
       <hr />
       <ol className="columns-1 md:columns-2">
-        {localStorage.cookie && data ? (
+        {hasCookie && data ? (
           data.map(({ name, id, recommendReason }) => (
             <li key={id}>
               <div className="flex space-x-2 items-center">
