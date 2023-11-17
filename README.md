@@ -3,6 +3,8 @@ https://nextjs-netease-music.vercel.app/
 > [IMPORTANT]
 > 开发中
 
+> 暂时使用了25个接口, 已经支持登录(共有200+ 接口)
+
 ## TODO
 
 - [x] 301 https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961
