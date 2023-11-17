@@ -32,11 +32,8 @@ export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
   if (!slug) return <div>Loading ...</div>;
   const songInfo = await getSongInfo(slug);
-  const musicData = await getMusicURL(slug);
-  const isAvailable = await checkSong(songInfo.id);
   const songComment = await getSongComment(slug);
   const { total } = songComment;
-  const { lrc } = await getLyric(slug);
   const simiSong = await getSimiSong(slug);
   const artistDetail = await getArtistDetail(songInfo.ar[0].id);
   const artist = artistDetail.data.artist;
@@ -70,9 +67,7 @@ export default async function Page({ params }: { params: Params }) {
       {/* TODO: 仍然不起作用, 部分歌曲403, 暂时采用outer */}
       <AudioSong
         // src={musicInfo.url}
-        isAvailable={isAvailable}
         songInfo={songInfo}
-        lrc={lrc}
         artist={artist}
       />
       <div>

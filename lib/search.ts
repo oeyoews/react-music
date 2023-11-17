@@ -29,9 +29,13 @@ export const getLyric = async (id: Id): Promise<ILyric> => {
   });
 };
 
-export const checkSong = async (id: Id): Promise<CheckSong> => {
+export const checkSong = async (id: Id, cookie: string): Promise<CheckSong> => {
   return await fetch({
     url: '/check/music',
+    params: {
+      id,
+      cookie,
+    },
   });
 };
 
@@ -88,14 +92,17 @@ export const searchHot = async (): Promise<IHotDetail> => {
 };
 
 //  v1 有时会失效
+// TODO:
 export const getMusicURL = async (
   id: Id,
+  cookie: string,
   // level: any = 'standard',
 ): Promise<IMusicURL> => {
   return fetch({
     url: '/song/url',
     params: {
       id,
+      cookie,
       // level,
     },
   });

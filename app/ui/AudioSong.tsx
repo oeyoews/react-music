@@ -1,30 +1,35 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { checkSong, getMusicURL } from '~lib/search';
+import { toast } from 'react-toastify';
 
 export default function AudioSong({
   // src,
-  isAvailable,
   songInfo,
-  lrc,
   artist,
 }: {
-  // src: string;
-  isAvailable: CheckSong;
   songInfo: SongDetail;
-  lrc: Lrc;
   artist: Artist;
 }) {
-  if (!isAvailable.success) {
-    // TODO: 即使能播放, 也提示无版权, thunder client 提示有版权, 需要登录吗 本地开发时默认登录的???
-    // toast.error(isAvailable.message);
-    // return <></>;
-  }
+  const [musicURL, setMusicURL] = useState('');
+  useEffect(() => {
+    getMusicURL(songInfo.id, localStorage.cookie).then((res) => {
+      // 如果没有权限, 30s 试听
+      setMusicURL(res.data[0].url);
+    });
+    checkSong(songInfo.id, localStorage.cookie).then((res) => {
+      if (!res.success) {
+        toast.error(res.message);
+      }
+    });
+  }, [songInfo]);
 
-  const baseURL = 'https://music.163.com/song/media/outer/url?id=';
+  // TODO: 使用外链, vip 歌曲自然就不能播放了
+  // const baseURL = 'https://music.163.com/song/media/outer/url?id=';
   // if (!songInfo.id) return <>loading ...</>;
-  const url = `${baseURL}${songInfo.id}.mp3`;
+  // const url = `${baseURL}${songInfo.id}.mp3`;
   // @ts-ignore
   // 即使使用use-client, 客户端组件在服务端也会渲染, 除非使用useeffect, 这里使用dynamic
   const ReactAplayer = dynamic(() => import('react-aplayer'), { ssr: false });
@@ -36,7 +41,7 @@ export default function AudioSong({
       {
         name: songInfo.name,
         artist: songInfo.ar[0].name,
-        url,
+        url: musicURL,
         lrc: '', // 外链会自动获取???
         cover: artist.avatar,
         // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
