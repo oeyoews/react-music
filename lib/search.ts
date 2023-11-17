@@ -59,11 +59,6 @@ export const getRecommendations = async (
       cookie,
       timestamp: Date.now(),
     },
-    options: {
-      headers: {
-        cookie,
-      },
-    },
   });
 };
 
