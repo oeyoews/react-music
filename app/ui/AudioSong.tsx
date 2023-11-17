@@ -23,6 +23,7 @@ export default function AudioSong({
     // return <></>;
   }
   const baseURL = 'https://music.163.com/song/media/outer/url?id=';
+  // if (!songInfo.id) return <>loading ...</>;
   const url = `${baseURL}${songInfo.id}.mp3`;
   const props = {
     theme: '#F57F17',

@@ -101,7 +101,7 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
     params: {
       id,
       limit: 99,
-      timestamp: Date.now(),
+      // timestamp: Date.now(),
     },
   });
 };

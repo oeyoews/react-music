@@ -6,3 +6,7 @@
 a {
   text-decoration: none !important;
 }
+
+:focus-visible {
+  outline: none;
+}
