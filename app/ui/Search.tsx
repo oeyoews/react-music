@@ -4,7 +4,7 @@
 import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 export default function Search() {
   const [search, setSearch] = useState('');
@@ -13,7 +13,7 @@ export default function Search() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!search) {
-      toast.warn('请输入搜索内容');
+      toast('请输入搜索内容');
       return;
     }
     router.push(`/search/${search}`);
