@@ -18,7 +18,7 @@ export default async function Home() {
     <div className="p-2">
       <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
-      <StarPick />
+      {process.env.NODE_ENV === 'development' && <StarPick />}
       <RecommendSongs />
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
