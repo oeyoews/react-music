@@ -9,10 +9,15 @@ export default function StarPick() {
   const [starPick, setStarPick] = useState<StarPick>();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    getStarPick(localStorage.getItem('cookie') || '').then((res) => {
-      setStarPick(res.data);
-      setLoading(false);
-    });
+    try {
+      getStarPick(localStorage.getItem('cookie') || '').then((res) => {
+        setStarPick(res.data);
+        res && setLoading(false);
+      });
+    } catch (error) {
+      console.log(error);
+      setLoading(true);
+    }
   });
 
   return (
