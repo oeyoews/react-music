@@ -35,11 +35,10 @@ export default function StarPick() {
               <Link
                 href={`/song/${songData.id}`}
                 key={creative.creativeId}
-                className="hover:scale-105 transition-all">
+                title={songData.name}
+                className="hover:scale-105 transition-all duration-500">
                 <div className="w-full h-full m-2 flex justify-between p-2 flex-wrap bg-neutral-100 rounded-md shadow">
-                  <div
-                    title={users[0].userId.toString()}
-                    className="w-full md:w-auto">
+                  <div className="w-full md:w-auto">
                     <div className="line-clamp-3">
                       {resources.uiElement.mainTitle.titleDesc} --
                     </div>
