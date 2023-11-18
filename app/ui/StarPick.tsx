@@ -18,9 +18,9 @@ export default function StarPick() {
   return (
     <div className="m-2">
       <h2>云村星评</h2>
-      {!loading ? (
-        starPick?.blocks.map((block) => {
-          return block?.creatives?.slice(0, 9).map((creative) => {
+      {!loading && starPick ? (
+        starPick.blocks.map((block) => {
+          return block.creatives.slice(0, 9).map((creative) => {
             const resources = creative.resources[0];
             const { songData, users } = resources.resourceExtInfo;
             return (
