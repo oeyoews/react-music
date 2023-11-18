@@ -14,6 +14,7 @@
 - [x] 首页轮播图
 - [x] 歌手信息
 - [x] cookie login
+- [x] use svg qrcode
 - [ ] 搜索页面完善
 - [ ] 用户信息界面完善
 - [ ] 加载歌曲loading完善

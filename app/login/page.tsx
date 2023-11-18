@@ -15,7 +15,7 @@ import {
   getAccount,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
-import CanvasQRCode from '~app/ui/CanvasQRCode';
+import { QRCodeSVG } from 'qrcode.react';
 
 const LoginPage = () => {
   const [qrurl, setQrURL] = useState('');
@@ -86,10 +86,9 @@ const LoginPage = () => {
           <div>
             {/* <img src={qrimg} alt="QR Code" width={256} height={256} /> */}
             {/* // canvas 确实不如svg */}
-            {qrurl && <CanvasQRCode value={qrurl} />}
-            <canvas ref={canvasRef}></canvas>
+            {qrurl && <QRCodeSVG value={qrurl} width={256} height={256} />}
             <button
-              className="bg-neutral-200 rounded-sm p-1"
+              className="bg-neutral-200 rounded-sm p-1 my-2"
               onClick={() => {
                 updateStatus();
                 checkQr(key);
