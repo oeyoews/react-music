@@ -63,13 +63,9 @@ export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
   });
 };
 
-/**
- * login with anonymous
- * @returns
- */
-export const loginAnonymous = async (): Promise<any> => {
+export const loginAnonymous = async (): Promise<ICookieAnonymous> => {
   return await fetch({
-    url: '/login/qr/code',
+    url: '/register/anonimous',
     params: { timestamp: Date.now() },
   });
 };

@@ -13,6 +13,7 @@ import {
   qrCreate,
   logout,
   getAccount,
+  loginAnonymous,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
 import { QRCodeSVG } from 'qrcode.react';
@@ -65,7 +66,13 @@ const LoginPage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    !localStorage.cookie && handleLogin();
+    if (!localStorage.cookie) {
+      handleLogin();
+      loginAnonymous().then((res) => {
+        statusStore.setCookie(res.cookie);
+        localStorage.setItem('cookie', res.cookie);
+      });
+    }
     updateStatus();
     setLoading(false);
     getUserIfno();

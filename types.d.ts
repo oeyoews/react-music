@@ -1,3 +1,10 @@
+interface ICookieAnonymous {
+  code: number;
+  userId: number;
+  createTime: number;
+  cookie: string;
+}
+
 interface IStarPick {
   code: number;
   data: StarPick;
