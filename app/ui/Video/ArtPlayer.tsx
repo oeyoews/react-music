@@ -21,6 +21,7 @@ export default function ArtPlayer({
   const artRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!url) return;
     const art = new Artplayer({
       id: id,
       ...option,

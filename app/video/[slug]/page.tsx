@@ -10,6 +10,7 @@ export default function VideoPage({ params }: { params: Params }) {
   const [mvName, setMvName] = useState('');
   const [artistName, setArtistName] = useState('');
   const [id, setId] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getMvDetail(slug).then((res) => {
@@ -20,6 +21,9 @@ export default function VideoPage({ params }: { params: Params }) {
       setMVURL(res.data.url);
       res.data;
       setId(res.data.id.toString());
+      if (res.data.url) {
+        setLoading(false);
+      }
     });
   }, [mvURL, slug]);
 
@@ -29,12 +33,14 @@ export default function VideoPage({ params }: { params: Params }) {
         {mvName} -- {artistName}
       </h2>
       <div className="flex justify-center items-center my-4">
-        <ArtPlayer
-          id={id}
-          url={mvURL}
-          className="aspect-video w-[1080px]"
-          // getInstance={(art) => toast.success('加载成功')}
-        />
+        {!loading && (
+          <ArtPlayer
+            id={id}
+            url={mvURL}
+            className="aspect-video w-[1080px]"
+            // getInstance={(art) => toast.success('加载成功')}
+          />
+        )}
         )
       </div>
     </div>
