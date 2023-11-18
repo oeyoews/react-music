@@ -2,6 +2,9 @@
 
 [preview page](https://nextjs-netease-music.vercel.app/)
 
+> [IMPORTANT]
+> 如果没有登录, 部分页面将会导致加载错误, 原因未知(开发环境伪造了请求头, 和线上环境不一致, 不方便排查).
+
 ## TODO
 
 - [x] 星评
