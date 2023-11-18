@@ -23,9 +23,6 @@ dependencies:
   artplayer-plugin-control:
     specifier: ^2.0.0
     version: 2.0.0
-  artplayer-plugin-dash-quality:
-    specifier: ^2.0.0
-    version: 2.0.0
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -906,10 +903,6 @@ packages:
 
   /artplayer-plugin-control@2.0.0:
     resolution: {integrity: sha512-EELMIM9EJn90Tc0z3JE9x0yFvS4MkUDhiGP35KFXN2AHgshaJUPTQn2gKtPTRZwrAF3pMK2oum67wVxBDl6ecg==}
-    dev: false
-
-  /artplayer-plugin-dash-quality@2.0.0:
-    resolution: {integrity: sha512-bQ1cGEX54O1s/9OVuFAHnV/zqDdOgM4uNPBzl3F1cqPUAxWzc1dfLt9OFTyEWCWyNBN9A5xjx7bRK4vevxcrdg==}
     dev: false
 
   /artplayer@5.0.9:
