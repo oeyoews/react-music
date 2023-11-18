@@ -113,3 +113,9 @@ export const logout = async (): Promise<any> => {
 };
 
 // /user/playlist?uid=32953014
+
+export const getVipInfo = async (cookie: string): Promise<IVipInfo> => {
+  return await fetch({
+    url: '/vip/info',
+  });
+};

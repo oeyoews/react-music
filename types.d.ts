@@ -1,3 +1,32 @@
+interface IVipInfo {
+  message: string;
+  data: VipInfo;
+  code: number;
+}
+
+interface VipInfo {
+  redVipLevelIcon: string;
+  redVipLevel: number;
+  redVipAnnualCount: number;
+  musicPackage: Associator;
+  associator: Associator;
+  redVipDynamicIconUrl: null;
+  redVipDynamicIconUrl2: null;
+  redplus: Associator;
+}
+
+interface Associator {
+  vipCode: number;
+  expireTime: number;
+  iconUrl: string;
+  dynamicIconUrl: string;
+  vipLevel: number;
+  isSignDeduct: boolean;
+  isSignIap: boolean;
+  isSignIapDeduct: boolean;
+  isSign: boolean;
+}
+
 interface ICookieAnonymous {
   code: number;
   userId: number;

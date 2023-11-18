@@ -43,3 +43,33 @@ hr {
   border-radius: 20px;
   border: 3px solid var(--scroll-bar-bg-color);
 }
+
+#om-progress {
+  height: 7px;
+  width: 100%;
+  border-radius: 9px;
+  overflow: hidden;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#om-progress::-webkit-progress-bar {
+  background-color: #efefef;
+}
+
+#om-progress::-webkit-progress-value {
+  background-color: #f67f93;
+  animation: progress-bar 1s ease-out infinite;
+}
+
+@keyframes progress-bar {
+  0% {
+    box-shadow: 0 0 1px #007aff;
+  }
+  50% {
+    box-shadow: 0 0 2px #007aff;
+  }
+  100% {
+    box-shadow: 0 0 1px #007aff;
+  }
+}

@@ -6,6 +6,7 @@ const navItems = [
   { href: '/', title: 'home', icon: <FaHome /> },
   { href: '/search', title: 'search', icon: <FaSearch /> },
   // { href: '/song', title: 'song', icon: <FaMusic /> },
+  // TODO: use user avatar
   { href: '/login', title: 'login', icon: <FaUser /> },
 ];
 
