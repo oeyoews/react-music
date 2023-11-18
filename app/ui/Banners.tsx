@@ -5,6 +5,7 @@ import { getRoute } from '~lib/getRoute';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Route } from 'next';
 // TODO: click events
 // @see-also https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/components/Banner/index.vue#L38
 export default function Banners({ data }: { data: Banner[] }) {
@@ -36,14 +37,16 @@ export default function Banners({ data }: { data: Banner[] }) {
         variants={container}
         initial="hidden"
         animate="visible">
-        {/* 数量不固定 */}
-        {data.slice(0, 9).map((banner) => (
+        {/* NOTE: 数量不固定 >=9 */}
+        {data.map((banner) => (
           <motion.div
             key={banner.imageUrl}
             variants={item}
             className="overflow-hidden rounded-md">
             {/* <span>{banner.typeTitle}</span> */}
-            <Link href={getRoute(banner)}>
+            <Link
+              href={getRoute(banner) as Route}
+              target={getRoute(banner).startsWith('http') ? '_blank' : ''}>
               <Image
                 src={banner.imageUrl}
                 alt={banner.typeTitle}

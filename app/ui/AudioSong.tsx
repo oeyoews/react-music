@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { checkSong, getMusicURL } from '~lib/search';
 import { toast } from 'react-hot-toast';
+import Spinner from './Spinner';
 
 export default function AudioSong({
   // src,
@@ -14,17 +15,24 @@ export default function AudioSong({
   artist: Artist;
 }) {
   const [musicURL, setMusicURL] = useState('');
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    // toast.loading('loading...');
     getMusicURL(songInfo.id, localStorage.cookie).then((res) => {
       // 如果没有权限, 30s 试听
       setMusicURL(res.data[0].url);
     });
+    if (musicURL) {
+      setLoading(false);
+      // toast.dismiss();
+    }
     checkSong(songInfo.id, localStorage.cookie).then((res) => {
       if (!res.success) {
         toast.error(res.message);
       }
     });
-  }, [songInfo]);
+  }, [songInfo, musicURL]);
 
   // TODO: 使用外链, vip 歌曲自然就不能播放了
   // const baseURL = 'https://music.163.com/song/media/outer/url?id=';
@@ -60,18 +68,23 @@ export default function AudioSong({
 
   return (
     // TODO: add suspense
-    <div className="flex justify-center items-center h-24">
+    <div>
       {/* <audio controls src={src} title={src} /> */}
       {/* TODO: use react-aplayer??? */}
       {/* <audio controls src={`${baseURL}/${id}.mp3`} // title={src} */}
       <div className="w-full">
-        <ReactAplayer
-          {...props}
-          // @ts-ignore
-          onInit={onInit}
-          // onPlay={onPlay}
-          // onPause={onPause}
-        />
+        <div className="flex justify-center items-center">
+          {loading && <Spinner />}
+        </div>
+        {!loading && (
+          <ReactAplayer
+            {...props}
+            // @ts-ignore
+            onInit={() => toast.success('歌曲加载成功', { duration: 2000 })}
+            onPlay={() => toast('播放歌曲')}
+            onPause={() => toast('暂停歌曲')}
+          />
+        )}
       </div>
       {/* TODO: add copybutton or download url */}
       {/* // @ts-ignore */}

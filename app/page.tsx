@@ -6,6 +6,7 @@ import RecommendSongs from './ui/RecommendSongs';
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
 import StarPick from './ui/StarPick';
+import Carousel from './ui/Carousel';
 
 export const revalidate = 3600;
 
@@ -18,6 +19,7 @@ export default async function Home() {
     <div className="p-2">
       <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
+      {/* <Carousel data={bannerData.banners} /> */}
       {process.env.NODE_ENV === 'development' && <StarPick />}
       <RecommendSongs />
       <HotSongs data={songsHot.data} />

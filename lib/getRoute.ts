@@ -1,6 +1,6 @@
 import { Route } from 'next';
 export const getRoute = (banner: Banner): Route => {
-  const { targetId, targetType } = banner;
+  const { targetId, targetType, url } = banner;
   switch (targetType) {
     case 1:
       // 歌曲页
@@ -16,8 +16,7 @@ export const getRoute = (banner: Banner): Route => {
       return `/video/${targetId}`;
     case 3000:
       // 站外链接
-      // return targetId;
-      return '';
+      return url as string;
     default:
       return '';
   }

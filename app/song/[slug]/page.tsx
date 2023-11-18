@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: Params }) {
       <SimiSong simiSong={simiSong} />
       <div className="flex justify-start items-center space-x-2 mt-8">
         <h2 className="my-2">评论区</h2>
-        <div>共{total.toLocaleString()} 条评论</div>
+        <div>共{total?.toLocaleString()} 条评论</div>
       </div>
       <hr />
       <SongCommentTab songComment={songComment} />

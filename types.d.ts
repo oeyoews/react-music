@@ -1062,7 +1062,7 @@ interface Banner {
   targetType: number;
   titleColor: string;
   typeTitle: string;
-  url: null;
+  url: null | string;
   exclusive: boolean;
   monitorImpress: null;
   monitorClick: null;
