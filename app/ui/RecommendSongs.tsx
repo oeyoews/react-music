@@ -23,7 +23,6 @@ export default function RecommendSongs() {
   return (
     <div>
       <h2>每日推荐</h2>
-      <hr />
       <ol className="columns-1 md:columns-2">
         {/* TODO: 缓存 */}
         {hasCookie && data ? (

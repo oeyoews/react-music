@@ -6,7 +6,6 @@ export default function Playlist({ data }: { data: Playlist[] }) {
   return (
     <div>
       <h2>热门歌单</h2>
-      <hr />
       {/* TODO: add more */}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-6 my-4">
         {data.slice(0, 12).map((playlist) => (
