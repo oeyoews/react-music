@@ -35,6 +35,7 @@ export default function RecommendSongs() {
             </li>
           ))
         ) : (
+          // TODO: add loading
           <Link href="/login">需要登录</Link>
         )}
       </ol>

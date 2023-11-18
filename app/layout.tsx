@@ -21,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased `}>
-        <NextTopLoader />
+        {/* TODO: 修复加载问题 */}
+        {/* <NextTopLoader /> */}
         <Toaster />
         <Nav />
         <div className="prose mx-auto max-w-6xl px-2">{children}</div>
