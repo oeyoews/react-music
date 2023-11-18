@@ -27,9 +27,11 @@ export default async function Home() {
       {/* <Carousel data={bannerData.banners} /> */}
       {process.env.NODE_ENV === 'development' && <StarPick />}
       <RecommendSongs />
+      <HotSongs data={songsHot.data} />
+      <Playlist data={PlaylistData.playlists} />
       <MVFirst mvFirst={mvFirst} />
 
-      <h2>推荐MV</h2>
+      {/* <h2>推荐MV</h2>
       <div className="grid grid-cols-2 md:grid-cols-2 gap-8 my-6">
         {personalizeMv.result.map((mv) => (
           <div key={mv.id}>
@@ -52,9 +54,7 @@ export default async function Home() {
             </Link>
           </div>
         ))}
-      </div>
-      <HotSongs data={songsHot.data} />
-      <Playlist data={PlaylistData.playlists} />
+      </div> */}
     </div>
   );
 }

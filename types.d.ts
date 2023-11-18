@@ -1,3 +1,70 @@
+interface IMvDetail {
+  loadingPic: string;
+  bufferPic: string;
+  loadingPicFS: string;
+  bufferPicFS: string;
+  subed: boolean;
+  mp: Mp;
+  data: IMvDetailData;
+  code: number;
+}
+
+interface IMvDetailData {
+  id: number;
+  name: string;
+  artistId: number;
+  artistName: string;
+  briefDesc: string;
+  desc: null;
+  cover: string;
+  coverId_str: string;
+  coverId: number;
+  playCount: number;
+  subCount: number;
+  shareCount: number;
+  commentCount: number;
+  duration: number;
+  nType: number;
+  publishTime: Date;
+  price: null;
+  brs: Br[];
+  artists: Artist[];
+  commentThreadId: string;
+  videoGroup: VideoGroup[];
+}
+
+interface IMvDetailArtist extends MVArtist {
+  img1v1Url: string;
+  followed: boolean;
+}
+
+interface Br {
+  size: number;
+  br: number;
+  point: number;
+}
+
+interface VideoGroup {
+  id: number;
+  name: string;
+  type: number;
+}
+
+interface Mp {
+  id: number;
+  fee: number;
+  mvFee: number;
+  payed: number;
+  pl: number;
+  dl: number;
+  cp: number;
+  sid: number;
+  st: number;
+  normal: boolean;
+  unauthorized: boolean;
+  msg: null;
+}
+
 interface IPersonalizedMv {
   code: number;
   category: number;
