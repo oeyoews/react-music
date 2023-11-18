@@ -40,20 +40,6 @@ const LoginPage = () => {
   };
 
   const router = useRouter();
-  const handleLogin = async () => {
-    toast.loading('loading ...');
-    const qrkey = await getqrKey();
-    const key = qrkey.data.unikey;
-    setKey(key);
-
-    const qrcreate = await qrCreate(key);
-    const qrurl = qrcreate.data.qrurl;
-
-    // setQrImg(qrimg);
-    setQrURL(qrurl);
-    toast.dismiss();
-    toast('请使用手机扫描二维码登录');
-  };
 
   const checkQr = async (key: string) => {
     const checkResult = await qrCheck(key);
@@ -72,48 +58,51 @@ const LoginPage = () => {
     statusStore.setLoginStatus(loginStatus);
   };
 
-  const handleLevel = () => {
-    if (statusStore.userInfo.account?.anonimousUser === false) {
-      toast.loading('loading ...');
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const userInfo = await getAccount(localStorage.cookie);
+      statusStore.setUserInfo(userInfo);
+      localStorage.userData = JSON.stringify(userInfo);
+    };
+    const handleLogin = async () => {
+      const qrkey = await getqrKey();
+      const key = qrkey.data.unikey;
+      setKey(key);
+
+      const qrcreate = await qrCreate(key);
+      const qrurl = qrcreate.data.qrurl;
+
+      // setQrImg(qrimg);
+      setQrURL(qrurl);
+      toast('请使用手机扫描二维码登录');
+    };
+
+    const handleLevel = () => {
       getLevel(localStorage.cookie).then((res) => {
         setLevel(res.data.level);
         setProgress(res.data.progress);
       });
-      // getVipInfo(localStorage.cookie).then((res) => {
-      //   statusStore.setVipInfo(res.data);
-      // });
-      toast.dismiss();
-    } else {
-      toast('游客模式下无法查看会员信息');
-    }
-  };
+    };
 
-  useEffect(() => {
-    toast.loading('loading ...');
     getVersion().then((res) => {
       setVersion(res.data.version);
     });
     statusStore.setCookie(localStorage.cookie);
+
     if (!localStorage.cookie) {
       handleLogin();
     }
+
     updateStatus();
     setLoading(false);
-    getUserIfno();
+    getUserInfo();
     handleLevel();
-    toast.dismiss();
-  }, [statusStore.cookie]);
-
-  const getUserIfno = async () => {
-    const userInfo = await getAccount(localStorage.cookie);
-    statusStore.setUserInfo(userInfo);
-    localStorage.userData = JSON.stringify(userInfo);
-  };
+  }, []);
 
   return (
     <div>
       {loading ? (
-        <div>Loading...</div>
+        <></>
       ) : (
         !localStorage.cookie && (
           <div className="">
@@ -152,12 +141,12 @@ const LoginPage = () => {
       )}
       {statusStore.userInfo?.profile && (
         <div className="flex space-x-2 justify-center my-4 flex-row">
-          <div className="">
+          <div className="transition-all">
             <Image
               src={statusStore.userInfo.profile?.avatarUrl}
               width={52}
               height={52}
-              className="rounded-full not-prose shadow-md"
+              className="rounded-full not-prose shadow-md transition-all"
               alt={statusStore.userInfo.profile?.nickname}
               title={statusStore.userInfo.profile.userId.toString()}
             />
@@ -169,7 +158,7 @@ const LoginPage = () => {
                 value={progress}
                 max={1}
                 id="om-progress"
-                className="transition-all"
+                className="transition-all duration-500"
               />
               <div>Lv.{level}</div>
             </div>
