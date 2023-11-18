@@ -11,10 +11,8 @@ import {
   qrCheck,
   getLoginStatus,
   qrCreate,
-  getUserDetail,
   logout,
   getAccount,
-  getLevel,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
 

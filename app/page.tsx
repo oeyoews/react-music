@@ -6,6 +6,7 @@ import RecommendSongs from './ui/RecommendSongs';
 import { getHotPlayList } from '~lib/playlist';
 import Announcement from './ui/Announcement';
 import StarPick from './ui/StarPick';
+import { Suspense } from 'react';
 
 export const revalidate = 3600;
 
@@ -18,7 +19,9 @@ export default async function Home() {
     <div className="p-2">
       <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
-      <StarPick />
+      <Suspense fallback={<div>Loading...</div>}>
+        <StarPick />
+      </Suspense>
       <RecommendSongs />
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
