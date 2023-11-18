@@ -119,3 +119,9 @@ export const getVipInfo = async (cookie: string): Promise<IVipInfo> => {
     url: '/vip/info',
   });
 };
+
+export const getVersion = async (): Promise<IVersion> => {
+  return await fetch({
+    url: '/inner/version',
+  });
+};

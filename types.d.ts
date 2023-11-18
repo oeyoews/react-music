@@ -1,3 +1,10 @@
+interface IVersion {
+  code: number;
+  data: {
+    version: number;
+  };
+}
+
 interface IVipInfo {
   message: string;
   data: VipInfo;

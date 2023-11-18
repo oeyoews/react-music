@@ -16,6 +16,7 @@ import {
   getAccount,
   loginAnonymous,
   getVipInfo,
+  getVersion,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
 import { QRCodeSVG } from 'qrcode.react';
@@ -26,6 +27,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(true);
   const [level, setLevel] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [version, setVersion] = useState(0);
   const statusStore = useStore();
 
   const btnClass = 'bg-neutral-200 shadow p-2 rounded-sm font-bold';
@@ -86,6 +88,9 @@ const LoginPage = () => {
 
   useEffect(() => {
     toast.loading('loading ...');
+    getVersion().then((res) => {
+      setVersion(res.data.version);
+    });
     statusStore.setCookie(localStorage.cookie);
     if (!localStorage.cookie) {
       handleLogin();
@@ -167,6 +172,9 @@ const LoginPage = () => {
           </button>
         </div>
       )}
+      <footer className="text-gray-400  text-sm text-right mt-4">
+        网易云 API 版本号: {version}
+      </footer>
     </div>
   );
 };
