@@ -1,6 +1,7 @@
+type Params = Record<string, any>;
 type Config = {
   url?: string;
-  params?: Record<string, string | number | boolean>;
+  params?: Params;
   options?: RequestInit;
 };
 
@@ -30,7 +31,7 @@ function addParams(
 // https://github.com/vercel/next.js/discussions/48324
 async function fetchData(
   finalURL: string,
-  params?: Record<string, string | number | boolean>,
+  params?: Params,
   options?: RequestInit,
 ): Promise<any> {
   const defaultOptions: RequestInit = {

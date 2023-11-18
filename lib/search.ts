@@ -137,7 +137,9 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
   });
 };
 
-export const getStarPick = async (cookie: string): Promise<IStarPick> => {
+export const getStarPick = async (
+  cookie?: string | undefined,
+): Promise<IStarPick> => {
   return await fetch({
     url: '/starpick/comments/summary',
     params: { cookie },
