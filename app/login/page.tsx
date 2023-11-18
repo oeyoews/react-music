@@ -38,7 +38,6 @@ const LoginPage = () => {
     setKey(key);
 
     const qrcreate = await qrCreate(key);
-    const qrimg = qrcreate.data.qrimg;
     const qrurl = qrcreate.data.qrurl;
 
     // setQrImg(qrimg);
@@ -63,19 +62,15 @@ const LoginPage = () => {
     statusStore.setLoginStatus(loginStatus);
   };
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
   useEffect(() => {
+    toast.loading('loading ...');
     if (!localStorage.cookie) {
       handleLogin();
-      loginAnonymous().then((res) => {
-        statusStore.setCookie(res.cookie);
-        localStorage.setItem('cookie', res.cookie);
-      });
     }
     updateStatus();
     setLoading(false);
     getUserIfno();
+    toast.dismiss();
   }, [statusStore.cookie]);
 
   const getUserIfno = async () => {
@@ -94,14 +89,27 @@ const LoginPage = () => {
             {/* <img src={qrimg} alt="QR Code" width={256} height={256} /> */}
             {/* // canvas 确实不如svg */}
             {qrurl && <QRCodeSVG value={qrurl} width={256} height={256} />}
-            <button
-              className="bg-neutral-200 rounded-sm p-1 my-2"
-              onClick={() => {
-                updateStatus();
-                checkQr(key);
-              }}>
-              Login
-            </button>
+            <div>
+              <button
+                className="bg-neutral-200 rounded-sm p-1 my-2"
+                onClick={() => {
+                  updateStatus();
+                  checkQr(key);
+                }}>
+                Login
+              </button>
+              <button
+                className="bg-neutral-200 rounded-sm p-1 my-2"
+                onClick={() => {
+                  loginAnonymous().then((res) => {
+                    statusStore.setCookie(res.cookie);
+                    localStorage.setItem('cookie', res.cookie);
+                    toast('游客登录成功');
+                  });
+                }}>
+                游客登录
+              </button>
+            </div>
           </div>
         )
       )}
@@ -120,7 +128,9 @@ const LoginPage = () => {
       )}
       <div>
         {statusStore.cookie && (
-          <button className="bg-rose-200 rounded-sm p-1" onClick={handleLogout}>
+          <button
+            className="bg-neutral-200 rounded-sm p-1"
+            onClick={handleLogout}>
             Logout
           </button>
         )}

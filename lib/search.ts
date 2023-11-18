@@ -145,3 +145,12 @@ export const getStarPick = async (
     params: { cookie },
   });
 };
+
+export const getDownloadURL = async (id: Id): Promise<any> => {
+  return await fetch({
+    url: '/song/download/url',
+    params: {
+      id,
+    },
+  });
+};

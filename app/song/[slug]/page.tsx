@@ -1,8 +1,5 @@
 import {
-  checkSong,
   getArtistDetail,
-  getLyric,
-  getMusicURL,
   getSimiSong,
   getSongComment,
   getSongDetail,
