@@ -21,7 +21,6 @@
 - [ ] 评论分页
 - [ ] 播放器
 - [ ] 支持歌单播放
-- [ ] qr use canvas
 
 <!-- - [x] [301](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961) -->
 <!-- - [ ] 支持直接调用 [neteasemusicapi](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/1842) -->

@@ -4,7 +4,7 @@ import useStore from '~lib/store';
 import Image from 'next/image';
 
 // TODO: 重构登录
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   getqrKey,
@@ -15,9 +15,10 @@ import {
   getAccount,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
+import CanvasQRCode from '~app/ui/CanvasQRCode';
 
 const LoginPage = () => {
-  const [qrimg, setQrImg] = useState('');
+  const [qrurl, setQrURL] = useState('');
   const [key, setKey] = useState('');
   const [loading, setLoading] = useState(true);
   const statusStore = useStore();
@@ -37,8 +38,10 @@ const LoginPage = () => {
 
     const qrcreate = await qrCreate(key);
     const qrimg = qrcreate.data.qrimg;
+    const qrurl = qrcreate.data.qrurl;
 
-    setQrImg(qrimg);
+    // setQrImg(qrimg);
+    setQrURL(qrurl);
     toast('请使用手机扫描二维码登录');
   };
 
@@ -58,6 +61,8 @@ const LoginPage = () => {
     const loginStatus = await getLoginStatus(localStorage.cookie);
     statusStore.setLoginStatus(loginStatus);
   };
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     !localStorage.cookie && handleLogin();
@@ -79,7 +84,10 @@ const LoginPage = () => {
       ) : (
         !localStorage.cookie && (
           <div>
-            <img src={qrimg} alt="QR Code" width={256} height={256} />
+            {/* <img src={qrimg} alt="QR Code" width={256} height={256} /> */}
+            {/* // canvas 确实不如svg */}
+            {qrurl && <CanvasQRCode value={qrurl} />}
+            <canvas ref={canvasRef}></canvas>
             <button
               className="bg-neutral-200 rounded-sm p-1"
               onClick={() => {

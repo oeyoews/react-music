@@ -24,10 +24,8 @@ export default function StarPick() {
             const resources = creative.resources[0];
             const { songData, users } = resources.resourceExtInfo;
             return (
-              <>
-                <div
-                  key={creative.creativeId}
-                  className="m-2 flex justify-between p-2 flex-wrap">
+              <div key={creative.creativeId}>
+                <div className="m-2 flex justify-between p-2 flex-wrap">
                   <div
                     title={users[0].userId.toString()}
                     className="w-full md:w-auto">
@@ -45,7 +43,7 @@ export default function StarPick() {
                   </div>
                 </div>
                 <hr />
-              </>
+              </div>
             );
           });
         })
