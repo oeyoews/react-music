@@ -3,6 +3,7 @@
 import { getMvDetail, getMvURL } from '~lib/mv';
 import { useState, useEffect } from 'react';
 import ArtPlayer from '~app/ui/Video/ArtPlayer';
+import Spinner from '~app/ui/Spinner';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -33,7 +34,9 @@ export default function VideoPage({ params }: { params: Params }) {
         {mvName} -- {artistName}
       </h2>
       <div className="flex justify-center items-center my-4">
-        {!loading && (
+        {loading ? (
+          <Spinner />
+        ) : (
           <ArtPlayer
             id={id}
             url={mvURL}
@@ -41,7 +44,6 @@ export default function VideoPage({ params }: { params: Params }) {
             // getInstance={(art) => toast.success('加载成功')}
           />
         )}
-        )
       </div>
     </div>
   );
