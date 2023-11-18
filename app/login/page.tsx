@@ -73,7 +73,7 @@ const LoginPage = () => {
   };
 
   const handleLevel = () => {
-    if (!statusStore.userInfo.account?.anonimousUser) {
+    if (statusStore.userInfo.account?.anonimousUser === false) {
       toast.loading('loading ...');
       getLevel(localStorage.cookie).then((res) => {
         setLevel(res.data.level);
@@ -165,7 +165,12 @@ const LoginPage = () => {
           <div>
             <div>{statusStore.userInfo?.profile?.nickname}</div>
             <div className="flex items-center space-x-2 w-48">
-              <progress value={progress} max={1} id="om-progress" />
+              <progress
+                value={progress}
+                max={1}
+                id="om-progress"
+                className="transition-all"
+              />
               <div>Lv.{level}</div>
             </div>
           </div>

@@ -4,22 +4,25 @@ import { getStarPick } from '~lib/search';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Avatar from './Avatar';
+import { loginAnonymous } from '~lib/login';
 
-// TODO: starpick fetch failed
 export default function StarPick() {
   const [starPick, setStarPick] = useState<StarPick>();
   const [loading, setLoading] = useState(true);
+  const [cookie, setCookie] = useState('');
+
   useEffect(() => {
-    try {
-      getStarPick(localStorage.getItem('cookie') || '').then((res) => {
-        setStarPick(res.data);
-        res && setLoading(false);
+    if (!localStorage.cookie) {
+      loginAnonymous().then((res) => {
+        setCookie(res.cookie);
+        localStorage.setItem('cookie', res.cookie);
       });
-    } catch (error) {
-      console.log(error);
-      setLoading(true);
     }
-  }, []);
+    getStarPick(cookie).then((res) => {
+      setStarPick(res.data);
+      res && setLoading(false);
+    });
+  }, [cookie]);
 
   return (
     <div className="m-2">
