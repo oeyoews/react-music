@@ -12,12 +12,12 @@ export default function StarPick() {
   const [cookie, setCookie] = useState('');
 
   useEffect(() => {
-    if (!localStorage.cookie) {
-      loginAnonymous().then((res) => {
-        setCookie(res.cookie);
-        localStorage.setItem('cookie', res.cookie);
-      });
-    }
+    // if (!localStorage.cookie) {
+    //   loginAnonymous().then((res) => {
+    //     setCookie(res.cookie);
+    //     localStorage.setItem('cookie', res.cookie);
+    //   });
+    // }
     getStarPick(cookie).then((res) => {
       setStarPick(res.data);
       res && setLoading(false);
