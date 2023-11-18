@@ -1,3 +1,30 @@
+interface IMvFirst {
+  data: Datum[];
+  code: number;
+}
+
+interface Datum {
+  id: number;
+  cover: string;
+  name: string;
+  playCount: number;
+  briefDesc: null;
+  desc: null;
+  artistName: string;
+  artistId: number;
+  duration: number;
+  mark: number;
+  subed: boolean;
+  artists: MVArtist[];
+  transNames?: string[];
+  alias?: string[];
+}
+
+interface MVArtist {
+  id: number;
+  name: string;
+}
+
 interface IVersion {
   code: number;
   data: {
