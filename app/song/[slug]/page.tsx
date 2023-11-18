@@ -33,7 +33,14 @@ export default async function Page({ params }: { params: Params }) {
   const { total } = songComment;
   const simiSong = await getSimiSong(slug);
   const artistDetail = await getArtistDetail(songInfo.ar[0].id);
-  const artist = artistDetail.data.artist;
+  // TODO: 可能没有版权
+  const artist = artistDetail.data?.artist;
+  if (!artist)
+    return (
+      <div className="flex justify-center items-start font-bold text-rose-400 my-4">
+        没有版权
+      </div>
+    );
 
   const SimiSong = ({ simiSong }: { simiSong: ISimiSong }) => {
     const { songs } = simiSong;
@@ -70,14 +77,16 @@ export default async function Page({ params }: { params: Params }) {
       <div>
         <hr />
         <h2 className="my-2">歌手简介</h2>
-        <div>
-          <Link
-            href={`/artist/${artist.id}`}
-            className="no-underline font-bold">
-            {artist.name}
-          </Link>
-          <p className="my-2">{artist.briefDesc}</p>
-        </div>
+        {artist && (
+          <div>
+            <Link
+              href={`/artist/${artist.id}`}
+              className="no-underline font-bold">
+              {artist.name}
+            </Link>
+            <p className="my-2">{artist.briefDesc}</p>
+          </div>
+        )}
       </div>
       <SimiSong simiSong={simiSong} />
       <div className="flex justify-start items-center space-x-2 mt-8">

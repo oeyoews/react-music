@@ -17,6 +17,15 @@ dependencies:
   NeteaseCloudMusicApi:
     specifier: ^4.13.6
     version: 4.13.6
+  artplayer:
+    specifier: ^5.0.9
+    version: 5.0.9
+  artplayer-plugin-control:
+    specifier: ^2.0.0
+    version: 2.0.0
+  artplayer-plugin-dash-quality:
+    specifier: ^2.0.0
+    version: 2.0.0
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -894,6 +903,20 @@ packages:
       is-array-buffer: 3.0.2
       is-shared-array-buffer: 1.0.2
     dev: true
+
+  /artplayer-plugin-control@2.0.0:
+    resolution: {integrity: sha512-EELMIM9EJn90Tc0z3JE9x0yFvS4MkUDhiGP35KFXN2AHgshaJUPTQn2gKtPTRZwrAF3pMK2oum67wVxBDl6ecg==}
+    dev: false
+
+  /artplayer-plugin-dash-quality@2.0.0:
+    resolution: {integrity: sha512-bQ1cGEX54O1s/9OVuFAHnV/zqDdOgM4uNPBzl3F1cqPUAxWzc1dfLt9OFTyEWCWyNBN9A5xjx7bRK4vevxcrdg==}
+    dev: false
+
+  /artplayer@5.0.9:
+    resolution: {integrity: sha512-IM/DShYdmKFEA9jl08LYbTK2Jfz9s7qIjEH0xWjnxvVArUKZZKcoqwr6i54U0c4grtc/Uvb4wtCd78kvtSVlgw==}
+    dependencies:
+      option-validator: 2.0.6
+    dev: false
 
   /ast-types-flow@0.0.8:
     resolution: {integrity: sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==}
@@ -2555,6 +2578,11 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
+  /kind-of@6.0.3:
+    resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: true
@@ -2895,6 +2923,12 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+
+  /option-validator@2.0.6:
+    resolution: {integrity: sha512-tmZDan2LRIRQyhUGvkff68/O0R8UmF+Btmiiz0SmSw2ng3CfPZB9wJlIjHpe/MKUZqyIZkVIXCrwr1tIN+0Dzg==}
+    dependencies:
+      kind-of: 6.0.3
+    dev: false
 
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
