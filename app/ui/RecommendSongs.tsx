@@ -15,7 +15,7 @@ export default function RecommendSongs() {
       setHasCookie(false);
     }
     getRecommendations(localStorage.cookie).then((recommendSongs) => {
-      setData(recommendSongs.data.dailySongs);
+      setData(recommendSongs.data?.dailySongs);
       setLoading(false);
     });
   }, []);
