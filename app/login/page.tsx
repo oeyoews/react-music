@@ -41,6 +41,7 @@ const LoginPage = () => {
 
   const router = useRouter();
   const handleLogin = async () => {
+    toast.loading('loading ...');
     const qrkey = await getqrKey();
     const key = qrkey.data.unikey;
     setKey(key);
@@ -50,6 +51,7 @@ const LoginPage = () => {
 
     // setQrImg(qrimg);
     setQrURL(qrurl);
+    toast.dismiss();
     toast('请使用手机扫描二维码登录');
   };
 
@@ -118,7 +120,11 @@ const LoginPage = () => {
             {/* <img src={qrimg} alt="QR Code" width={256} height={256} /> */}
             {/* // canvas 确实不如svg */}
             <div className="flex justify-center items-center">
-              {qrurl && <QRCodeSVG value={qrurl} width={256} height={256} />}
+              {qrurl ? (
+                <QRCodeSVG value={qrurl} width={256} height={256} />
+              ) : (
+                <div className="w-64 h-64 shadow-sm animate-pulse bg-neutral-200/80"></div>
+              )}
             </div>
             <div className="space-x-2 flex justify-center mt-4">
               <button
