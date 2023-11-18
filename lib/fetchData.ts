@@ -48,14 +48,8 @@ async function fetchData(
   const urlWithParams = addParams(finalURL, params);
 
   try {
-    const response = await fetch(urlWithParams, mergedOptions);
-    // console.log(urlWithParams);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data. Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
+    const res = await fetch(urlWithParams, mergedOptions);
+    return await res.json();
   } catch (error) {
     console.error('Error in fetchData:', error);
     throw error;

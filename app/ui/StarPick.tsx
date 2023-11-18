@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Avatar from './Avatar';
 
+// TODO: starpick fetch failed
 export default function StarPick() {
   const [starPick, setStarPick] = useState<StarPick>();
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function StarPick() {
       console.log(error);
       setLoading(true);
     }
-  });
+  }, []);
 
   return (
     <div className="m-2">
