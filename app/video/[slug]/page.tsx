@@ -4,6 +4,7 @@ import { getMvDetail, getMvURL } from '~lib/mv';
 import { useState, useEffect } from 'react';
 import ArtPlayer from '~app/ui/Video/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
+import toast from 'react-hot-toast';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -15,7 +16,11 @@ export default function VideoPage({ params }: { params: Params }) {
 
   useEffect(() => {
     getMvDetail(slug).then((res) => {
-      setMvName(res.data.name);
+      if (!res.data) {
+        toast.error('加载出错');
+        return;
+      }
+      setMvName(res.data?.name);
       setArtistName(res.data.artistName);
     });
     getMvURL(slug).then((res) => {
