@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
-import artplayerPluginControl from 'artplayer-plugin-control';
+// import artplayerPluginControl from 'artplayer-plugin-control';
 
 export default function ArtPlayer({
   url,
@@ -43,7 +43,7 @@ export default function ArtPlayer({
       subtitleOffset: true,
       // useSSR: true,
       playsInline: true,
-      plugins: [artplayerPluginControl()],
+      // plugins: [artplayerPluginControl()],
       lock: true,
       fastForward: true,
       thumbnails: {
@@ -54,16 +54,16 @@ export default function ArtPlayer({
       autoPlayback: true, // 保存在了localstorage
       autoOrientation: true,
       airplay: true,
-      controls: [
-        {
-          position: 'right',
-          html: '<button type="">Switch UI</button>',
-          click: function () {
-            const { enable } = art.plugins.artplayerPluginControl;
-            art.plugins.artplayerPluginControl.enable = !enable;
-          },
-        },
-      ],
+      // controls: [
+      //   {
+      //     position: 'right',
+      //     html: '<button type="">Switch UI</button>',
+      //     click: function () {
+      //       const { enable } = art.plugins.artplayerPluginControl;
+      //       art.plugins.artplayerPluginControl.enable = !enable;
+      //     },
+      //   },
+      // ],
     });
 
     {

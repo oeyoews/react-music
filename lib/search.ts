@@ -137,7 +137,7 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
   });
 };
 
-// NOTE: 需要cookie
+// NOTE: 需要cookie ??? 线上报错
 export const getStarPick = async (cookie: string): Promise<IStarPick> => {
   return await fetch({
     url: '/starpick/comments/summary',

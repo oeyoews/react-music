@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default async function MVFirst({ mvFirst }: { mvFirst: IMvFirst }) {
-  const videos = mvFirst.data.slice(0, 24).map((mv) => {
+  const videos = mvFirst.data.slice(0, 8).map((mv) => {
     return (
       <div key={mv.id} className="">
         <Link href={`/video/${mv.id}`}>
@@ -20,7 +20,7 @@ export default async function MVFirst({ mvFirst }: { mvFirst: IMvFirst }) {
 
   return (
     <div>
-      <h2>推荐MV</h2>
+      <h2>热门MV</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">{videos}</div>
     </div>
   );

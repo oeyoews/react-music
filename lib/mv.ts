@@ -12,3 +12,9 @@ export const getMvURL = async (id: Id): Promise<IMvURL> => {
     params: { id },
   });
 };
+
+export const getPersonalizedMv = async (): Promise<IPersonalizedMv> => {
+  return await customfetch({
+    url: '/personalized/mv',
+  });
+};

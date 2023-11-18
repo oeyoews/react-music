@@ -1,3 +1,26 @@
+interface IPersonalizedMv {
+  code: number;
+  category: number;
+  result: PersonalizeMvResult[];
+}
+
+interface PersonalizeMvResult {
+  id: number;
+  type: number;
+  name: string;
+  copywriter: string;
+  picUrl: string;
+  canDislike: boolean;
+  trackNumberUpdateTime: null;
+  duration: number;
+  playCount: number;
+  subed: boolean;
+  artists: MVArtist[];
+  artistName: string;
+  artistId: number;
+  alg: string;
+}
+
 interface IMvURL {
   code: number;
   data: MvURL;
