@@ -1,3 +1,275 @@
+interface IStarPick {
+  code: number;
+  data: StarPick;
+  message: string;
+}
+
+interface StarPick {
+  cursor: null;
+  blocks: Block[];
+  hasMore: boolean;
+  blockUUIDs: null;
+  pageConfig: PageConfig;
+  guideToast: GuideToast;
+  internalTest: null;
+  titles: any[];
+  blockCodeOrderList: null;
+  exposedResource: string;
+  demote: boolean;
+}
+
+interface Block {
+  blockCode: string;
+  showType: string;
+  dislikeShowType: number;
+  uiElement: BlockUIElement;
+  creatives: Creative[];
+  canClose: boolean;
+  crossPlatformConfig: CrossPlatformConfig;
+  blockStyle: number;
+  canFeedback: boolean;
+  blockDemote: boolean;
+  sort: number;
+}
+
+interface Creative {
+  creativeType: any;
+  creativeId: string;
+  actionType: any;
+  uiElement: ResourceUIElement;
+  resources: Resource[];
+  alg: string;
+  position: number;
+  algReason: any;
+}
+
+interface Resource {
+  uiElement: ResourceUIElement;
+  resourceType: Type;
+  resourceState: null;
+  resourceId: string;
+  resourceUrl: null;
+  resourceExtInfo: ResourceEXTInfo;
+  action: null;
+  actionType: Type;
+  valid: boolean;
+  alg: string;
+  logInfo: null;
+  ctrp: null;
+  likedCount: number;
+  replyCount: number;
+  resourceContentList: null;
+  position: null;
+  playParams: null;
+}
+
+interface ResourceEXTInfo {
+  users: StarPickUser[];
+  songData: SongData;
+  hasListened: boolean;
+  threadId: string;
+}
+
+interface SongData {
+  name: string;
+  id: number;
+  position: number;
+  alias: any[];
+  status: number;
+  fee: number;
+  copyrightId: number;
+  disc: string;
+  no: number;
+  artists: Artist[];
+  album: Album;
+  starred: boolean;
+  popularity: number;
+  score: number;
+  starredNum: number;
+  duration: number;
+  playedNum: number;
+  dayPlays: number;
+  hearTime: number;
+  sqMusic: Music | null;
+  hrMusic: Music | null;
+  ringtone: null | string;
+  crbt: null;
+  audition: null;
+  copyFrom: string;
+  commentThreadId: string;
+  rtUrl: null;
+  ftype: number;
+  rtUrls: any[];
+  copyright: number;
+  transName: null | string;
+  sign: null;
+  mark: number;
+  originCoverType: number;
+  originSongSimpleData: OriginSongSimpleData | null;
+  single: number;
+  noCopyrightRcmd: null;
+  mvid: number;
+  rtype: number;
+  rurl: null;
+  hMusic: Music;
+  mMusic: Music;
+  lMusic: Music | null;
+  bMusic: Music | null;
+  mp3Url: null;
+  transNames?: string[];
+}
+
+interface Album {
+  name: string;
+  id: number;
+  type: any;
+  size: number;
+  picId: number;
+  blurPicUrl: string;
+  companyId: number;
+  pic: number;
+  picUrl: string;
+  publishTime: number;
+  description: string;
+  tags: string;
+  company: null | string;
+  briefDesc: string;
+  artist: Artist;
+  songs: any[];
+  alias: any[];
+  status: number;
+  copyrightId: number;
+  commentThreadId: string;
+  artists: Artist[];
+  subType: any;
+  transName: null;
+  onSale: boolean;
+  mark: number;
+  gapless: number;
+  picId_str?: string;
+}
+
+interface Music {
+  name: null;
+  id: number;
+  size: number;
+  extension: Extension;
+  sr: number;
+  dfsId: number;
+  bitrate: number;
+  playTime: number;
+  volumeDelta: number;
+}
+
+enum Extension {
+  FLAC = 'flac',
+  Mp3 = 'mp3',
+}
+
+interface OriginSongSimpleData {
+  songId: number;
+  name: string;
+  artists: AlbumMeta[];
+  albumMeta: AlbumMeta;
+}
+
+interface AlbumMeta {
+  id: number;
+  name: string;
+}
+
+interface StarPickUser {
+  defaultAvatar: boolean;
+  province: number;
+  authStatus: number;
+  followed: boolean;
+  avatarUrl: null;
+  accountStatus: number;
+  gender: number;
+  city: number;
+  birthday: number;
+  userId: number;
+  userType: number;
+  nickname: string;
+  signature: null;
+  description: null;
+  detailDescription: null;
+  avatarImgId: number;
+  backgroundImgId: number;
+  backgroundUrl: null;
+  authority: number;
+  mutual: boolean;
+  expertTags: null;
+  experts: null;
+  djStatus: number;
+  vipType: number;
+  remarkName: null;
+  authenticationTypes: number;
+  avatarDetail: null;
+  backgroundImgIdStr: string;
+  avatarImgIdStr: string;
+  anchor: boolean;
+}
+
+interface ResourceUIElement {
+  mainTitle: MainTitle;
+  rcmdShowType: RcmdShowType;
+}
+
+interface MainTitle {
+  serialNum: string;
+  title: string;
+  canShowTitleLogo: boolean;
+  titleDesc: string;
+}
+
+enum RcmdShowType {
+  Default = 'DEFAULT',
+}
+
+interface CrossPlatformConfig {
+  containerType: string;
+  rnContent: RnContent;
+}
+
+interface RnContent {
+  engineId: string;
+  moduleName: string;
+  component: string;
+  params: {};
+  estimatedRatio: string;
+  estimatedHeight: number;
+}
+
+interface BlockUIElement {
+  subTitle: SubTitle;
+  rcmdShowType: RcmdShowType;
+}
+
+interface SubTitle {
+  title: string;
+  canShowTitleLogo: boolean;
+}
+
+interface GuideToast {
+  hasGuideToast: boolean;
+  toastList: any[];
+}
+
+interface PageConfig {
+  refreshToast: string;
+  nodataToast: string;
+  refreshInterval: number;
+  title: null;
+  fullscreen: boolean;
+  abtest: string[];
+  songLabelMarkPriority: string[];
+  songLabelMarkLimit: number;
+  homepageMode: string;
+  showModeEntry: boolean;
+  orderInfo: null;
+}
+
 interface ILevel {
   full: boolean;
   data: LevelInfo;
@@ -861,20 +1133,6 @@ interface Song {
   fee: number;
   rUrl: null;
   mark: number;
-}
-
-interface Album {
-  id: number;
-  name: string;
-  artist: Artist;
-  publishTime: number;
-  size: number;
-  copyrightId: number;
-  status: number;
-  picId: number;
-  mark: number;
-  transNames?: string[];
-  alia?: string[];
 }
 
 // search hot
