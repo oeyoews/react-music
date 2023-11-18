@@ -7,6 +7,8 @@ import Link from 'next/link';
 export default function RecommendSongs() {
   const [data, setData] = useState<DailySong[]>();
   const [hasCookie, setHasCookie] = useState(true);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (!localStorage.cookie) {
       setHasCookie(false);
@@ -14,6 +16,7 @@ export default function RecommendSongs() {
     }
     getRecommendations(localStorage.cookie).then((recommendSongs) => {
       setData(recommendSongs.data.dailySongs);
+      setLoading(false);
     });
   }, []);
 
@@ -35,8 +38,12 @@ export default function RecommendSongs() {
             </li>
           ))
         ) : (
-          // TODO: add loading
-          <Link href="/login">需要登录</Link>
+          <div>
+            {loading && (
+              <div className="h-24 bg-neutral-100 rounded animate-pulse"></div>
+            )}
+            {!hasCookie && <div>需要登录</div>}
+          </div>
         )}
       </ol>
     </div>
