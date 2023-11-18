@@ -20,7 +20,7 @@ export default function StarPick() {
       <h2>云村星评</h2>
       {!loading && starPick ? (
         starPick.blocks.map((block) => {
-          return block.creatives.slice(0, 9).map((creative) => {
+          return block.creatives?.slice(0, 9).map((creative) => {
             const resources = creative.resources[0];
             const { songData, users } = resources.resourceExtInfo;
             return (
