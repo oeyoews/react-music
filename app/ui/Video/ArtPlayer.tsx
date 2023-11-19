@@ -3,16 +3,15 @@
 import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 import toast from 'react-hot-toast';
+import Option from 'artplayer/types/option';
 
 export default function ArtPlayer({
   url,
   className,
   id = url,
-  option,
 }: {
   url: string;
   className: string;
-  option?: any;
   id?: string;
 }) {
   const artRef = useRef<HTMLDivElement>(null);
@@ -20,14 +19,13 @@ export default function ArtPlayer({
   useEffect(() => {
     !url && toast.error('未找到播放源');
 
-    const art = new Artplayer({
-      id: id,
-      container: artRef.current,
-      ...option,
-      mute: true,
+    const option: Option = {
+      id,
       url,
+      container: artRef.current!,
+      muted: false, // 默认静音
       autoplay: false,
-      autoMini: false, // if mini, 不会销毁实例
+      autoMini: false, // 不建议使用
       autoSize: false,
       playbackRate: true,
       aspectRatio: true,
@@ -35,7 +33,7 @@ export default function ArtPlayer({
       setting: true,
       hotkey: true,
       pip: true,
-      mutex: true, // 无法生效
+      mutex: true, // TODO: 禁止多个视频同时播放
       fullscreen: true,
       fullscreenWeb: true,
       loop: true,
@@ -46,7 +44,9 @@ export default function ArtPlayer({
       autoPlayback: true, // 保存在了localstorage
       autoOrientation: true,
       airplay: true,
-    });
+    };
+
+    const art = new Artplayer(option);
 
     art.on('play', () => {
       toast.success('开始播放');
@@ -64,7 +64,7 @@ export default function ArtPlayer({
       art?.destroy(false);
       toast('暂停播放');
     };
-  }, [url, id, option]);
+  }, [url, id]);
 
   return <div ref={artRef} className={className}></div>;
 }
