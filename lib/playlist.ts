@@ -39,3 +39,24 @@ export const getPlayListDetail = async (id: number): Promise<IPlaylist> => {
     params: { id },
   });
 };
+
+export const getPlayListComment = async (id: Id): Promise<ISongComment> => {
+  return await fetch({
+    url: '/comment/playlist',
+    params: { id },
+  });
+};
+
+export const getAlbumComment = async (id: Id): Promise<ISongComment> => {
+  return await fetch({
+    url: '/comment/album',
+    params: { id },
+  });
+};
+
+export const getMVComment = async (id: Id): Promise<ISongComment> => {
+  return await fetch({
+    url: '/comment/mv',
+    params: { id },
+  });
+};

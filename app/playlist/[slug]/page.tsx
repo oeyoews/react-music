@@ -1,6 +1,11 @@
-import { getHotPlayList, getPlayListSongs } from '~lib/playlist';
+import {
+  getHotPlayList,
+  getPlayListComment,
+  getPlayListSongs,
+} from '~lib/playlist';
 import Link from 'next/link';
 import Badge from '~app/ui/Badge';
+import SongCommentTab from '~app/ui/SongCommentTab';
 
 export default async function Page({ params }: any) {
   const { slug } = params;
@@ -15,10 +20,11 @@ export default async function Page({ params }: any) {
   const getTime = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString().split('T')[0];
   };
+  const playListComment = await getPlayListComment(slug);
 
   return (
     <div className="my-2">
-      <h1>{name}</h1>
+      <h1 className="text-center">{name}</h1>
       <p className="line-clamp-2">{description}</p>
       {tags.map((tag) => (
         <Badge
@@ -32,7 +38,7 @@ export default async function Page({ params }: any) {
         <div>更新时间: {getTime(updateTime)}</div>
       </div>
       <hr />
-      <ol>
+      <ol className="md:columns-2">
         {songs.map(({ id, name }) => (
           <li key={id}>
             <Link href={`/song/${id}`} className="no-underline">
@@ -47,6 +53,11 @@ export default async function Page({ params }: any) {
           </li>
         ))}
       </ol>
+      <div className="flex justify-start items-center space-x-2 mt-8">
+        <h2 className="my-2">歌单评论区</h2>
+        <div>共{playListComment.total?.toLocaleString()} 条评论</div>
+      </div>
+      <SongCommentTab songComment={playListComment} />
     </div>
   );
 }

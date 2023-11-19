@@ -36,7 +36,7 @@ export default function SongComment({
 
   return (
     <div className="min-h-screen">
-      {!commentList.length && <div>暂无评论</div>}
+      {!commentList?.length && <div>暂无评论</div>}
       {commentList}
     </div>
   );
