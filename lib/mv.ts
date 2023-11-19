@@ -6,6 +6,7 @@ export const getMvFirst = async (): Promise<IMvFirst> => {
   });
 };
 
+// NOTE: 需要加上cookie
 export const getMvURL = async (id: Id, cookie?: string): Promise<IMvURL> => {
   return await fetch({
     url: '/mv/url',
