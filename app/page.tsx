@@ -27,7 +27,7 @@ export default async function Home() {
   const personalizeMv = await getPersonalizedMv();
 
   return (
-    <div className="p-2">
+    <div className="p-2 mb-16">
       <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
       {/* <Carousel data={bannerData.banners} /> */}

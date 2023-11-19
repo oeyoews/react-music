@@ -122,11 +122,11 @@ interface MvURL {
 }
 
 interface IMvFirst {
-  data: Datum[];
+  data: MvFirst[];
   code: number;
 }
 
-interface Datum {
+interface MvFirst {
   id: number;
   cover: string;
   name: string;
