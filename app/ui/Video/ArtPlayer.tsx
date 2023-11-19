@@ -3,9 +3,6 @@
 import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 import toast from 'react-hot-toast';
-import { Spinnaker } from 'next/font/google';
-import Spinner from '../Spinner';
-// import artplayerPluginControl from 'artplayer-plugin-control';
 
 export default function ArtPlayer({
   url,
