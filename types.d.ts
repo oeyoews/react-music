@@ -1,3 +1,19 @@
+interface IHomePage {
+  code: number;
+  data: HomePage[];
+  message: string;
+}
+
+interface HomePage {
+  id: number;
+  name: string;
+  iconUrl: string;
+  url: string;
+  skinSupport: boolean;
+  homepageMode: string;
+  resourceState: null;
+}
+
 type SearchTypes =
   | 1
   | 10

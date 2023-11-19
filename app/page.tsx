@@ -16,6 +16,8 @@ import MVFirst from './ui/Video/MVFirst';
 import { getMvFirst, getPersonalizedMv } from '~lib/mv';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getHomePage } from '~lib/homepage';
+import HomePage from './ui/HomePage';
 
 export const revalidate = 3600;
 
@@ -25,11 +27,13 @@ export default async function Home() {
   const PlaylistData = await getHotPlayList();
   const mvFirst = await getMvFirst();
   const personalizeMv = await getPersonalizedMv();
+  const homepage = await getHomePage();
 
   return (
     <div className="p-2 mb-16">
       <Announcement text="完善中..." />
       <Banners data={bannerData.banners} />
+      <HomePage data={homepage.data} />
       {/* <Carousel data={bannerData.banners} /> */}
       {process.env.NODE_ENV === 'development' && <StarPick />}
       <RecommendSongs />

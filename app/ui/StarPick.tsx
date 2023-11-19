@@ -4,7 +4,6 @@ import { getStarPick } from '~lib/search';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Avatar from './Avatar';
-import { loginAnonymous } from '~lib/login';
 import Spinner from './Spinner';
 
 export default function StarPick() {
@@ -27,7 +26,7 @@ export default function StarPick() {
 
   const content = (
     <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
-      {starPick?.blocks.map((block) => {
+      {starPick?.blocks.slice(0, 6).map((block) => {
         return block.creatives?.slice(0, 9).map((creative) => {
           const resources = creative.resources[0];
           const { songData, users } = resources.resourceExtInfo;
