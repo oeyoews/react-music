@@ -4,7 +4,13 @@ import { create } from '~lib/fetchData';
 
 const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
 
-export const getPlayListSongs = async (id: number): Promise<PlaylistSong> => {
+/**
+ * Retrieves the songs of a playlist.
+ *
+ * @param {number} id The id of the playlist.
+ * @return {Promise<PlaylistSong>} A promise that resolves to the songs of the playlist.
+ */
+export const getPlayListSongs = async (id: Id): Promise<PlaylistSong> => {
   return await fetch({
     url: '/playlist/track/all',
     params: {

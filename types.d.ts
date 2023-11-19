@@ -1352,7 +1352,7 @@ interface Privilege {
   pl: number;
   dl: number;
   sp: number;
-  cp: number;
+  cp: number; // 判断是否为vip歌曲
   subp: number;
   cs: boolean;
   maxbr: number;

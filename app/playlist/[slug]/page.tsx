@@ -6,10 +6,15 @@ export default async function Page({ params }: any) {
   const musicdata = await getHotPlayList();
   const { description, name, tags, createTime, updateTime } =
     musicdata.playlists[0];
-  const { songs } = await getPlayListSongs(Number(slug));
+  const { songs, privileges } = await getPlayListSongs(slug);
+  const vipids = privileges
+    .filter((privileges) => privileges.cp === 0)
+    .map((vipPrivileges) => vipPrivileges.id);
+
   const getTime = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString().split('T')[0];
   };
+
   return (
     <div className="my-2">
       <h1>{name}</h1>
@@ -25,10 +30,15 @@ export default async function Page({ params }: any) {
       </div>
       <hr />
       <ol>
-        {songs.map((song) => (
-          <li key={song.id}>
-            <Link href={`/song/${song.id}`} className="no-underline">
-              {song.name}
+        {songs.map(({ id, name }) => (
+          <li key={id}>
+            <Link href={`/song/${id}`} className="no-underline">
+              {name}
+              {vipids.includes(id) && (
+                <sup className="ml-2 bg-rose-400 text-black rounded px-0.5">
+                  VIP
+                </sup>
+              )}
             </Link>
           </li>
         ))}
