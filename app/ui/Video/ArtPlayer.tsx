@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 import toast from 'react-hot-toast';
+import { Spinnaker } from 'next/font/google';
+import Spinner from '../Spinner';
 // import artplayerPluginControl from 'artplayer-plugin-control';
 
 export default function ArtPlayer({
@@ -22,7 +24,7 @@ export default function ArtPlayer({
   const artRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // if (!url) return;
+    !url && toast.error('未找到播放源');
 
     const art = new Artplayer({
       id: id,

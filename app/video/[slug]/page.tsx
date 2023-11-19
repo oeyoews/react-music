@@ -36,7 +36,7 @@ export default function VideoPage({ params }: { params: Params }) {
           <></>
         ) : (
           <div className="flex justify-center items-center">
-            {mvName} -- {artistName}
+            {mvName} {mvName && '--'} {artistName}
           </div>
         )}
       </h2>
@@ -44,7 +44,7 @@ export default function VideoPage({ params }: { params: Params }) {
         {isLoadingURL ? (
           <Spinner />
         ) : (
-          <div>
+          <div className="w-full">
             {url ? (
               <ArtPlayer
                 id={id?.toString()}
