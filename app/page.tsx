@@ -35,7 +35,8 @@ export default async function Home() {
       <Banners data={bannerData.banners} />
       {/* <HomePage data={homepage.data} /> */}
       {/* <Carousel data={bannerData.banners} /> */}
-      {process.env.NODE_ENV === 'development' && <StarPick />}
+      {/* {process.env.NODE_ENV === 'development' && <StarPick />} */}
+      <StarPick />
       <RecommendSongs />
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />

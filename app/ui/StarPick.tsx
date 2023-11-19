@@ -15,9 +15,13 @@ export default function StarPick() {
   if (error) return <div>failed to load</div>;
   const comments = starPick?.blocks[0];
 
-  const content = (
+  const content = isLoading ? (
+    <div className="flex justify-center">
+      <Spinner />
+    </div>
+  ) : (
     <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
-      {comments?.creatives.slice(0, 6).map((creative) => {
+      {comments?.creatives?.slice(0, 6).map((creative) => {
         const resources = creative.resources[0];
         const { songData, users } = resources.resourceExtInfo;
         return (
@@ -47,11 +51,6 @@ export default function StarPick() {
     <div className="m-2">
       <h2>云村星评</h2>
       {content}
-      {isLoading && (
-        <div className="flex justify-center">
-          <Spinner />
-        </div>
-      )}
     </div>
   );
 }
