@@ -85,9 +85,10 @@ export default function ArtPlayer({
     });
 
     return () => {
+      // 但是事件上没有销毁, google 仍然可以进行小窗口播放
       if (art && art.destroy) {
-        toast('暂停播放');
         art.destroy(true);
+        toast('暂停播放');
       }
     };
   }, [option, url, id]);

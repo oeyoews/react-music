@@ -4,7 +4,6 @@
 import { getMvDetail, getMvURL } from '~lib/mv';
 import ArtPlayer from '~app/ui/Video/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
-import toast from 'react-hot-toast';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import { getMVComment } from '~lib/playlist';
 import useSWR from 'swr';
