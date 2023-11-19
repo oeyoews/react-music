@@ -101,7 +101,7 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="h-min-screen">
       {loading ? (
         <></>
       ) : (
