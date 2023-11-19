@@ -10,7 +10,7 @@ export default function Search({ searchWord = '' }: { searchWord?: string }) {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/search/${searchWord}`);
+    router.push(`/search/${search || searchWord}`);
   };
 
   return (
