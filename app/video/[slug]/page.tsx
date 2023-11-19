@@ -6,7 +6,7 @@ import ArtPlayer from '~app/ui/Video/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import { getMVComment } from '~lib/mv';
-import useSWR from 'swr';
+import useSWR, { SWRConfig } from 'swr';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -29,7 +29,7 @@ export default function VideoPage({ params }: { params: Params }) {
   const mvName = mvDetailData?.data?.name;
   const artistName = mvDetailData?.data?.artistName;
 
-  return (
+  const content = (
     <div>
       <h2 className="text-center">
         {isLoadingDetail ? (
@@ -66,5 +66,14 @@ export default function VideoPage({ params }: { params: Params }) {
         )}
       </div>
     </div>
+  );
+
+  return (
+    <SWRConfig
+      value={{
+        refreshInterval: 3600000,
+      }}>
+      {content}
+    </SWRConfig>
   );
 }
