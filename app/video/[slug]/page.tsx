@@ -2,7 +2,6 @@
 
 // TODO: remove use client
 import { getMvDetail, getMvURL } from '~lib/mv';
-import { useState, useEffect } from 'react';
 import ArtPlayer from '~app/ui/Video/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
@@ -12,10 +11,6 @@ import useSWR from 'swr';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
-  const [mvURL, setMVURL] = useState('');
-  const [mvName, setMvName] = useState('');
-  const [artistName, setArtistName] = useState('');
-  const [id, setId] = useState('');
 
   const {
     data: mvComment,
@@ -23,21 +18,18 @@ export default function VideoPage({ params }: { params: Params }) {
     isLoading,
   } = useSWR(slug, () => getMVComment(slug));
 
-  useEffect(() => {
-    getMvDetail(slug).then((res) => {
-      if (!res.data) {
-        toast.error('加载出错');
-        return;
-      }
-      setMvName(res.data?.name);
-      setArtistName(res.data.artistName);
-    });
-    getMvURL(slug).then((res) => {
-      setMVURL(res.data.url);
-      res.data;
-      setId(res.data.id.toString());
-    });
-  }, [mvURL, slug]);
+  const { data: mvDetailData, isLoading: isLoadingDetail } = useSWR(
+    'detail',
+    () => getMvDetail(slug),
+  );
+  const { data: mvURLData, isLoading: isLoadingURL } = useSWR('url', () =>
+    getMvURL(slug),
+  );
+
+  const mvURL = mvURLData?.data.url!;
+  const id = mvURLData?.data.id;
+  const mvName = mvDetailData?.data.name;
+  const artistName = mvDetailData?.data.artistName;
 
   return (
     <div>
@@ -56,7 +48,7 @@ export default function VideoPage({ params }: { params: Params }) {
         ) : (
           <div>
             <ArtPlayer
-              id={id}
+              id={id?.toString()}
               url={mvURL}
               className="aspect-video w-[1080px]"
               // getInstance={(art) => toast.success('加载成功')}
