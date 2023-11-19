@@ -51,16 +51,14 @@ export default function VideoPage({ params }: { params: Params }) {
           <Spinner />
         ) : (
           <div>
-            {url ? (
+            {url && hasCookie ? (
               <ArtPlayer
                 id={id?.toString()}
                 url={url}
                 className="aspect-video w-[980px]"
               />
             ) : (
-              <div>
-                {!hasCookie} && <div className="text-red-500">请先登录</div>
-              </div>
+              <div className="text-red-500">请先登录</div>
             )}
 
             <div className="flex justify-start items-center space-x-2 mt-8">
