@@ -17,11 +17,7 @@ export default function VideoPage({ params }: { params: Params }) {
     localStorage.cookie && setHasCookie(true);
   }, []);
 
-  const {
-    data: mvComment,
-    error,
-    isLoading,
-  } = useSWR(slug, () => getMVComment(slug));
+  const { data: mvComment } = useSWR(slug, () => getMVComment(slug));
 
   const { data: mvDetailData, isLoading: isLoadingDetail } = useSWR(
     'detail',
