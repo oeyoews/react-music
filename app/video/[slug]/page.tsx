@@ -26,9 +26,9 @@ export default function VideoPage({ params }: { params: Params }) {
   );
 
   const mvURL = mvURLData?.data.url!;
-  const id = mvURLData?.data.id;
-  const mvName = mvDetailData?.data.name;
-  const artistName = mvDetailData?.data.artistName;
+  const id = mvURLData?.data?.id;
+  const mvName = mvDetailData?.data?.name;
+  const artistName = mvDetailData?.data?.artistName;
 
   return (
     <div>
