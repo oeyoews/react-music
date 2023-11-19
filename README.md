@@ -30,6 +30,7 @@
 - [ ] 播放器
 - [ ] 支持歌单播放
 - [ ] 图片动态加载 comment
+- [ ] 缓存刷新造成的实例没有被销毁aplayer, 页面渲染更新事件配置
 
 <!-- - [x] [301](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961) -->
 <!-- - [ ] 支持直接调用 [neteasemusicapi](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/1842) -->

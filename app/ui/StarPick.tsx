@@ -58,7 +58,9 @@ export default function StarPick() {
     <div className="m-2">
       <h2>云村星评</h2>
       {content}
-      {!hasCookie && <div className="text-center text-rose-400">需要登录</div>}
+      {!hasCookie && !isLoading && (
+        <div className="text-center text-rose-400">需要登录</div>
+      )}
     </div>
   );
 }
