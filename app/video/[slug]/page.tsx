@@ -37,6 +37,7 @@ export default function VideoPage({ params }: { params: Params }) {
 
   const content = (
     <div>
+      {/* title */}
       <h2 className="text-center">
         {isLoadingDetail ? (
           <></>
@@ -46,11 +47,12 @@ export default function VideoPage({ params }: { params: Params }) {
           </div>
         )}
       </h2>
+      {/* video */}
       <div className="flex justify-center items-center my-4">
         {isLoadingURL ? (
           <Spinner />
         ) : (
-          <div>
+          <>
             {url && hasCookie ? (
               <ArtPlayer
                 id={id?.toString()}
@@ -60,16 +62,15 @@ export default function VideoPage({ params }: { params: Params }) {
             ) : (
               <div className="text-red-500">请先登录</div>
             )}
-
-            <div className="flex justify-start items-center space-x-2 mt-8">
-              <h2 className="my-2">评论区</h2>
-              <div>共{mvComment?.total?.toLocaleString()} 条评论</div>
-            </div>
-            <hr />
-            <SongCommentTab songComment={mvComment as ISongComment} />
-          </div>
+          </>
         )}
       </div>
+      {/* comment */}
+      <div className="flex justify-start items-center space-x-2 mt-8">
+        <h2 className="my-2">评论区</h2>
+        <div>共{mvComment?.total?.toLocaleString()} 条评论</div>
+      </div>
+      <SongCommentTab songComment={mvComment as ISongComment} />
     </div>
   );
 

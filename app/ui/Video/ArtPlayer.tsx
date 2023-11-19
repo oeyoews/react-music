@@ -27,7 +27,7 @@ export default function ArtPlayer({
       mute: true,
       url,
       autoplay: true,
-      autoMini: true, // if mini, 不会销毁实例
+      autoMini: false, // if mini, 不会销毁实例
       autoSize: false,
       playbackRate: true,
       aspectRatio: true,
