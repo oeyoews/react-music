@@ -9,28 +9,27 @@ export default function ArtPlayer({
   className,
   id = url,
   option,
-  // getInstance,
   ...rest
 }: {
   url: string;
-  className: string;
-  id?: string;
+  className?: string;
   option?: any;
+  id?: string;
   // getInstance?: (art: Artplayer) => void;
 }) {
-  const artRef = useRef<HTMLDivElement>(null);
+  const artRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
     !url && toast.error('未找到播放源');
 
     const art = new Artplayer({
       id: id,
+      container: artRef.current,
       ...option,
       mute: true,
       url,
-      container: artRef.current,
-      autoplay: false,
-      autoMini: false, // if mini, 不会销毁实例
+      autoplay: true,
+      autoMini: true, // if mini, 不会销毁实例
       autoSize: true,
       playbackRate: true,
       aspectRatio: true,
@@ -43,29 +42,12 @@ export default function ArtPlayer({
       fullscreenWeb: true,
       loop: true,
       subtitleOffset: true,
-      // useSSR: true,
       playsInline: true,
-      // plugins: [artplayerPluginControl()],
       lock: true,
       fastForward: true,
-      thumbnails: {
-        // url: '/assets/sample/thumbnails.png',
-        number: 60,
-        column: 10,
-      },
       autoPlayback: true, // 保存在了localstorage
       autoOrientation: true,
       airplay: true,
-      // controls: [
-      //   {
-      //     position: 'right',
-      //     html: '<button type="">Switch UI</button>',
-      //     click: function () {
-      //       const { enable } = art.plugins.artplayerPluginControl;
-      //       art.plugins.artplayerPluginControl.enable = !enable;
-      //     },
-      //   },
-      // ],
     });
 
     // getinstance 会导致死循环
@@ -91,7 +73,7 @@ export default function ArtPlayer({
         toast('暂停播放');
       }
     };
-  }, [option, url, id]);
+  }, [url, id]);
 
   return <div ref={artRef} {...rest} className={className}></div>;
 }
