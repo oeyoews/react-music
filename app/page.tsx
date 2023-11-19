@@ -31,9 +31,9 @@ export default async function Home() {
 
   return (
     <div className="p-2 mb-16">
-      <Announcement text="完善中..." />
+      <Announcement text="完善中..." store={true} />
       <Banners data={bannerData.banners} />
-      <HomePage data={homepage.data} />
+      {/* <HomePage data={homepage.data} /> */}
       {/* <Carousel data={bannerData.banners} /> */}
       {process.env.NODE_ENV === 'development' && <StarPick />}
       <RecommendSongs />
