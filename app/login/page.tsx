@@ -21,6 +21,7 @@ import {
 import { toast } from 'react-hot-toast';
 import { QRCodeSVG } from 'qrcode.react';
 
+// TODO: 改成swr
 const LoginPage = () => {
   const [qrurl, setQrURL] = useState('');
   const [key, setKey] = useState('');
