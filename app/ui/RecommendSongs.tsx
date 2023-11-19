@@ -4,20 +4,21 @@ import { useEffect, useState } from 'react';
 import { getRecommendations } from '~lib/search';
 import Link from 'next/link';
 import Spinner from './Spinner';
+import useSWR from 'swr';
 
 export default function RecommendSongs() {
-  const [data, setData] = useState<DailySong[]>();
   const [hasCookie, setHasCookie] = useState(true);
-  const [loading, setLoading] = useState(true);
+
+  const { data: recommendations, isLoading } = useSWR('recommendations', () =>
+    getRecommendations(localStorage.cookie),
+  );
+
+  const data = recommendations?.data.dailySongs;
 
   useEffect(() => {
     if (!localStorage.cookie) {
       setHasCookie(false);
     }
-    getRecommendations(localStorage.cookie).then((recommendSongs) => {
-      setData(recommendSongs.data?.dailySongs);
-      setLoading(false);
-    });
   }, []);
 
   const content = (
@@ -41,7 +42,7 @@ export default function RecommendSongs() {
       <h2>每日推荐</h2>
       {content}
       <div className="flex justify-center items-center">
-        {hasCookie && loading && <Spinner />}
+        {hasCookie && isLoading && <Spinner />}
         {!hasCookie && <div className="text-rose-400 font-bold">需要登录</div>}
       </div>
     </div>
