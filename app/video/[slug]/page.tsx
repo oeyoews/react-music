@@ -50,12 +50,12 @@ export default function VideoPage({ params }: { params: Params }) {
         {isLoadingURL ? (
           <Spinner />
         ) : (
-          <div className="w-full">
+          <div>
             {url ? (
               <ArtPlayer
                 id={id?.toString()}
                 url={url}
-                className="aspect-video w-[1080px]"
+                className="aspect-video w-[980px]"
               />
             ) : (
               <div>
@@ -77,6 +77,7 @@ export default function VideoPage({ params }: { params: Params }) {
 
   return (
     <SWRConfig
+      // TODO: 不起作用, 需要配置fetch???
       value={{
         refreshInterval: 3600000,
       }}>
