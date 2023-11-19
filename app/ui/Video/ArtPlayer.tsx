@@ -9,15 +9,13 @@ export default function ArtPlayer({
   className,
   id = url,
   option,
-  ...rest
 }: {
   url: string;
   className?: string;
   option?: any;
   id?: string;
-  // getInstance?: (art: Artplayer) => void;
 }) {
-  const artRef = useRef<HTMLDivElement>();
+  const artRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     !url && toast.error('未找到播放源');
@@ -73,7 +71,7 @@ export default function ArtPlayer({
         toast('暂停播放');
       }
     };
-  }, [url, id]);
+  }, [url, id, option]);
 
-  return <div ref={artRef} {...rest} className={className}></div>;
+  return <div ref={artRef} className={className}></div>;
 }
