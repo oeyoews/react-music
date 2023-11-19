@@ -5,7 +5,7 @@ import ArtPlayer from '~app/ui/Video/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import { getMVComment } from '~lib/mv';
-import useSWR, { SWRConfig } from 'swr';
+import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 
 export default function VideoPage({ params }: { params: Params }) {
@@ -61,24 +61,19 @@ export default function VideoPage({ params }: { params: Params }) {
   }
 
   return (
-    <SWRConfig
-      value={{
-        refreshInterval: 3600000,
-      }}>
-      <div>
-        {/* title */}
-        <h2 className="text-center">{renderTitle()}</h2>
-        {/* video */}
-        <div className="flex justify-center items-center my-4">
-          {renderVideoPlayer()}
-        </div>
-        {/* comment */}
-        <div className="flex justify-start items-center space-x-2 mt-8">
-          <h2 className="my-2">评论区</h2>
-          <div>共{mvComment?.total?.toLocaleString()} 条评论</div>
-        </div>
-        <SongCommentTab songComment={mvComment as ISongComment} />
+    <>
+      {/* title */}
+      <h2 className="text-center">{renderTitle()}</h2>
+      {/* video */}
+      <div className="flex justify-center items-center my-4">
+        {renderVideoPlayer()}
       </div>
-    </SWRConfig>
+      {/* comment */}
+      <div className="flex justify-start items-center space-x-2 mt-8">
+        <h2 className="my-2">评论区</h2>
+        <div>共{mvComment?.total?.toLocaleString()} 条评论</div>
+      </div>
+      <SongCommentTab songComment={mvComment as ISongComment} />
+    </>
   );
 }

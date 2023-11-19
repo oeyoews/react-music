@@ -26,7 +26,7 @@ export default function ArtPlayer({
       ...option,
       mute: true,
       url,
-      autoplay: true,
+      autoplay: false,
       autoMini: false, // if mini, 不会销毁实例
       autoSize: false,
       playbackRate: true,
@@ -61,10 +61,8 @@ export default function ArtPlayer({
     // swr 轮询更新也会导致artplayer 出错
     // 但是事件上没有销毁, google 仍然可以进行小窗口播放
     return () => {
-      if (art && art.destroy) {
-        art.destroy(true);
-        toast('暂停播放');
-      }
+      art?.destroy(false);
+      toast('暂停播放');
     };
   }, [url, id, option]);
 
