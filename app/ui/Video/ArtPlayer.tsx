@@ -11,7 +11,7 @@ export default function ArtPlayer({
   option,
 }: {
   url: string;
-  className?: string;
+  className: string;
   option?: any;
   id?: string;
 }) {
@@ -28,7 +28,7 @@ export default function ArtPlayer({
       url,
       autoplay: true,
       autoMini: true, // if mini, 不会销毁实例
-      autoSize: true,
+      autoSize: false,
       playbackRate: true,
       aspectRatio: true,
       screenshot: true,
@@ -47,11 +47,6 @@ export default function ArtPlayer({
       autoOrientation: true,
       airplay: true,
     });
-
-    // getinstance 会导致死循环
-    // if (getInstance && typeof getInstance === 'function') {
-    //   getInstance(art);
-    // }
 
     art.on('play', () => {
       toast.success('开始播放');
