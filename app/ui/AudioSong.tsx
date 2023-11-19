@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { checkSong, getMusicURL } from '~lib/search';
 import { toast } from 'react-hot-toast';
 import Spinner from './Spinner';
+import useSWR from 'swr';
 
 export default function AudioSong({
   // src,
@@ -14,19 +15,12 @@ export default function AudioSong({
   songInfo: SongDetail;
   artist: Artist;
 }) {
-  const [musicURL, setMusicURL] = useState('');
-  const [loading, setLoading] = useState(true);
+  const { data: musicURLData, isLoading } = useSWR('audio', () =>
+    getMusicURL(songInfo.id, localStorage.cookie),
+  );
+  const musicURL = musicURLData?.data[0].url;
 
   useEffect(() => {
-    // toast.loading('loading...');
-    getMusicURL(songInfo.id, localStorage.cookie).then((res) => {
-      // 如果没有权限, 30s 试听
-      setMusicURL(res.data[0].url);
-    });
-    if (musicURL) {
-      setLoading(false);
-      // toast.dismiss();
-    }
     checkSong(songInfo.id, localStorage.cookie).then((res) => {
       if (!res.success) {
         toast.error(res.message);
@@ -60,10 +54,12 @@ export default function AudioSong({
 
   const apRef = useRef<any>(null);
 
+  // ??? instance
   const onInit = (instance: any) => {
     if (!apRef.current) {
       apRef.current = instance;
     }
+    toast.success('歌曲加载成功', { duration: 2000 });
   };
 
   return (
@@ -74,13 +70,13 @@ export default function AudioSong({
       {/* <audio controls src={`${baseURL}/${id}.mp3`} // title={src} */}
       <div className="w-full">
         <div className="flex justify-center items-center">
-          {loading && <Spinner />}
+          {isLoading && <Spinner />}
         </div>
-        {!loading && (
+        {!isLoading && (
           <ReactAplayer
             {...props}
             // @ts-ignore
-            onInit={() => toast.success('歌曲加载成功', { duration: 2000 })}
+            onInit={onInit}
             onPlay={() => toast('播放歌曲')}
             onPause={() => toast('暂停歌曲')}
           />
