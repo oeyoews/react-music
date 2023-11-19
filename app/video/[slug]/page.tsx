@@ -43,7 +43,7 @@ export default function VideoPage({ params }: { params: Params }) {
         )}
       </h2>
       <div className="flex justify-center items-center my-4">
-        {isLoading ? (
+        {isLoadingURL ? (
           <Spinner />
         ) : (
           <div>
