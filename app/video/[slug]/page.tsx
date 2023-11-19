@@ -24,7 +24,7 @@ export default function VideoPage({ params }: { params: Params }) {
   const { data: mvURLData, isLoading: isLoadingURL } = useSWR('url', () =>
     getMvURL(slug),
   );
-
+  const url = mvURLData?.data.url;
   const id = mvURLData?.data?.id;
   const mvName = mvDetailData?.data?.name;
   const artistName = mvDetailData?.data?.artistName;
@@ -45,11 +45,17 @@ export default function VideoPage({ params }: { params: Params }) {
           <Spinner />
         ) : (
           <div>
-            <ArtPlayer
-              id={id?.toString()}
-              url={mvURLData?.data.url!}
-              className="aspect-video w-[1080px]"
-            />
+            {url ? (
+              <ArtPlayer
+                id={id?.toString()}
+                url={url}
+                className="aspect-video w-[1080px]"
+              />
+            ) : (
+              <div>
+                <Spinner />
+              </div>
+            )}
 
             <div className="flex justify-start items-center space-x-2 mt-8">
               <h2 className="my-2">评论区</h2>
