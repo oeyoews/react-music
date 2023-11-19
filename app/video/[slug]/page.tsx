@@ -1,5 +1,6 @@
 'use client';
 
+// TODO: remove use client
 import { getMvDetail, getMvURL } from '~lib/mv';
 import { useState, useEffect } from 'react';
 import ArtPlayer from '~app/ui/Video/ArtPlayer';
@@ -7,6 +8,7 @@ import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import { getMVComment } from '~lib/playlist';
+import useSWR from 'swr';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -14,8 +16,12 @@ export default function VideoPage({ params }: { params: Params }) {
   const [mvName, setMvName] = useState('');
   const [artistName, setArtistName] = useState('');
   const [id, setId] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [mvComment, setMvComment] = useState<ISongComment>();
+
+  const {
+    data: mvComment,
+    error,
+    isLoading,
+  } = useSWR(slug, () => getMVComment(slug));
 
   useEffect(() => {
     getMvDetail(slug).then((res) => {
@@ -26,23 +32,17 @@ export default function VideoPage({ params }: { params: Params }) {
       setMvName(res.data?.name);
       setArtistName(res.data.artistName);
     });
-    getMVComment(slug).then((res) => {
-      setMvComment(res);
-    });
     getMvURL(slug).then((res) => {
       setMVURL(res.data.url);
       res.data;
       setId(res.data.id.toString());
-      if (res.data.url) {
-        setLoading(false);
-      }
     });
   }, [mvURL, slug]);
 
   return (
     <div>
       <h2 className="text-center">
-        {loading ? (
+        {isLoading ? (
           <></>
         ) : (
           <div className="flex justify-center items-center">
@@ -51,7 +51,7 @@ export default function VideoPage({ params }: { params: Params }) {
         )}
       </h2>
       <div className="flex justify-center items-center my-4">
-        {loading ? (
+        {isLoading ? (
           <Spinner />
         ) : (
           <div>
