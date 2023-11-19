@@ -18,10 +18,10 @@ export default function VideoPage({ params }: { params: Params }) {
 
   const { data: mvComment } = useSWR(slug, () => getMVComment(slug));
   const { data: mvDetailData, isLoading: isLoadingDetail } = useSWR(
-    'detail',
+    slug + 'detail',
     () => getMvDetail(slug),
   );
-  const { data: mvURLData, isLoading: isLoadingURL } = useSWR('url', () =>
+  const { data: mvURLData, isLoading: isLoadingURL } = useSWR(slug + 'url', () =>
     getMvURL(slug, localStorage.cookie),
   );
 
