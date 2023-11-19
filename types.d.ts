@@ -977,6 +977,7 @@ interface SongDetail {
   noCopyrightRcmd: null;
   publishTime: number;
 }
+
 interface Ar {
   id: number;
   name: string;
@@ -1034,29 +1035,6 @@ interface OriginSongSimpleData {
 interface AlbumMeta {
   id: number;
   name: string;
-}
-
-interface Privilege {
-  id: number;
-  fee: number;
-  payed: number;
-  st: number;
-  pl: number;
-  dl: number;
-  sp: number;
-  cp: number;
-  subp: number;
-  cs: boolean;
-  maxbr: number;
-  fl: number;
-  toast: boolean;
-  flag: number;
-  preSell: boolean;
-  playMaxbr: number;
-  downloadMaxbr: number;
-  rscl: null;
-  freeTrialPrivilege: FreeTrialPrivilege;
-  chargeInfoList: ChargeInfoList[];
 }
 
 interface ChargeInfoList {
@@ -1346,13 +1324,13 @@ interface TopSong {
 
 interface Privilege {
   id: number;
-  fee: number;
-  payed: number;
+  fee: number; // 是否为vip歌曲 0: 否 1: 是.  --  --> 8: 可以播放???
+  payed: number; // 账户是否付费
   st: number;
   pl: number;
   dl: number;
   sp: number;
-  cp: number; // 判断是否为vip歌曲
+  cp: number; // 判断用户能否播放歌曲(如果有vip, 就会显示1, 否则显示0, 受账号状态影响)
   subp: number;
   cs: boolean;
   maxbr: number;

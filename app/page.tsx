@@ -1,4 +1,9 @@
-import { getBanners, searchHot } from '~lib/search';
+import {
+  getBanners,
+  getSongComment,
+  getSongDetail,
+  searchHot,
+} from '~lib/search';
 import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
 import HotSongs from './ui/HotSongs';

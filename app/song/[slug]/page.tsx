@@ -11,30 +11,34 @@ import Link from 'next/link';
 export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
 async function getSongInfo(slug: string) {
-  // TODO: 总会运行两次, 第二次undefined, 难道是server side 获取不到slug的原因吗
+  // TODO: 总会运行两次, 第二次undefined, 难道是server side 获取不到slug的原因吗,似乎没有了
   // 即使return, 也会继续运行???
-  const songdetail = await getSongDetail(slug);
-  return songdetail.songs[0];
+  const { songs, privileges } = await getSongDetail(slug);
+  return {
+    song: songs[0],
+    vip: privileges[0].fee === 1 ? true : false,
+  };
 }
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = params;
-  const { name } = await getSongInfo(slug);
+  const { song } = await getSongInfo(slug);
   return {
-    title: `歌曲详情 - ${name}`,
+    title: `歌曲详情 - ${song.name}`,
   };
 }
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
   if (!slug) return <div>Loading ...</div>;
-  const songInfo = await getSongInfo(slug);
+  const { song, vip } = await getSongInfo(slug);
   const songComment = await getSongComment(slug);
-  const { total } = songComment;
+  const { total = 0 } = songComment;
   const simiSong = await getSimiSong(slug);
-  const artistDetail = await getArtistDetail(songInfo.ar[0].id);
+  const artistDetail = await getArtistDetail(song.ar[0].id);
   // TODO: 可能没有版权
   const artist = artistDetail.data?.artist;
+
   if (!artist)
     return (
       <div className="flex justify-center items-start font-bold text-rose-400 my-4">
@@ -71,11 +75,18 @@ export default async function Page({ params }: { params: Params }) {
       {/* TODO: 仍然不起作用, 部分歌曲403, 暂时采用outer */}
       <AudioSong
         // src={musicInfo.url}
-        songInfo={songInfo}
+        songInfo={song}
         artist={artist}
       />
-      <div>
-        <hr />
+      <h2>
+        歌曲名: {song.name}
+        {vip && (
+          <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
+            VIP
+          </sup>
+        )}
+      </h2>
+      <div className="my-4">
         <h2 className="my-2">歌手简介</h2>
         {artist && (
           <div>

@@ -8,7 +8,7 @@ export default async function Page({ params }: any) {
     musicdata.playlists[0];
   const { songs, privileges } = await getPlayListSongs(slug);
   const vipids = privileges
-    .filter((privileges) => privileges.cp === 0)
+    .filter((privileges) => privileges.fee === 1)
     .map((vipPrivileges) => vipPrivileges.id);
 
   const getTime = (timestamp: number) => {
