@@ -40,7 +40,7 @@ export default function RecommendSongs() {
   return (
     <div>
       <h2>每日推荐</h2>
-      {content}
+      {!isLoading && content}
       <div className="flex justify-center items-center">
         {hasCookie && isLoading && <Spinner />}
         {!hasCookie && <div className="text-rose-400 font-bold">需要登录</div>}

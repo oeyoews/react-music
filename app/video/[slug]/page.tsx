@@ -51,14 +51,6 @@ export default function VideoPage({ params }: { params: Params }) {
               id={id?.toString()}
               url={mvURL}
               className="aspect-video w-[1080px]"
-              getInstance={(art) => {
-                art.on('play', () => {
-                  toast.success('开始播放');
-                });
-                art.on('ready', () => {
-                  toast.success('视频加载成功');
-                });
-              }}
             />
 
             <div className="flex justify-start items-center space-x-2 mt-8">
