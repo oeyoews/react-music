@@ -33,7 +33,7 @@ export default async function Home() {
     <div className="p-2 mb-16">
       <Announcement text="完善中..." store={true} />
       <Banners data={bannerData.banners} />
-      <HomePage data={homepage.data} />
+      {/* <HomePage data={homepage.data} /> */}
       {/* <Carousel data={bannerData.banners} /> */}
       <StarPick />
       <RecommendSongs />
