@@ -8,7 +8,7 @@ export default function SongComment({
   comments: HotComment[] | SongComment[];
 }) {
   const commentList = comments
-    .sort((a, b) => {
+    ?.sort((a, b) => {
       return a.time > b.time ? -1 : 1;
     })
     .map((comment) => {
