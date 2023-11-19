@@ -86,8 +86,9 @@ export default function ArtPlayer({
       toast('暂停播放');
     });
 
+    // swr 轮询更新也会导致artplayer 出错
+    // 但是事件上没有销毁, google 仍然可以进行小窗口播放
     return () => {
-      // 但是事件上没有销毁, google 仍然可以进行小窗口播放
       if (art && art.destroy) {
         art.destroy(true);
         toast('暂停播放');

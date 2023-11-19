@@ -53,10 +53,3 @@ export const getAlbumComment = async (id: Id): Promise<ISongComment> => {
     params: { id },
   });
 };
-
-export const getMVComment = async (id: Id): Promise<ISongComment> => {
-  return await fetch({
-    url: '/comment/mv',
-    params: { id, limit: 99 },
-  });
-};

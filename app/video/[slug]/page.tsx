@@ -5,7 +5,7 @@ import { getMvDetail, getMvURL } from '~lib/mv';
 import ArtPlayer from '~app/ui/Video/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
 import SongCommentTab from '~app/ui/SongCommentTab';
-import { getMVComment } from '~lib/playlist';
+import { getMVComment } from '~lib/mv';
 import useSWR from 'swr';
 
 export default function VideoPage({ params }: { params: Params }) {
@@ -52,9 +52,8 @@ export default function VideoPage({ params }: { params: Params }) {
                 className="aspect-video w-[1080px]"
               />
             ) : (
-              <div>
-                <Spinner />
-              </div>
+              // 线上仍然failed
+              <div>加载失败</div>
             )}
 
             <div className="flex justify-start items-center space-x-2 mt-8">
