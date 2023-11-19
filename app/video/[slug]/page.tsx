@@ -25,7 +25,6 @@ export default function VideoPage({ params }: { params: Params }) {
     getMvURL(slug),
   );
 
-  const mvURL = mvURLData?.data.url!;
   const id = mvURLData?.data?.id;
   const mvName = mvDetailData?.data?.name;
   const artistName = mvDetailData?.data?.artistName;
@@ -48,7 +47,7 @@ export default function VideoPage({ params }: { params: Params }) {
           <div>
             <ArtPlayer
               id={id?.toString()}
-              url={mvURL}
+              url={mvURLData?.data.url!}
               className="aspect-video w-[1080px]"
             />
 
