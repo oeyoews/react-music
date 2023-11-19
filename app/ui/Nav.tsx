@@ -1,13 +1,14 @@
-import { FaSearch, FaHome, FaMusic, FaUser } from 'react-icons/fa';
+// import { FaSearch, FaHome, FaMusic, FaUser } from 'react-icons/fa';
+import { FcHome, FcSearch, FcSettings } from 'react-icons/fc';
 import Link from 'next/link';
 import React from 'react';
 
 const navItems = [
-  { href: '/', title: 'home', icon: <FaHome /> },
-  { href: '/search', title: 'search', icon: <FaSearch /> },
+  { href: '/', title: 'home', icon: <FcHome /> },
+  { href: '/search', title: 'search', icon: <FcSearch /> },
   // { href: '/song', title: 'song', icon: <FaMusic /> },
   // TODO: use user avatar
-  { href: '/login', title: 'login', icon: <FaUser /> },
+  { href: '/login', title: 'login', icon: <FcSettings /> },
 ];
 
 export default function Nav() {
