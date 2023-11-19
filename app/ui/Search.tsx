@@ -14,7 +14,7 @@ export default function Search({ searchWord = '' }: { searchWord?: string }) {
   };
 
   return (
-    <div className="my-8 h-screen">
+    <div className="my-8 min-h-screen">
       <form onSubmit={handleSearch} className="flex items-center">
         <input
           autoFocus
