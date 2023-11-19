@@ -22,7 +22,7 @@ export default function VideoPage({ params }: { params: Params }) {
     () => getMvDetail(slug),
   );
   const { data: mvURLData, isLoading: isLoadingURL } = useSWR('url', () =>
-    getMvURL(slug),
+    getMvURL(slug, localStorage.cookie),
   );
   const url = mvURLData?.data.url;
   const id = mvURLData?.data?.id;
