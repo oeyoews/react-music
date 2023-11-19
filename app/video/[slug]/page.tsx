@@ -32,7 +32,7 @@ export default function VideoPage({ params }: { params: Params }) {
   return (
     <div>
       <h2 className="text-center">
-        {isLoading ? (
+        {isLoadingDetail ? (
           <></>
         ) : (
           <div className="flex justify-center items-center">
