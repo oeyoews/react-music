@@ -15,7 +15,7 @@ export default function AudioSong({
   songInfo: SongDetail;
   artist: Artist;
 }) {
-  const { data: musicURLData, isLoading } = useSWR('audio', () =>
+  const { data: musicURLData, isLoading } = useSW(songInfo, () =>
     getMusicURL(songInfo.id, localStorage.cookie),
   );
   const musicURL = musicURLData?.data[0].url;
