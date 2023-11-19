@@ -42,7 +42,13 @@ export default function VideoPage({ params }: { params: Params }) {
   return (
     <div>
       <h2 className="text-center">
-        {mvName} -- {artistName}
+        {loading ? (
+          <></>
+        ) : (
+          <div className="flex justify-center items-center">
+            {mvName} -- {artistName}
+          </div>
+        )}
       </h2>
       <div className="flex justify-center items-center my-4">
         {loading ? (
