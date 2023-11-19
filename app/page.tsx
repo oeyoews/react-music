@@ -19,7 +19,12 @@ export default async function Home() {
 
   return (
     <div className="p-2 mb-16">
-      <Announcement text="完善中..." store={true} />
+      <Announcement
+        text="维护中..."
+        store={true}
+        icon={'🎉'}
+        position="top-center"
+      />
       <Banners data={bannerData.banners} />
       <StarPick />
       <RecommendSongs />
