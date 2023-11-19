@@ -5,8 +5,15 @@ import Link from 'next/link';
 import Avatar from './Avatar';
 import Spinner from './Spinner';
 import useSWR from 'swr';
+import { useEffect, useState } from 'react';
 
 export default function StarPick() {
+  const [hasCookie, setHasCookie] = useState(false);
+
+  useEffect(() => {
+    localStorage.cookie && setHasCookie(true);
+  }, []);
+
   const { data, error, isLoading } = useSWR('starpick', () =>
     getStarPick(localStorage.cookie),
   );
@@ -51,9 +58,7 @@ export default function StarPick() {
     <div className="m-2">
       <h2>云村星评</h2>
       {content}
-      {localStorage.cookie && (
-        <div className="text-center text-rose-400">需要登录</div>
-      )}
+      {hasCookie && <div className="text-center text-rose-400">需要登录</div>}
     </div>
   );
 }
