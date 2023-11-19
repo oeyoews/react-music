@@ -115,6 +115,7 @@ export const getBanners = async (): Promise<IBanner> => {
   });
 };
 
+// TODO:
 export const searchHot = async (): Promise<any> => {
   return await fetch({
     url: '/search/hot',

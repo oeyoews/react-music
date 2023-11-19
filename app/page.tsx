@@ -3,6 +3,7 @@ import {
   getSongComment,
   getSongDetail,
   searchHot,
+  searchHotDetail,
 } from '~lib/search';
 import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
@@ -20,7 +21,7 @@ export const revalidate = 3600;
 
 export default async function Home() {
   const bannerData = await getBanners();
-  const songsHot = await searchHot();
+  const songsHot = await searchHotDetail();
   const PlaylistData = await getHotPlayList();
   const mvFirst = await getMvFirst();
   const personalizeMv = await getPersonalizedMv();
