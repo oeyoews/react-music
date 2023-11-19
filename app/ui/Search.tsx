@@ -6,17 +6,13 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-export default function Search() {
+export default function Search({ searchWord = '' }: { searchWord?: string }) {
   const [search, setSearch] = useState('');
   const router = useRouter();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!search) {
-      toast('请输入搜索内容');
-      return;
-    }
-    router.push(`/search/${search}`);
+    router.push(`/search/${searchWord}`);
   };
 
   return (
@@ -27,7 +23,7 @@ export default function Search() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search for songs, artists, or albums"
+          placeholder={searchWord}
           className="border border-gray-300 rounded-l p-2 focus:outline-none w-full"
         />
         <button

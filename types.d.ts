@@ -1,3 +1,16 @@
+type SearchTypes =
+  | 1
+  | 10
+  | 100
+  | 1000
+  | 1002
+  | 1004
+  | 1006
+  | 1009
+  | 1014
+  | 1018;
+// | 2000
+
 interface IMvDetail {
   loadingPic: string;
   bufferPic: string;
@@ -1204,6 +1217,33 @@ interface IHotDetail {
   code: number;
   data: HotDetail[];
   message: string;
+}
+
+interface ISearchDefault {
+  code: number;
+  message: null;
+  data: SearchDefault;
+}
+
+interface SearchDefault {
+  showKeyword: string;
+  styleKeyword: StyleKeyword;
+  realkeyword: string;
+  searchType: number;
+  action: number;
+  alg: string;
+  gap: number;
+  source: null;
+  bizQueryInfo: string;
+  logInfo: null;
+  imageUrl: null;
+  trp_type: null;
+  trp_id: null;
+}
+
+interface StyleKeyword {
+  keyWord: string;
+  descWord: null;
 }
 
 interface HotDetail {

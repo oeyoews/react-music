@@ -39,7 +39,37 @@ export const checkSong = async (id: Id, cookie: string): Promise<CheckSong> => {
   });
 };
 
-export const search = async (keywords: string): Promise<ISearch> => {
+// offset 分页
+export const search = async (
+  keywords: string,
+  types?: SearchTypes,
+  offset?: number,
+): Promise<ISearch> => {
+  return await fetch({
+    url: '/search',
+    params: {
+      keywords,
+    },
+  });
+};
+
+export const searchDefault = async (): Promise<ISearchDefault> => {
+  return await fetch({
+    url: '/search/default',
+  });
+};
+
+// TODO
+export const searchCloud = async (keywords: string): Promise<ISearch> => {
+  return await fetch({
+    url: '/cloudsearch',
+    params: {
+      keywords,
+    },
+  });
+};
+
+export const searchSuggest = async (keywords: string): Promise<ISearch> => {
   return await fetch({
     url: '/search/suggest',
     params: {
@@ -85,7 +115,13 @@ export const getBanners = async (): Promise<IBanner> => {
   });
 };
 
-export const searchHot = async (): Promise<IHotDetail> => {
+export const searchHot = async (): Promise<any> => {
+  return await fetch({
+    url: '/search/hot',
+  });
+};
+
+export const searchHotDetail = async (): Promise<IHotDetail> => {
   return await fetch({
     url: '/search/hot/detail',
   });
