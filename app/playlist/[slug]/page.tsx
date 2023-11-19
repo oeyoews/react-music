@@ -1,5 +1,6 @@
 import { getHotPlayList, getPlayListSongs } from '~lib/playlist';
 import Link from 'next/link';
+import Badge from '~app/ui/Badge';
 
 export default async function Page({ params }: any) {
   const { slug } = params;
@@ -20,9 +21,11 @@ export default async function Page({ params }: any) {
       <h1>{name}</h1>
       <p className="line-clamp-2">{description}</p>
       {tags.map((tag) => (
-        <span key={tag} className="bg-lime-300 rounded-lg px-2 py-1 mx-1">
-          {tag}
-        </span>
+        <Badge
+          text={tag}
+          key={tag}
+          className="bg-lime-300 rounded px-2 py-1 mx-1"
+        />
       ))}
       <div className="my-2 flex items-center space-x-2">
         <div>创建时间: {getTime(createTime)}</div>
@@ -35,9 +38,10 @@ export default async function Page({ params }: any) {
             <Link href={`/song/${id}`} className="no-underline">
               {name}
               {vipids.includes(id) && (
-                <sup className="ml-2 bg-rose-400 text-black rounded px-0.5">
-                  VIP
-                </sup>
+                <Badge
+                  text={'VIP'}
+                  className="ml-2 bg-rose-400 text-black px-0.5 font-serif"
+                />
               )}
             </Link>
           </li>
