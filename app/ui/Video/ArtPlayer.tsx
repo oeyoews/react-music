@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
+import toast from 'react-hot-toast';
 // import artplayerPluginControl from 'artplayer-plugin-control';
 
 export default function ArtPlayer({
@@ -22,15 +23,16 @@ export default function ArtPlayer({
 
   useEffect(() => {
     // if (!url) return;
+
     const art = new Artplayer({
       id: id,
       ...option,
       mute: true,
       url,
-      autoplay: true,
       container: artRef.current,
+      autoplay: false,
+      autoMini: false, // if mini, 不会销毁实例
       autoSize: true,
-      autoMini: true,
       playbackRate: true,
       aspectRatio: true,
       screenshot: true,
@@ -76,10 +78,11 @@ export default function ArtPlayer({
 
     return () => {
       if (art && art.destroy) {
-        art.destroy(false);
+        toast('暂停播放');
+        art.destroy(true);
       }
     };
-  }, [getInstance, option, url]);
+  }, [option, url, id]); // 如果监听了getstance, 会导致加载失败
 
   return <div ref={artRef} {...rest} className={className}></div>;
 }
