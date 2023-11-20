@@ -23,7 +23,7 @@ const useStore = create<Store>((set) => ({
   loginStatus: {},
   // @ts-ignore
   userInfo: {},
-  firstLoading: false,
+  firstLoading: true,
   searchWord: '',
 
   setCookie: (cookie: string) => set({ cookie }),

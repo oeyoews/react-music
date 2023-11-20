@@ -2,6 +2,7 @@
 
 import { getRoute } from '~lib/getRoute';
 
+import useStore from '~lib/store';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -9,6 +10,8 @@ import { Route } from 'next';
 // TODO: click events
 // @see-also https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/components/Banner/index.vue#L38
 export default function Banners({ data }: { data: Banner[] }) {
+  const statusStore = useStore();
+
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -35,9 +38,9 @@ export default function Banners({ data }: { data: Banner[] }) {
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-3 not-prose"
         variants={container}
-        initial="hidden"
-        animate="visible">
-        {/* NOTE: 数量不固定 >=9 */}
+        initial={statusStore.firstLoading ? 'hidden' : 'visible'}
+        animate={'visible'}>
+        {/* NOTE: 数量不固定 */}
         {data.map((banner) => (
           <motion.div
             key={banner.imageUrl}
