@@ -9,7 +9,7 @@ import useSWR from 'swr';
 import { Suspense } from 'react';
 import Spinner from '~app/ui/Spinner';
 
-export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
+// export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
 // TODO
 // export async function generateMetadata({ params }: { params: Params }) {
