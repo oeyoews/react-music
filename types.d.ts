@@ -1348,6 +1348,7 @@ interface MusicURL {
 interface ISearch {
   result: Result;
   code: number;
+  message?: string;
 }
 
 interface Result {
@@ -1621,4 +1622,46 @@ enum Level {
   None = 'none',
   Sky = 'sky',
   Standard = 'standard',
+}
+
+declare module 'react-aplayer' {
+  interface AplayerAudio {
+    name: string;
+    artist: string;
+    url: string;
+    cover: string;
+    lrc: string;
+    theme: string;
+  }
+
+  interface AplayerProps {
+    audio: Partial<AplayerAudio>[];
+    theme?: string;
+    lrcType?: number;
+    onInit?: (instance) => void;
+    onPlay?: () => void;
+    onPause?: () => void;
+    order?: 'random' | 'list';
+  }
+
+  interface AplayerMethods {
+    play: () => void;
+    pause: Function;
+    seek: Function;
+    toggle: () => void;
+    destroy: Function;
+    on: (event, handler) => void;
+    theme: (theme, themeType) => void;
+    skipForward: () => void;
+    list: {
+      show: any;
+      hide: any;
+      toggle: any;
+      audios: { id: string; name: string; url: string }[];
+    };
+  }
+  export default class Aplayer extends React.Component<
+    AplayerProps,
+    AplayerMethods
+  > {}
 }

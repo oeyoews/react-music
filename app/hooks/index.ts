@@ -8,7 +8,15 @@ import {
   getArtistDetail,
   getSimiSong,
   getMusicURL,
+  search,
 } from '~lib/search';
+
+export const useSearch = (keyword: string) => {
+  const searchKeyword = encodeURIComponent(keyword.trim());
+  return useSWR(keyword + 'search', () => search(searchKeyword), {
+    suspense: true,
+  });
+};
 
 export const useSongComment = (id: Id) => {
   return useSWR(id + 'comment', () => getSongComment(id), {
