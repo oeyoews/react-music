@@ -1,6 +1,6 @@
 'use client';
 
-import { lazy, useEffect, useRef } from 'react';
+import { Suspense, lazy, useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
@@ -9,6 +9,7 @@ import {
   useSongDetailData,
   useLyric,
 } from '~app/hooks';
+import Spinner from './Spinner';
 
 // https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
@@ -60,7 +61,14 @@ export default function AudioSong({ slug }: { slug: string }) {
   /* TODO: add copybutton or download url */
   return (
     <div className="w-full">
-      {!isLoadingURL && !isLoadingLyric && <ReactAplayer {...options} />}
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center">
+            <Spinner />
+          </div>
+        }>
+        {!isLoadingURL && !isLoadingLyric && <ReactAplayer {...options} />}
+      </Suspense>
     </div>
   );
 }

@@ -13,7 +13,9 @@ import {
 } from '~lib/search';
 
 export const useLyric = (id: Id) => {
-  return useSWRImmutable(id + 'lyric', () => getLyric(id), {});
+  return useSWRImmutable(id + 'lyric', () => getLyric(id), {
+    suspense: true,
+  });
 };
 
 export const useSearch = (keyword: string) => {
