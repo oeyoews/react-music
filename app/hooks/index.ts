@@ -60,7 +60,7 @@ export const useMusicURL = (id: Id) => {
 };
 
 export const useSongDetailData = (slug: Id) => {
-  return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
+  return useSWR(slug + 'detail', () => getSongDetail(slug), {
     suspense: true,
     refreshInterval: 3600000,
     revalidateOnFocus: false,
@@ -68,9 +68,10 @@ export const useSongDetailData = (slug: Id) => {
 };
 
 export const useArtistData = (slug: string) => {
+  // 依赖请求, 使用返回值作为key, 如果函数抛出错误或返回 falsy 值，SWR 会知道某些依赖还没准备好。
   const songDetailData = useSongDetailData(slug);
   return useSWRImmutable(
-    `${slug}-artist`,
+    `${slug}-artist-${songDetailData.data.songs[0].ar[0].id}`,
     () => getArtistDetail(songDetailData.data.songs[0].ar[0].id),
     {
       suspense: true,
