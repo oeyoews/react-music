@@ -66,6 +66,7 @@ const LoginPage = () => {
       localStorage.userData = JSON.stringify(userInfo);
     };
     const handleLogin = async () => {
+      toast.loading('生成二维码...');
       const qrkey = await getqrKey();
       const key = qrkey.data.unikey;
       setKey(key);

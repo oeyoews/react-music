@@ -46,12 +46,10 @@ export const useUserData = (uid: number) => {
 };
 
 export const useStarPick = () => {
-  const { data: starPickData } = useSWR(
-    'starpick',
-    () => getStarPick(localStorage.cookie),
-    { suspense: true },
-  );
-  return { comments: starPickData?.data.blocks[0].creatives };
+  return useSWRImmutable('starpick', () => getStarPick(localStorage.cookie), {
+    suspense: true,
+    refreshInterval: 3600000,
+  });
 };
 
 export const useMusicURL = (id: Id) => {

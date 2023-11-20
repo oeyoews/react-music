@@ -2,24 +2,15 @@
 
 import Link from 'next/link';
 import Avatar from './Avatar';
-import { Suspense, useEffect, useState } from 'react';
 import { useStarPick } from '~app/hooks';
 
-// TODO: swr
 export default function StarPick() {
-  const [hasCookie, setHasCookie] = useState(false);
+  const { data: startPickData } = useStarPick();
+  const data = startPickData.data;
 
-  useEffect(() => {
-    localStorage.cookie && setHasCookie(true);
-  }, []);
-
-  const starPick = useStarPick();
-
-  const content = (
-    <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
-      {/* ssr fetchdata error */}
-      {/* <Suspense fallback={<Spinner />}> */}
-      {starPick.comments.slice(0, 6).map((creative) => {
+  const StarPickComment = () => (
+    <>
+      {data.blocks[0].creatives.slice(0, 6).map((creative) => {
         const resources = creative.resources[0];
         const { songData, users } = resources.resourceExtInfo;
         return (
@@ -44,15 +35,15 @@ export default function StarPick() {
           </Link>
         );
       })}
-      {/* </Suspense> */}
-    </div>
+    </>
   );
 
   return (
     <div className="m-2">
       <h2>云村星评</h2>
-      {content}
-      {/* {!hasCookie && <div className="text-center text-rose-400">需要登录</div>} */}
+      <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
+        <StarPickComment />
+      </div>
     </div>
   );
 }
