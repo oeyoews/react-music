@@ -13,7 +13,7 @@ export const useUserData = (uid: number) => {
   const { data: userData } = useSWRImmutable(
     uid + 'user',
     () => getUserDetail(uid),
-    { suspense: true },
+    { suspense: true, refreshInterval: 3600000 },
   );
   return userData;
 };

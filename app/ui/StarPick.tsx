@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Avatar from './Avatar';
+import Image from 'next/image';
 import { Suspense, useEffect, useState } from 'react';
 import { useStarPick } from '~app/hooks';
 import Spinner from './Spinner';
@@ -35,6 +36,7 @@ export default function StarPick() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 w-full justify-end">
+                  {/* 警告处理 */}
                   <Avatar userData={users[0]} />
                   <div>{users[0].nickname}</div>
                 </div>
