@@ -129,8 +129,6 @@ export const searchHotDetail = async (): Promise<IHotDetail> => {
   });
 };
 
-//  v1 有时会失效
-// TODO:
 export const getMusicURL = async (
   id: Id,
   cookie: string,

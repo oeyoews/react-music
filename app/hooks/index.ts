@@ -1,6 +1,23 @@
 import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
-import { getSongDetail, getArtistDetail, getSimiSong } from '~lib/search';
+import {
+  getSongDetail,
+  getArtistDetail,
+  getSimiSong,
+  getMusicURL,
+} from '~lib/search';
+
+export const useMusicURL = (id: Id) => {
+  const { data: musicURLData } = useSWR(
+    id + 'url',
+    () => getMusicURL(id, localStorage.cookie),
+    {
+      suspense: true,
+      refreshInterval: 3600000,
+    },
+  );
+  return musicURLData.data[0];
+};
 
 export const useSongDetailData = (slug: Id) => {
   const { data: songDetailData } = useSWRImmutable(
@@ -25,7 +42,7 @@ export const useArtistData = (slug: string) => {
       refreshInterval: 3600000,
     },
   );
-  return artistDetailData;
+  return artistDetailData.data;
 };
 
 export const useSiMiSong = (slug: Id) => {
@@ -37,5 +54,5 @@ export const useSiMiSong = (slug: Id) => {
       refreshInterval: 3600000,
     },
   );
-  return simiSongData;
+  return simiSongData.songs;
 };

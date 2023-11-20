@@ -1,12 +1,10 @@
 'use client';
 
-import { use } from 'react';
 import { useSongDetailData, useArtistData, useSiMiSong } from '~app/hooks';
-import { getSimiSong, getSongComment } from '~lib/search';
+import { getSongComment } from '~lib/search';
 import AudioSong from '~app/ui/AudioSong';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
-import useSWRImmutable from 'swr/immutable';
 import useSWR from 'swr';
 import { Suspense } from 'react';
 import Spinner from '~app/ui/Spinner';
@@ -28,7 +26,6 @@ export default function Page({ params }: { params: Params }) {
   // TODO: swr 后, lrc 加载错误
   const MusicPlayer = () => {
     const songDetailData = useSongDetailData(slug);
-    const artistDetailData = useArtistData(slug);
     const song = songDetailData?.songs[0];
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
@@ -41,7 +38,9 @@ export default function Page({ params }: { params: Params }) {
               <Spinner />
             </div>
           }>
-          <AudioSong songInfo={song} artist={artistDetailData.data?.artist} />
+          <AudioSong
+            slug={slug} // artist={artistDetailData.artist}
+          />
         </Suspense>
         <h2>
           歌曲名: {song.name}
@@ -57,7 +56,7 @@ export default function Page({ params }: { params: Params }) {
 
   const ArtistInfo = () => {
     const artistDetailData = useArtistData(slug);
-    const artist = artistDetailData.data?.artist;
+    const artist = artistDetailData.artist;
 
     return (
       <div className="my-4">
@@ -102,7 +101,7 @@ export default function Page({ params }: { params: Params }) {
         <h2 className="my-2">相似歌曲</h2>
         <ol className="columns-2">
           <Suspense fallback={<Spinner />}>
-            {simiSongData?.songs?.map((song) => {
+            {simiSongData?.map((song) => {
               return (
                 <li key={song.id}>
                   <Link href={`/song/${song.id}`} className="no-underline">
