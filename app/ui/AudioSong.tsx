@@ -1,7 +1,7 @@
 'use client';
 
 import { lazy, useEffect, useRef } from 'react';
-import { AplayerMethods, AplayerProps } from 'react-aplayer';
+import Aplayer, { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import { useArtistData, useMusicURL, useSongDetailData } from '~app/hooks';
 
@@ -53,6 +53,10 @@ export default function AudioSong({ slug }: { slug: string }) {
       toast('退出播放');
     };
   }, []);
+
+  apRef.current?.on('ready', () => {
+    toast('歌曲加载成功', { duration: 1000 });
+  });
 
   /* TODO: add copybutton or download url */
   return (
