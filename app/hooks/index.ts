@@ -9,17 +9,22 @@ import {
   getSimiSong,
   getMusicURL,
   search,
+  getLyric,
 } from '~lib/search';
+
+export const useLyric = (id: Id) => {
+  return useSWRImmutable(id + 'lyric', () => getLyric(id), {});
+};
 
 export const useSearch = (keyword: string) => {
   const searchKeyword = encodeURIComponent(keyword.trim());
-  return useSWR(keyword + 'search', () => search(searchKeyword), {
+  return useSWRImmutable(keyword + 'search', () => search(searchKeyword), {
     suspense: true,
   });
 };
 
 export const useSongComment = (id: Id) => {
-  return useSWR(id + 'comment', () => getSongComment(id), {
+  return useSWRImmutable(id + 'comment', () => getSongComment(id), {
     suspense: true,
     // refreshInterval: 3600000,
   });

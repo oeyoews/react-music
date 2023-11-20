@@ -1636,12 +1636,20 @@ declare module 'react-aplayer' {
 
   interface AplayerProps {
     audio: Partial<AplayerAudio>[];
-    theme?: string;
-    lrcType?: number;
-    onInit?: (instance) => void;
-    onPlay?: () => void;
-    onPause?: () => void;
-    order?: 'random' | 'list';
+    theme: string;
+    lrcType: number;
+    onInit: (instance) => void;
+    onPlay: () => void;
+    onPause: () => void;
+    order: 'random' | 'list';
+    loop: 'all';
+    mini: boolean;
+    fixed: boolean;
+    autoplay: boolean;
+    preload: string | 'auto';
+    volume: number;
+    mutex: boolean;
+    listFolded: boolean;
   }
 
   interface AplayerMethods {
@@ -1660,8 +1668,5 @@ declare module 'react-aplayer' {
       audios: { id: string; name: string; url: string }[];
     };
   }
-  export default class Aplayer extends React.Component<
-    AplayerProps,
-    AplayerMethods
-  > {}
+  export default class Aplayer extends React.Component<Partial<AplayerProps>> {}
 }
