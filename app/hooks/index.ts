@@ -19,7 +19,7 @@ export const useLyric = (id: Id) => {
 };
 
 export const useSearch = (keyword: string) => {
-  const searchKeyword = encodeURIComponent(keyword.trim());
+  const searchKeyword = decodeURIComponent(keyword.trim());
   return useSWRImmutable(keyword + 'search', () => search(searchKeyword), {
     suspense: true,
   });
