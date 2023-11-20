@@ -1,7 +1,7 @@
 'use client';
 
 import { getMvDetail, getMvURL } from '~lib/mv';
-import ArtPlayer from '~app/ui/Video/ArtPlayer';
+import ArtPlayer from '~app/ui/Player/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import { getMVComment } from '~lib/mv';

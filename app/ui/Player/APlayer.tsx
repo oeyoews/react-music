@@ -9,12 +9,12 @@ import {
   useSongDetailData,
   useLyric,
 } from '~app/hooks';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 
 // https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
 
-export default function AudioSong({ slug }: { slug: string }) {
+export default function APlayer({ slug }: { slug: string }) {
   const { url, isLoading: isLoadingURL } = useMusicURL(slug);
   const { songs } = useSongDetailData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);

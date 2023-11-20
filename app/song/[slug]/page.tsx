@@ -6,7 +6,7 @@ import {
   useSiMiSong,
   useSongComment,
 } from '~app/hooks';
-import AudioSong from '~app/ui/AudioSong';
+import APlayer from '~app/ui/Player/APlayer';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
 import { Suspense, useEffect } from 'react';
@@ -36,7 +36,7 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        <AudioSong slug={slug} />
+        <APlayer slug={slug} />
         <h2>
           歌曲名: {song.name}
           {vip && (
