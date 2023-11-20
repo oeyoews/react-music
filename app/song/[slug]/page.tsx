@@ -1,7 +1,7 @@
 'use client';
 
 import { use } from 'react';
-import { useSongDetailData, useArtistData } from '~app/hooks';
+import { useSongDetailData, useArtistData, useSiMiSong } from '~app/hooks';
 import { getSimiSong, getSongComment } from '~lib/search';
 import AudioSong from '~app/ui/AudioSong';
 import SongCommentTab from '~app/ui/SongCommentTab';
@@ -13,6 +13,7 @@ import Spinner from '~app/ui/Spinner';
 
 export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
+// TODO
 // export async function generateMetadata({ params }: { params: Params }) {
 //   const { slug } = params;
 //   const name = use(useSongDetailData(slug).songs[0].name);
@@ -55,6 +56,7 @@ export default function Page({ params }: { params: Params }) {
       <div className="my-4">
         <h2 className="my-2">歌手简介</h2>
         <Suspense fallback={<Spinner />}>
+          {/* TODO: */}
           <Link
             href={`/artist/${artist?.id}`}
             className="no-underline font-bold">
@@ -87,24 +89,24 @@ export default function Page({ params }: { params: Params }) {
   };
 
   const SimiSong = () => {
-    const { data: simiSongData } = useSWRImmutable(slug + 'simi', () =>
-      getSimiSong(slug),
-    );
+    const simiSongData = useSiMiSong(slug);
     return (
       <div className="mt-4">
         <hr />
         <h2 className="my-2">相似歌曲</h2>
         <ol className="columns-2">
-          {simiSongData?.songs.map((song) => {
-            return (
-              <li key={song.id}>
-                <Link href={`/song/${song.id}`} className="no-underline">
-                  {song.name} -- {song.artists[0].name}
-                  {/* {song.artists[0].id} */}
-                </Link>
-              </li>
-            );
-          })}
+          <Suspense fallback={<Spinner />}>
+            {simiSongData?.songs?.map((song) => {
+              return (
+                <li key={song.id}>
+                  <Link href={`/song/${song.id}`} className="no-underline">
+                    {song.name} -- {song.artists[0].name}
+                    {/* {song.artists[0].id} */}
+                  </Link>
+                </li>
+              );
+            })}
+          </Suspense>
         </ol>
       </div>
     );

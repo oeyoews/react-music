@@ -6,12 +6,14 @@ type Store = {
   loginStatus: ILoginStatus;
   userInfo: IUserAccount;
   firstLoading: boolean;
+  searchWord: string;
 
   setCookie: (cookie: string) => void;
   setUserId: (userId: string) => void;
   setLoginStatus: (loginStatus: ILoginStatus) => void;
   setUserInfo: (userInfo: IUserAccount) => void;
   setFirstLoading: (firstLoading: boolean) => void;
+  setSearchWord: (searchWord: string) => void;
 };
 
 const useStore = create<Store>((set) => ({
@@ -22,12 +24,14 @@ const useStore = create<Store>((set) => ({
   // @ts-ignore
   userInfo: {},
   firstLoading: false,
+  searchWord: '',
 
   setCookie: (cookie: string) => set({ cookie }),
   setUserId: (userId: string) => set({ userId }),
   setLoginStatus: (loginStatus: ILoginStatus) => set({ loginStatus }),
   setUserInfo: (userInfo) => set({ userInfo }),
   setFirstLoading: (firstLoading: boolean) => set({ firstLoading }),
+  setSearchWord: (searchWord: string) => set({ searchWord }),
 }));
 
 export default useStore;

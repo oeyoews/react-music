@@ -1,16 +1,15 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-
-import { useState } from 'react';
+import useStore from '~lib/store';
 
 export default function Search({ searchWord = '' }: { searchWord?: string }) {
-  const [search, setSearch] = useState('');
+  const statusStore = useStore();
   const router = useRouter();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/search/${search || searchWord}`);
+    router.push(`/search/${statusStore.searchWord || searchWord}`);
   };
 
   return (
@@ -19,8 +18,8 @@ export default function Search({ searchWord = '' }: { searchWord?: string }) {
         <input
           autoFocus
           type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={statusStore.searchWord}
+          onChange={(e) => statusStore.setSearchWord(e.target.value)}
           placeholder={searchWord}
           className="border border-gray-300 rounded-l p-2 focus:outline-none w-full"
         />

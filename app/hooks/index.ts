@@ -1,5 +1,5 @@
 import useSWRImmutable from 'swr/immutable';
-import { getSongDetail, getArtistDetail } from '~lib/search';
+import { getSongDetail, getArtistDetail, getSimiSong } from '~lib/search';
 
 export const useSongDetailData = (slug: Id) => {
   const { data: songDetailData, isLoading: isLoadingSongDetail } =
@@ -21,4 +21,13 @@ export const useArtistData = (id: number, slug: Id) => {
     },
   );
   return artistDetailData;
+};
+
+export const useSiMiSong = (slug: Id) => {
+  const { data: simiSongData } = useSWRImmutable(
+    slug + 'simi',
+    () => getSimiSong(slug),
+    { suspense: true },
+  );
+  return simiSongData;
 };
