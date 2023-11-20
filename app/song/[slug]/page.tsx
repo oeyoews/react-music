@@ -72,7 +72,8 @@ export default function Page({ params }: { params: Params }) {
     const { data, isLoading } = useSongComment(slug);
 
     useEffect(() => {
-      if (!isLoading && data.code !== 200) toast.error(data.message as string);
+      if (!isLoading && data.code !== 200)
+        toast.error(`评论区: ${data.message}` as string);
     }, [data, isLoading]);
 
     return (

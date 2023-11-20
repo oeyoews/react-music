@@ -13,9 +13,9 @@ function addParams(
   let apiURL = finalURL;
   if (params) {
     // Include timestamp only if not already present in params
-    // if (!params.hasOwnProperty('timestamp')) {
-    //   params.timestamp = Date.now();
-    // }
+    if (!params.hasOwnProperty('realIp')) {
+      params.realIp = process.env.NEXT_PUBLIC_REALIP as string;
+    }
     const queryString = Object.keys(params)
       .map(
         (key) =>
@@ -40,9 +40,11 @@ async function fetchData(
     next: {
       revalidate: 3600,
     },
+    // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-    }, // cookie on header auto???
+    }, // cookie on header auto on same domain???
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
   const urlWithParams = addParams(finalURL, params);

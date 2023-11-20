@@ -32,7 +32,7 @@ export default function AudioSong({ slug }: { slug: string }) {
 
   // @ts-ignore
   const ReactAplayer = dynamic(() => import('react-aplayer'), { ssr: false });
-  const apRef = useRef<any>(null);
+  const apRef = useRef(null);
 
   // ??? instance
   const onInit = (instance: any) => {

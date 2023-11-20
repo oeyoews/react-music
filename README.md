@@ -6,7 +6,20 @@
 
 ## TODO
 
-- [ ] swr 更新错误(strict mode??)
+<!-- starpick avatar  -->
+
+<!-- 97-78417250c6c92500.js:1 Error: Minified React error #482; visit https://reactjs.org/docs/error-decoder.html?invariant=482 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at nC (6358292e-a7d6d2e2d6935da0.js:1:29244)
+    at rN (6358292e-a7d6d2e2d6935da0.js:1:41624)
+    at Object.r_ [as use] (6358292e-a7d6d2e2d6935da0.js:1:41810)
+    at t.use (97-78417250c6c92500.js:1:98311)
+    at 746-ceac6e374c522058.js:200:10199
+    at 746-ceac6e374c522058.js:200:5833
+    at page-db5caa298455ebed.js:1:9647
+    at 746-ceac6e374c522058.js:200:5971
+    at 746-ceac6e374c522058.js:200:6175
+    at o (page-db5caa298455ebed.js:1:843) -->
+
 - [x] 星评
 - [x] 歌曲 + 评论
 - [x] 相似歌曲

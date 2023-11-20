@@ -11,12 +11,10 @@ import {
 } from '~lib/search';
 
 export const useSongComment = (id: Id) => {
-  const { data, isLoading } = useSWR(id + 'comment', () => getSongComment(id), {
+  return useSWR(id + 'comment', () => getSongComment(id), {
     suspense: true,
     // refreshInterval: 3600000,
   });
-
-  return { data, isLoading };
 };
 
 export const useUserData = (uid: number) => {
