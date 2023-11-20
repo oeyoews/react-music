@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import useStore from '~lib/store';
+import toast from 'react-hot-toast';
 
 export default function Search({ searchWord = '' }: { searchWord?: string }) {
   const statusStore = useStore();
@@ -9,6 +10,7 @@ export default function Search({ searchWord = '' }: { searchWord?: string }) {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    toast('搜索中...');
     router.push(`/search/${statusStore.searchWord || searchWord}`);
   };
 

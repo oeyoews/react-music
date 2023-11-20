@@ -25,6 +25,7 @@ export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
 
+  // TODO: swr 后, lrc 加载错误
   const MusicPlayer = () => {
     const songDetailData = useSongDetailData(slug);
     const artistDetailData = useArtistData(slug);
@@ -33,8 +34,15 @@ export default function Page({ params }: { params: Params }) {
     const vip = previleges?.fee === 1 ? true : false;
 
     return (
-      <Suspense fallback={<Spinner />}>
-        <AudioSong songInfo={song} artist={artistDetailData.data?.artist} />
+      <div>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center">
+              <Spinner />
+            </div>
+          }>
+          <AudioSong songInfo={song} artist={artistDetailData.data?.artist} />
+        </Suspense>
         <h2>
           歌曲名: {song.name}
           {vip && (
@@ -43,7 +51,7 @@ export default function Page({ params }: { params: Params }) {
             </sup>
           )}
         </h2>
-      </Suspense>
+      </div>
     );
   };
 

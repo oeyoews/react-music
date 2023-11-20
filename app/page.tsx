@@ -1,4 +1,4 @@
-import { getBanners, searchHotDetail } from '~lib/search';
+import { getBanners, getSongDetail, searchHotDetail } from '~lib/search';
 import Banners from '~app/ui/Banners';
 import Playlist from '~app/ui/Playlist';
 import HotSongs from './ui/HotSongs';
@@ -16,6 +16,7 @@ export default async function Home() {
   const songsHot = await searchHotDetail();
   const PlaylistData = await getHotPlayList();
   const mvFirst = await getMvFirst();
+  const songInfo = await getSongDetail(1923184888);
 
   return (
     <div className="p-2 mb-16">
