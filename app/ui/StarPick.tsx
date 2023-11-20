@@ -19,7 +19,7 @@ export default function StarPick() {
   const content = (
     <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
       <Suspense fallback={<Spinner />}>
-        {starPick.comments?.creatives?.slice(0, 6).map((creative) => {
+        {starPick.comments.creatives.slice(0, 6).map((creative) => {
           const resources = creative.resources[0];
           const { songData, users } = resources.resourceExtInfo;
           return (
