@@ -1,13 +1,17 @@
 'use client';
 
-import { useSongDetailData, useArtistData, useSiMiSong } from '~app/hooks';
-import { getSongComment } from '~lib/search';
+import {
+  useSongDetailData,
+  useArtistData,
+  useSiMiSong,
+  useSongComment,
+} from '~app/hooks';
 import AudioSong from '~app/ui/AudioSong';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
-import useSWR from 'swr';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import Spinner from '~app/ui/Spinner';
+import toast from 'react-hot-toast';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
@@ -32,16 +36,7 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center">
-              <Spinner />
-            </div>
-          }>
-          <AudioSong
-            slug={slug} // artist={artistDetailData.artist}
-          />
-        </Suspense>
+        <AudioSong slug={slug} />
         <h2>
           歌曲名: {song.name}
           {vip && (
@@ -74,20 +69,20 @@ export default function Page({ params }: { params: Params }) {
   };
 
   const SongComment = () => {
-    const { data: songCommentData } = useSWR(
-      slug + 'comment',
-      () => getSongComment(slug),
-      { suspense: true },
-    );
+    const { data, isLoading } = useSongComment(slug);
+
+    useEffect(() => {
+      if (!isLoading && data.code !== 200) toast.error(data.message as string);
+    }, [data, isLoading]);
 
     return (
       <div>
         <Suspense fallback={<Spinner />}>
           <div className="flex justify-start items-center space-x-2">
             <h2 className="my-2">评论区</h2>
-            <div>共 {songCommentData?.total?.toLocaleString() || 0} 条评论</div>
+            <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
           </div>
-          <SongCommentTab songComment={songCommentData!} />
+          <SongCommentTab songComment={data} />
         </Suspense>
       </div>
     );

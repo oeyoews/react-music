@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { getUserDetail } from '~lib/login';
 import {
+  getSongComment,
   getStarPick,
   getSongDetail,
   getArtistDetail,
@@ -9,13 +12,30 @@ import {
   getMusicURL,
 } from '~lib/search';
 
+export const useSongComment = (id: Id) => {
+  const { data, isLoading } = useSWRImmutable(
+    id + 'comment',
+    () => getSongComment(id),
+    {
+      suspense: true,
+      refreshInterval: 3600000,
+    },
+  );
+
+  return { data, isLoading };
+};
+
 export const useUserData = (uid: number) => {
-  const { data: userData } = useSWRImmutable(
+  const { data: userData, isLoading } = useSWRImmutable(
     uid + 'user',
     () => getUserDetail(uid),
-    { suspense: true, refreshInterval: 3600000 },
+    {
+      suspense: true,
+      refreshInterval: 3600000,
+      revalidateOnMount: false,
+    },
   );
-  return userData;
+  return { userData, isLoading };
 };
 
 export const useStarPick = () => {
@@ -24,11 +44,11 @@ export const useStarPick = () => {
     () => getStarPick(localStorage.cookie),
     { suspense: true },
   );
-  return { comments: starPickData?.data.blocks[0] };
+  return { comments: starPickData?.data.blocks[0].creatives };
 };
 
 export const useMusicURL = (id: Id) => {
-  const { data: musicURLData } = useSWR(
+  const { data, isLoading } = useSWR(
     id + 'url',
     () => getMusicURL(id, localStorage.cookie),
     {
@@ -36,7 +56,7 @@ export const useMusicURL = (id: Id) => {
       refreshInterval: 3600000,
     },
   );
-  return musicURLData.data?.[0];
+  return { url: data.data?.[0].url, isLoading };
 };
 
 export const useSongDetailData = (slug: Id) => {

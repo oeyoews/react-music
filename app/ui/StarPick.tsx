@@ -19,7 +19,7 @@ export default function StarPick() {
     <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
       {/* ssr fetchdata error */}
       {/* <Suspense fallback={<Spinner />}> */}
-      {starPick.comments.creatives.slice(0, 6).map((creative) => {
+      {starPick.comments.slice(0, 6).map((creative) => {
         const resources = creative.resources[0];
         const { songData, users } = resources.resourceExtInfo;
         return (
@@ -36,7 +36,8 @@ export default function StarPick() {
               </div>
               <div className="flex items-center space-x-2 w-full justify-end">
                 {/* 警告处理 */}
-                <Avatar userData={users[0]} />
+                {/* swr 嵌套更新 */}
+                <Avatar uid={users[0].userId} />
                 <div>{users[0].nickname}</div>
               </div>
             </div>

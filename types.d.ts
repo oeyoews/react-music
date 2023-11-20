@@ -756,6 +756,7 @@ interface ISongComment {
   hotComments: HotComment[];
   commentBanner: null;
   code: number;
+  message?: string;
   comments: SongComment[];
   total: number;
   more: boolean;
