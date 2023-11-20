@@ -26,7 +26,10 @@ export default function AudioSong({ slug }: { slug: string }) {
     if (!apRef.current) {
       apRef.current = aplayer;
     }
-    toast.success('歌曲加载成功', { duration: 1000 });
+    apRef.current?.on('loadeddata', () => toast('歌曲加载成功'));
+    apRef.current.on('error', () => toast('歌曲加载失败'));
+    apRef.current.on('loadedmetadata', () => toast('歌曲信息加载成功'));
+    // apRef.current.on('loadstart', () => toast('hhh'));
   };
 
   const audio = [
@@ -44,7 +47,7 @@ export default function AudioSong({ slug }: { slug: string }) {
     theme: 'red',
     // mini: true,
     // fixed: true, // if fixed, not destroy
-    lrcType: 1,
+    lrcType: 1, // 1: lrc 内容 3: file
     audio,
     onInit,
     onPlay: () => toast.success('播放歌曲'),
