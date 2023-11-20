@@ -1,20 +1,25 @@
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { getSongDetail, getArtistDetail, getSimiSong } from '~lib/search';
 
 export const useSongDetailData = (slug: Id) => {
-  const { data: songDetailData, isLoading: isLoadingSongDetail } =
-    useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
+  const { data: songDetailData } = useSWRImmutable(
+    slug + 'detail',
+    () => getSongDetail(slug),
+    {
       suspense: true,
       refreshInterval: 3600000,
-    });
+    },
+  );
   return songDetailData;
 };
 
-export const useArtistData = (id: number, slug: Id) => {
-  const songDetailData = useSongDetailData(slug);
+export const useArtistData = (arId: number, slug: string) => {
   const { data: artistDetailData } = useSWRImmutable(
-    songDetailData?.songs[0].id ? `${slug}-artist` : null,
-    () => getArtistDetail(id),
+    arId ? `${slug}-artist` : null,
+    () => getArtistDetail(arId),
     {
       suspense: true,
       refreshInterval: 3600000,

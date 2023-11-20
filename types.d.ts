@@ -1,3 +1,10 @@
+// 0: 免费或无版权
+// 1: VIP 歌曲
+// 4: 购买专辑
+// 8: 非会员可免费播放低音质，会员可播放高音质及下载
+// 1 或 8 的歌曲均可单独购买 2 元单曲
+type fee = 0 | 1 | 4 | 8;
+
 interface IHomePage {
   code: number;
   data: HomePage[];
@@ -81,7 +88,7 @@ interface VideoGroup {
 
 interface Mp {
   id: number;
-  fee: number;
+  fee: Fee;
   mvFee: number;
   payed: number;
   pl: number;
@@ -130,7 +137,7 @@ interface MvURL {
   md5: string;
   code: number;
   expi: number;
-  fee: number;
+  fee: Fee;
   mvFee: number;
   st: number;
   promotionVo: null;
@@ -279,13 +286,45 @@ interface ResourceEXTInfo {
   threadId: string;
 }
 
+interface Quality {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+  sr: number;
+}
+
+interface SongDetail {
+  ar: Ar[];
+  name: string;
+  id: number;
+  fee: Fee;
+  dt: number; // 歌曲播放时长
+  sq: Quality; // 无损质量文件信息;
+  h: Quality; // 高质量文件信息;
+  m: Quality; // 中质量文件信息;
+  l: Quality; // 低质量文件信息;
+  pop: number; // 小数，常取[0.0, 100.0]中离散的几个数值, 表示歌曲热度
+  originCoverType: number;
+  originSongSimpleData: null;
+  tagPicList: null;
+  resourceState: boolean;
+  version: number;
+  songJumpInfo: null;
+  entertainmentTags: null;
+  awardTags: null;
+  single: number;
+  noCopyrightRcmd: null;
+  publishTime: number;
+}
+
 interface SongData {
   name: string;
   id: number;
   position: number;
   alias: any[];
   status: number;
-  fee: number;
+  fee: Fee;
   copyrightId: number;
   disc: string;
   no: number;
@@ -974,6 +1013,7 @@ interface ISongDetail {
   songs: SongDetail[];
   privileges: Privilege[];
   code: number;
+  message?: string;
 }
 
 interface ChargeInfoList {
@@ -989,29 +1029,12 @@ interface FreeTrialPrivilege {
   listenType: null;
 }
 
-interface SongDetail {
-  ar: Ar[];
-  name: string;
-  id: number;
-  pop: number;
-  originCoverType: number;
-  originSongSimpleData: null;
-  tagPicList: null;
-  resourceState: boolean;
-  version: number;
-  songJumpInfo: null;
-  entertainmentTags: null;
-  awardTags: null;
-  single: number;
-  noCopyrightRcmd: null;
-  publishTime: number;
-}
-
+// 歌手列表
 interface Ar {
   id: number;
   name: string;
   tns: any[];
-  alias: any[];
+  alias: any[]; // 别名列表，第一个别名会被显示作副标题
 }
 
 interface DailySong extends SongDetail {
@@ -1344,7 +1367,7 @@ interface Song {
   rtype: number;
   ftype: number;
   mvid: number;
-  fee: number;
+  fee: Fee;
   rUrl: null;
   mark: number;
 }
@@ -1380,7 +1403,7 @@ interface TopSong {
 
 interface Privilege {
   id: number;
-  fee: number; // 是否为vip歌曲 0: 否 1: 是.  --  --> 8: 可以播放???
+  fee: Fee;
   payed: number; // 账户是否付费
   st: number;
   pl: number;

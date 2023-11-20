@@ -49,14 +49,16 @@ export default function Page({ params }: { params: Params }) {
 
   const ArtistInfo = () => {
     const songDetailData = useSongDetailData(slug);
-    const artistDetailData = useArtistData(songDetailData.songs[0].id, slug);
+    const artistDetailData = useArtistData(
+      songDetailData.songs[0].ar[0].id,
+      slug,
+    );
     const artist = artistDetailData.data?.artist;
 
     return (
       <div className="my-4">
-        <h2 className="my-2">歌手简介</h2>
         <Suspense fallback={<Spinner />}>
-          {/* TODO: */}
+          {artist && <h2 className="my-2">歌手简介</h2>}
           <Link
             href={`/artist/${artist?.id}`}
             className="no-underline font-bold">
