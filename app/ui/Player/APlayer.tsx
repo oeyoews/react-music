@@ -15,8 +15,8 @@ import Spinner from '../Spinner';
 const ReactAplayer = lazy(() => import('react-aplayer'));
 
 export default function APlayer({ slug }: { slug: string }) {
-  const { url, isLoading: isLoadingURL } = useMusicURL(slug);
-  const { songs } = useSongDetailData(slug);
+  const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
+  const { data: songData } = useSongDetailData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const { data: artistData, isLoading: isloadingArtist } = useArtistData(slug);
@@ -35,9 +35,9 @@ export default function APlayer({ slug }: { slug: string }) {
 
   const audio = [
     {
-      name: songs?.[0].name,
+      name: songData.songs?.[0].name,
       artist: artistData.data.artist.name,
-      url,
+      url: musicData.data[0].url,
       lrc: lyric?.lrc.lyric,
       cover: artistData.data.artist.name,
     },

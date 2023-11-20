@@ -55,35 +55,25 @@ export const useStarPick = () => {
 };
 
 export const useMusicURL = (id: Id) => {
-  const { data, isLoading } = useSWR(
-    id + 'url',
-    () => getMusicURL(id, localStorage.cookie),
-    {
-      suspense: true,
-      refreshInterval: 3600000,
-    },
-  );
-  return { url: data.data?.[0].url, isLoading };
+  return useSWR(id + 'url', () => getMusicURL(id, localStorage.cookie), {
+    suspense: true,
+    refreshInterval: 3600000,
+  });
 };
 
 export const useSongDetailData = (slug: Id) => {
-  const { data: songDetailData } = useSWRImmutable(
-    slug + 'detail',
-    () => getSongDetail(slug),
-    {
-      suspense: true,
-      refreshInterval: 3600000,
-      revalidateOnFocus: false,
-    },
-  );
-  return songDetailData;
+  return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
+    suspense: true,
+    refreshInterval: 3600000,
+    revalidateOnFocus: false,
+  });
 };
 
 export const useArtistData = (slug: string) => {
   const songDetailData = useSongDetailData(slug);
   return useSWRImmutable(
     `${slug}-artist`,
-    () => getArtistDetail(songDetailData.songs[0].ar[0].id),
+    () => getArtistDetail(songDetailData.data.songs[0].ar[0].id),
     {
       suspense: true,
       refreshInterval: 3600000,

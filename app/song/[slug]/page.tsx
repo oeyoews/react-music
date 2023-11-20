@@ -29,7 +29,7 @@ export default function Page({ params }: { params: Params }) {
 
   // TODO: swr 后, lrc 加载错误
   const MusicPlayer = () => {
-    const songDetailData = useSongDetailData(slug);
+    const { data: songDetailData } = useSongDetailData(slug);
     const song = songDetailData?.songs[0];
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
