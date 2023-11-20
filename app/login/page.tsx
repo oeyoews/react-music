@@ -66,17 +66,19 @@ const LoginPage = () => {
       localStorage.userData = JSON.stringify(userInfo);
     };
     const handleLogin = async () => {
-      toast.loading('生成二维码...');
       const qrkey = await getqrKey();
       const key = qrkey.data.unikey;
       setKey(key);
 
       const qrcreate = await qrCreate(key);
       const qrurl = qrcreate.data.qrurl;
-
-      // setQrImg(qrimg);
       setQrURL(qrurl);
-      toast('请使用手机扫描二维码登录');
+
+      toast.promise(qrCreate(key), {
+        loading: '生成QRCode ...',
+        success: '请使用手机扫描二维码登录',
+        error: 'QRCode 生成失败',
+      });
     };
 
     const handleLevel = () => {
