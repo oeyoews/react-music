@@ -19,8 +19,10 @@ export const useUserData = (uid: number) => {
 };
 
 export const useStarPick = () => {
-  const { data: starPickData } = useSWR('starpick', () =>
-    getStarPick(localStorage.cookie),
+  const { data: starPickData } = useSWR(
+    'starpick',
+    () => getStarPick(localStorage.cookie),
+    { suspense: true },
   );
   return { comments: starPickData?.data.blocks[0] };
 };

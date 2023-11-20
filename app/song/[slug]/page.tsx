@@ -83,7 +83,7 @@ export default function Page({ params }: { params: Params }) {
     return (
       <div>
         <Suspense fallback={<Spinner />}>
-          <div className="flex justify-start items-center space-x-2 mt-8">
+          <div className="flex justify-start items-center space-x-2">
             <h2 className="my-2">评论区</h2>
             <div>共 {songCommentData?.total?.toLocaleString() || 0} 条评论</div>
           </div>

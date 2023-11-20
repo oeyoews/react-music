@@ -10,7 +10,7 @@ export default function Avatar({ userData }: { userData: StarPickUser }) {
   return (
     <Suspense>
       <Image
-        src={userDetail?.profile?.avatarDetail}
+        src={userDetail?.profile?.avatarUrl}
         alt={userData.nickname}
         width={22}
         height={22}
