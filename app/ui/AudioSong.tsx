@@ -10,7 +10,7 @@ export default function AudioSong({ slug }: { slug: string }) {
   // if (!songInfo.id) return <>loading ...</>;
   // 即使使用use-client, 客户端组件在服务端也会渲染, 除非使用useeffect, 这里使用dynamic
   // @ts-ignore
-  const { url } = useMusicURL(slug);
+  const musicURL = useMusicURL(slug);
   const { songs } = useSongDetailData(slug);
   const { artist } = useArtistData(slug);
 
@@ -21,7 +21,7 @@ export default function AudioSong({ slug }: { slug: string }) {
       {
         name: songs[0].name,
         artist: artist.name,
-        url,
+        url: musicURL?.url,
         lrc: '', // 外链会自动获取???
         cover: artist?.avatar,
         // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',

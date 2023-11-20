@@ -1,11 +1,9 @@
 'use client';
 
-import { getStarPick } from '~lib/search';
 import Link from 'next/link';
 import Avatar from './Avatar';
-import Spinner from './Spinner';
-import useSWR from 'swr';
 import { useEffect, useState } from 'react';
+import { useStarPick } from '~app/hooks';
 
 // TODO: swr
 export default function StarPick() {
@@ -15,19 +13,9 @@ export default function StarPick() {
     localStorage.cookie && setHasCookie(true);
   }, []);
 
-  const { data, error, isLoading } = useSWR('starpick', () =>
-    getStarPick(localStorage.cookie),
-  );
-  const starPick: StarPick | undefined = data?.data;
+  const { comments } = useStarPick();
 
-  if (error) return <div>failed to load</div>;
-  const comments = starPick?.blocks[0];
-
-  const content = isLoading ? (
-    <div className="flex justify-center">
-      <Spinner />
-    </div>
-  ) : (
+  const content = (
     <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
       {comments?.creatives?.slice(0, 6).map((creative) => {
         const resources = creative.resources[0];
@@ -59,9 +47,7 @@ export default function StarPick() {
     <div className="m-2">
       <h2>云村星评</h2>
       {content}
-      {!hasCookie && !isLoading && (
-        <div className="text-center text-rose-400">需要登录</div>
-      )}
+      {/* {!hasCookie && <div className="text-center text-rose-400">需要登录</div>} */}
     </div>
   );
 }

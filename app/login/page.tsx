@@ -80,8 +80,8 @@ const LoginPage = () => {
 
     const handleLevel = () => {
       getLevel(localStorage.cookie).then((res) => {
-        setLevel(res.data.level);
-        setProgress(res.data.progress);
+        setLevel(res.data?.level);
+        setProgress(res.data?.progress);
       });
     };
 

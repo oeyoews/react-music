@@ -1,11 +1,29 @@
 import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
+import { getUserDetail } from '~lib/login';
 import {
+  getStarPick,
   getSongDetail,
   getArtistDetail,
   getSimiSong,
   getMusicURL,
 } from '~lib/search';
+
+export const useUserData = (uid: number) => {
+  const { data: userData } = useSWRImmutable(
+    uid + 'user',
+    () => getUserDetail(uid),
+    { suspense: true },
+  );
+  return userData;
+};
+
+export const useStarPick = () => {
+  const { data: starPickData } = useSWR('starpick', () =>
+    getStarPick(localStorage.cookie),
+  );
+  return { comments: starPickData?.data.blocks[0] };
+};
 
 export const useMusicURL = (id: Id) => {
   const { data: musicURLData } = useSWR(
@@ -16,7 +34,7 @@ export const useMusicURL = (id: Id) => {
       refreshInterval: 3600000,
     },
   );
-  return musicURLData.data[0];
+  return musicURLData.data?.[0];
 };
 
 export const useSongDetailData = (slug: Id) => {
