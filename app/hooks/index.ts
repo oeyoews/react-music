@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { getUserDetail } from '~lib/login';
@@ -13,14 +11,10 @@ import {
 } from '~lib/search';
 
 export const useSongComment = (id: Id) => {
-  const { data, isLoading } = useSWRImmutable(
-    id + 'comment',
-    () => getSongComment(id),
-    {
-      suspense: true,
-      refreshInterval: 3600000,
-    },
-  );
+  const { data, isLoading } = useSWR(id + 'comment', () => getSongComment(id), {
+    suspense: true,
+    // refreshInterval: 3600000,
+  });
 
   return { data, isLoading };
 };
