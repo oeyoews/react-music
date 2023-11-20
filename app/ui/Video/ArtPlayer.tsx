@@ -8,7 +8,7 @@ import Option from 'artplayer/types/option';
 export default function ArtPlayer({
   url,
   className,
-  id = url,
+  id = url || '',
 }: {
   url: string;
   className: string;
@@ -58,7 +58,6 @@ export default function ArtPlayer({
       toast('暂停播放');
     });
 
-    // swr 轮询更新也会导致artplayer 出错
     // 但是事件上没有销毁, google 仍然可以进行小窗口播放
     return () => {
       art?.destroy(false);
