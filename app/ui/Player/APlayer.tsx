@@ -16,7 +16,8 @@ const ReactAplayer = lazy(() => import('react-aplayer'));
 
 export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
-  const { data: songData } = useSongDetailData(slug);
+  const { data: songData, isLoading: isLoadingSongData } =
+    useSongDetailData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const { data: artistData, isLoading: isloadingArtist } = useArtistData(slug);
@@ -39,7 +40,7 @@ export default function APlayer({ slug }: { slug: string }) {
       artist: artistData.data.artist.name,
       url: musicData.data[0].url,
       lrc: lyric?.lrc.lyric,
-      cover: artistData.data.artist.name,
+      cover: artistData.data.artist.cover,
     },
   ];
 
@@ -71,9 +72,10 @@ export default function APlayer({ slug }: { slug: string }) {
             <Spinner />
           </div>
         }>
-        {!isLoadingURL && !isLoadingLyric && !isloadingArtist && (
+        {/* {!isLoadingURL && !isLoadingLyric && !isloadingArtist && !isLoadingSongData && (
           <ReactAplayer {...options} />
-        )}
+        )} */}
+        <ReactAplayer {...options} />
       </Suspense>
     </div>
   );
