@@ -81,7 +81,7 @@ export const useSongDetailData = (slug: Id) => {
 
 export const useArtistData = (slug: string) => {
   const songDetailData = useSongDetailData(slug);
-  const { data: artistDetailData } = useSWRImmutable(
+  return useSWRImmutable(
     `${slug}-artist`,
     () => getArtistDetail(songDetailData.songs[0].ar[0].id),
     {
@@ -89,7 +89,6 @@ export const useArtistData = (slug: string) => {
       refreshInterval: 3600000,
     },
   );
-  return artistDetailData.data;
 };
 
 export const useSiMiSong = (slug: Id) => {

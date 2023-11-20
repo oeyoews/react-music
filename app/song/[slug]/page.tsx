@@ -50,13 +50,14 @@ export default function Page({ params }: { params: Params }) {
   };
 
   const ArtistInfo = () => {
-    const artistDetailData = useArtistData(slug);
-    const artist = artistDetailData.artist;
+    const { data: artistData, isLoading: isloadingArtist } =
+      useArtistData(slug);
+    const artist = artistData.data.artist;
 
     return (
       <div className="my-4">
         <Suspense fallback={<Spinner />}>
-          {artist && <h2 className="my-2">歌手简介</h2>}
+          <h2 className="my-2">歌手简介</h2>
           <Link
             href={`/artist/${artist.id}`}
             className="no-underline font-bold">

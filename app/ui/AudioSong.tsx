@@ -17,8 +17,9 @@ const ReactAplayer = lazy(() => import('react-aplayer'));
 export default function AudioSong({ slug }: { slug: string }) {
   const { url, isLoading: isLoadingURL } = useMusicURL(slug);
   const { songs } = useSongDetailData(slug);
-  const { artist } = useArtistData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
+
+  const { data: artistData, isLoading: isloadingArtist } = useArtistData(slug);
 
   const apRef = useRef<AplayerMethods | null>();
 
@@ -35,10 +36,10 @@ export default function AudioSong({ slug }: { slug: string }) {
   const audio = [
     {
       name: songs?.[0].name,
-      artist: artist.name,
+      artist: artistData.data.artist.name,
       url,
       lrc: lyric?.lrc.lyric,
-      cover: artist?.avatar,
+      cover: artistData.data.artist.name,
     },
   ];
 
@@ -70,7 +71,9 @@ export default function AudioSong({ slug }: { slug: string }) {
             <Spinner />
           </div>
         }>
-        {!isLoadingURL && !isLoadingLyric && <ReactAplayer {...options} />}
+        {!isLoadingURL && !isLoadingLyric && !isloadingArtist && (
+          <ReactAplayer {...options} />
+        )}
       </Suspense>
     </div>
   );
