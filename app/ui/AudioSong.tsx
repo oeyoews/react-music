@@ -27,9 +27,9 @@ export default function AudioSong({ slug }: { slug: string }) {
     if (!apRef.current) {
       apRef.current = aplayer;
     }
-    apRef.current?.on('loadeddata', () => toast('歌曲加载成功'));
-    apRef.current.on('error', () => toast('歌曲加载失败'));
-    apRef.current.on('loadedmetadata', () => toast('歌曲信息加载成功'));
+    apRef.current.on('error', () => toast.error('歌曲加载失败'));
+    // apRef.current?.on('loadeddata', () => toast('歌曲加载成功'));
+    // apRef.current.on('loadedmetadata', () => toast('歌曲信息加载成功'));
     // apRef.current.on('loadstart', () => toast('hhh'));
   };
 

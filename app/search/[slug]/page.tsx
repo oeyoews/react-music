@@ -15,7 +15,7 @@ export default function page({ params }: { params: Params }) {
     }
 
     const vipids = data.result.songs
-      .filter((song) => song.fee == 1)
+      ?.filter((song) => song.fee == 1)
       .map((song) => song.id);
 
     return (

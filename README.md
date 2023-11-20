@@ -29,21 +29,18 @@
 - [x] 热门歌曲,歌单
 - [x] 首页轮播图
 - [x] 歌手信息
-- [x] cookie login
 - [x] use svg qrcode
 - [x] MV + 评论
 - [x] 专辑 + 评论
+- [ ] 歌单播放
 - [ ] videos
 - [ ] 榜单
 - [ ] 搜索页面完善
 - [ ] 用户信息界面完善
-- [ ] 加载歌曲loading完善
-- [ ] 支持游客登录
 - [ ] 评论分页
 - [ ] 播放器
 - [ ] 支持歌单播放
-- [ ] 图片动态加载 comment
-- [ ] 缓存刷新造成的实例没有被销毁aplayer, 页面渲染更新事件配置
+- [ ] 用户图片动态加载
 
 <!-- - [x] [301](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961) -->
 <!-- - [ ] 支持直接调用 [neteasemusicapi](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/1842) -->
