@@ -44,7 +44,7 @@ export default function VideoPage({ params }: { params: Params }) {
       () => getMvURL(slug, localStorage.cookie),
       {
         suspense: true,
-        revalidateOnFocus: false, //  窗口聚焦时自动重新验证
+        refreshInterval: 3600000, // 1小时
       },
     );
 

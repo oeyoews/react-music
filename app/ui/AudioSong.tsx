@@ -45,7 +45,7 @@ export default function AudioSong({
         artist: songInfo.ar[0].name,
         url: musicURL,
         lrc: '', // 外链会自动获取???
-        cover: artist.avatar,
+        cover: artist?.avatar,
         // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
         // theme: 'lightred',
       },
