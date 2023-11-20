@@ -89,24 +89,23 @@ export default function Page({ params }: { params: Params }) {
   };
 
   const SimiSong = () => {
-    const simiSongData = useSiMiSong(slug);
+    const { data, isLoading } = useSiMiSong(slug);
     return (
       <div className="mt-4">
         <hr />
         <h2 className="my-2">相似歌曲</h2>
         <ol className="columns-2">
-          <Suspense fallback={<Spinner />}>
-            {simiSongData?.map((song) => {
+          {!isLoading &&
+            data.songs?.map((song) => {
               return (
                 <li key={song.id}>
                   <Link href={`/song/${song.id}`} className="no-underline">
-                    {song.name} -- {song.artists[0].name}
+                    {song.name} -- {song.artists?.[0].name}
                     {/* {song.artists[0].id} */}
                   </Link>
                 </li>
               );
             })}
-          </Suspense>
         </ol>
       </div>
     );
@@ -115,6 +114,7 @@ export default function Page({ params }: { params: Params }) {
   return (
     <div className="my-2">
       {/* <h1> 歌曲详情 - {songInfo.name} {songInfo.id}{' '} </h1> */}
+      {/* TODO */}
       {/* <div>音质: {musicInfo.level}</div> */}
       <MusicPlayer />
       <ArtistInfo />

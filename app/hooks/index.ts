@@ -80,13 +80,8 @@ export const useArtistData = (slug: string) => {
 };
 
 export const useSiMiSong = (slug: Id) => {
-  const { data: simiSongData } = useSWRImmutable(
-    slug + 'simi',
-    () => getSimiSong(slug),
-    {
-      suspense: true,
-      refreshInterval: 3600000,
-    },
-  );
-  return simiSongData.songs;
+  return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
+    suspense: true,
+    refreshInterval: 3600000,
+  });
 };
