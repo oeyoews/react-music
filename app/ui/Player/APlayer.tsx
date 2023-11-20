@@ -59,7 +59,7 @@ export default function APlayer({ slug }: { slug: string }) {
   useEffect(() => {
     return () => {
       apRef.current?.destroy();
-      toast('退出播放');
+      // toast('退出播放');
     };
   }, []);
 

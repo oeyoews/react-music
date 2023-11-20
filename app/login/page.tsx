@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  getLevel,
   getqrKey,
   qrCheck,
   getLoginStatus,
@@ -15,8 +14,6 @@ import {
   logout,
   getAccount,
   loginAnonymous,
-  getVipInfo,
-  getVersion,
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
 import { QRCodeSVG } from 'qrcode.react';
@@ -26,19 +23,9 @@ const LoginPage = () => {
   const [qrurl, setQrURL] = useState('');
   const [key, setKey] = useState('');
   const [loading, setLoading] = useState(true);
-  const [level, setLevel] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [version, setVersion] = useState(0);
   const statusStore = useStore();
 
   const btnClass = 'bg-neutral-200 shadow p-2 rounded-sm font-bold';
-  const handleLogout = () => {
-    logout();
-    statusStore.setCookie('');
-    localStorage.removeItem('cookie');
-    toast.success('退出登录成功');
-    // router.push('/');
-  };
 
   const router = useRouter();
 
@@ -81,16 +68,6 @@ const LoginPage = () => {
       });
     };
 
-    const handleLevel = () => {
-      getLevel(localStorage.cookie).then((res) => {
-        setLevel(res.data?.level);
-        setProgress(res.data?.progress);
-      });
-    };
-
-    getVersion().then((res) => {
-      setVersion(res.data.version);
-    });
     statusStore.setCookie(localStorage.cookie);
 
     if (!localStorage.cookie) {
@@ -100,7 +77,6 @@ const LoginPage = () => {
     updateStatus();
     setLoading(false);
     getUserInfo();
-    handleLevel();
   }, []);
 
   return (
@@ -143,42 +119,6 @@ const LoginPage = () => {
           </div>
         )
       )}
-      {statusStore.userInfo?.profile && (
-        <div className="flex space-x-2 justify-center my-4 flex-row">
-          <div className="transition-all">
-            <Image
-              src={statusStore.userInfo.profile?.avatarUrl}
-              width={52}
-              height={52}
-              className="rounded-full not-prose shadow-md transition-all"
-              alt={statusStore.userInfo.profile?.nickname}
-              title={statusStore.userInfo.profile.userId.toString()}
-            />
-          </div>
-          <div>
-            <div>{statusStore.userInfo?.profile?.nickname}</div>
-            <div className="flex items-center space-x-2 w-48">
-              <progress
-                value={progress}
-                max={1}
-                id="om-progress"
-                className="transition-all duration-500"
-              />
-              <div>Lv.{level}</div>
-            </div>
-          </div>
-        </div>
-      )}
-      {statusStore.cookie && (
-        <div className="flex justify-center items-center">
-          <button className={btnClass} onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      )}
-      <footer className="text-gray-400  text-sm text-right mt-4">
-        网易云 API 版本号: {version}
-      </footer>
     </div>
   );
 };
