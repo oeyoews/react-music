@@ -6,11 +6,12 @@ import {
 import Link from 'next/link';
 import Badge from '~app/ui/Badge';
 import SongCommentTab from '~app/ui/SongCommentTab';
+import Image from 'next/image';
 
 export default async function Page({ params }: any) {
   const { slug } = params;
   const musicdata = await getHotPlayList();
-  const { description, name, tags, createTime, updateTime } =
+  const { description, name, tags, createTime, updateTime, coverImgUrl } =
     musicdata.playlists[0];
   const { songs, privileges } = await getPlayListSongs(slug);
   const vipids = privileges
@@ -25,6 +26,15 @@ export default async function Page({ params }: any) {
   return (
     <div className="my-2">
       <h1 className="text-center">{name}</h1>
+      <div className="flex justify-center items-center">
+        <Image
+          src={coverImgUrl}
+          width={256}
+          height={256}
+          alt="img"
+          className="rounded-full shadow-lg"
+        />
+      </div>
       <p className="line-clamp-2">{description}</p>
       {tags.map((tag) => (
         <Badge

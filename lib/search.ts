@@ -1,5 +1,3 @@
-// 'use server';
-
 import { customfetch as fetch } from './fetchData';
 
 // id: 歌手id

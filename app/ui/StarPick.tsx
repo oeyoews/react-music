@@ -7,6 +7,7 @@ import Spinner from './Spinner';
 import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 
+// TODO: swr
 export default function StarPick() {
   const [hasCookie, setHasCookie] = useState(false);
 
