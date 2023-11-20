@@ -14,7 +14,7 @@ import {
 const ReactAplayer = lazy(() => import('react-aplayer'));
 
 export default function AudioSong({ slug }: { slug: string }) {
-  const { url, isLoading } = useMusicURL(slug);
+  const { url, isLoading: isLoadingURL } = useMusicURL(slug);
   const { songs } = useSongDetailData(slug);
   const { artist } = useArtistData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
@@ -30,7 +30,7 @@ export default function AudioSong({ slug }: { slug: string }) {
 
   const audio = [
     {
-      name: songs[0].name,
+      name: songs?.[0].name,
       artist: artist.name,
       url,
       lrc: lyric?.lrc.lyric,
@@ -38,6 +38,7 @@ export default function AudioSong({ slug }: { slug: string }) {
     },
   ];
 
+  // 关于artplayer 提到的刷新问题
   const options: Partial<AplayerProps> = {
     theme: 'red',
     // mini: true,
@@ -59,7 +60,7 @@ export default function AudioSong({ slug }: { slug: string }) {
   /* TODO: add copybutton or download url */
   return (
     <div className="w-full">
-      {!isLoading && !isLoadingLyric && <ReactAplayer {...options} />}
+      {!isLoadingURL && !isLoadingLyric && <ReactAplayer {...options} />}
     </div>
   );
 }
