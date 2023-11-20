@@ -27,7 +27,7 @@ export default function Page({ params }: { params: Params }) {
 
   const MusicPlayer = () => {
     const songDetailData = useSongDetailData(slug);
-    const artistDetailData = useArtistData(songDetailData.songs[0].id, slug);
+    const artistDetailData = useArtistData(slug);
     const song = songDetailData?.songs[0];
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
@@ -48,11 +48,7 @@ export default function Page({ params }: { params: Params }) {
   };
 
   const ArtistInfo = () => {
-    const songDetailData = useSongDetailData(slug);
-    const artistDetailData = useArtistData(
-      songDetailData.songs[0].ar[0].id,
-      slug,
-    );
+    const artistDetailData = useArtistData(slug);
     const artist = artistDetailData.data?.artist;
 
     return (
@@ -60,11 +56,11 @@ export default function Page({ params }: { params: Params }) {
         <Suspense fallback={<Spinner />}>
           {artist && <h2 className="my-2">歌手简介</h2>}
           <Link
-            href={`/artist/${artist?.id}`}
+            href={`/artist/${artist.id}`}
             className="no-underline font-bold">
-            {artist?.name}
+            {artist.name}
           </Link>
-          <p className="my-2">{artist?.briefDesc}</p>
+          <p className="my-2">{artist.briefDesc}</p>
         </Suspense>
       </div>
     );

@@ -4,7 +4,6 @@ import { customfetch as fetch } from './fetchData';
 
 // id: 歌手id
 export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
-  console.log(id);
   return await fetch({
     url: '/artist/detail',
     params: {

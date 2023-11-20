@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-import toast from 'react-hot-toast';
-import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { getSongDetail, getArtistDetail, getSimiSong } from '~lib/search';
 
@@ -16,10 +13,11 @@ export const useSongDetailData = (slug: Id) => {
   return songDetailData;
 };
 
-export const useArtistData = (arId: number, slug: string) => {
+export const useArtistData = (slug: string) => {
+  const songDetailData = useSongDetailData(slug);
   const { data: artistDetailData } = useSWRImmutable(
-    arId ? `${slug}-artist` : null,
-    () => getArtistDetail(arId),
+    `${slug}-artist`,
+    () => getArtistDetail(songDetailData.songs[0].ar[0].id),
     {
       suspense: true,
       refreshInterval: 3600000,
