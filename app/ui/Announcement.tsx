@@ -19,13 +19,14 @@ export default function Announcement({
   const { firstLoading, setFirstLoading } = useStore();
   useEffect(() => {
     // process.env.NODE_ENV === 'production' &&
+
+    if (firstLoading) {
+      toast(text, {
+        icon,
+        position,
+      });
+    }
     return () => {
-      if (firstLoading) {
-        toast(text, {
-          icon,
-          position,
-        });
-      }
       if (store && firstLoading) {
         setFirstLoading(false);
       }
