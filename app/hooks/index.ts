@@ -89,7 +89,7 @@ export const useArtistData = (arId: number) => {
     arId + 'artist',
     () => getArtistDetail(arId),
     {
-      suspense: true, // 必须???
+      // suspense: true, // 必须???
       refreshInterval: 3600000,
     },
   );

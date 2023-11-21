@@ -84,7 +84,6 @@ export default function Page({ params }: { params: Params }) {
             <SongCommentTab songComment={data as ISongComment} />
           )}
         </>
-        )
       </div>
     );
   };
