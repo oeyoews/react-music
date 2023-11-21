@@ -39,7 +39,7 @@ export default function StarPick() {
   );
 
   return (
-    <div className="m-2">
+    <div className="my-4">
       <h2>云村星评</h2>
       <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
         <StarPickComment />
