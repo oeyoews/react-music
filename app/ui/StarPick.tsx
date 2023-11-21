@@ -14,6 +14,7 @@ export default function StarPick() {
         startPickData?.data.blocks[0].creatives?.slice(0, 6).map((creative) => {
           const resources = creative.resources[0];
           const { songData, users } = resources.resourceExtInfo;
+          const uid = users[0].userId;
           return (
             <Link
               href={`/song/${songData.id}`}
@@ -27,7 +28,7 @@ export default function StarPick() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 w-full justify-end">
-                  {/* <Avatar uid={users[0].userId} /> */}
+                  <Avatar uid={uid} />
                   <div>{users[0].nickname}</div>
                 </div>
               </div>

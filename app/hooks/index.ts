@@ -45,11 +45,7 @@ export const useSongComment = (id: Id) => {
 };
 
 export const useUserData = (uid: number) => {
-  const { data: userData, isLoading } = useSWR([uid], getUserDetail, {
-    refreshInterval: 3600000,
-    revalidateOnMount: false,
-  });
-  return { userData, isLoading };
+  return useSWRImmutable([uid], getUserDetail);
 };
 
 export const useStarPick = () => {
