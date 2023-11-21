@@ -183,7 +183,7 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
     url: '/comment/music',
     params: {
       id,
-      limit: 99,
+      limit: 30,
     },
   });
 };

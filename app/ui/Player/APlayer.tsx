@@ -83,12 +83,7 @@ export default function APlayer({ slug }: { slug: string }) {
   /* TODO: add copybutton or download url */
   return (
     <div className="w-full">
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center">
-            <Spinner />
-          </div>
-        }>
+      <Suspense fallback={<Spinner />}>
         <ReactAplayer {...options} />
       </Suspense>
     </div>

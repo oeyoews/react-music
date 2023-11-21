@@ -26,7 +26,7 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        {!isLoadingSong && <APlayer slug={slug} />}
+        {isLoadingSong ? <Spinner /> : <APlayer slug={slug} />}
         <h2>
           歌曲名: {song?.name}
           {vip && (
@@ -73,7 +73,9 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        {!isLoading && (
+        {isLoading ? (
+          <Spinner />
+        ) : (
           <>
             <div className="flex justify-start items-center space-x-2">
               <h2 className="my-2">评论区</h2>
