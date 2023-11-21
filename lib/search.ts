@@ -151,6 +151,7 @@ export const getMusicURL = async (
 };
 
 export const getSongDetail = async (ids: Id): Promise<ISongDetail> => {
+  if (!ids) console.warn('请传入歌曲id');
   return await fetch({
     url: '/song/detail',
     params: {

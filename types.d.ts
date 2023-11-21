@@ -1624,6 +1624,7 @@ enum Level {
   Standard = 'standard',
 }
 
+/** react-aplayer d.ts */
 declare module 'react-aplayer' {
   interface AplayerAudio {
     name: string;

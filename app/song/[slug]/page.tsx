@@ -8,28 +8,13 @@ import {
 } from '~app/hooks';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
-import { Suspense, lazy } from 'react';
-import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
-import { notFound } from 'next/navigation';
 
-const APlayer = lazy(() => import('~app/ui/Player/APlayer'));
-
-// export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
-
-// TODO
-// export async function generateMetadata({ params }: { params: Params }) {
-//   const { slug } = params;
-//   const name = use(useSongDetailData(slug).songs[0].name);
-//   return {
-//     title: `正在播放 - ${song.name}`,
-//   };
-// }
+import APlayer from '~app/ui/Player/APlayer';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
 
-  // TODO: swr 后, lrc 加载错误
   const MusicPlayer = () => {
     const { data: songDetailData, isLoading: isLoadingSong } =
       useSongDetailData(slug);
@@ -37,16 +22,8 @@ export default function Page({ params }: { params: Params }) {
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
 
-    // if (!song) {
-    //   return <Spinner />;
-    // }
-
     return (
       <div>
-        {/* <SWRConfig
-          value={{
-            fallback: {},
-          }}> */}
         {!isLoadingSong && <APlayer slug={slug} />}
         <h2>
           歌曲名: {song?.name}
@@ -56,7 +33,6 @@ export default function Page({ params }: { params: Params }) {
             </sup>
           )}
         </h2>
-        {/* </SWRConfig> */}
       </div>
     );
   };

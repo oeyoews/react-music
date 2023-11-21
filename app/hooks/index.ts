@@ -92,6 +92,7 @@ export const useArtistData = (slug: string) => {
     arId + 'artist',
     () => getArtistDetail(arId!),
     {
+      suspense: true,
       refreshInterval: 3600000,
     },
   );
