@@ -59,7 +59,7 @@ export const useUserData = (uid: number) => {
 
 export const useStarPick = () => {
   return useSWRImmutable('starpick', () => getStarPick(localStorage.cookie), {
-    suspense: true,
+    // suspense: true,
     refreshInterval: 3600000,
   });
 };

@@ -28,7 +28,7 @@ export default async function Home() {
       <Banners data={bannerData.banners} />
 
       {/* 构建时有渲染问题 */}
-      {/* <StarPick /> */}
+      <StarPick />
       <RecommendSongs />
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />

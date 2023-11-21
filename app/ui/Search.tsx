@@ -12,6 +12,10 @@ export default function Search() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!statusStore.searchWord && !searchWord) {
+      toast.error('请输入关键字');
+      return;
+    }
     toast.loading('搜索中...', {
       duration: 500,
     });
