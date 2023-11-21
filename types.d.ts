@@ -1642,7 +1642,7 @@ declare module 'react-aplayer' {
     onPlay: () => void;
     onPause: () => void;
     order: 'random' | 'list';
-    loop: boolean;
+    loop: 'all' | 'one' | 'none';
     mini: boolean;
     fixed: boolean;
     autoplay: boolean;

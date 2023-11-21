@@ -52,8 +52,8 @@ export default function APlayer({ slug }: { slug: string }) {
     {
       name: songData.songs?.[0].name,
       artist: artistData.data.artist.name,
-      url: musicData.data[0].url,
-      lrc: lyric?.lrc.lyric,
+      url: musicData.data?.[0].url,
+      lrc: lyric?.lrc?.lyric,
       cover: artistData.data.artist.cover,
     },
   ];
@@ -66,7 +66,7 @@ export default function APlayer({ slug }: { slug: string }) {
     lrcType: 1, // 1: lrc 内容 3: file
     audio,
     onInit,
-    loop: false,
+    loop: 'none',
     onPlay: () => {
       document.title = `正在播放 ${songData.songs?.[0].name}`;
       toast.success('播放歌曲');
