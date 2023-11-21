@@ -132,7 +132,7 @@ export default function Page({ params }: { params: Params }) {
       {/* TODO */}
       {/* <div>音质: {musicInfo.level}</div> */}
       {/* TODO: 有渲染问题 */}
-      {/* <MusicPlayer /> */}
+      <MusicPlayer />
       {/* <ArtistInfo /> */}
       <SimiSong />
       <SongComment />

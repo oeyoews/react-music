@@ -4,24 +4,14 @@ import { getMvDetail, getMvURL } from '~lib/mv';
 import ArtPlayer from '~app/ui/Player/ArtPlayer';
 import Spinner from '~app/ui/Spinner';
 import SongCommentTab from '~app/ui/SongCommentTab';
-import { getMVComment } from '~lib/mv';
-import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
-import { Suspense, useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { Suspense } from 'react';
+import { useMvComment } from '~app/hooks';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
 
-  const { data: mvComment } = useSWRImmutable(slug, () => getMVComment(slug), {
-    suspense: true,
-  });
-
-  useEffect(() => {
-    if (mvComment.code !== 200) {
-      toast.error(`评论区: ${mvComment.message}` as string);
-    }
-  }, [mvComment]);
+  const { data: mvComment } = useMvComment(slug);
 
   const VideoTitle = () => {
     const { data: mvDetailData } = useSWRImmutable(

@@ -23,9 +23,10 @@ export default function APlayer({ slug }: { slug: string }) {
 
   const apRef = useRef<AplayerMethods | null>();
 
+  // NOTE: 不能使用useeffect here
+
   useEffect(() => {
     const vanillaTitle = document.title;
-
     apRef.current?.on('ended', () => {
       toast('歌曲播放完毕');
       document.title = `${songData.songs[0].name} - 歌曲播放结束`;
@@ -35,7 +36,7 @@ export default function APlayer({ slug }: { slug: string }) {
       apRef.current?.destroy();
       // toast('退出播放');
     };
-  }, []);
+  }, [songData]);
 
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {

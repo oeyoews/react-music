@@ -13,6 +13,19 @@ import {
   getLyric,
 } from '~lib/search';
 
+import { getMVComment } from '~lib/mv';
+import { useEffect } from 'react';
+
+export const useMvComment = (id: Id) => {
+  const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {
+    suspense: true,
+  });
+  if (data.data.code !== 200) {
+    toast.error(`评论区: ${data.data.message}` as string);
+  }
+  return data;
+};
+
 // 不要使用id, 作为key, 因为一个页面如果使用id作为路由, 多个数据会错乱
 export const useLyric = (id: Id) => {
   return useSWRImmutable(id + 'lyric', () => getLyric(id), {
@@ -75,6 +88,7 @@ export const useSongDetailData = (slug: Id) => {
 export const useArtistData = (slug: string) => {
   // 依赖请求, 使用返回值作为key, 如果函数抛出错误或返回 falsy 值，SWR 会知道某些依赖还没准备好。
   const songDetailData = useSongDetailData(slug);
+  // 不能使用useeffect ???
   if (songDetailData.data.code !== 200) {
     toast.error(songDetailData.data.message as string);
   }
