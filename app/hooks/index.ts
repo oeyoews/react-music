@@ -67,6 +67,7 @@ export const useSongDetailData = (slug: Id) => {
   });
 };
 
+// TODO: https://swr.vercel.app/zh-CN/docs/with-nextjs.zh-CN#server-components
 export const useArtistData = (slug: string) => {
   // 依赖请求, 使用返回值作为key, 如果函数抛出错误或返回 falsy 值，SWR 会知道某些依赖还没准备好。
   const songDetailData = useSongDetailData(slug);
