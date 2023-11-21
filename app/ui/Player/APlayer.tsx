@@ -82,7 +82,8 @@ export default function APlayer({ slug }: { slug: string }) {
 
   /* TODO: add copybutton or download url */
   return (
-    <div className="w-full">
+    // TODO: stick absolute
+    <div className="w-full top-[52px]">
       {isLoadingURL ||
       isLoadingSongData ||
       isLoadingArtist ||
