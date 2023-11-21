@@ -1661,11 +1661,19 @@ declare module 'react-aplayer' {
     on: (event, handler) => void;
     theme: (theme, themeType) => void;
     skipForward: () => void;
+    audio: {
+      currentTime: number;
+      duration: number;
+      paused: boolean;
+    };
     list: {
       show: any;
       hide: any;
       toggle: any;
-      audios: { id: string; name: string; url: string }[];
+      add: {
+        audios: [] | {};
+      };
+      // audios: { id: string; name: string; url: string }[];
     };
   }
   export default class Aplayer extends React.Component<Partial<AplayerProps>> {}
