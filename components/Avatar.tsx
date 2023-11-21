@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useUserData } from '~app/hooks';
+import { useUserData } from '~lib/hooks';
 import Spinner from './Spinner';
 
 export default function Avatar({ uid }: { uid: number }) {

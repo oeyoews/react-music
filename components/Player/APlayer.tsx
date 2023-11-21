@@ -8,7 +8,7 @@ import {
   useMusicURL,
   useSongDetailData,
   useLyric,
-} from '~app/hooks';
+} from '~lib/hooks';
 import Spinner from '../Spinner';
 
 // https://react.dev/reference/react/lazy#troubleshooting

@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Badge from '~app/ui/Badge';
-import { useSearch } from '~app/hooks';
+import Badge from '~components/Badge';
+import { useSearch } from '~lib/hooks';
 import toast from 'react-hot-toast';
 
 export default function page({ params }: { params: Params }) {

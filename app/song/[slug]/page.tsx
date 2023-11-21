@@ -5,13 +5,13 @@ import {
   useArtistData,
   useSiMiSong,
   useSongComment,
-} from '~app/hooks';
-import SongCommentTab from '~app/ui/SongCommentTab';
+} from '~lib/hooks';
+import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
-import APlayer from '~app/ui/Player/APlayer';
-import Spinner from '~app/ui/Spinner';
+import APlayer from '~components/Player/APlayer';
+import Spinner from '~components/Spinner';
 import { Suspense, useEffect } from 'react';
 
 export default function Page({ params }: { params: Params }) {

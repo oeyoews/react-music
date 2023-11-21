@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Avatar from './Avatar';
-import { useStarPick } from '~app/hooks';
+import { useStarPick } from '~lib/hooks';
 import Spinner from './Spinner';
 
 export default function StarPick() {

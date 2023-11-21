@@ -1,12 +1,12 @@
 'use client';
 
 import { getMvDetail, getMvURL } from '~lib/mv';
-import ArtPlayer from '~app/ui/Player/ArtPlayer';
-import Spinner from '~app/ui/Spinner';
-import SongCommentTab from '~app/ui/SongCommentTab';
+import ArtPlayer from '~components/Player/ArtPlayer';
+import Spinner from '~components/Spinner';
+import SongCommentTab from '~components/SongCommentTab';
 import useSWRImmutable from 'swr/immutable';
 import { Suspense } from 'react';
-import { useMvComment } from '~app/hooks';
+import { useMvComment } from '~lib/hooks';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;

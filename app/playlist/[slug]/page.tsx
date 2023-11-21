@@ -4,8 +4,8 @@ import {
   getPlayListSongs,
 } from '~lib/playlist';
 import Link from 'next/link';
-import Badge from '~app/ui/Badge';
-import SongCommentTab from '~app/ui/SongCommentTab';
+import Badge from '~components/Badge';
+import SongCommentTab from '~components/SongCommentTab';
 import Image from 'next/image';
 
 export default async function Page({ params }: any) {

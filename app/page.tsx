@@ -1,12 +1,12 @@
 import { getBanners, searchHotDetail } from '~lib/search';
-import Banners from '~app/ui/Banners';
-import Playlist from '~app/ui/Playlist';
-import HotSongs from './ui/HotSongs';
-import RecommendSongs from './ui/RecommendSongs';
+import Banners from '~components/Banners';
+import Playlist from '~components/Playlist';
+import HotSongs from '../components/HotSongs';
+import RecommendSongs from '../components/RecommendSongs';
 import { getHotPlayList } from '~lib/playlist';
-import Announcement from './ui/Announcement';
-import StarPick from './ui/StarPick';
-import MVFirst from './ui/Video/MVFirst';
+import Announcement from '../components/Announcement';
+import StarPick from '../components/StarPick';
+import MVFirst from '../components/Video/MVFirst';
 import { getMvFirst } from '~lib/mv';
 
 export const revalidate = 3600;

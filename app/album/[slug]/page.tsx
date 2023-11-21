@@ -2,7 +2,7 @@ import { getAlbumDetail } from '~lib/search';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAlbumComment } from '~lib/playlist';
-import SongCommentTab from '~app/ui/SongCommentTab';
+import SongCommentTab from '~components/SongCommentTab';
 
 export default async function Album({ params }: { params: Params }) {
   const { slug } = params;
