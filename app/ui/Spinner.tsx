@@ -3,14 +3,20 @@
 import React from 'react';
 import { ColorRing } from 'react-loader-spinner';
 
-export default function Spinner({ center = true }: { center?: boolean }) {
+export default function Spinner({
+  center = true,
+  size = 40,
+}: {
+  center?: boolean;
+  size?: number;
+}) {
   const classname = center ? 'flex justify-center items-center' : '';
   return (
     <div className={classname}>
       <ColorRing
         visible={true}
-        height="80"
-        width="80"
+        height={size}
+        width={size}
         ariaLabel="blocks-loading"
         wrapperStyle={{}}
         wrapperClass="blocks-wrapper"

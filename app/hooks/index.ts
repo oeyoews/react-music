@@ -45,15 +45,10 @@ export const useSongComment = (id: Id) => {
 };
 
 export const useUserData = (uid: number) => {
-  const { data: userData, isLoading } = useSWRImmutable(
-    uid + 'user',
-    () => getUserDetail(uid),
-    {
-      suspense: true,
-      refreshInterval: 3600000,
-      revalidateOnMount: false,
-    },
-  );
+  const { data: userData, isLoading } = useSWR([uid], getUserDetail, {
+    refreshInterval: 3600000,
+    revalidateOnMount: false,
+  });
   return { userData, isLoading };
 };
 
