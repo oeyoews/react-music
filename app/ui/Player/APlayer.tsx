@@ -18,7 +18,7 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
-  const { data: artistData, isLoading: isloadingArtist } = useArtistData(slug);
+  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const apRef = useRef<AplayerMethods | null>();
@@ -29,7 +29,7 @@ export default function APlayer({ slug }: { slug: string }) {
     const vanillaTitle = document.title;
     apRef.current?.on('ended', () => {
       toast('歌曲播放完毕');
-      document.title = `${songData.songs[0].name} - 歌曲播放结束`;
+      document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
     });
     return () => {
       document.title = vanillaTitle;
@@ -50,11 +50,11 @@ export default function APlayer({ slug }: { slug: string }) {
 
   const audio = [
     {
-      name: songData.songs?.[0].name,
-      artist: artistData.data.artist.name,
+      name: songData?.songs?.[0].name,
+      artist: artistData?.data.artist.name,
       url: musicData.data?.[0].url,
       lrc: lyric?.lrc?.lyric,
-      cover: artistData.data.artist.cover,
+      cover: artistData?.data.artist.cover,
     },
   ];
 
@@ -68,11 +68,11 @@ export default function APlayer({ slug }: { slug: string }) {
     onInit,
     loop: 'none',
     onPlay: () => {
-      document.title = `正在播放 ${songData.songs?.[0].name}`;
+      document.title = `正在播放 ${songData?.songs?.[0].name}`;
       toast.success('播放歌曲');
     },
     onPause: () => {
-      document.title = `暂停播放 ${songData.songs?.[0].name}`;
+      document.title = `暂停播放 ${songData?.songs?.[0].name}`;
       // apRef.current?.on('pause', () => toast('歌曲播放暂停'));
       // apRef.current?.on('ended', () => toast('歌曲播放完毕'));
       toast('歌曲暂停');

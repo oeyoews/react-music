@@ -37,9 +37,9 @@ export default function Page({ params }: { params: Params }) {
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
 
-    if (!song) {
-      notFound();
-    }
+    // if (!song) {
+    //   return <Spinner />;
+    // }
 
     return (
       <div>
@@ -49,7 +49,7 @@ export default function Page({ params }: { params: Params }) {
           }}> */}
         {!isLoadingSong && <APlayer slug={slug} />}
         <h2>
-          歌曲名: {song.name}
+          歌曲名: {song?.name}
           {vip && (
             <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
               VIP
@@ -64,19 +64,20 @@ export default function Page({ params }: { params: Params }) {
   const ArtistInfo = () => {
     const { data: artistData, isLoading: isloadingArtist } =
       useArtistData(slug);
-    const artist = artistData.data.artist;
 
     return (
       <div className="my-4">
-        <Suspense fallback={<Spinner />}>
-          <h2 className="my-2">歌手简介</h2>
-          <Link
-            href={`/artist/${artist.id}`}
-            className="no-underline font-bold">
-            {artist.name}
-          </Link>
-          <p className="my-2">{artist.briefDesc}</p>
-        </Suspense>
+        {artistData?.data && (
+          <div>
+            <h2 className="my-2">歌手简介</h2>
+            <Link
+              href={`/artist/${artistData?.data?.artist?.id}`}
+              className="no-underline font-bold">
+              {artistData?.data.artist?.name}
+            </Link>
+            <p className="my-2">{artistData?.data.artist?.briefDesc}</p>
+          </div>
+        )}
       </div>
     );
   };

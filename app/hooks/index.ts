@@ -69,16 +69,19 @@ export const useStarPick = () => {
 export const useMusicURL = (id: Id) => {
   // [id, localStorage.cookie]
   // TODO: 为什么不能直接传
-  const cookie = localStorage.cookie;
-  return useSWR([id, cookie], () => getMusicURL(id, cookie), {
-    suspense: true,
-    refreshInterval: 3600000,
-  });
+  return useSWR(
+    [id, localStorage.cookie],
+    () => getMusicURL(id, localStorage.cookie),
+    {
+      suspense: true,
+      refreshInterval: 3600000,
+    },
+  );
 };
 
 export const useSongDetailData = (slug: Id) => {
   return useSWR(slug + 'detail', () => getSongDetail(slug), {
-    suspense: true,
+    // suspense: true, // 不要在这里用suspense
     refreshInterval: 3600000,
     revalidateOnFocus: false,
   });
@@ -89,14 +92,14 @@ export const useArtistData = (slug: string) => {
   // 依赖请求, 使用返回值作为key, 如果函数抛出错误或返回 falsy 值，SWR 会知道某些依赖还没准备好。
   const songDetailData = useSongDetailData(slug);
   // 不能使用useeffect ???
-  if (songDetailData.data.code !== 200) {
-    toast.error(songDetailData.data.message as string);
+  if (songDetailData.data?.code !== 200) {
+    toast.error(songDetailData.data?.message as string);
   }
   return useSWRImmutable(
     slug + 'artist',
-    () => getArtistDetail(songDetailData.data.songs[0].ar[0].id),
+    () => getArtistDetail(songDetailData.data?.songs[0].ar[0].id as number),
     {
-      suspense: true,
+      // suspense: true,
       refreshInterval: 3600000,
     },
   );
