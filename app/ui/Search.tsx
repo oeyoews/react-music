@@ -1,5 +1,3 @@
-'use client';
-
 import { useRouter } from 'next/navigation';
 import useStore from '~lib/store';
 import toast from 'react-hot-toast';
