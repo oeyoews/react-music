@@ -28,7 +28,7 @@ export default function StarPick() {
               <div className="flex items-center space-x-2 w-full justify-end">
                 {/* 警告处理 */}
                 {/* swr 嵌套更新 */}
-                <Avatar uid={users[0].userId} />
+                {/* <Avatar uid={users[0].userId} /> */}
                 <div>{users[0].nickname}</div>
               </div>
             </div>
