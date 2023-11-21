@@ -92,9 +92,6 @@ export const getRecommendations = async (
       cookie,
       timestamp: Date.now(),
     },
-    options: {
-      method: 'GET',
-    },
   });
 };
 
@@ -140,8 +137,12 @@ export const getMusicURL = async (
     url: '/song/url',
     params: {
       id,
-      cookie,
-      // level,
+      // cookie,
+      timestamp: Date.now(),
+    },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
     },
   });
 };
@@ -170,7 +171,6 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
     params: {
       id,
       limit: 99,
-      // timestamp: Date.now(),
     },
   });
 };

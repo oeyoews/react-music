@@ -37,6 +37,7 @@ async function fetchData(
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
+    // cache: 'force-cache',
     next: {
       revalidate: 3600,
     },

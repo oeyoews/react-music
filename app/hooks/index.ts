@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { getUserDetail } from '~lib/login';
@@ -71,6 +72,9 @@ export const useSongDetailData = (slug: Id) => {
 export const useArtistData = (slug: string) => {
   // 依赖请求, 使用返回值作为key, 如果函数抛出错误或返回 falsy 值，SWR 会知道某些依赖还没准备好。
   const songDetailData = useSongDetailData(slug);
+  if (songDetailData.data.code !== 200) {
+    toast.error(songDetailData.data.message as string);
+  }
   return useSWRImmutable(
     `${slug}-artist-${songDetailData.data.songs[0].ar[0].id}`,
     () => getArtistDetail(songDetailData.data.songs[0].ar[0].id),
