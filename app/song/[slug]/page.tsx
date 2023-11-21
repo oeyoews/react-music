@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 
 import APlayer from '~app/ui/Player/APlayer';
 import Spinner from '~app/ui/Spinner';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
