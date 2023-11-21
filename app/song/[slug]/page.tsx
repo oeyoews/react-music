@@ -11,6 +11,8 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 
 import APlayer from '~app/ui/Player/APlayer';
+import Spinner from '~app/ui/Spinner';
+import { useEffect } from 'react';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
@@ -38,8 +40,12 @@ export default function Page({ params }: { params: Params }) {
   };
 
   const ArtistInfo = () => {
-    const { data: artistData, isLoading: isloadingArtist } =
-      useArtistData(slug);
+    const { data: songData } = useSongDetailData(slug);
+    const arId = songData?.songs[0].ar[0].id;
+
+    const { data: artistData, isLoading: isloadingArtist } = useArtistData(
+      arId!,
+    );
 
     return (
       <div className="my-4">

@@ -18,7 +18,8 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
-  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(slug);
+  const arId = songData?.songs[0].ar[0].id;
+  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const apRef = useRef<AplayerMethods | null>();
@@ -82,17 +83,7 @@ export default function APlayer({ slug }: { slug: string }) {
   /* TODO: add copybutton or download url */
   return (
     <div className="w-full">
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center">
-            <Spinner />
-          </div>
-        }>
-        {/* {!isLoadingURL && !isLoadingLyric && !isloadingArtist && !isLoadingSongData && (
-          <ReactAplayer {...options} />
-        )} */}
-        <ReactAplayer {...options} />
-      </Suspense>
+      <ReactAplayer {...options} />
     </div>
   );
 }
