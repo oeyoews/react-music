@@ -13,6 +13,7 @@ import { Suspense, useEffect } from 'react';
 import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
 import { notFound } from 'next/navigation';
+import { SWRConfig } from 'swr';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
@@ -41,6 +42,10 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
+        {/* <SWRConfig
+          value={{
+            fallback: {},
+          }}> */}
         <APlayer slug={slug} />
         <h2>
           歌曲名: {song.name}
@@ -50,6 +55,7 @@ export default function Page({ params }: { params: Params }) {
             </sup>
           )}
         </h2>
+        {/* </SWRConfig> */}
       </div>
     );
   };
