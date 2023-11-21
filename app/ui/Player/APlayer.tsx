@@ -24,6 +24,15 @@ export default function APlayer({ slug }: { slug: string }) {
 
   const apRef = useRef<AplayerMethods | null>();
 
+  useEffect(() => {
+    const vanillaTitle = document.title;
+    return () => {
+      document.title = vanillaTitle;
+      apRef.current?.destroy();
+      // toast('退出播放');
+    };
+  }, []);
+
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
       apRef.current = aplayer;
@@ -52,16 +61,15 @@ export default function APlayer({ slug }: { slug: string }) {
     lrcType: 1, // 1: lrc 内容 3: file
     audio,
     onInit,
-    onPlay: () => toast.success('播放歌曲'),
-    onPause: () => toast('暂停歌曲'),
+    onPlay: () => {
+      document.title = `正在播放 ${songData.songs?.[0].name}`;
+      toast.success('播放歌曲');
+    },
+    onPause: () => {
+      document.title = `暂停播放 ${songData.songs?.[0].name}`;
+      toast('暂停歌曲');
+    },
   };
-
-  useEffect(() => {
-    return () => {
-      apRef.current?.destroy();
-      // toast('退出播放');
-    };
-  }, []);
 
   /* TODO: add copybutton or download url */
   return (

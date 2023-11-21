@@ -4,10 +4,10 @@ const nextConfig = {
   crossOrigin: 'anonymous',
   // https://github.com/vercel/next.js/discussions/34810
   // https://nextjs.org/docs/architecture/nextjs-compiler
-  compiler: {
-    removeConsole:
-      process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
-  },
+  // compiler: {
+  //   removeConsole:
+  //     process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+  // },
   images: {
     unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
     remotePatterns: [

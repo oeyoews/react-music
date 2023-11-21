@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Suspense, useEffect } from 'react';
 import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
+import { notFound } from 'next/navigation';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
@@ -33,6 +34,10 @@ export default function Page({ params }: { params: Params }) {
     const song = songDetailData?.songs[0];
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
+
+    if (!song) {
+      notFound();
+    }
 
     return (
       <div>

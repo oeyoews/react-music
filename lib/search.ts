@@ -92,6 +92,9 @@ export const getRecommendations = async (
       cookie,
       timestamp: Date.now(),
     },
+    options: {
+      method: 'GET',
+    },
   });
 };
 
@@ -127,6 +130,7 @@ export const searchHotDetail = async (): Promise<IHotDetail> => {
   });
 };
 
+// 播放地址有效期 25 min
 export const getMusicURL = async (
   id: Id,
   cookie: string,

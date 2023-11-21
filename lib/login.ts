@@ -4,6 +4,8 @@ import { customfetch as fetch } from './fetchData';
 
 /**
  * 01: generate qr code key
+ * 五分钟过期
+ * cookie: 20天后不活跃可引导用户重新登录(maybe)
  */
 export const getqrKey = async (): Promise<IQRCode> => {
   return await fetch({
@@ -63,6 +65,7 @@ export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
   });
 };
 
+// cookie 永不过期
 export const loginAnonymous = async (): Promise<ICookieAnonymous> => {
   return await fetch({
     url: '/register/anonimous',
