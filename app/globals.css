@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .aplayer {
+    @apply !shadow-none !font-sans;
+  }
+}
+
+/* 不支持dash --  ?? */
+.aplayer-pic {
+  @apply !rounded-full !shadow-lg;
+}
+
 /* hide scrollbar */
 a {
   text-decoration: none !important;
@@ -13,10 +24,6 @@ a {
 
 hr {
   margin: 2px auto !important;
-}
-
-.aplayer-pic {
-  border-radius: 50%;
 }
 
 :root {
