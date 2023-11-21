@@ -17,7 +17,6 @@ export const getPlayListSongs = async (id: Id): Promise<PlaylistSong> => {
       id,
       limit: 30,
       offset: 0,
-      timestamp: Date.now(),
     },
   });
 };

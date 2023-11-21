@@ -85,11 +85,6 @@ export const getAccount = async (cookie: string): Promise<IUserAccount> => {
   return await fetch({
     url: '/user/account',
     params: { timestamp: Date.now(), cookie },
-    options: {
-      headers: {
-        // cookie, // 这里传cookie 没用
-      },
-    },
   });
 };
 
@@ -105,7 +100,7 @@ export const getLevel = async (cookie: string): Promise<ILevel> => {
 export const getUserDetail = async (uid: Id): Promise<IUserDetail> => {
   return await fetch({
     url: '/user/detail',
-    params: { uid, timestamp: Date.now() },
+    params: { uid },
   });
 };
 

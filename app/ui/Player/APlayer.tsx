@@ -75,7 +75,7 @@ export default function APlayer({ slug }: { slug: string }) {
       document.title = `暂停播放 ${songData.songs?.[0].name}`;
       // apRef.current?.on('pause', () => toast('歌曲播放暂停'));
       // apRef.current?.on('ended', () => toast('歌曲播放完毕'));
-      // toast('歌曲暂停');
+      toast('歌曲暂停');
     },
   };
 

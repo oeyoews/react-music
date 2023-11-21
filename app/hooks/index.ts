@@ -13,6 +13,7 @@ import {
   getLyric,
 } from '~lib/search';
 
+// 不要使用id, 作为key, 因为一个页面如果使用id作为路由, 多个数据会错乱
 export const useLyric = (id: Id) => {
   return useSWRImmutable(id + 'lyric', () => getLyric(id), {
     suspense: true,
@@ -21,7 +22,7 @@ export const useLyric = (id: Id) => {
 
 export const useSearch = (keyword: string) => {
   const searchKeyword = decodeURIComponent(keyword.trim());
-  return useSWRImmutable(keyword + 'search', () => search(searchKeyword), {
+  return useSWRImmutable([searchKeyword], search, {
     suspense: true,
   });
 };
@@ -34,15 +35,11 @@ export const useSongComment = (id: Id) => {
 };
 
 export const useUserData = (uid: number) => {
-  const { data: userData, isLoading } = useSWRImmutable(
-    uid + 'user',
-    () => getUserDetail(uid),
-    {
-      suspense: true,
-      refreshInterval: 3600000,
-      revalidateOnMount: false,
-    },
-  );
+  const { data: userData, isLoading } = useSWRImmutable([uid], getUserDetail, {
+    suspense: true,
+    refreshInterval: 3600000,
+    revalidateOnMount: false,
+  });
   return { userData, isLoading };
 };
 
@@ -54,7 +51,10 @@ export const useStarPick = () => {
 };
 
 export const useMusicURL = (id: Id) => {
-  return useSWR(id + 'url', () => getMusicURL(id, localStorage.cookie), {
+  // [id, localStorage.cookie]
+  // TODO: 为什么不能直接传
+  const cookie = localStorage.cookie;
+  return useSWR([id, cookie], () => getMusicURL(id, cookie), {
     suspense: true,
     refreshInterval: 3600000,
   });
@@ -76,7 +76,7 @@ export const useArtistData = (slug: string) => {
     toast.error(songDetailData.data.message as string);
   }
   return useSWRImmutable(
-    `${slug}-artist-${songDetailData.data.songs[0].ar[0].id}`,
+    slug + 'artist',
     () => getArtistDetail(songDetailData.data.songs[0].ar[0].id),
     {
       suspense: true,

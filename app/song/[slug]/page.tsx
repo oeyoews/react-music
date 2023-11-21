@@ -9,11 +9,10 @@ import {
 import APlayer from '~app/ui/Player/APlayer';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
 import { notFound } from 'next/navigation';
-import { SWRConfig } from 'swr';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
@@ -83,10 +82,9 @@ export default function Page({ params }: { params: Params }) {
   const SongComment = () => {
     const { data, isLoading } = useSongComment(slug);
 
-    useEffect(() => {
-      if (!isLoading && data.code !== 200)
-        toast.error(`评论区: ${data.message}` as string);
-    }, [data, isLoading]);
+    if (!isLoading && data.code !== 200) {
+      toast.error(`评论区: ${data.message}` as string);
+    }
 
     return (
       <div>

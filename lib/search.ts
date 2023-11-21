@@ -33,7 +33,10 @@ export const checkSong = async (id: Id, cookie: string): Promise<CheckSong> => {
     url: '/check/music',
     params: {
       id,
-      cookie,
+    },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
     },
   });
 };
@@ -88,9 +91,10 @@ export const getRecommendations = async (
   // NOTE: need login
   return await fetch({
     url: '/recommend/songs',
-    params: {
-      cookie,
-      timestamp: Date.now(),
+    params: {},
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
     },
   });
 };
@@ -137,8 +141,6 @@ export const getMusicURL = async (
     url: '/song/url',
     params: {
       id,
-      // cookie,
-      timestamp: Date.now(),
     },
     options: {
       method: 'POST',
@@ -179,7 +181,10 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
 export const getStarPick = async (cookie: string): Promise<IStarPick> => {
   return await fetch({
     url: '/starpick/comments/summary',
-    params: { cookie },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
   });
 };
 
