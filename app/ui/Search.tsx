@@ -14,7 +14,9 @@ export default function Search() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.loading('搜索中...');
+    toast.loading('搜索中...', {
+      duration: 500,
+    });
     router.push(`/search/${statusStore.searchWord || searchWord}`);
   };
 
