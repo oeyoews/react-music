@@ -14,7 +14,6 @@ import {
 } from '~lib/search';
 
 import { getMVComment } from '~lib/mv';
-import { useEffect } from 'react';
 
 export const useMvComment = (id: Id) => {
   const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {

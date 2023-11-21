@@ -61,26 +61,25 @@ export default function Page({ params }: { params: Params }) {
     );
   };
 
-  const ArtistInfo = () => {
-    const { data: artistData, isLoading: isloadingArtist } =
-      useArtistData(slug);
-
-    return (
-      <div className="my-4">
-        {artistData?.data && (
-          <div>
-            <h2 className="my-2">歌手简介</h2>
-            <Link
-              href={`/artist/${artistData?.data?.artist?.id}`}
-              className="no-underline font-bold">
-              {artistData?.data.artist?.name}
-            </Link>
-            <p className="my-2">{artistData?.data.artist?.briefDesc}</p>
-          </div>
-        )}
-      </div>
-    );
-  };
+  // const ArtistInfo = () => {
+  //   const { data: artistData, isLoading: isloadingArtist } =
+  //     useArtistData(slug);
+  //   return (
+  //     <div className="my-4">
+  //       {artistData?.data && (
+  //         <div>
+  //           <h2 className="my-2">歌手简介</h2>
+  //           <Link
+  //             href={`/artist/${artistData?.data?.artist?.id}`}
+  //             className="no-underline font-bold">
+  //             {artistData?.data.artist?.name}
+  //           </Link>
+  //           <p className="my-2">{artistData?.data.artist?.briefDesc}</p>
+  //         </div>
+  //       )}
+  //     </div>
+  //   );
+  // };
 
   const SongComment = () => {
     const { data, isLoading } = useSongComment(slug);
