@@ -18,9 +18,8 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
-  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
-
   const { data: artistData, isLoading: isloadingArtist } = useArtistData(slug);
+  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const apRef = useRef<AplayerMethods | null>();
 

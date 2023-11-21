@@ -30,7 +30,6 @@ export const useSearch = (keyword: string) => {
 export const useSongComment = (id: Id) => {
   return useSWRImmutable(id + 'comment', () => getSongComment(id), {
     suspense: true,
-    // refreshInterval: 3600000,
   });
 };
 

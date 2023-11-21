@@ -6,13 +6,14 @@ import {
   useSiMiSong,
   useSongComment,
 } from '~app/hooks';
-import APlayer from '~app/ui/Player/APlayer';
 import SongCommentTab from '~app/ui/SongCommentTab';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import Spinner from '~app/ui/Spinner';
 import toast from 'react-hot-toast';
 import { notFound } from 'next/navigation';
+
+const APlayer = lazy(() => import('~app/ui/Player/APlayer'));
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 60 : 0;
 
@@ -30,7 +31,8 @@ export default function Page({ params }: { params: Params }) {
 
   // TODO: swr 后, lrc 加载错误
   const MusicPlayer = () => {
-    const { data: songDetailData } = useSongDetailData(slug);
+    const { data: songDetailData, isLoading: isLoadingSong } =
+      useSongDetailData(slug);
     const song = songDetailData?.songs[0];
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
@@ -45,7 +47,7 @@ export default function Page({ params }: { params: Params }) {
           value={{
             fallback: {},
           }}> */}
-        <APlayer slug={slug} />
+        {!isLoadingSong && <APlayer slug={slug} />}
         <h2>
           歌曲名: {song.name}
           {vip && (
@@ -88,13 +90,15 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        <Suspense fallback={<Spinner />}>
-          <div className="flex justify-start items-center space-x-2">
-            <h2 className="my-2">评论区</h2>
-            <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
-          </div>
-          <SongCommentTab songComment={data} />
-        </Suspense>
+        {!isLoading && (
+          <>
+            <div className="flex justify-start items-center space-x-2">
+              <h2 className="my-2">评论区</h2>
+              <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
+            </div>
+            <SongCommentTab songComment={data} />
+          </>
+        )}
       </div>
     );
   };
@@ -127,8 +131,9 @@ export default function Page({ params }: { params: Params }) {
       {/* <h1> 歌曲详情 - {songInfo.name} {songInfo.id}{' '} </h1> */}
       {/* TODO */}
       {/* <div>音质: {musicInfo.level}</div> */}
-      <MusicPlayer />
-      <ArtistInfo />
+      {/* TODO: 有渲染问题 */}
+      {/* <MusicPlayer /> */}
+      {/* <ArtistInfo /> */}
       <SimiSong />
       <SongComment />
     </div>
