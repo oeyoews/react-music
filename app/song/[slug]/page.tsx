@@ -73,17 +73,18 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <>
-            <div className="flex justify-start items-center space-x-2">
-              <h2 className="my-2">评论区</h2>
-              <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
-            </div>
+        <>
+          <div className="flex justify-start items-center space-x-2">
+            <h2 className="my-2">评论区</h2>
+            <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
+          </div>
+          {isLoading ? (
+            <Spinner />
+          ) : (
             <SongCommentTab songComment={data as ISongComment} />
-          </>
-        )}
+          )}
+        </>
+        )
       </div>
     );
   };
@@ -94,9 +95,11 @@ export default function Page({ params }: { params: Params }) {
       <div className="mt-4">
         <hr />
         <h2 className="my-2">相似歌曲</h2>
-        <ol className="columns-2">
-          {!isLoading &&
-            data?.songs?.map((song) => {
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <ol className="columns-2">
+            {data?.songs?.map((song) => {
               return (
                 <li key={song.id}>
                   <Link href={`/song/${song.id}`} className="no-underline">
@@ -106,7 +109,8 @@ export default function Page({ params }: { params: Params }) {
                 </li>
               );
             })}
-        </ol>
+          </ol>
+        )}
       </div>
     );
   };
