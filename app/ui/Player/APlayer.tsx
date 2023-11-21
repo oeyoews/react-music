@@ -83,9 +83,14 @@ export default function APlayer({ slug }: { slug: string }) {
   /* TODO: add copybutton or download url */
   return (
     <div className="w-full">
-      <Suspense fallback={<Spinner />}>
+      {isLoadingURL ||
+      isLoadingSongData ||
+      isLoadingArtist ||
+      isLoadingLyric ? (
+        <Spinner />
+      ) : (
         <ReactAplayer {...options} />
-      </Suspense>
+      )}
     </div>
   );
 }

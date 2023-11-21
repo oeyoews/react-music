@@ -45,7 +45,7 @@ export const useSongComment = (id: Id) => {
 };
 
 export const useUserData = (uid: number) => {
-  return useSWRImmutable([uid], getUserDetail);
+  return useSWRImmutable([uid], () => getUserDetail(uid));
 };
 
 export const useStarPick = () => {
@@ -58,7 +58,7 @@ export const useStarPick = () => {
 export const useMusicURL = (id: Id) => {
   // [id, localStorage.cookie]
   // TODO: 为什么不能直接传
-  return useSWR(
+  return useSWRImmutable(
     [id, localStorage.cookie],
     () => getMusicURL(id, localStorage.cookie),
     {
@@ -76,15 +76,7 @@ export const useSongDetailData = (slug: Id) => {
 
 // TODO: https://swr.vercel.app/zh-CN/docs/with-nextjs.zh-CN#server-components
 export const useArtistData = (arId: number) => {
-  const artistData = useSWRImmutable(
-    arId + 'artist',
-    () => getArtistDetail(arId),
-    {
-      // suspense: true, // 必须???
-      refreshInterval: 3600000,
-    },
-  );
-  return artistData;
+  return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
 };
 
 export const useSiMiSong = (slug: Id) => {
