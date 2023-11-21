@@ -3,14 +3,18 @@
 import { useRouter } from 'next/navigation';
 import useStore from '~lib/store';
 import toast from 'react-hot-toast';
+import useSWR from 'swr';
+import { searchDefault } from '~lib/search';
 
-export default function Search({ searchWord = '' }: { searchWord?: string }) {
+export default function Search() {
   const statusStore = useStore();
   const router = useRouter();
+  const { data } = useSWR('/search/default', searchDefault);
+  const searchWord = data?.data.showKeyword;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    toast('搜索中...');
+    toast.loading('搜索中...');
     router.push(`/search/${statusStore.searchWord || searchWord}`);
   };
 

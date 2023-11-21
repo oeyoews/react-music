@@ -26,7 +26,6 @@ export default async function Home() {
         position="top-center"
       />
       <Banners data={bannerData.banners} />
-      <StarPick />
       <RecommendSongs />
       <HotSongs data={songsHot.data} />
       <Playlist data={PlaylistData.playlists} />
