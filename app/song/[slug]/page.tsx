@@ -67,10 +67,6 @@ export default function Page({ params }: { params: Params }) {
   const SongComment = () => {
     const { data, isLoading } = useSongComment(slug);
 
-    if (!isLoading && data?.code !== 200) {
-      toast.error(`评论区: ${data?.message}` as string);
-    }
-
     return (
       <div>
         <>
