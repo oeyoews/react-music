@@ -18,7 +18,7 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
-  // const { data: artistData, isLoading: isLoadingArtist } = useArtistData(slug);
+  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(slug);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const apRef = useRef<AplayerMethods | null>();
@@ -53,8 +53,8 @@ export default function APlayer({ slug }: { slug: string }) {
       name: songData?.songs?.[0].name,
       url: musicData.data?.[0].url,
       lrc: lyric?.lrc?.lyric,
-      // artist: artistData?.data.artist.name,
-      // cover: artistData?.data.artist.cover,
+      artist: artistData?.data.artist.name,
+      cover: artistData?.data.artist.cover,
     },
   ];
 

@@ -14,6 +14,7 @@ import {
 } from '~lib/search';
 
 import { getMVComment } from '~lib/mv';
+import { useEffect } from 'react';
 
 export const useMvComment = (id: Id) => {
   const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {
@@ -77,10 +78,8 @@ export const useMusicURL = (id: Id) => {
 };
 
 export const useSongDetailData = (slug: Id) => {
-  return useSWR(slug + 'detail', () => getSongDetail(slug), {
-    // suspense: true, // 不要在这里用suspense
+  return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
     refreshInterval: 3600000,
-    revalidateOnFocus: false,
   });
 };
 
@@ -88,17 +87,15 @@ export const useSongDetailData = (slug: Id) => {
 export const useArtistData = (slug: string) => {
   // 依赖请求, 使用返回值作为key, 如果函数抛出错误或返回 falsy 值，SWR 会知道某些依赖还没准备好。
   const songDetailData = useSongDetailData(slug);
-  // 不能使用useeffect ???
-  if (songDetailData.data?.code !== 200) {
-    toast.error(songDetailData.data?.message as string);
-  }
-  return useSWRImmutable(
-    slug + 'artist',
-    () => getArtistDetail(songDetailData.data?.songs[0].ar[0].id as number),
+  const arId = songDetailData.data?.songs[0].ar[0].id;
+  const artistData = useSWRImmutable(
+    arId + 'artist',
+    () => getArtistDetail(arId!),
     {
       refreshInterval: 3600000,
     },
   );
+  return artistData;
 };
 
 export const useSiMiSong = (slug: Id) => {

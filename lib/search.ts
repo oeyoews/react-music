@@ -2,6 +2,7 @@ import { customfetch as fetch } from './fetchData';
 
 // id: 歌手id
 export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
+  if (!id) console.warn('请传入歌手id');
   return await fetch({
     url: '/artist/detail',
     params: {
