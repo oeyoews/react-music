@@ -26,6 +26,11 @@ export default function APlayer({ slug }: { slug: string }) {
 
   useEffect(() => {
     const vanillaTitle = document.title;
+
+    apRef.current?.on('ended', () => {
+      toast('歌曲播放完毕');
+      document.title = `${songData.songs[0].name} - 歌曲播放结束`;
+    });
     return () => {
       document.title = vanillaTitle;
       apRef.current?.destroy();
@@ -61,13 +66,16 @@ export default function APlayer({ slug }: { slug: string }) {
     lrcType: 1, // 1: lrc 内容 3: file
     audio,
     onInit,
+    loop: false,
     onPlay: () => {
       document.title = `正在播放 ${songData.songs?.[0].name}`;
       toast.success('播放歌曲');
     },
     onPause: () => {
       document.title = `暂停播放 ${songData.songs?.[0].name}`;
-      toast('暂停歌曲');
+      // apRef.current?.on('pause', () => toast('歌曲播放暂停'));
+      // apRef.current?.on('ended', () => toast('歌曲播放完毕'));
+      // toast('歌曲暂停');
     },
   };
 
