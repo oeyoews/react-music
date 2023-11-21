@@ -1,5 +1,4 @@
 import toast from 'react-hot-toast';
-import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { getUserDetail } from '~lib/login';
 import {
@@ -14,14 +13,15 @@ import {
 } from '~lib/search';
 
 import { getMVComment } from '~lib/mv';
-import { useEffect } from 'react';
 
 export const useMvComment = (id: Id) => {
   const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {
     suspense: true,
   });
   if (data.data.code !== 200) {
-    toast.error(`评论区: ${data.data.message}` as string);
+    toast.error(`评论区: ${data.data.message}` as string, {
+      position: 'bottom-right',
+    });
   }
   return data;
 };
@@ -41,7 +41,15 @@ export const useSearch = (keyword: string) => {
 };
 
 export const useSongComment = (id: Id) => {
-  return useSWRImmutable(id + 'comment', () => getSongComment(id), {});
+  const data = useSWRImmutable(id + 'comment', () => getSongComment(id), {
+    suspense: true,
+  });
+  if (data.data?.code !== 200) {
+    toast.error(`评论区: ${data.data?.message}` as string, {
+      position: 'bottom-right',
+    });
+  }
+  return data;
 };
 
 export const useUserData = (uid: number) => {

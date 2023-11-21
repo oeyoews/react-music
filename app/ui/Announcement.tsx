@@ -18,9 +18,7 @@ export default function Announcement({
   // 首次加载提示, 状态管理
   const { firstLoading, setFirstLoading } = useStore();
   useEffect(() => {
-    // process.env.NODE_ENV === 'production' &&
-
-    if (firstLoading) {
+    if (firstLoading && process.env.NODE_ENV === 'production') {
       toast(text, {
         icon,
         position,
