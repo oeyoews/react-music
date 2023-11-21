@@ -1,6 +1,6 @@
 'use client';
 
-import Search from '~app/ui/Search';
+import Search from '~components/Search';
 
 // TODO: more element
 export default function page() {
