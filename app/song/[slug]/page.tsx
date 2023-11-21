@@ -85,8 +85,8 @@ export default function Page({ params }: { params: Params }) {
   const SongComment = () => {
     const { data, isLoading } = useSongComment(slug);
 
-    if (!isLoading && data.code !== 200) {
-      toast.error(`评论区: ${data.message}` as string);
+    if (!isLoading && data?.code !== 200) {
+      toast.error(`评论区: ${data?.message}` as string);
     }
 
     return (
@@ -97,7 +97,7 @@ export default function Page({ params }: { params: Params }) {
               <h2 className="my-2">评论区</h2>
               <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
             </div>
-            <SongCommentTab songComment={data} />
+            <SongCommentTab songComment={data as ISongComment} />
           </>
         )}
       </div>
@@ -112,7 +112,7 @@ export default function Page({ params }: { params: Params }) {
         <h2 className="my-2">相似歌曲</h2>
         <ol className="columns-2">
           {!isLoading &&
-            data.songs?.map((song) => {
+            data?.songs?.map((song) => {
               return (
                 <li key={song.id}>
                   <Link href={`/song/${song.id}`} className="no-underline">

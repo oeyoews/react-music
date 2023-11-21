@@ -41,9 +41,7 @@ export const useSearch = (keyword: string) => {
 };
 
 export const useSongComment = (id: Id) => {
-  return useSWRImmutable(id + 'comment', () => getSongComment(id), {
-    suspense: true,
-  });
+  return useSWRImmutable(id + 'comment', () => getSongComment(id), {});
 };
 
 export const useUserData = (uid: number) => {
@@ -99,7 +97,6 @@ export const useArtistData = (slug: string) => {
     slug + 'artist',
     () => getArtistDetail(songDetailData.data?.songs[0].ar[0].id as number),
     {
-      // suspense: true,
       refreshInterval: 3600000,
     },
   );
@@ -107,7 +104,6 @@ export const useArtistData = (slug: string) => {
 
 export const useSiMiSong = (slug: Id) => {
   return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
-    suspense: true,
     refreshInterval: 3600000,
   });
 };
