@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { RiNeteaseCloudMusicFill } from 'react-icons/ri';
 import { FaComment, FaSearch, FaStar, FaUser, FaVideo } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
+import SidebarSearchMusic from '~components/SidebarSearchMusic';
 
 const pcSidebarItems = [
   { href: '/', title: '为我推荐', icon: <FaStar /> },
@@ -15,7 +16,7 @@ const pcSidebarItems = [
     title: '云村星评馆',
     icon: <FaComment />,
   },
-  { href: '/search', title: '搜索音乐', icon: <FaSearch /> },
+  // { href: '/search', title: '搜索音乐', icon: <FaSearch /> },
   { href: '/login', title: '用户', icon: <FaUser /> },
 ];
 
@@ -49,6 +50,7 @@ export const Sidebar = () => {
           </div>
         </Link>
       ))}
+      <SidebarSearchMusic />
     </div>
   );
 };

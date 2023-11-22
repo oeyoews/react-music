@@ -1,11 +1,13 @@
 import { Drawer } from 'vaul';
 
+// 监听点击事件, 对于搜索歌曲
+// click to close params
 export default function DrawserComponent({
   children,
   text,
 }: {
   children: React.ReactNode;
-  text: string;
+  text: React.ReactNode;
 }) {
   return (
     <Drawer.Root shouldScaleBackground>

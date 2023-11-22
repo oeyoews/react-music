@@ -31,12 +31,29 @@ hr {
   --scroll-bar-bg-color: #f6f6f6;
 }
 
+/* disable scrollbar */
 * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar,
+scrollbar-width {
+  display: none;
+}
+::-webkit-scrollbar:hover,
+scrollbar-width {
+  display: none;
+}
+::-moz-scrollbar {
+  display: none;
+}
+
+/* custom scrollbar */
+/* * {
   scrollbar-width: thin;
   scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
 }
 
-/* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 12px;
 }
@@ -49,7 +66,7 @@ hr {
   background-color: var(--scroll-bar-color);
   border-radius: 20px;
   border: 3px solid var(--scroll-bar-bg-color);
-}
+} */
 
 #om-progress {
   height: 7px;
