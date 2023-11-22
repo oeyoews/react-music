@@ -6,7 +6,14 @@ import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
 import { RiNeteaseCloudMusicFill } from 'react-icons/ri';
-import { FaSearch, FaStar, FaUser, FaVideo } from 'react-icons/fa';
+import {
+  FaComment,
+  FaCommentAlt,
+  FaSearch,
+  FaStar,
+  FaUser,
+  FaVideo,
+} from 'react-icons/fa';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -48,6 +55,11 @@ export default function RootLayout({
           <div className="p-2 rounded text-gray-500 m-0 transition-all hover:bg-neutral-200/90 duration-500">
             <Link href="/mv">
               <FaVideo className="inline" /> MV视频
+            </Link>
+          </div>
+          <div className="p-2 rounded text-gray-500 m-0">
+            <Link href="/starpick">
+              <FaComment className="inline" /> 云村星评馆
             </Link>
           </div>
           <div className="p-2 rounded text-gray-500 m-0">
