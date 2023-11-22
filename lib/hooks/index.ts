@@ -13,6 +13,13 @@ import {
 } from '~lib/search';
 
 import { getMVComment } from '~lib/mv';
+import { getPlayListPersonalized } from '~lib/api/playlist';
+
+export const usePlaylistPersonalized = () => {
+  return useSWRImmutable('playlistpersonalized', () =>
+    getPlayListPersonalized(localStorage.cookie),
+  );
+};
 
 export const useMvComment = (id: Id) => {
   const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {

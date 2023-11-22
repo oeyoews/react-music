@@ -32,7 +32,24 @@ export const getHotPlayList = async (): Promise<IPlaylist> => {
   });
 };
 
-export const getPlayListDetail = async (id: number): Promise<IPlaylist> => {
+export const getPlayListPersonalized = async (
+  cookie: string, // 可选
+): Promise<IPlaylistPersonalized> => {
+  return await fetch({
+    url: '/personalized',
+    params: {
+      // limit,
+    },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
+  });
+};
+
+export const getPlayListDetail = async (
+  id: number,
+): Promise<IPlayListDetails> => {
   return await fetch({
     url: '/playlist/detail',
     params: { id },

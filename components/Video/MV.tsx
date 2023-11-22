@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaCloudDownloadAlt, FaPlay, FaSearch, FaVideo } from 'react-icons/fa';
 
-export default async function MVFirst({ mvFirst }: { mvFirst: IMvFirst }) {
-  const videos = mvFirst.data.slice(0, 8).map((mv) => {
+export default async function MV({ data }: { data: IMvFirst }) {
+  const videos = data.data.slice(0, 8).map((mv) => {
     return (
       <div key={mv.id} title={mv.name}>
         <Link href={`/video/${mv.id}`}>

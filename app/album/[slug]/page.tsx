@@ -1,7 +1,7 @@
 import { getAlbumDetail } from '~lib/search';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAlbumComment } from '~lib/playlist';
+import { getAlbumComment } from '~lib/api/playlist';
 import SongCommentTab from '~components/SongCommentTab';
 
 export default async function Album({ params }: { params: Params }) {

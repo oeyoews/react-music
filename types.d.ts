@@ -1,3 +1,24 @@
+interface IPlaylistPersonalized {
+  hasTaste: boolean;
+  code: number;
+  category: number;
+  result: PlaylistPersonalized[];
+}
+
+interface PlaylistPersonalized {
+  id: number;
+  type: number;
+  name: string;
+  copywriter: string;
+  picUrl: string;
+  canDislike: boolean;
+  trackNumberUpdateTime: number;
+  playCount: number;
+  trackCount: number;
+  highQuality: boolean;
+  alg: string;
+}
+
 // 0: 免费或无版权
 // 1: VIP 歌曲
 // 4: 购买专辑
@@ -1155,7 +1176,7 @@ interface Playlist {
   specialType: number;
   totalDuration: number;
   creator: Creator;
-  tracks: null;
+  tracks: Tracks[];
   subscribers: Creator[];
   subscribed: boolean;
   commentThreadId: string;
@@ -1176,6 +1197,55 @@ interface Playlist {
   coverImgId_str?: string;
   alg: string;
   commentCount: number;
+}
+
+interface Tracks {
+  name: string;
+  id: number;
+  pst: number;
+  t: number;
+  ar: Ar[];
+  alia: any[];
+  pop: number;
+  st: number;
+  rt: null | string;
+  fee: number;
+  v: number;
+  crbt: null;
+  cf: string;
+  al: Al;
+  dt: number;
+  h: L | null;
+  m: L | null;
+  l: L;
+  sq: L | null;
+  hr: L | null;
+  a: null;
+  cd: string;
+  no: number;
+  rtUrl: null;
+  ftype: number;
+  rtUrls: any[];
+  djId: number;
+  copyright: number;
+  s_id: number;
+  mark: number;
+  originCoverType: number;
+  originSongSimpleData: null;
+  tagPicList: null;
+  resourceState: boolean;
+  version: number;
+  songJumpInfo: null;
+  entertainmentTags: null;
+  awardTags: null;
+  single: number;
+  noCopyrightRcmd: null;
+  mst: number;
+  cp: number;
+  mv: number;
+  rtype: number;
+  rurl: null;
+  publishTime: number;
 }
 
 interface Creator {
@@ -1442,7 +1512,7 @@ interface VideoInfo {
 }
 
 // playlist details
-interface PlayListDetails {
+interface IPlayListDetails {
   code: number;
   relatedVideos: RelatedVideos;
   playlist: Playlist;

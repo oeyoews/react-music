@@ -9,7 +9,8 @@ const nextConfig = {
   //     process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   // },
   images: {
-    unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
+    // unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'http',

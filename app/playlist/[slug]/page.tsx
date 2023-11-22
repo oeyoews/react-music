@@ -1,8 +1,4 @@
-import {
-  getHotPlayList,
-  getPlayListComment,
-  getPlayListSongs,
-} from '~lib/playlist';
+import { getPlayListComment, getPlayListDetail } from '~lib/api/playlist';
 import Link from 'next/link';
 import Badge from '~components/Badge';
 import SongCommentTab from '~components/SongCommentTab';
@@ -10,10 +6,11 @@ import Image from 'next/image';
 
 export default async function Page({ params }: any) {
   const { slug } = params;
-  const musicdata = await getHotPlayList();
-  const { description, name, tags, createTime, updateTime, coverImgUrl } =
-    musicdata.playlists[0];
-  const { songs, privileges } = await getPlayListSongs(slug);
+  const musicdata = await getPlayListDetail(slug);
+  const { name, description, tags, coverImgUrl, createTime, updateTime } =
+    musicdata.playlist;
+  const songs = musicdata.playlist.tracks;
+  const privileges = musicdata.privileges;
   const vipids = privileges
     .filter((privileges) => privileges.fee === 1)
     .map((vipPrivileges) => vipPrivileges.id);
