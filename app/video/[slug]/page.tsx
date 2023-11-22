@@ -13,6 +13,7 @@ export default function VideoPage({ params }: { params: Params }) {
 
   const { data: mvComment } = useMvComment(slug);
 
+  // TODO: 支持选择分辨率 /mv/url
   const VideoTitle = () => {
     const { data: mvDetailData } = useSWRImmutable(
       slug + 'detail',

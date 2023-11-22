@@ -42,6 +42,7 @@
 - [ ] 支持歌单播放
 - [ ] 用户图片动态加载
 - [ ] update latest comment btn
+- [ ] 用户歌单 /user/playlist?uid=32953014
 
 <!-- - [x] [301](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961) -->
 <!-- - [ ] 支持直接调用 [neteasemusicapi](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/1842) -->

@@ -7,7 +7,7 @@ import { getHotPlayList, getPlayListPersonalized } from '~lib/api/playlist';
 import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
 import MV from '~components/Video/MV';
-import { getMvFirst, getMvRCMD } from '~lib/mv';
+import { getMvFirst, getMvRCMD, getPersonalizedVideo } from '~lib/mv';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
 
 export const revalidate = 3600;

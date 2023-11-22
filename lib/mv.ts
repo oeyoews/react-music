@@ -48,3 +48,10 @@ export const getMVComment = async (id: Id): Promise<ISongComment> => {
     params: { id, limit: 99 },
   });
 };
+
+// TODO: video
+export const getPersonalizedVideo = async (): Promise<any> => {
+  return await fetch({
+    url: '/video/timeline/recommend',
+  });
+};
