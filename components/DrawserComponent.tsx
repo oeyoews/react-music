@@ -21,7 +21,9 @@ export default function DrawserComponent({
         <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[80%] mt-24 fixed bottom-0 inset-x-0 z-[99999] prose max-w-none">
           <div className="p-4 bg-white rounded-t-[10px] flex-1 overflow-auto">
             <div className="mx-auto overflow-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
-            <div className="mx-auto max-w-2xl">{children}</div>
+            <div className="mx-auto w-full md:max-w-2xl overflow-hidden">
+              {children}
+            </div>
           </div>
         </Drawer.Content>
       </Drawer.Portal>
