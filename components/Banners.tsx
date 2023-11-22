@@ -38,7 +38,7 @@ export default function Banners({ data }: { data: Banner[] }) {
     <div>
       {/* sticky 对于framermotion bug, 需要多加一个div */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose [&>*:nth-child(2)]:col-span-2"
+        className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose md:[&>*:nth-child(2)]:col-span-2"
         variants={container}
         initial={firstLoading ? 'hidden' : 'visible'}
         animate={'visible'}>
