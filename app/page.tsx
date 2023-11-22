@@ -1,7 +1,6 @@
-import { getBanners, searchHotDetail } from '~lib/search';
+import { getBanners } from '~lib/search';
 import Banners from '~components/Banners';
 import Playlist from '~components/Playlist';
-import HotSongs from '~components/HotSongs';
 import RecommendSongs from '~components/RecommendSongs';
 import { getHotPlayList } from '~lib/api/playlist';
 import Announcement from '~components/Announcement';
@@ -17,7 +16,7 @@ export default async function Home() {
   return (
     <div className="p-2 mb-16">
       <Announcement
-        text="维护中..."
+        text="重构中..."
         store={true}
         icon={'🎉'}
         position="top-center"

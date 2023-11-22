@@ -1,11 +1,12 @@
 'use client';
 
-import useStore from '~lib/store';
 import React from 'react';
 
 import Link from 'next/link';
 import { RiNeteaseCloudMusicFill } from 'react-icons/ri';
 import { FaComment, FaSearch, FaStar, FaUser, FaVideo } from 'react-icons/fa';
+import { usePathname } from 'next/navigation';
+
 const pcSidebarItems = [
   { href: '/', title: '为我推荐', icon: <FaStar /> },
   { href: '/mv', title: 'MV视频', icon: <FaVideo /> },
@@ -19,7 +20,7 @@ const pcSidebarItems = [
 ];
 
 export const Sidebar = () => {
-  const { focusedTab, setFocusedTab } = useStore();
+  const pathname = usePathname();
   return (
     <div className="select-none hidden md:flex fixed left-0 top-0 bg-slate-100/70 backdrop-blur-sm p-4 h-screen space-y-2 bgblack flex-col w-52">
       <Link href={'/'}>
@@ -34,18 +35,17 @@ export const Sidebar = () => {
         </div>
       </Link>
       {pcSidebarItems.map((item) => (
-        <div
-          key={item.title}
-          className={`p-2 rounded text-gray-500 m-0 transition-all ${
-            focusedTab === item.href
-              ? 'bg-rose-500 text-white'
-              : 'hover:bg-slate-200/90'
-          }`}>
-          <Link href={item.href} onClick={() => setFocusedTab(item.href)}>
-            {React.cloneElement(item.icon, { className: 'inline' })}{' '}
+        <Link href={item.href} key={item.title}>
+          <div
+            className={`p-2 rounded text-gray-500 m-0 transition-all ${
+              pathname === item.href
+                ? 'bg-rose-500 text-white'
+                : 'hover:bg-slate-200/90'
+            }`}>
+            {React.cloneElement(item.icon, { className: 'inline mx-2' })}
             {item.title}
-          </Link>
-        </div>
+          </div>
+        </Link>
       ))}
     </div>
   );
