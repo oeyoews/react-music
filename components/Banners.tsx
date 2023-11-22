@@ -38,7 +38,8 @@ export default function Banners({ data }: { data: Banner[] }) {
     <div>
       {/* sticky 对于framermotion bug, 需要多加一个div */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose md:[&>*:nth-child(2)]:col-span-2"
+        // md:[&>*:nth-child(2)]:col-span-2
+        className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose "
         variants={container}
         initial={firstLoading ? 'hidden' : 'visible'}
         animate={'visible'}>
@@ -47,8 +48,9 @@ export default function Banners({ data }: { data: Banner[] }) {
           <motion.div
             key={banner.imageUrl}
             variants={item}
-            className="overflow-hidden rounded-md md:first:col-span-2">
-            {/* md:first:col-span-3 */}
+            // md:first:col-span-2
+            className="overflow-hidden rounded-md">
+            {/* md:first:col-span-2 */}
             {/* <span>{banner.typeTitle}</span> */}
             <Link
               href={getRoute(banner) as Route}
