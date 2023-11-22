@@ -1,6 +1,9 @@
+'use client';
+
 import { FcMusic, FcSearch, FcSettings } from 'react-icons/fc';
 import Link from 'next/link';
 import React from 'react';
+import useStore from '~lib/store';
 
 import { RiNeteaseCloudMusicFill } from 'react-icons/ri';
 import { FaComment, FaSearch, FaStar, FaUser, FaVideo } from 'react-icons/fa';
@@ -39,6 +42,7 @@ export default function MobNav() {
 }
 
 export const PcSidebar = () => {
+  const { focusedTab, setFocusedTab } = useStore();
   return (
     <div className="select-none hidden md:flex fixed left-0 top-0 bg-slate-100/70 backdrop-blur-sm p-4 h-screen space-y-2 bgblack flex-col w-52">
       <Link href={'/'}>
@@ -55,8 +59,12 @@ export const PcSidebar = () => {
       {pcSidebarItems.map((item) => (
         <div
           key={item.title}
-          className="p-2 rounded text-gray-500 m-0 transition-all hover:bg-neutral-200/90 duration-500">
-          <Link href={item.href}>
+          className={`p-2 rounded text-gray-500 m-0 transition-all ${
+            focusedTab === item.href
+              ? 'bg-rose-500 text-white'
+              : 'hover:bg-slate-200/90'
+          }`}>
+          <Link href={item.href} onClick={() => setFocusedTab(item.href)}>
             {React.cloneElement(item.icon, { className: 'inline' })}{' '}
             {item.title}
           </Link>

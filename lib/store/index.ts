@@ -7,6 +7,7 @@ type Store = {
   userInfo: IUserAccount;
   firstLoading: boolean;
   searchWord: string;
+  focusedTab: string;
 
   setCookie: (cookie: string) => void;
   setUserId: (userId: string) => void;
@@ -14,6 +15,7 @@ type Store = {
   setUserInfo: (userInfo: IUserAccount) => void;
   setFirstLoading: (firstLoading: boolean) => void;
   setSearchWord: (searchWord: string) => void;
+  setFocusedTab: (tab: string) => void;
 };
 
 const useStore = create<Store>((set) => ({
@@ -25,6 +27,7 @@ const useStore = create<Store>((set) => ({
   userInfo: {},
   firstLoading: true,
   searchWord: '',
+  focusedTab: '/', // 初始值为空
 
   setCookie: (cookie: string) => set({ cookie }),
   setUserId: (userId: string) => set({ userId }),
@@ -32,6 +35,7 @@ const useStore = create<Store>((set) => ({
   setUserInfo: (userInfo) => set({ userInfo }),
   setFirstLoading: (firstLoading: boolean) => set({ firstLoading }),
   setSearchWord: (searchWord: string) => set({ searchWord }),
+  setFocusedTab: (tab: string) => set({ focusedTab: tab }),
 }));
 
 export default useStore;
