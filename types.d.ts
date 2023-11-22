@@ -769,7 +769,7 @@ interface ISimiSong {
 
 // song comment
 interface ISongComment {
-  isMusician: boolean;
+  isMusician: boolean; // 似乎没什么用
   cnum: number;
   userId: number;
   topComments: any[];

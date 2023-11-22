@@ -50,7 +50,7 @@ export const useSongComment = (id: Id) => {
   const data = useSWRImmutable(id + 'comment', () => getSongComment(id), {
     // suspense: true,
   });
-  if (data.data?.code !== 200) {
+  if (data.data?.code !== 200 && data.data?.message) {
     toast.error(`评论区: ${data.data?.message}` as string, {
       position: 'bottom-right',
     });
