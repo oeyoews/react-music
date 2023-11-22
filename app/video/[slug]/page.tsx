@@ -15,18 +15,12 @@ export default function VideoPage({ params }: { params: Params }) {
 
   // TODO: 支持选择分辨率 /mv/url
   const VideoTitle = () => {
-    const { data: mvDetailData } = useSWRImmutable(
-      slug + 'detail',
-      () => getMvDetail(slug),
-      {
-        suspense: true,
-      },
+    const { data: mvDetailData } = useSWRImmutable(slug + 'detail', () =>
+      getMvDetail(slug),
     );
     const mvName = mvDetailData?.data?.name;
     const artistName = mvDetailData?.data?.artistName;
-
-    const desc = mvDetailData.data.desc;
-
+    const desc = mvDetailData?.data.desc;
     return (
       <div className="">
         <Suspense fallback={<Spinner />}>
@@ -40,27 +34,23 @@ export default function VideoPage({ params }: { params: Params }) {
   };
 
   const VideoPlayer = () => {
-    const { data: mvURLData } = useSWRImmutable(
-      slug + 'url',
+    const { data: mvURLData, isLoading } = useSWRImmutable(
+      slug + 'mvurl',
       () => getMvURL(slug, localStorage.cookie),
       {
-        suspense: true,
         refreshInterval: 3600000, // 1小时
       },
     );
 
     return (
       <div className="flex justify-center items-center my-4">
-        {localStorage.cookie ? (
-          <Suspense fallback={<Spinner />}>
-            <ArtPlayer
-              // id={mvURLData?.data.id.toString()}
-              url={mvURLData?.data.url!}
-              className="aspect-video w-[980px]"
-            />
-          </Suspense>
-        ) : (
-          <div className="text-red-500">请先登录</div>
+        {isLoading && <Spinner />}
+        {!isLoading && (
+          <ArtPlayer
+            // id={mvURLData?.data.id.toString()}
+            url={mvURLData?.data.url!}
+            className="aspect-video w-[980px]"
+          />
         )}
       </div>
     );
@@ -72,7 +62,7 @@ export default function VideoPage({ params }: { params: Params }) {
       <VideoPlayer />
       <div className="flex justify-start items-center space-x-2 mt-8">
         <h2 className="my-2">评论区</h2>
-        <div>共{mvComment?.total?.toLocaleString()} 条评论</div>
+        <div>共 {mvComment?.total?.toLocaleString() || 0} 条评论</div>
       </div>
       <SongCommentTab songComment={mvComment as ISongComment} />
     </>

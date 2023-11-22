@@ -80,7 +80,7 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="">
       {loading ? (
         <></>
       ) : (

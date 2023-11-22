@@ -33,7 +33,7 @@ export default function Banners({ data }: { data: Banner[] }) {
   };
 
   return (
-    <div>
+    <div className="mt-14">
       {/* sticky 对于framermotion bug, 需要多加一个div */}
       <motion.div
         // md:[&>*:nth-child(2)]:col-span-2

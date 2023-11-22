@@ -22,14 +22,13 @@ export const usePlaylistPersonalized = () => {
 };
 
 export const useMvComment = (id: Id) => {
-  const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {
-    suspense: true,
-  });
-  if (data.data.code !== 200) {
-    toast.error(`评论区: ${data.data.message}` as string, {
-      position: 'bottom-right',
-    });
-  }
+  const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {});
+  // 这里会导致hydration error
+  // if (data.data?.code !== 200) {
+  //   toast.error(`评论区: ${data.data?.message}` as string, {
+  //     position: 'bottom-right',
+  //   });
+  // }
   return data;
 };
 
