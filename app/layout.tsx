@@ -27,7 +27,7 @@ export default function RootLayout({
         <Toaster />
         <Nav />
         <Sidebar />
-        <div className="mt-8 prose ml-2 md:ml-56 mr-2 max-w-none px-2">
+        <div className="mt-6 prose ml-2 md:ml-56 mr-2 max-w-none px-2">
           {children}
         </div>
       </body>

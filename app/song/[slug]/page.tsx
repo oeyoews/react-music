@@ -8,11 +8,10 @@ import {
 } from '~lib/hooks';
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
 
 import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
-import { Suspense, useEffect } from 'react';
+import DrawserComponent from '~components/DrawserComponent';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
@@ -26,7 +25,7 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        {isLoadingSong ? <Spinner /> : <APlayer slug={slug} />}
+        {isLoadingSong ? <Spinner size={88} /> : <APlayer slug={slug} />}
         <h2>歌曲名</h2>
         <div className="inline font-semibold">{song?.name}</div>
         {vip && (
@@ -115,9 +114,17 @@ export default function Page({ params }: { params: Params }) {
       {/* <div>音质: {musicInfo.level}</div> */}
       {/* TODO: 有渲染问题 */}
       <MusicPlayer />
-      <ArtistInfo />
-      <SimiSong />
-      <SongComment />
+      <div className="space-x-2 my-4">
+        <DrawserComponent text="查看歌手信息">
+          <ArtistInfo />
+        </DrawserComponent>
+        <DrawserComponent text="查看相似歌曲">
+          <SimiSong />
+        </DrawserComponent>
+        <DrawserComponent text="查看评论区">
+          <SongComment />
+        </DrawserComponent>
+      </div>
     </div>
   );
 }
