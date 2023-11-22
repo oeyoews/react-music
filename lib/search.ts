@@ -188,7 +188,7 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
   });
 };
 
-// NOTE: 需要cookie(游客cookie 也可以)
+// NOTE: 需要cookie(游客cookie 也可以); 有时没有cookie 也可以???
 export const getStarPick = async (cookie: string): Promise<IStarPick> => {
   return await fetch({
     url: '/starpick/comments/summary',

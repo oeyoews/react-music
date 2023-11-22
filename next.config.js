@@ -8,6 +8,8 @@ const nextConfig = {
   //   removeConsole:
   //     process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   // },
+  // / -> /home
+  // redirects: { },
   images: {
     unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
     remotePatterns: [

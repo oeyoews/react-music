@@ -12,7 +12,7 @@ export const getqrKey = async (): Promise<IQRCode> => {
     url: '/login/qr/key',
     params: { timestamp: Date.now() },
     options: {
-      method: 'post',
+      method: 'POST',
     },
   });
 };
@@ -31,7 +31,7 @@ export const qrCreate = async (key: string): Promise<IQRCodeData> => {
       timestamp: Date.now(),
     },
     options: {
-      method: 'post',
+      method: 'POST',
     },
   });
 };
@@ -49,7 +49,7 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
       timestamp: Date.now(),
     },
     options: {
-      method: 'post',
+      method: 'POST',
     },
   });
 };
@@ -61,7 +61,11 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
 export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
   return await fetch({
     url: '/login/status',
-    params: { timestamp: Date.now(), cookie },
+    params: { timestamp: Date.now() },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
   });
 };
 
@@ -84,7 +88,11 @@ export const refreshLogin = async () => {
 export const getAccount = async (cookie: string): Promise<IUserAccount> => {
   return await fetch({
     url: '/user/account',
-    params: { timestamp: Date.now(), cookie },
+    params: { timestamp: Date.now() },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
   });
 };
 
@@ -92,7 +100,11 @@ export const getAccount = async (cookie: string): Promise<IUserAccount> => {
 export const getLevel = async (cookie: string): Promise<ILevel> => {
   return await fetch({
     url: '/user/level',
-    params: { timestamp: Date.now(), cookie },
+    params: { timestamp: Date.now() },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
   });
 };
 

@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaCloudDownloadAlt, FaPlay, FaSearch, FaVideo } from 'react-icons/fa';
+import { FaPlay, FaVideo } from 'react-icons/fa';
 
 export default async function MV({ data }: { data: IMvFirst }) {
-  const videos = data.data.slice(0, 8).map((mv) => {
+  const videos = data.data?.slice(0, 8)?.map((mv) => {
     return (
       <div key={mv.id} title={mv.name}>
-        <Link href={`/video/${mv.id}`}>
+        <Link href={`/mv/${mv.id}`}>
           <div className="overflow-hidden rounded-md relative group">
             <div className="flex space-x-2 justify-between items-center text-sm text-black p-2 absolute backdrop-blur-md bg-white/10 w-full bottom-0 left-0 rounded-b-sm">
               <div className="truncate">{mv.name}</div>

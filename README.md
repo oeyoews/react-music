@@ -2,7 +2,8 @@
 
 [preview page](https://nextjs-netease-music.vercel.app/)
 
-<!-- > [!IMPORTANT] -->
+> [!TIP]
+> 由于API不够稳定, 部分页面请求会加载失败, 可在开发者工具中查看具体原因
 
 ## TODO
 

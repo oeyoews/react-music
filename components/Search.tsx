@@ -3,6 +3,7 @@ import useStore from '~lib/store';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import { searchDefault } from '~lib/search';
+import { FaSearch } from 'react-icons/fa';
 
 export default function Search() {
   const statusStore = useStore();
@@ -23,7 +24,7 @@ export default function Search() {
   };
 
   return (
-    <div className="my-8 min-h-screen">
+    <div className="my-8">
       <form onSubmit={handleSearch} className="flex items-center">
         <input
           autoFocus
@@ -31,12 +32,12 @@ export default function Search() {
           value={statusStore.searchWord}
           onChange={(e) => statusStore.setSearchWord(e.target.value)}
           placeholder={searchWord}
-          className="border border-gray-300 rounded-l p-2 focus:outline-none w-full"
+          className="border border-gray-500 rounded-l-lg p-2 focus:outline-none w-full"
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-r hover:bg-blue-700 focus:outline-none">
-          Search
+          className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
+          <FaSearch className="inline" />
         </button>
       </form>
     </div>
