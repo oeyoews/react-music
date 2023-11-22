@@ -32,8 +32,6 @@ export default function Banners({ data }: { data: Banner[] }) {
     },
   };
 
-  const length = data.length;
-
   return (
     <div>
       {/* sticky 对于framermotion bug, 需要多加一个div */}
