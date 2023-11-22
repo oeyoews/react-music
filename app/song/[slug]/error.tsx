@@ -13,6 +13,7 @@ export default function Error({
 }) {
   return (
     <div className="flex items-center justify-center h-screen">
+      <p className="text-rose-400 font-bold text-lg">加载出错</p>
       <Link href={'/'} className="bg-neutral-200 rounded p-2">
         返回主页
       </Link>

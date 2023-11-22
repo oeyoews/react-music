@@ -69,17 +69,15 @@ export default function Page({ params }: { params: Params }) {
 
     return (
       <div>
-        <>
-          <div className="flex justify-start items-center space-x-2">
-            <h2 className="my-2">评论区</h2>
-            <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
-          </div>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <SongCommentTab songComment={data as ISongComment} />
-          )}
-        </>
+        <div className="flex justify-start items-center space-x-2">
+          <h2 className="my-2">评论区</h2>
+          <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
+        </div>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <SongCommentTab songComment={data as ISongComment} />
+        )}
       </div>
     );
   };

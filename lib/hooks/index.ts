@@ -48,7 +48,7 @@ export const useSearch = (keyword: string) => {
 
 export const useSongComment = (id: Id) => {
   const data = useSWRImmutable(id + 'comment', () => getSongComment(id), {
-    suspense: true,
+    // suspense: true,
   });
   if (data.data?.code !== 200) {
     toast.error(`评论区: ${data.data?.message}` as string, {
