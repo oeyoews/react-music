@@ -38,7 +38,11 @@ export const Sidebar = () => {
         <Link href={item.href} key={item.title}>
           <div
             className={`p-2 rounded text-gray-500 m-0 transition-all ${
-              pathname === item.href
+              pathname
+                .replace('https://', '')
+                .split('/')
+                .splice(0, 2)
+                .join('/') === item.href.replace('https://', '')
                 ? 'bg-rose-500 text-white'
                 : 'hover:bg-slate-200/90'
             }`}>
