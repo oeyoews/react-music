@@ -32,20 +32,23 @@ export default function Banners({ data }: { data: Banner[] }) {
     },
   };
 
+  const length = data.length;
+
   return (
     <div>
       {/* sticky 对于framermotion bug, 需要多加一个div */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-3 not-prose"
+        className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose [&>*:nth-child(2)]:col-span-2"
         variants={container}
         initial={firstLoading ? 'hidden' : 'visible'}
         animate={'visible'}>
         {/* NOTE: 数量不固定 */}
-        {data.map((banner) => (
+        {data.slice(0, 8).map((banner) => (
           <motion.div
             key={banner.imageUrl}
             variants={item}
-            className="overflow-hidden rounded-md">
+            className="overflow-hidden rounded-md md:first:col-span-2">
+            {/* md:first:col-span-3 */}
             {/* <span>{banner.typeTitle}</span> */}
             <Link
               href={getRoute(banner) as Route}
