@@ -4,9 +4,5 @@ import { getMvRCMD } from '~lib/mv';
 export default async function MVPage() {
   const mvrcmd = await getMvRCMD();
 
-  return (
-    <div className="p-2 mb-16">
-      <MV data={mvrcmd} />
-    </div>
-  );
+  return <div className="p-2 mb-16">{mvrcmd && <MV data={mvrcmd} />}</div>;
 }
