@@ -1749,3 +1749,104 @@ declare module 'react-aplayer' {
   }
   export default class Aplayer extends React.Component<Partial<AplayerProps>> {}
 }
+
+interface IVideosAll {
+  datas: DataElement[];
+  msg: string;
+  hasmore: boolean;
+  rcmdLimit: number;
+  code: number;
+}
+
+interface VideosAll {
+  type: number;
+  displayed: boolean;
+  alg: string;
+  extAlg: null;
+  data: VideosAllData;
+}
+
+interface VideosAllData {
+  alg: string;
+  scm: string;
+  threadId: string;
+  coverUrl: string;
+  height: number;
+  width: number;
+  title: string;
+  description: null | string;
+  commentCount: number;
+  shareCount: number;
+  resolutions: Resolution[];
+  creator: Creator;
+  urlInfo: null;
+  videoGroup: VideoGroup[];
+  previewUrl: null | string;
+  previewDurationms: number;
+  hasRelatedGameAd: boolean;
+  markTypes: number[] | null;
+  relateSong: RelateSong[];
+  relatedInfo: null;
+  videoUserLiveInfo: null;
+  vid: string;
+  durationms: number;
+  playTime: number;
+  praisedCount: number;
+  praised: boolean;
+  subscribed: boolean;
+}
+
+interface RelateSong {
+  name: string;
+  id: number;
+  pst: number;
+  t: number;
+  ar: Ar[];
+  alia: string[];
+  pop: number;
+  st: number;
+  rt: null;
+  fee: number;
+  v: number;
+  crbt: null;
+  cf: string;
+  al: Al;
+  dt: number;
+  h: H;
+  m: H;
+  l: H;
+  a: null;
+  cd: string;
+  no: number;
+  rtUrl: null;
+  ftype: number;
+  rtUrls: any[];
+  djId: number;
+  copyright: number;
+  s_id: number;
+  mst: number;
+  cp: number;
+  mv: number;
+  rtype: number;
+  rurl: null;
+  publishTime: number;
+  privilege: Privilege;
+}
+
+interface H {
+  br: number;
+  fid: number;
+  size: number;
+  vd: number;
+}
+
+interface Resolution {
+  resolution: number;
+  size: number;
+}
+
+interface VideoGroup {
+  id: number;
+  name: string;
+  alg: null;
+}

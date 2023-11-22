@@ -8,8 +8,9 @@ export default function page({ params }: { params: any }) {
   const { slug } = params;
 
   const ArtistData = () => {
-    const { data, isLoading } = useArtistData(slug);
-    const artist = data?.data.artist;
+    const { data: artistdata, isLoading } = useArtistData(slug);
+    const artist = artistdata?.data.artist;
+    const videoCount = artistdata?.data.videoCount;
 
     return (
       <>
@@ -21,11 +22,12 @@ export default function page({ params }: { params: any }) {
               alt="img"
               width={256}
               height={256}
-              className="rounded-full"
+              className="rounded-full shadow-lg"
             />
           </div>
         )}
         <div className="font-bold">{artist?.name}</div>
+        <div>video: {videoCount}</div>
         <p>{artist?.briefDesc}</p>
       </>
     );

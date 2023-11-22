@@ -28,7 +28,7 @@ export default function Page({ params }: { params: Params }) {
       <div>
         {isLoadingSong ? <Spinner /> : <APlayer slug={slug} />}
         <h2>歌曲名</h2>
-        <div className="font-semibold">{song?.name}</div>
+        <div className="inline font-semibold">{song?.name}</div>
         {vip && (
           <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
             VIP
