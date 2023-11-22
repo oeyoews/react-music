@@ -34,15 +34,13 @@ export const Sidebar = () => {
           </div>
         </div>
       </Link>
+
       {pcSidebarItems.map((item) => (
         <Link href={item.href} key={item.title}>
           <div
             className={`p-2 rounded text-gray-500 m-0 transition-all ${
-              pathname
-                .replace('https://', '')
-                .split('/')
-                .splice(0, 2)
-                .join('/') === item.href.replace('https://', '')
+              // pathname.includes(item.href)
+              pathname === item.href
                 ? 'bg-rose-500 text-white'
                 : 'hover:bg-slate-200/90'
             }`}>
