@@ -71,8 +71,8 @@ interface IMvDetailData {
   name: string;
   artistId: number;
   artistName: string;
-  briefDesc: string;
-  desc: null;
+  briefDesc: string | null;
+  desc: string | null;
   cover: string;
   coverId_str: string;
   coverId: number;

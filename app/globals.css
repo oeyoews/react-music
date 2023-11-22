@@ -80,3 +80,7 @@ hr {
     box-shadow: 0 0 1px #007aff;
   }
 }
+
+h2 {
+  text-wrap: balance;
+}

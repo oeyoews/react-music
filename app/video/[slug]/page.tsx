@@ -24,12 +24,15 @@ export default function VideoPage({ params }: { params: Params }) {
     const mvName = mvDetailData?.data?.name;
     const artistName = mvDetailData?.data?.artistName;
 
+    const desc = mvDetailData.data.desc;
+
     return (
-      <div className="flex justify-center items-center">
+      <div className="">
         <Suspense fallback={<Spinner />}>
           <h2 className="text-center">
             {mvName} {mvName && '--'} {artistName}
           </h2>
+          <p className="font-normal text-sm">{desc}</p>
         </Suspense>
       </div>
     );
