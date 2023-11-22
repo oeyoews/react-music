@@ -38,7 +38,7 @@ export const getPlayListPersonalized = async (
   return await fetch({
     url: '/personalized',
     params: {
-      // limit,
+      limit: 12,
     },
     options: {
       method: 'POST',

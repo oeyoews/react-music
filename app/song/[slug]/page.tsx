@@ -27,14 +27,13 @@ export default function Page({ params }: { params: Params }) {
     return (
       <div>
         {isLoadingSong ? <Spinner /> : <APlayer slug={slug} />}
-        <h2>
-          歌曲名: {song?.name}
-          {vip && (
-            <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
-              VIP
-            </sup>
-          )}
-        </h2>
+        <h2>歌曲名</h2>
+        <div className="font-semibold">{song?.name}</div>
+        {vip && (
+          <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
+            VIP
+          </sup>
+        )}
       </div>
     );
   };
@@ -53,6 +52,7 @@ export default function Page({ params }: { params: Params }) {
           <div>
             <h2 className="my-2">歌手简介</h2>
             <Link
+              title="点击查看具体详情"
               href={`/artist/${artistData?.data?.artist?.id}`}
               className="no-underline font-bold">
               {artistData?.data.artist?.name}
