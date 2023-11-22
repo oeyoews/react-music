@@ -27,7 +27,7 @@ export const Sidebar = () => {
         <div className="flex mb-8">
           <RiNeteaseCloudMusicFill className="w-8 h-8 mr-2 text-rose-500/95" />
           <div className="flex items-center space-x-2">
-            <div className="text-sm font-semibold">网易云音乐</div>
+            <div className="text-base font-semibold">网易云音乐</div>
             <button className="text-gray-800 border-gray-400 border p-0.5 rounded-sm font-bold text-[8px]">
               Beta
             </button>
