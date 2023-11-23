@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'React Netease Cloud Music',
   description: 'React Netease Cloud Music',
   manifest: '/manifest.json',
+  referrer: 'no-referrer', // 针对一些防盗链
 };
 
 export default function RootLayout({

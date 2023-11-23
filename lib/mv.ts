@@ -35,7 +35,10 @@ export const getMvPersonalized = async (): Promise<IMvFirst> => {
 export const getMvURL = async (id: Id, cookie?: string): Promise<IMvURL> => {
   return await fetch({
     url: '/mv/url',
-    params: { id },
+    params: {
+      id,
+      r: 1080,
+    },
     options: {
       method: 'POST',
       body: JSON.stringify({ cookie }),
@@ -52,7 +55,9 @@ export const getPersonalizedMv = async (): Promise<IPersonalizedMv> => {
 export const getMvDetail = async (mvid: Id): Promise<IMvDetail> => {
   return await fetch({
     url: '/mv/detail',
-    params: { mvid },
+    params: {
+      mvid,
+    },
   });
 };
 

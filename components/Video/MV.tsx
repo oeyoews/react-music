@@ -6,7 +6,7 @@ export default function MV({
   data,
   total = 8,
 }: {
-  data: MvFirst[] | ArtistMV[];
+  data: MvFirst[] | ArtistMV[] | any[];
   total?: number;
 }) {
   const videos = data?.slice(0, total)?.map((mv) => {
