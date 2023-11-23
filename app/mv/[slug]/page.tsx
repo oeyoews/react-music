@@ -69,9 +69,9 @@ export default function VideoPage({ params }: { params: Params }) {
         </div>
         <SongCommentTab songComment={mvComment as ISongComment} />
       </DrawserComponent>
-      <DrawserComponent text="查看相似MV">
+      {/* <DrawserComponent text="查看相似MV">
         <SiMiMV mvId={slug} />
-      </DrawserComponent>
+      </DrawserComponent> */}
     </>
   );
 }
