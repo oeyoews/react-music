@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import {
   useSongDetailData,
   useArtistData,
@@ -14,18 +13,24 @@ import Link from 'next/link';
 import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
 import DrawserComponent from '~components/DrawserComponent';
-import { FaPlay, FaVideo } from 'react-icons/fa';
 import MV from '~components/Video/MV';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
 
   const MusicPlayer = () => {
-    const { data: songDetailData, isLoading: isLoadingSong } =
-      useSongDetailData(slug);
+    const {
+      data: songDetailData,
+      isLoading: isLoadingSong,
+      error,
+    } = useSongDetailData(slug);
     const song = songDetailData?.songs[0];
     const previleges = songDetailData?.privileges[0];
     const vip = previleges?.fee === 1 ? true : false;
+
+    if (error) {
+      return <div className="text-red-500">加载错误</div>;
+    }
 
     return (
       <div>
@@ -52,7 +57,7 @@ export default function Page({ params }: { params: Params }) {
 
   const ArtistInfo = () => {
     const { data: songData } = useSongDetailData(slug);
-    const arId = songData?.songs[0].ar[0].id;
+    const arId = songData?.songs?.[0].ar?.[0].id;
 
     const { data: artistData, isLoading: isloadingArtist } = useArtistData(
       arId!,
