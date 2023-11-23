@@ -23,8 +23,8 @@ export default function StarPick({ number = 6 }: { number?: number }) {
                 href={`/song/${songData.id}`}
                 key={creative.creativeId}
                 title={songData.name}
-                className="hover:scale-105 transition-all duration-500">
-                <div className="w-full h-full m-2 flex justify-between p-2 flex-wrap bg-neutral-100 rounded-md shadow">
+                className="hover:scale-105 transition-all duration-500 p-1 hover:link-error">
+                <div className="card card-body card-bordered w-full h-full m-2 flex justify-between p-2 flex-wrap rounded-md shadow">
                   <div className="w-full md:w-auto">
                     <div className="line-clamp-3">
                       {resources.uiElement.mainTitle.titleDesc} --

@@ -5,5 +5,5 @@ export default function Badge({
   text: string | number;
   className?: string;
 }) {
-  return <sup className={className}>{text}</sup>;
+  return <sup className={`${className} badge`}>{text}</sup>;
 }

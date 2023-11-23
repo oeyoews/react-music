@@ -32,11 +32,9 @@ export default function Search() {
           value={statusStore.searchWord}
           onChange={(e) => statusStore.setSearchWord(e.target.value)}
           placeholder={searchWord}
-          className="border border-gray-500 rounded-l-lg p-2 focus:outline-none w-full"
+          className="input w-full input-ghost mx-2"
         />
-        <button
-          type="submit"
-          className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
+        <button type="submit" className="btn rounded-l-none">
           <FaSearch className="inline" />
         </button>
       </form>

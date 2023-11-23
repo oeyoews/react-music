@@ -45,6 +45,8 @@
 - [ ] update latest comment btn
 - [ ] 用户歌单 /user/playlist?uid=32953014
 - [ ] simi mv 结果相同
+- [ ] daisyui theme switch (setting)
+- [ ] add navbar with daysyui for user
 
 <!-- - [x] [301](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961) -->
 <!-- - [ ] 支持直接调用 [neteasemusicapi](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/1842) -->

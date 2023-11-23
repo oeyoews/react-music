@@ -32,7 +32,7 @@ export default function page({ params }: { params: Params }) {
                       <div>
                         <Badge
                           text={'VIP'}
-                          className="text-red-500 mx-2 font-serif"
+                          className="ml-2 badge-error badge-outline"
                         />
                       </div>
                     ) : (

@@ -12,7 +12,7 @@ export default function Playlist({ data }: { data: Playlist[] }) {
           <div
             key={playlist.name}
             className="hover:cursor-pointer flex flex-col">
-            <Link href={`/playlist/${playlist.id}`} className="rounded-md">
+            <Link href={`/playlist/${playlist.id}`} className="link link-hover">
               <div className="flex overflow-hidden rounded-md relative">
                 <div className="not-prose group">
                   <Image
@@ -31,7 +31,7 @@ export default function Playlist({ data }: { data: Playlist[] }) {
                   </div>
                 </div>
               </div>
-              <div className="text-sm mt-2 hover:text-rose-500 transition-all">
+              <div className="text-sm mt-2 hover:link-error transition-all">
                 {playlist.name}
               </div>
             </Link>

@@ -26,7 +26,7 @@ export default function RecommendSongs() {
       {hasCookie &&
         data?.map(({ name, id, recommendReason }) => (
           <li key={id}>
-            <Link href={`/song/${id}`}>
+            <Link href={`/song/${id}`} className="link link-hover">
               <div className="flex space-x-2 items-center">
                 <div>{name}</div>
                 {recommendReason && <div> -- {recommendReason}</div>}

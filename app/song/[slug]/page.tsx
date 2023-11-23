@@ -14,6 +14,7 @@ import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
 import DrawserComponent from '~components/DrawserComponent';
 import MV from '~components/Video/MV';
+import Badge from '~components/Badge';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
@@ -37,11 +38,7 @@ export default function Page({ params }: { params: Params }) {
         {isLoadingSong ? <Spinner size={88} /> : <APlayer slug={slug} />}
         <h2>歌曲名</h2>
         <div className="inline font-semibold">{song?.name}</div>
-        {vip && (
-          <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
-            VIP
-          </sup>
-        )}
+        {vip && <Badge text={'VIP'} className="badge-error badge-outline" />}
       </div>
     );
   };

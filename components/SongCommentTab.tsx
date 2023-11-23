@@ -10,7 +10,7 @@ export default function SongCommentTab({
   songComment: ISongComment;
 }) {
   const className =
-    'ui-selected:bg-neutral-200/80 ui-selected:text-black ui-not-selected:bg-white ui-not-selected:text-black m-1 p-1 rounded transition-all duration-500';
+    'btn mx-1 ui-selected:btn-info btn-outline ui-not-selected:btn-ghost';
   return (
     <div className="mb-8">
       <Tab.Group>
