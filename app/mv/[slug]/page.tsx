@@ -8,6 +8,7 @@ import useSWRImmutable from 'swr/immutable';
 import { Suspense } from 'react';
 import { useMvComment } from '~lib/hooks';
 import DrawserComponent from '~components/DrawserComponent';
+import SiMiMV from '~components/Video/SiMiMV';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -67,6 +68,9 @@ export default function VideoPage({ params }: { params: Params }) {
           <div>共 {mvComment?.total?.toLocaleString() || 0} 条评论</div>
         </div>
         <SongCommentTab songComment={mvComment as ISongComment} />
+      </DrawserComponent>
+      <DrawserComponent text="查看相似MV">
+        <SiMiMV mvId={slug} />
       </DrawserComponent>
     </>
   );

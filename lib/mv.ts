@@ -1,5 +1,12 @@
 import { customfetch as fetch } from './fetchData';
 
+export const getSiMiMV = async (mvid: Id): Promise<IArtistMV> => {
+  return await fetch({
+    url: '/simi/mv',
+    params: { mvid },
+  });
+};
+
 export const getArtistMV = async (arId: Id): Promise<IArtistMV> => {
   return await fetch({
     url: '/artist/mv',

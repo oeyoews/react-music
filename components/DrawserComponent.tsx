@@ -12,7 +12,7 @@ export default function DrawserComponent({
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <button className="bg-zinc-200 rounded px-2 py-1">{text}</button>
+        <button className="bg-zinc-200 rounded px-2 py-1 mx-2">{text}</button>
       </Drawer.Trigger>
       <Drawer.Portal>
         {/* NOTE: aplayer 的z-index 过高 */}
