@@ -1,8 +1,18 @@
 import { customfetch as fetch } from './fetchData';
 
+export const getArtistMV = async (arId: Id): Promise<IArtistMV> => {
+  return await fetch({
+    url: '/artist/mv',
+    params: { id: arId },
+  });
+};
+
 export const getMvFirst = async (): Promise<IMvFirst> => {
   return await fetch({
     url: '/mv/first',
+    params: {
+      limit: 30,
+    },
   });
 };
 
@@ -25,7 +35,11 @@ export const getMvPersonalized = async (): Promise<IMvFirst> => {
 export const getMvURL = async (id: Id, cookie?: string): Promise<IMvURL> => {
   return await fetch({
     url: '/mv/url',
-    params: { id, cookie },
+    params: { id },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
   });
 };
 

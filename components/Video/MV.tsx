@@ -2,8 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaPlay, FaVideo } from 'react-icons/fa';
 
-export default async function MV({ data }: { data: IMvFirst }) {
-  const videos = data.data?.slice(0, 8)?.map((mv) => {
+export default function MV({
+  data,
+  total = 8,
+}: {
+  data: MvFirst[] | ArtistMV[];
+  total?: number;
+}) {
+  const videos = data?.slice(0, total)?.map((mv) => {
     return (
       <div key={mv.id} title={mv.name}>
         <Link href={`/mv/${mv.id}`}>
@@ -19,7 +25,7 @@ export default async function MV({ data }: { data: IMvFirst }) {
               <FaPlay className="w-16 h-16 text-gray-300" />
             </div>
             <Image
-              src={mv.cover}
+              src={mv.cover || mv.imgurl}
               alt={mv.name}
               width={256}
               height={144}
@@ -33,7 +39,7 @@ export default async function MV({ data }: { data: IMvFirst }) {
 
   return (
     <div>
-      <h2>热门MV</h2>
+      <h2>MV</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">{videos}</div>
     </div>
   );

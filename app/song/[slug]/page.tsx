@@ -1,10 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import {
   useSongDetailData,
   useArtistData,
   useSiMiSong,
   useSongComment,
+  useArtistMV,
 } from '~lib/hooks';
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
@@ -12,6 +14,8 @@ import Link from 'next/link';
 import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
 import DrawserComponent from '~components/DrawserComponent';
+import { FaPlay, FaVideo } from 'react-icons/fa';
+import MV from '~components/Video/MV';
 
 export default function Page({ params }: { params: Params }) {
   const { slug } = params;
@@ -35,6 +39,15 @@ export default function Page({ params }: { params: Params }) {
         )}
       </div>
     );
+  };
+
+  const ArtistMVS = () => {
+    const { data: songData } = useSongDetailData(slug);
+    const arId = songData?.songs[0].ar[0].id;
+
+    const { data: artistMVs, isLoading: isloadingMv } = useArtistMV(arId!);
+
+    return <div>{!isloadingMv && <MV data={artistMVs?.mvs!} />}</div>;
   };
 
   const ArtistInfo = () => {
@@ -123,6 +136,9 @@ export default function Page({ params }: { params: Params }) {
         </DrawserComponent>
         <DrawserComponent text="查看评论区">
           <SongComment />
+        </DrawserComponent>
+        <DrawserComponent text="查看歌手MV">
+          <ArtistMVS />
         </DrawserComponent>
       </div>
     </div>

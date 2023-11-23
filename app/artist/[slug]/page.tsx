@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useArtistData } from '~lib/hooks';
 import Image from 'next/image';
 import Spinner from '~components/Spinner';
@@ -27,7 +28,7 @@ export default function page({ params }: { params: any }) {
           </div>
         )}
         <div className="font-bold">{artist?.name}</div>
-        <div>video: {videoCount}</div>
+        {/* <div>video: {videoCount}</div> */}
         <p>{artist?.briefDesc}</p>
       </>
     );

@@ -12,8 +12,12 @@ import {
   getLyric,
 } from '~lib/search';
 
-import { getMVComment } from '~lib/mv';
+import { getMVComment, getArtistMV } from '~lib/mv';
 import { getPlayListPersonalized } from '~lib/api/playlist';
+
+export const useArtistMV = (arId: Id) => {
+  return useSWRImmutable(arId + 'artistmv', () => getArtistMV(arId));
+};
 
 export const usePlaylistPersonalized = () => {
   return useSWRImmutable('playlistpersonalized', () =>

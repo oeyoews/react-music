@@ -1,3 +1,40 @@
+interface IArtistMV {
+  mvs: ArtistMV[];
+  time: number;
+  hasMore: boolean;
+  code: number;
+}
+
+interface ArtistMV {
+  id: number;
+  name: string;
+  status: number;
+  artistName: string;
+  imgurl: string;
+  imgurl16v9: string;
+  artist: MVArtist;
+  duration: number;
+  playCount: number;
+  publishTime: Date;
+  subed: boolean;
+}
+
+interface MVArtist {
+  img1v1Id: number;
+  topicPerson: number;
+  picId: number;
+  trans: string;
+  musicSize: number;
+  albumSize: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  alias: any[];
+  name: string;
+  id: number;
+  img1v1Id_str: string;
+}
+
 interface IPlaylistPersonalized {
   hasTaste: boolean;
   code: number;
