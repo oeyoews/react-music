@@ -1,7 +1,6 @@
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
 
-import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
 import DrawserComponent from '~components/DrawserComponent';
 import MV from '~components/Video/MV';
@@ -14,6 +13,10 @@ import {
 } from '~lib/search';
 import Aplayer from 'react-aplayer';
 import { getArtistMV } from '~lib/mv';
+import { div } from '~components/Motion';
+import { lazy } from 'react';
+
+const APlayer = lazy(() => import('~components/Player/APlayer'));
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
@@ -46,12 +49,10 @@ export default async function Page({ params }: { params: Params }) {
           )}
         </div>
       );
-    } catch (error) {
-      console.error('发生错误:', error);
-      // 在实际应用中，你可能想展示一个友好的错误信息给用户
+    } catch (e) {
       return (
         <div className="flex justify-center items-center">
-          <div className="text-rose-500 font-bold">歌曲加载失败</div>
+          <div className="text-rose-500 font-bold">{e?.body?.message}</div>
 
           <Link href={'/'} className="bg-neutral-200 rounded p-2">
             返回主页
@@ -99,23 +100,25 @@ export default async function Page({ params }: { params: Params }) {
   };
 
   const SongComment = async () => {
-    const songCommentData = await getSongComment(Number(slug));
-    if (songCommentData.status !== 200) {
-      return <div>评论加载失败</div>;
-    }
-    return (
-      <div>
-        <div className="flex justify-start items-center space-x-2">
-          <h2 className="my-2">评论区</h2>
-          <div>
-            共 {songCommentData.body?.total?.toLocaleString() || 0} 条评论
+    try {
+      const songCommentData = await getSongComment(slug);
+
+      return (
+        <div>
+          <div className="flex justify-start items-center space-x-2">
+            <h2 className="my-2">评论区</h2>
+            <div>
+              共 {songCommentData.body?.total?.toLocaleString() || 0} 条评论
+            </div>
           </div>
+          <SongCommentTab
+            songComment={songCommentData.body as unknown as ISongComment}
+          />
         </div>
-        <SongCommentTab
-          songComment={songCommentData.body as unknown as ISongComment}
-        />
-      </div>
-    );
+      );
+    } catch (e) {
+      return <div className="text-red-400">{e?.body?.message}</div>;
+    }
   };
 
   const SimiSong = async () => {

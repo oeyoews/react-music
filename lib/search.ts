@@ -90,9 +90,9 @@ export const getMusicURL = async (id: Id, cookie?: string) => {
 };
 
 export const getSongDetail = async (ids: string) =>
-  await app.song_detail({
+  (await app.song_detail({
     ids,
-  }) as unknown as { status: number; body: ISongDetail };
+  })) as unknown as { status: number; body: ISongDetail };
 
 export const getAlbumDetail = async (id: Id) => {
   return await app.album({
@@ -100,7 +100,7 @@ export const getAlbumDetail = async (id: Id) => {
   });
 };
 
-export const getSongComment = async (id: number) => {
+export const getSongComment = async (id: Id) => {
   return await app.comment_music({
     id,
   });
