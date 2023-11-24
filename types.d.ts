@@ -1,3 +1,10 @@
+interface APP {
+  status: number
+  body: {
+    message?: string
+  }
+}
+
 interface IArtistMV {
   mvs: ArtistMV[];
   time: number;

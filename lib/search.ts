@@ -83,6 +83,7 @@ export const searchHotDetail = async () => {
 
 // 播放地址有效期 25 min
 export const getMusicURL = async (id: Id, cookie?: string) => {
+  console.log(id);
   return await app.song_url({
     id,
     cookie,

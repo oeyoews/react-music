@@ -6,6 +6,7 @@ import DrawserComponent from '~components/DrawserComponent';
 import MV from '~components/Video/MV';
 import {
   getArtistDetail,
+  getLyric,
   getMusicURL,
   getSimiSong,
   getSongComment,
@@ -31,7 +32,7 @@ export default async function Page({ params }: { params: Params }) {
       const musicBodyData = await getMusicURL(slug);
 
       const url = musicBodyData.body as unknown as IMusicURL;
-      console.log(musicBodyData.body);
+      const lyric = await getLyric(slug);
 
       return (
         <div>
@@ -39,6 +40,7 @@ export default async function Page({ params }: { params: Params }) {
             slug={slug}
             data={songDetailData.body}
             musicurl={url.data[0].url}
+            lyric={lyric.body.lrc.lyric}
           />
           <h2>歌曲名</h2>
           <div className="inline font-semibold">{song?.name}</div>
@@ -50,10 +52,11 @@ export default async function Page({ params }: { params: Params }) {
         </div>
       );
     } catch (e) {
+      console.error('error: ', e);
       return (
         <div className="flex justify-center items-center">
+          {JSON.stringify(e)}
           <div className="text-rose-500 font-bold">{e?.body?.message}</div>
-
           <Link href={'/'} className="bg-neutral-200 rounded p-2">
             返回主页
           </Link>
@@ -62,19 +65,15 @@ export default async function Page({ params }: { params: Params }) {
     }
   };
 
-  // const ArtistMVS = async () => {
-  //   const arId = songDetailData.body?.songs[0].ar[0].id;
-  //   const artistMVs = await getArtistMV(arId);
-  //   if(artistMVs.code !== 200) {
-  //     console.log(artistMVs.body.message);
-  //     return <div>歌手MV加载失败</div>
-  //   }
-  //   return (
-  //     <div>
-  //       <MV data={artistMVs.body?.mvs!} />
-  //     </div>
-  //   );
-  // };
+  const ArtistMVS = async () => {
+    const arId = songDetailData.body?.songs[0].ar[0].id;
+    const artistMVs = await getArtistMV(arId);
+    return (
+      <div>
+        <MV data={artistMVs.body?.mvs!} />
+      </div>
+    );
+  };
 
   const ArtistInfo = async () => {
     const arId = songDetailData.body?.songs?.[0].ar?.[0].id;
@@ -157,9 +156,9 @@ export default async function Page({ params }: { params: Params }) {
         <DrawserComponent text="查看评论区">
           <SongComment />
         </DrawserComponent>
-        {/* <DrawserComponent text="查看歌手MV">
+        <DrawserComponent text="查看歌手MV">
           <ArtistMVS />
-        </DrawserComponent> */}
+        </DrawserComponent>
       </div>
     </div>
   );

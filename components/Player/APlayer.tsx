@@ -14,10 +14,12 @@ export default function APlayer({
   data,
   slug,
   musicurl,
+  lyric
 }: {
   data: any;
   slug: string;
   musicurl: string;
+  lyric: string;
 }) {
   const apRef = useRef<AplayerMethods | null>();
 
@@ -53,7 +55,7 @@ export default function APlayer({
     {
       name: data?.songs?.[0].name,
       url: musicurl,
-      // lrc: lyric?.lrc?.lyric,
+      lrc: lyric,
       // artist: artistData?.data.artist.name,
       // cover: artistData?.data.artist.cover,
     },
