@@ -78,6 +78,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
   let data;
 
   if (slug === 'banners') {
+    // @ts-ignore
     data = await app.banner({ type: 1 });
   }
   data = data?.body as unknown as IBanner;
