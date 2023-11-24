@@ -2,7 +2,7 @@
 
 import Spinner from '~components/Spinner';
 
-import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import { getMusicURL } from '~lib/search';
@@ -27,6 +27,30 @@ export default function APlayer({
   const [artistData, setArtistData] = useState<IArtistDetail>();
   const [musicURL, setMusicURL] = useState<IMusicURL>();
 
+  // 需要cookie , 如何分离出去
+  useEffect(() => {
+    const cookie = localStorage.cookie;
+    getMusicURL(slug, cookie).then((res) => {
+      setMusicURL(res.body);
+    });
+
+    try {
+      fetch('/api/artist_detail', {
+        method: 'POST',
+        body: JSON.stringify({ cookie, id: arId }),
+        credentials: 'include',
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setArtistData(data.data);
+        });
+    } catch (e) {
+      console.log(e.body.message as string);
+    }
+  }, [arId, slug]);
+
   useEffect(() => {
     const vanillaTitle = document.title;
     apRef.current?.on('ended', () => {
@@ -38,25 +62,6 @@ export default function APlayer({
       apRef.current?.destroy();
     };
   }, [data.songs]);
-
-  useEffect(() => {
-    const cookie = localStorage.cookie;
-    getMusicURL(slug, cookie).then((res) => {
-      setMusicURL(res.body);
-    });
-
-    fetch('/api/artist_detail', {
-      method: 'POST',
-      body: JSON.stringify({ cookie, id: arId }),
-      credentials: 'include',
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setArtistData(data.data);
-      });
-  }, [arId, slug]);
 
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
@@ -107,7 +112,7 @@ export default function APlayer({
     // TODO: 这里的数据必须要等待完全获取, 在进行渲染, 直接修改 变量是不会刷新的
     // feat: use swr
     <div className="w-full top-[52px]">
-      {(!url || !cover || !artist) && <Spinner size={68}/>}
+      {(!url || !cover || !artist) && <Spinner size={68} />}
       {url && cover && artist && <ReactAplayer {...options} />}
     </div>
   );
