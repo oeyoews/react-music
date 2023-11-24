@@ -6,17 +6,15 @@ import { customfetch as fetch } from './fetchData';
 import app from 'NeteaseCloudMusicApi';
 
 // id: 歌手id
-export const getArtistDetail = async (arId: Id) => {
-  return await app.artist_detail({
+export const getArtistDetail = async (arId: Id) =>
+  await app.artist_detail({
     id: arId,
   });
-};
 
-export const getSimiSong = async (id: number) => {
-  return await app.simi_song({
+export const getSimiSong = async (id: number) =>
+  (await app.simi_song({
     id,
-  });
-};
+  })) as unknown as { status: number; body: ISimiSong };
 
 export const getLyric = async (id: Id) => {
   return await app.lyric({
