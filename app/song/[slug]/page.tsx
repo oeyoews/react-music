@@ -1,4 +1,5 @@
 import SongCommentTab from '~components/SongCommentTab';
+import app from 'NeteaseCloudMusicApi';
 import Link from 'next/link';
 
 import APlayer from '~components/Player/APlayer';
@@ -7,6 +8,7 @@ import DrawserComponent from '~components/DrawserComponent';
 import MV from '~components/Video/MV';
 import {
   getArtistDetail,
+  getMusicURL,
   getSimiSong,
   getSongComment,
   getSongDetail,
@@ -27,11 +29,25 @@ export default async function Page({ params }: { params: Params }) {
 
     const song = songDetailData.body.songs[0];
     const previleges = songDetailData?.body.privileges[0];
+    // @ts-ignore
     const vip = previleges?.fee === 1 ? true : false;
+    // const musicBodyData = await getMusicURL(slug);
+    const musicBodyData = await app.song_url({
+      id: slug,
+    });
+    if (musicBodyData.status !== 200) {
+      return <div>歌曲加载失败</div>;
+    }
+    const url = musicBodyData.body as unknown as IMusicURL;
+    console.log(musicBodyData.body);
 
     return (
       <div>
-        {/* <APlayer slug={slug} data={songDetailData.body} /> */}
+        <APlayer
+          slug={slug}
+          data={songDetailData.body}
+          musicurl={url.data[0].url}
+        />
         <h2>歌曲名</h2>
         <div className="inline font-semibold">{song?.name}</div>
         {vip && (
@@ -43,18 +59,19 @@ export default async function Page({ params }: { params: Params }) {
     );
   };
 
-  const ArtistMVS = async () => {
-    const arId = songDetailData.body?.songs[0].ar[0].id;
-
-    // const { data: artistMVs, isLoading: isloadingMv } = useArtistMV(arId!);
-    const artistMVs = await getArtistMV(arId!);
-
-    return (
-      <div>
-        <MV data={artistMVs.body?.mvs!} />
-      </div>
-    );
-  };
+  // const ArtistMVS = async () => {
+  //   const arId = songDetailData.body?.songs[0].ar[0].id;
+  //   const artistMVs = await getArtistMV(arId);
+  //   if(artistMVs.code !== 200) {
+  //     console.log(artistMVs.body.message);
+  //     return <div>歌手MV加载失败</div>
+  //   }
+  //   return (
+  //     <div>
+  //       <MV data={artistMVs.body?.mvs!} />
+  //     </div>
+  //   );
+  // };
 
   const ArtistInfo = async () => {
     const arId = songDetailData.body?.songs?.[0].ar?.[0].id;
@@ -123,11 +140,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <div className="my-2">
-      {/* <h1> 歌曲详情 - {songInfo.name} {songInfo.id}{' '} </h1> */}
-      {/* TODO */}
-      {/* <div>音质: {musicInfo.level}</div> */}
-      {/* TODO: 有渲染问题 */}
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
       <div className="space-x-2 my-4">
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo />
@@ -138,9 +151,9 @@ export default async function Page({ params }: { params: Params }) {
         <DrawserComponent text="查看评论区">
           <SongComment />
         </DrawserComponent>
-        <DrawserComponent text="查看歌手MV">
+        {/* <DrawserComponent text="查看歌手MV">
           <ArtistMVS />
-        </DrawserComponent>
+        </DrawserComponent> */}
       </div>
     </div>
   );

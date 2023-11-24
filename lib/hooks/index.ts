@@ -67,8 +67,6 @@ export const useStarPick = () => {
 };
 
 export const useMusicURL = (id: Id) => {
-  // [id, localStorage.cookie]
-  // TODO: 为什么不能直接传
   return useSWRImmutable(
     [id, localStorage.cookie],
     () => getMusicURL(id, localStorage.cookie),

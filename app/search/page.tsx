@@ -1,24 +1,19 @@
-'use client';
-
 import Search from '~components/Search';
 import HotSongs from '~components/HotSongs';
 import { searchHotDetail } from '~lib/search';
-import useSWRImmutable from 'swr/immutable';
 
 // TODO: more element
 export default function page() {
-  const HotSongComponent = () => {
-    const { data, isLoading } = useSWRImmutable(
-      '/search/hot/detail',
-      searchHotDetail,
-    );
+  const HotSongComponent = async () => {
+    const searchHotDetailData = await searchHotDetail();
+    const hotData = searchHotDetailData.body as unknown as IHotDetail;
 
-    return !isLoading && <HotSongs data={data?.data!} />;
+    return <HotSongs data={hotData.data} />;
   };
 
   return (
     <div>
-      <Search />
+      {/* <Search /> */}
       <HotSongComponent />
     </div>
   );

@@ -5,11 +5,11 @@ import useSWR from 'swr';
 import { searchDefault } from '~lib/search';
 import { FaSearch } from 'react-icons/fa';
 
-export default function Search() {
+export default async function Search() {
   const statusStore = useStore();
   const router = useRouter();
-  const { data } = useSWR('/search/default', searchDefault);
-  const searchWord = data?.data.showKeyword;
+  const searchDefaultData = await searchDefault()
+  const searchWord = searchDefaultData.body?.data.showKeyword;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

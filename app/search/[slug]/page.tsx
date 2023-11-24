@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import Badge from '~components/Badge';
 import { useSearch } from '~lib/hooks';

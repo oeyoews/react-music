@@ -1,18 +1,24 @@
+'use client';
+
 import { Suspense, lazy, useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
-import { useArtistData, useMusicURL, useLyric } from '~lib/hooks';
+import { useMusicURL, useLyric } from '~lib/hooks';
 import Spinner from '../Spinner';
 
 // https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
 
-export default function APlayer({ data, slug }: { data: any; slug: string }) {
-  const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
-  const arId = data?.songs[0].ar[0].id;
-  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
-  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
-
+// 由于要获取cookie, 所以只能在client
+export default function APlayer({
+  data,
+  slug,
+  musicurl,
+}: {
+  data: any;
+  slug: string;
+  musicurl: string;
+}) {
   const apRef = useRef<AplayerMethods | null>();
 
   // NOTE: 不能使用useeffect here
@@ -30,6 +36,9 @@ export default function APlayer({ data, slug }: { data: any; slug: string }) {
     };
   }, [data]);
 
+  if (!musicurl) {
+    return <></>;
+  }
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
       apRef.current = aplayer;
@@ -43,10 +52,10 @@ export default function APlayer({ data, slug }: { data: any; slug: string }) {
   const audio = [
     {
       name: data?.songs?.[0].name,
-      url: musicData.data?.[0].url,
-      lrc: lyric?.lrc?.lyric,
-      artist: artistData?.data.artist.name,
-      cover: artistData?.data.artist.cover,
+      url: musicurl,
+      // lrc: lyric?.lrc?.lyric,
+      // artist: artistData?.data.artist.name,
+      // cover: artistData?.data.artist.cover,
     },
   ];
 
@@ -75,14 +84,7 @@ export default function APlayer({ data, slug }: { data: any; slug: string }) {
   return (
     // TODO: stick absolute
     <div className="w-full top-[52px]">
-      {isLoadingURL ||
-      // isLoadingSongData ||
-      isLoadingArtist ||
-      isLoadingLyric ? (
-        <Spinner />
-      ) : (
-        <ReactAplayer {...options} />
-      )}
+      <ReactAplayer {...options} />
     </div>
   );
 }
