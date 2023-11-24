@@ -10,9 +10,10 @@ export default function page() {
     useEffect(() => {
 		const cookie = localStorage.cookie;
 
-      fetch('/api/recommend_songs', {
+      fetch('/api/artist_detail', {
         method: 'POST',
-        body: JSON.stringify({ cookie }),
+        // 1399112638
+        body: JSON.stringify({ cookie, id: 58955789 }),
         credentials: 'include',
       })
         .then((res) => res.json())
@@ -20,7 +21,6 @@ export default function page() {
 			setData(data)
         });
     }, []);
-    // return <Banners data={data} />;
 	  return <>{JSON.stringify(data)}</>
   };
 

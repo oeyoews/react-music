@@ -84,9 +84,10 @@ export const useMusicURL = (id: Id) => {
 // };
 
 // TODO: https://swr.vercel.app/zh-CN/docs/with-nextjs.zh-CN#server-components
-// export const useArtistData = (arId: number) => {
-//   return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
-// };
+export const useArtistData = (arId: Id) => {
+
+  return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
+};
 
 // export const useSiMiSong = (slug: Id) => {
 //   return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {

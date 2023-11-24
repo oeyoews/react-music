@@ -1,24 +1,34 @@
 import app from 'NeteaseCloudMusicApi';
 
-// export const runtime = 'edge'; // 'nodejs' is the default
+// export const runtime = 'edge'; // 'nodejs' is the default, edge no fs
 
 interface Params {
   slug: string;
 }
 
 export async function POST(request: Request, { params }: { params: Params }) {
-  const { slug } = params;
-  console.log(slug);
   const res = await request.json();
 
+  const { slug } = params;
+
+  const { id, cookie } = res;
+
   const recommendSongs = await app.recommend_songs({
-    cookie: res.cookie,
+    cookie,
+  });
+
+  const artistDetailData = await app.artist_detail({
+    id,
   });
 
   let data;
 
   if (slug === 'recommend_songs') {
-    data = recommendSongs.body;
+    data = recommendSongs.body as unknown as IRecommendSongs;
+  }
+
+  if (slug === 'artist_detail') {
+    data = artistDetailData.body as unknown as IArtistDetail;
   }
 
   // 支持跨域

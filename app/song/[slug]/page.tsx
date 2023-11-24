@@ -12,36 +12,36 @@ import {
   getSongComment,
   getSongDetail,
 } from '~lib/search';
-import Aplayer from 'react-aplayer';
 import { getArtistMV } from '~lib/mv';
-import { div } from '~components/Motion';
 import { lazy } from 'react';
+import dynamic from 'next/dynamic';
 
-const APlayer = lazy(() => import('~components/Player/APlayer'));
+const APlayer = dynamic(() => import('~components/Player/APlayer'), {
+  ssr: false,
+});
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
 
   const songDetailData = await getSongDetail(slug);
+  const arId = songDetailData.body?.songs?.[0].ar?.[0].id;
+
   const MusicPlayer = async () => {
     try {
       const song = songDetailData.body.songs[0];
       const previleges = songDetailData?.body.privileges[0];
       const vip = previleges?.fee === 1 ? true : false;
-
-      const musicBodyData = await getMusicURL(slug);
-
-      const url = musicBodyData.body as unknown as IMusicURL;
       const lyric = await getLyric(slug);
-
       return (
         <div>
-          <APlayer
-            slug={slug}
-            data={songDetailData.body}
-            musicurl={url.data[0].url}
-            lyric={lyric.body.lrc.lyric}
-          />
+          {typeof window !== undefined && (
+            <APlayer
+              slug={slug}
+              data={songDetailData.body}
+              lyric={lyric.body.lrc.lyric}
+              arId={arId}
+            />
+          )}
           <h2>歌曲名</h2>
           <div className="inline font-semibold">{song?.name}</div>
           {vip && (
@@ -66,7 +66,6 @@ export default async function Page({ params }: { params: Params }) {
   };
 
   const ArtistMVS = async () => {
-    const arId = songDetailData.body?.songs[0].ar[0].id;
     const artistMVs = await getArtistMV(arId);
     return (
       <div>
@@ -76,10 +75,8 @@ export default async function Page({ params }: { params: Params }) {
   };
 
   const ArtistInfo = async () => {
-    const arId = songDetailData.body?.songs?.[0].ar?.[0].id;
     const artistBodyData = await getArtistDetail(arId);
     const artistData = artistBodyData.body as unknown as IArtistDetail;
-
     return (
       <div className="my-4">
         {artistData?.data && (
@@ -122,7 +119,6 @@ export default async function Page({ params }: { params: Params }) {
 
   const SimiSong = async () => {
     const data = await getSimiSong(slug);
-
     return (
       <div className="mt-4">
         <hr />
@@ -145,7 +141,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <div className="my-2">
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
       <div className="space-x-2 my-4">
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo />

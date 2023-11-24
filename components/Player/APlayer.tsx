@@ -1,10 +1,11 @@
 'use client';
 
-import { Suspense, lazy, useEffect, useRef } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
-import { useMusicURL, useLyric } from '~lib/hooks';
+import { useMusicURL, useLyric, useArtistData } from '~lib/hooks';
 import Spinner from '../Spinner';
+import { getMusicURL } from '~lib/search';
 
 // https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
@@ -13,17 +14,18 @@ const ReactAplayer = lazy(() => import('react-aplayer'));
 export default function APlayer({
   data,
   slug,
-  musicurl,
-  lyric
+  lyric,
+  arId,
 }: {
   data: any;
   slug: string;
-  musicurl: string;
   lyric: string;
+  arId: Id;
 }) {
   const apRef = useRef<AplayerMethods | null>();
 
-  // NOTE: 不能使用useeffect here
+  const [artistData, setArtistData] = useState<IArtistDetail>();
+  const [musicURL, setMusicURL] = useState<IMusicURL>();
 
   useEffect(() => {
     const vanillaTitle = document.title;
@@ -34,13 +36,30 @@ export default function APlayer({
     return () => {
       document.title = vanillaTitle;
       apRef.current?.destroy();
-      // toast('退出播放');
     };
   }, [data]);
 
-  if (!musicurl) {
-    return <></>;
-  }
+  useEffect(() => {
+    const cookie = localStorage.cookie;
+    getMusicURL(slug, cookie).then((res) => {
+      setMusicURL(res.body);
+    });
+
+    fetch('/api/artist_detail', {
+      method: 'POST',
+      // arid
+      body: JSON.stringify({ cookie, id: arId }),
+      credentials: 'include',
+    })
+      .then((res) => {
+        if (!res.ok) return res.statusText;
+        return res.json();
+      })
+      .then((data) => {
+        setArtistData(data);
+      });
+  }, [slug, arId]);
+
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
       apRef.current = aplayer;
@@ -54,9 +73,9 @@ export default function APlayer({
   const audio = [
     {
       name: data?.songs?.[0].name,
-      url: musicurl,
+      url: musicURL?.data[0].url,
       lrc: lyric,
-      // artist: artistData?.data.artist.name,
+      artist: artistData?.data.artist.name,
       // cover: artistData?.data.artist.cover,
     },
   ];
