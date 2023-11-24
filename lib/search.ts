@@ -3,35 +3,31 @@
 // NOTE: 注意这里必须要明确指定use server 对于服务端渲染 @NeteaseMusicApi
 
 import { customfetch as fetch } from './fetchData';
-import app from 'NeteaseCloudMusicApi';
+import app, { CommentType, comment_music } from 'NeteaseCloudMusicApi';
 
 // id: 歌手id
-export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
-  const warn = {
-    message: '缺少歌手id',
-    code: 400,
-  };
-  // TODO
-  if (!id) {
-    // console.warn(warn.message);
-    // @ts-ignore
-    return warn;
-  }
-  return await fetch({
-    url: '/artist/detail',
-    params: {
-      id,
-    },
+export const getArtistDetail = async (arId: Id) => {
+  return await app.artist_detail({
+    id: arId,
   });
+  // return await fetch({
+  //   url: '/artist/detail',
+  //   params: {
+  //     id,
+  //   },
+  // });
 };
 
-export const getSimiSong = async (id: Id): Promise<ISimiSong> => {
-  return await fetch({
-    url: '/simi/song',
-    params: {
-      id,
-    },
+export const getSimiSong = async (id: number) => {
+  return await app.simi_song({
+    id,
   });
+  // return await fetch({
+  //   url: '/simi/song',
+  //   params: {
+  //     id,
+  //   },
+  // });
 };
 
 export const getLyric = async (id: Id): Promise<ILyric> => {
@@ -100,13 +96,11 @@ export const searchSuggest = async (keywords: string): Promise<ISearch> => {
  *
  * @return {Promise<IRecommendSongs>} A promise that resolves to an object containing recommended songs.
  */
-export const getRecommendations = async (
-  cookie: string,
-) => {
+export const getRecommendations = async (cookie: string) => {
   // NOTE: need login
   return await app.recommend_songs({
     cookie: cookie,
-  })
+  });
 };
 
 export const getBanners = async () => {
@@ -146,14 +140,17 @@ export const getMusicURL = async (
   });
 };
 
-export const getSongDetail = async (ids: Id): Promise<ISongDetail> => {
-  if (!ids) console.warn('请传入歌曲id');
-  return await fetch({
-    url: '/song/detail',
-    params: {
-      ids,
-    },
+export const getSongDetail = async (ids: string) => {
+  return await app.song_detail({
+    ids: ids,
   });
+  // if (!ids) console.warn('请传入歌曲id');
+  // return await fetch({
+  //   url: '/song/detail',
+  //   params: {
+  //     ids,
+  //   },
+  // });
 };
 
 export const getAlbumDetail = async (id: Id): Promise<IAlbumDetail> => {
@@ -165,20 +162,16 @@ export const getAlbumDetail = async (id: Id): Promise<IAlbumDetail> => {
   });
 };
 
-export const getSongComment = async (id: Id): Promise<ISongComment> => {
-  return await fetch({
-    url: '/comment/music',
-    params: {
-      id,
-      limit: 30,
-    },
+export const getSongComment = async (id: number) => {
+  return await comment_music({
+    id,
   });
 };
 
 // NOTE: 需要cookie(游客cookie 也可以); 有时没有cookie 也可以???
 export const getStarPick = async (cookie: string): Promise<IStarPick> => {
   // @ts-ignore
-  return await app.starpick_comments_summary()
+  return await app.starpick_comments_summary();
 };
 
 export const getDownloadURL = async (id: Id): Promise<any> => {

@@ -1,4 +1,5 @@
 import { customfetch as fetch } from './fetchData';
+import app from 'NeteaseCloudMusicApi'
 
 export const getSiMiMV = async (mvid: Id): Promise<IArtistMV> => {
   return await fetch({
@@ -7,11 +8,14 @@ export const getSiMiMV = async (mvid: Id): Promise<IArtistMV> => {
   });
 };
 
-export const getArtistMV = async (arId: Id): Promise<IArtistMV> => {
-  return await fetch({
-    url: '/artist/mv',
-    params: { id: arId },
-  });
+export const getArtistMV = async (arId: Id) => {
+  return await app.artist_mv({
+    id: arId
+  })
+  // return await fetch({
+  //   url: '/artist/mv',
+  //   params: { id: arId },
+  // });
 };
 
 export const getMvFirst = async (): Promise<IMvFirst> => {

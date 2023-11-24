@@ -1,3 +1,5 @@
+'use client';
+
 import { Drawer } from 'vaul';
 
 // 监听点击事件, 对于搜索歌曲

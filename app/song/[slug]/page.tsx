@@ -1,12 +1,3 @@
-'use client';
-
-import {
-  useSongDetailData,
-  useArtistData,
-  useSiMiSong,
-  useSongComment,
-  useArtistMV,
-} from '~lib/hooks';
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
 
@@ -14,27 +5,33 @@ import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
 import DrawserComponent from '~components/DrawserComponent';
 import MV from '~components/Video/MV';
+import {
+  getArtistDetail,
+  getSimiSong,
+  getSongComment,
+  getSongDetail,
+} from '~lib/search';
+import Aplayer from 'react-aplayer';
+import { getArtistMV } from '~lib/mv';
 
-export default function Page({ params }: { params: Params }) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
 
-  const MusicPlayer = () => {
-    const {
-      data: songDetailData,
-      isLoading: isLoadingSong,
-      error,
-    } = useSongDetailData(slug);
-    const song = songDetailData?.songs[0];
-    const previleges = songDetailData?.privileges[0];
-    const vip = previleges?.fee === 1 ? true : false;
+  const songDetailData = await getSongDetail(slug);
+  const MusicPlayer = async () => {
+    // const {
+    //   data: songDetailData,
+    //   isLoading: isLoadingSong,
+    //   error,
+    // } = useSongDetailData(slug);
 
-    if (error) {
-      return <div className="text-red-500">加载错误</div>;
-    }
+    const song = songDetailData.body.songs[0];
+    const previleges = songDetailData?.body.privileges[0];
+    const vip = previleges?.fee === 1 ? true : false;
 
     return (
       <div>
-        {isLoadingSong ? <Spinner size={88} /> : <APlayer slug={slug} />}
+        {/* <APlayer slug={slug} data={songDetailData.body} /> */}
         <h2>歌曲名</h2>
         <div className="inline font-semibold">{song?.name}</div>
         {vip && (
@@ -46,22 +43,23 @@ export default function Page({ params }: { params: Params }) {
     );
   };
 
-  const ArtistMVS = () => {
-    const { data: songData } = useSongDetailData(slug);
-    const arId = songData?.songs[0].ar[0].id;
+  const ArtistMVS = async () => {
+    const arId = songDetailData.body?.songs[0].ar[0].id;
 
-    const { data: artistMVs, isLoading: isloadingMv } = useArtistMV(arId!);
+    // const { data: artistMVs, isLoading: isloadingMv } = useArtistMV(arId!);
+    const artistMVs = await getArtistMV(arId!);
 
-    return <div>{!isloadingMv && <MV data={artistMVs?.mvs!} />}</div>;
+    return (
+      <div>
+        <MV data={artistMVs.body?.mvs!} />
+      </div>
+    );
   };
 
-  const ArtistInfo = () => {
-    const { data: songData } = useSongDetailData(slug);
-    const arId = songData?.songs?.[0].ar?.[0].id;
-
-    const { data: artistData, isLoading: isloadingArtist } = useArtistData(
-      arId!,
-    );
+  const ArtistInfo = async () => {
+    const arId = songDetailData.body?.songs?.[0].ar?.[0].id;
+    const artistBodyData = await getArtistDetail(arId);
+    const artistData = artistBodyData.body as unknown as IArtistDetail;
 
     return (
       <div className="my-4">
@@ -81,46 +79,44 @@ export default function Page({ params }: { params: Params }) {
     );
   };
 
-  const SongComment = () => {
-    const { data, isLoading } = useSongComment(slug);
-
+  const SongComment = async () => {
+    const songCommentData = await getSongComment(Number(slug));
+    if (songCommentData.status !== 200) {
+      return <div>评论加载失败</div>;
+    }
     return (
       <div>
         <div className="flex justify-start items-center space-x-2">
           <h2 className="my-2">评论区</h2>
-          <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
+          <div>
+            共 {songCommentData.body?.total?.toLocaleString() || 0} 条评论
+          </div>
         </div>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <SongCommentTab songComment={data as ISongComment} />
-        )}
+        <SongCommentTab
+          songComment={songCommentData.body as unknown as ISongComment}
+        />
       </div>
     );
   };
 
-  const SimiSong = () => {
-    const { data, isLoading } = useSiMiSong(slug);
+  const SimiSong = async () => {
+    const data = await getSimiSong(Number(slug));
     return (
       <div className="mt-4">
         <hr />
         <h2 className="my-2">相似歌曲</h2>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <ol className="columns-2">
-            {data?.songs?.map((song) => {
-              return (
-                <li key={song.id}>
-                  <Link href={`/song/${song.id}`} className="no-underline">
-                    {song.name} -- {song.artists?.[0].name}
-                    {/* {song.artists[0].id} */}
-                  </Link>
-                </li>
-              );
-            })}
-          </ol>
-        )}
+        <ol className="columns-2">
+          {data.body?.songs.map((song) => {
+            return (
+              <li key={song.id}>
+                <Link href={`/song/${song.id}`} className="no-underline">
+                  {song.name} -- {song.artists?.[0].name}
+                  {/* {song.artists[0].id} */}
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     );
   };

@@ -1,12 +1,8 @@
-import toast from 'react-hot-toast';
 import useSWRImmutable from 'swr/immutable';
 import { getUserDetail } from '~lib/login';
 import {
-  getSongComment,
   getStarPick,
-  getSongDetail,
   getArtistDetail,
-  getSimiSong,
   getMusicURL,
   search,
   getLyric,
@@ -19,9 +15,9 @@ export const useSiMiMV = (mvId: Id) => {
   return useSWRImmutable(mvId + 'simimv', () => getSiMiMV(mvId));
 };
 
-export const useArtistMV = (arId: Id) => {
-  return useSWRImmutable(arId + 'artistmv', () => getArtistMV(arId));
-};
+// export const useArtistMV = (arId: Id) => {
+//   return useSWRImmutable(arId + 'artistmv', () => getArtistMV(arId));
+// };
 
 export const usePlaylistPersonalized = () => {
   return useSWRImmutable('playlistpersonalized', () =>
@@ -54,17 +50,10 @@ export const useSearch = (keyword: string) => {
   });
 };
 
-export const useSongComment = (id: Id) => {
-  const data = useSWRImmutable(id + 'comment', () => getSongComment(id), {
-    // suspense: true,
-  });
-  if (data.data?.code !== 200 && data.data?.message) {
-    toast.error(`评论区: ${data.data?.message}` as string, {
-      position: 'bottom-right',
-    });
-  }
-  return data;
-};
+// export const useSongComment = (id: Id) => {
+//   const songCommendata  = await getSongComment(Number(id))
+//   return data;
+// };
 
 export const useUserData = (uid: number) => {
   return useSWRImmutable([uid], () => getUserDetail(uid));
@@ -90,19 +79,19 @@ export const useMusicURL = (id: Id) => {
   );
 };
 
-export const useSongDetailData = (slug: Id) => {
-  return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
-    refreshInterval: 3600000,
-  });
-};
+// export const useSongDetailData = (slug: Id) => {
+//   return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
+//     refreshInterval: 3600000,
+//   });
+// };
 
 // TODO: https://swr.vercel.app/zh-CN/docs/with-nextjs.zh-CN#server-components
-export const useArtistData = (arId: number) => {
-  return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
-};
+// export const useArtistData = (arId: number) => {
+//   return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
+// };
 
-export const useSiMiSong = (slug: Id) => {
-  return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
-    refreshInterval: 3600000,
-  });
-};
+// export const useSiMiSong = (slug: Id) => {
+//   return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
+//     refreshInterval: 3600000,
+//   });
+// };

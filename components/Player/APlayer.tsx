@@ -1,24 +1,15 @@
-'use client';
-
 import { Suspense, lazy, useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
-import {
-  useArtistData,
-  useMusicURL,
-  useSongDetailData,
-  useLyric,
-} from '~lib/hooks';
+import { useArtistData, useMusicURL, useLyric } from '~lib/hooks';
 import Spinner from '../Spinner';
 
 // https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
 
-export default function APlayer({ slug }: { slug: string }) {
+export default function APlayer({ data, slug }: { data: any; slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
-  const { data: songData, isLoading: isLoadingSongData } =
-    useSongDetailData(slug);
-  const arId = songData?.songs[0].ar[0].id;
+  const arId = data?.songs[0].ar[0].id;
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
@@ -30,14 +21,14 @@ export default function APlayer({ slug }: { slug: string }) {
     const vanillaTitle = document.title;
     apRef.current?.on('ended', () => {
       toast('歌曲播放完毕');
-      document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
+      document.title = `${data?.songs[0].name} - 歌曲播放结束`;
     });
     return () => {
       document.title = vanillaTitle;
       apRef.current?.destroy();
       // toast('退出播放');
     };
-  }, [songData]);
+  }, [data]);
 
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
@@ -51,7 +42,7 @@ export default function APlayer({ slug }: { slug: string }) {
 
   const audio = [
     {
-      name: songData?.songs?.[0].name,
+      name: data?.songs?.[0].name,
       url: musicData.data?.[0].url,
       lrc: lyric?.lrc?.lyric,
       artist: artistData?.data.artist.name,
@@ -69,11 +60,11 @@ export default function APlayer({ slug }: { slug: string }) {
     onInit,
     loop: 'none',
     onPlay: () => {
-      document.title = `正在播放 ${songData?.songs?.[0].name}`;
+      document.title = `正在播放 ${data?.songs?.[0].name}`;
       toast.success('播放歌曲');
     },
     onPause: () => {
-      document.title = `暂停播放 ${songData?.songs?.[0].name}`;
+      document.title = `暂停播放 ${data?.songs?.[0].name}`;
       // apRef.current?.on('pause', () => toast('歌曲播放暂停'));
       // apRef.current?.on('ended', () => toast('歌曲播放完毕'));
       toast('歌曲暂停');
@@ -85,7 +76,7 @@ export default function APlayer({ slug }: { slug: string }) {
     // TODO: stick absolute
     <div className="w-full top-[52px]">
       {isLoadingURL ||
-      isLoadingSongData ||
+      // isLoadingSongData ||
       isLoadingArtist ||
       isLoadingLyric ? (
         <Spinner />
