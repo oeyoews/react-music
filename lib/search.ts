@@ -7,29 +7,30 @@ import app from 'NeteaseCloudMusicApi';
 
 // id: 歌手id
 export const getArtistDetail = async (arId: Id) =>
-  await app.artist_detail({
+  (await app.artist_detail({
     id: arId,
-  }) as unknown as {
-    status: number, body: IArtistDetail
+  })) as unknown as {
+    status: number;
+    body: IArtistDetail;
   };
 
-export const getSimiSong = async (id: number) =>
+export const getSimiSong = async (id: Id) =>
   (await app.simi_song({
     id,
   })) as unknown as { status: number; body: ISimiSong };
 
 export const getLyric = async (id: Id) =>
-  await app.lyric({
+  (await app.lyric({
     id,
-  }) as unknown as { status: number; body: ILyric };
+  })) as unknown as { status: number; body: ILyric };
 
 // TODO: br
 export const checkMusic = async (id: Id, cookie: string) =>
-  await app.check_music({
+  (await app.check_music({
     id,
     cookie,
     br: 999000,
-  }) as unknown as { status: number; body: ICheckMusic };
+  })) as unknown as { status: number; body: ICheckMusic };
 
 // offset 分页
 export const search = async (
@@ -37,17 +38,20 @@ export const search = async (
   types?: SearchTypes,
   offset?: number,
 ) =>
-  await app.search({
+  (await app.search({
     keywords,
-  }) as unknown as { status: number; body: ISearch };
+  })) as unknown as { status: number; body: ISearch };
 
 export const searchDefault = async () =>
-  await app.search_default({}) as unknown as { status: number; body: ISearchDefault };
+  (await app.search_default({})) as unknown as {
+    status: number;
+    body: ISearchDefault;
+  };
 
 export const searchCloud = async (keywords: string) =>
-  await app.cloudsearch({
+  (await app.cloudsearch({
     keywords,
-  }) as unknown as { status: number; body: ISearch };
+  })) as unknown as { status: number; body: ISearch };
 
 export const searchSuggest = async (keywords: string) => {
   return await app.search_suggest({
@@ -79,7 +83,7 @@ export const searchHotDetail = async () => {
 
 // 播放地址有效期 25 min
 export const getMusicURL = async (id: Id, cookie?: string) => {
-  return await app.song_url({
+  const data = await app.song_url({
     id,
     cookie,
   });

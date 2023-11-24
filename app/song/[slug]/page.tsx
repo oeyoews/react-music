@@ -1,5 +1,4 @@
 import SongCommentTab from '~components/SongCommentTab';
-import app from 'NeteaseCloudMusicApi';
 import Link from 'next/link';
 
 import APlayer from '~components/Player/APlayer';
@@ -21,20 +20,11 @@ export default async function Page({ params }: { params: Params }) {
 
   const songDetailData = await getSongDetail(slug);
   const MusicPlayer = async () => {
-    // const {
-    //   data: songDetailData,
-    //   isLoading: isLoadingSong,
-    //   error,
-    // } = useSongDetailData(slug);
-
     const song = songDetailData.body.songs[0];
     const previleges = songDetailData?.body.privileges[0];
     // @ts-ignore
     const vip = previleges?.fee === 1 ? true : false;
-    // const musicBodyData = await getMusicURL(slug);
-    const musicBodyData = await app.song_url({
-      id: slug,
-    });
+    const musicBodyData = await getMusicURL(slug)
     if (musicBodyData.status !== 200) {
       return <div>歌曲加载失败</div>;
     }
@@ -117,7 +107,8 @@ export default async function Page({ params }: { params: Params }) {
   };
 
   const SimiSong = async () => {
-    const data = await getSimiSong(Number(slug));
+    const data = await getSimiSong(slug);
+
     return (
       <div className="mt-4">
         <hr />
@@ -140,7 +131,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <div className="my-2">
-      {/* <MusicPlayer /> */}
+      <MusicPlayer />
       <div className="space-x-2 my-4">
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo />
@@ -148,9 +139,9 @@ export default async function Page({ params }: { params: Params }) {
         <DrawserComponent text="查看相似歌曲">
           <SimiSong />
         </DrawserComponent>
-        <DrawserComponent text="查看评论区">
+        {/* <DrawserComponent text="查看评论区">
           <SongComment />
-        </DrawserComponent>
+        </DrawserComponent> */}
         {/* <DrawserComponent text="查看歌手MV">
           <ArtistMVS />
         </DrawserComponent> */}
