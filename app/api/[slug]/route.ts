@@ -25,6 +25,11 @@ export async function POST(request: Request, { params }: { params: Params }) {
     keywords: res.keywords,
   });
 
+  const mvCommentData = await app.comment_mv({
+    id: res.mvid,
+    limit: 99,
+  });
+
   const mvDetailData = (await app.mv_detail({
     mvid: res.mvid,
   })) as unknown as { status: number; body: IMvDetail };
@@ -46,6 +51,13 @@ export async function POST(request: Request, { params }: { params: Params }) {
   if (slug === 'mv_detail') {
     data = mvDetailData.body;
   }
+
+  if (slug === 'mv_comment') {
+    data = mvCommentData.body;
+  }
+
+  console.log('当前api:', slug);
+  console.log(slug, '-> 数据:', data);
 
   // 支持跨域
   return Response.json(
