@@ -20,33 +20,45 @@ export default async function Page({ params }: { params: Params }) {
 
   const songDetailData = await getSongDetail(slug);
   const MusicPlayer = async () => {
-    const song = songDetailData.body.songs[0];
-    const previleges = songDetailData?.body.privileges[0];
-    // @ts-ignore
-    const vip = previleges?.fee === 1 ? true : false;
-    const musicBodyData = await getMusicURL(slug)
-    if (musicBodyData.status !== 200) {
-      return <div>歌曲加载失败</div>;
-    }
-    const url = musicBodyData.body as unknown as IMusicURL;
-    console.log(musicBodyData.body);
+    try {
+      const song = songDetailData.body.songs[0];
+      const previleges = songDetailData?.body.privileges[0];
+      const vip = previleges?.fee === 1 ? true : false;
 
-    return (
-      <div>
-        <APlayer
-          slug={slug}
-          data={songDetailData.body}
-          musicurl={url.data[0].url}
-        />
-        <h2>歌曲名</h2>
-        <div className="inline font-semibold">{song?.name}</div>
-        {vip && (
-          <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
-            VIP
-          </sup>
-        )}
-      </div>
-    );
+      const musicBodyData = await getMusicURL(slug);
+
+      const url = musicBodyData.body as unknown as IMusicURL;
+      console.log(musicBodyData.body);
+
+      return (
+        <div>
+          <APlayer
+            slug={slug}
+            data={songDetailData.body}
+            musicurl={url.data[0].url}
+          />
+          <h2>歌曲名</h2>
+          <div className="inline font-semibold">{song?.name}</div>
+          {vip && (
+            <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
+              VIP
+            </sup>
+          )}
+        </div>
+      );
+    } catch (error) {
+      console.error('发生错误:', error);
+      // 在实际应用中，你可能想展示一个友好的错误信息给用户
+      return (
+        <div className="flex justify-center items-center">
+          <div className="text-rose-500 font-bold">歌曲加载失败</div>
+
+          <Link href={'/'} className="bg-neutral-200 rounded p-2">
+            返回主页
+          </Link>
+        </div>
+      );
+    }
   };
 
   // const ArtistMVS = async () => {
@@ -139,9 +151,9 @@ export default async function Page({ params }: { params: Params }) {
         <DrawserComponent text="查看相似歌曲">
           <SimiSong />
         </DrawserComponent>
-        {/* <DrawserComponent text="查看评论区">
+        <DrawserComponent text="查看评论区">
           <SongComment />
-        </DrawserComponent> */}
+        </DrawserComponent>
         {/* <DrawserComponent text="查看歌手MV">
           <ArtistMVS />
         </DrawserComponent> */}
