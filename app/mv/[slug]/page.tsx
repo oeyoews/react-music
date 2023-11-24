@@ -1,5 +1,3 @@
-'use client';
-
 import { getMvDetail, getMvURL } from '~lib/mv';
 import ArtPlayer from '~components/Player/ArtPlayer';
 import Spinner from '~components/Spinner';
@@ -13,7 +11,7 @@ import SiMiMV from '~components/Video/SiMiMV';
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
 
-  const { data: mvComment } = useMvComment(slug);
+  // const { data: mvComment } = useMvComment(slug);
 
   // TODO: 支持选择分辨率 /mv/url
   const VideoTitle = () => {

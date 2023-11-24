@@ -87,6 +87,7 @@ export const getMusicURL = async (id: Id, cookie?: string) => {
   return await app.song_url({
     id,
     cookie,
+    realIP: process.env.NEXT_PUBLIC_REALIP
   });
 };
 
