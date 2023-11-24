@@ -1,12 +1,14 @@
-import { getMvDetail, getMvURL } from '~lib/mv';
+'use client';
+
+import { getMvURL } from '~lib/mv';
+import { useState } from 'react';
 import ArtPlayer from '~components/Player/ArtPlayer';
 import Spinner from '~components/Spinner';
 import SongCommentTab from '~components/SongCommentTab';
-import useSWRImmutable from 'swr/immutable';
 import { Suspense } from 'react';
-import { useMvComment } from '~lib/hooks';
 import DrawserComponent from '~components/DrawserComponent';
-import SiMiMV from '~components/Video/SiMiMV';
+import useSWRImmutable from 'swr/immutable';
+import { useMvComment } from '~lib/hooks';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -14,10 +16,18 @@ export default function VideoPage({ params }: { params: Params }) {
   // const { data: mvComment } = useMvComment(slug);
 
   // TODO: 支持选择分辨率 /mv/url
+  const [mvDetailData, setMvDetailData] = useState<IMvDetail>();
   const VideoTitle = () => {
-    const { data: mvDetailData } = useSWRImmutable(slug + 'detail', () =>
-      getMvDetail(slug),
-    );
+    fetch('/api/mv_detail', {
+      method: 'POST',
+      body: JSON.stringify({ mvid: slug }),
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setMvDetailData(data.body);
+      });
     const mvName = mvDetailData?.data?.name;
     const artistName = mvDetailData?.data?.artistName;
     const desc = mvDetailData?.data.desc;
@@ -48,7 +58,7 @@ export default function VideoPage({ params }: { params: Params }) {
         {!isLoading && (
           <ArtPlayer
             // id={mvURLData?.data.id.toString()}
-            url={mvURLData?.data.url!}
+            url={mvURLData?.body?.data.url!}
             className="aspect-video w-[980px]"
           />
         )}
@@ -63,9 +73,9 @@ export default function VideoPage({ params }: { params: Params }) {
       <DrawserComponent text="查看评论区">
         <div className="flex justify-start items-center space-x-2 mt-8">
           <h2 className="my-2">评论区</h2>
-          <div>共 {mvComment?.total?.toLocaleString() || 0} 条评论</div>
+          {/* <div>共 {mvComment?.total?.toLocaleString() || 0} 条评论</div> */}
         </div>
-        <SongCommentTab songComment={mvComment as ISongComment} />
+        {/* <SongCommentTab songComment={mvComment as ISongComment} /> */}
       </DrawserComponent>
       {/* <DrawserComponent text="查看相似MV">
         <SiMiMV mvId={slug} />

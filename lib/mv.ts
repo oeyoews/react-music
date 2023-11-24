@@ -1,5 +1,5 @@
 import { customfetch as fetch } from './fetchData';
-import app from 'NeteaseCloudMusicApi'
+import app from 'NeteaseCloudMusicApi';
 
 export const getSiMiMV = async (mvid: Id): Promise<IArtistMV> => {
   return await fetch({
@@ -10,30 +10,27 @@ export const getSiMiMV = async (mvid: Id): Promise<IArtistMV> => {
 
 export const getArtistMV = async (arId: Id) => {
   return await app.artist_mv({
-    id: arId
-  })
+    id: arId,
+  });
   // return await fetch({
   //   url: '/artist/mv',
   //   params: { id: arId },
   // });
 };
 
-export const getMvFirst = async (): Promise<IMvFirst> => {
-  return await fetch({
-    url: '/mv/first',
-    params: {
-      limit: 30,
-    },
-  });
+export const getMvFirst = async () => {
+  return (await app.mv_first({
+    limit: 30,
+  })) as unknown as { status: number; body: IMvFirst };
 };
 
-export const getMvRCMD = async (limit: number = 24): Promise<IMvFirst> => {
-  return await fetch({
-    url: `/mv/exclusive/rcmd`,
-    params: {
-      limit,
-    },
-  });
+export const getMvRCMD = async (limit: number = 24) => {
+  return (await app.mv_exclusive_rcmd({
+    limit,
+  })) as unknown as {
+    status: number;
+    body: IMvFirst;
+  };
 };
 
 export const getMvPersonalized = async (): Promise<IMvFirst> => {
@@ -43,18 +40,12 @@ export const getMvPersonalized = async (): Promise<IMvFirst> => {
 };
 
 // NOTE: 需要加上cookie ???
-export const getMvURL = async (id: Id, cookie?: string): Promise<IMvURL> => {
-  return await fetch({
-    url: '/mv/url',
-    params: {
-      id,
-      r: 1080,
-    },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
-  });
+export const getMvURL = async (id: Id, cookie?: string) => {
+  return (await app.mv_url({
+    id,
+    cookie,
+    r: 1080,
+  })) as unknown as { status: number; body: IMvURL };
 };
 
 export const getPersonalizedMv = async (): Promise<IPersonalizedMv> => {
@@ -63,20 +54,11 @@ export const getPersonalizedMv = async (): Promise<IPersonalizedMv> => {
   });
 };
 
-export const getMvDetail = async (mvid: Id): Promise<IMvDetail> => {
-  return await fetch({
-    url: '/mv/detail',
-    params: {
-      mvid,
-    },
-  });
-};
-
-export const getMVComment = async (id: Id): Promise<ISongComment> => {
-  return await fetch({
-    url: '/comment/mv',
-    params: { id, limit: 99 },
-  });
+export const getMVComment = async (id: Id) => {
+  return (await app.comment_mv({
+    id,
+    limit: 99,
+  })) as unknown as { status: number; body: ISongComment };
 };
 
 // TODO: video

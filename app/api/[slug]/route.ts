@@ -25,6 +25,10 @@ export async function POST(request: Request, { params }: { params: Params }) {
     keywords: res.keywords,
   });
 
+  const mvDetailData = (await app.mv_detail({
+    mvid: res.mvid,
+  })) as unknown as { status: number; body: IMvDetail };
+
   let data;
 
   if (slug === 'recommend_songs') {
@@ -37,6 +41,10 @@ export async function POST(request: Request, { params }: { params: Params }) {
 
   if (slug === 'search') {
     data = searchData.body as unknown as ISearch;
+  }
+
+  if (slug === 'mv_detail') {
+    data = mvDetailData.body;
   }
 
   // 支持跨域
