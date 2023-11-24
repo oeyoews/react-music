@@ -1,17 +1,32 @@
-import { getBanners } from '~lib/search';
+import app from 'NeteaseCloudMusicApi';
 import Banners from '~components/Banners';
 import Playlist from '~components/Playlist';
 import RecommendSongs from '~components/RecommendSongs';
-import { getHotPlayList } from '~lib/api/playlist';
 import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
+import {getBanners} from '~lib/search';
 
 export const revalidate = 3600;
 
 export default async function Home() {
-  const bannerData = await getBanners();
-  const PlaylistData = await getHotPlayList();
+
+  const personalizedData = await app.personalized({
+    limit: 10,
+  });
+  const personalizedPlaylist =
+    personalizedData.body as unknown as IPlaylistPersonalized;
+  // @ts-ignore
+    const starpickData= await app.starpick_comments_summary()
+
+  // hot playlist
+  const playlistData = await app.top_playlist({
+    limit: 10,
+  });
+  const playlist = playlistData.body as unknown as IPlaylist;
+
+  const bannersData = await getBanners();
+  const banners = (await bannersData.body) as unknown as IBanner;
 
   return (
     <div className="p-2 mb-16">
@@ -21,12 +36,12 @@ export default async function Home() {
         icon={'🎉'}
         position="top-center"
       />
-      <Banners data={bannerData.banners} />
+      <Banners data={banners.banners} />
 
-      <StarPick />
+      <StarPick data={starpickData.body}/>
       <RecommendSongs />
-      <PlaylistPersonalized />
-      <Playlist data={PlaylistData.playlists} />
+      <PlaylistPersonalized data={personalizedPlaylist} />
+      <Playlist data={playlist.playlists} />
     </div>
   );
 }

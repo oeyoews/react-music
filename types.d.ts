@@ -1331,6 +1331,7 @@ interface IBanner {
 }
 
 interface Banner {
+  pic: string; // pc
   imageUrl: string;
   targetId: number;
   adid: null;

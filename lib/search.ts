@@ -1,4 +1,9 @@
+'use server';
+
+// NOTE: 注意这里必须要明确指定use server 对于服务端渲染 @NeteaseMusicApi
+
 import { customfetch as fetch } from './fetchData';
+import app from 'NeteaseCloudMusicApi';
 
 // id: 歌手id
 export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
@@ -97,34 +102,16 @@ export const searchSuggest = async (keywords: string): Promise<ISearch> => {
  */
 export const getRecommendations = async (
   cookie: string,
-): Promise<IRecommendSongs> => {
+) => {
   // NOTE: need login
-  return await fetch({
-    url: '/recommend/songs',
-    params: {},
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
-  });
+  return await app.recommend_songs({
+    cookie: cookie,
+  })
 };
 
-/**
- * Retrieves the banners from the server.
- *
- * @return {Promise<IBanner>} A promise that resolves with the banners.
- */
-export const getBanners = async (): Promise<IBanner> => {
-  return await fetch({
-    url: '/banner',
-    params: {
-      type: 0,
-    },
-    options: {
-      next: {
-        revalidate: 3600,
-      },
-    },
+export const getBanners = async () => {
+  return await app.banner({
+    type: 1,
   });
 };
 
@@ -190,13 +177,8 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
 
 // NOTE: 需要cookie(游客cookie 也可以); 有时没有cookie 也可以???
 export const getStarPick = async (cookie: string): Promise<IStarPick> => {
-  return await fetch({
-    url: '/starpick/comments/summary',
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
-  });
+  // @ts-ignore
+  return await app.starpick_comments_summary()
 };
 
 export const getDownloadURL = async (id: Id): Promise<any> => {

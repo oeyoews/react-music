@@ -10,6 +10,9 @@ const nextConfig = {
   // },
   // / -> /home
   // redirects: { },
+  experimental: {
+    serverComponentsExternalPackages: ['NeteaseCloudMusicApi'],
+  },
   images: {
     unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
     remotePatterns: [

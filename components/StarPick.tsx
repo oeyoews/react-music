@@ -1,18 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import Avatar from './Avatar';
-import { useStarPick } from '~lib/hooks';
-import Spinner from './Spinner';
 
-export default function StarPick({ number = 6 }: { number?: number }) {
-  const { data: startPickData, isLoading } = useStarPick();
-  const toastMessage = startPickData?.data.pageConfig.nodataToast;
-
+export default function StarPick({data, number = 6 }: { number?: number, data: IStarPick }) {
   const StarPickComment = () => (
     <>
-      {!isLoading &&
-        startPickData?.data.blocks[0].creatives
+        {
+        data?.data.blocks[0].creatives
           ?.slice(0, number)
           .map((creative) => {
             const resources = creative.resources[0];
@@ -44,11 +37,11 @@ export default function StarPick({ number = 6 }: { number?: number }) {
   return (
     <div className="my-4">
       <h2>云村星评</h2>
-      {isLoading && <Spinner />}
+      {/*{isLoading && <Spinner />}*/}
       <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
         <StarPickComment />
       </div>
-      <p className="text-center">{toastMessage}</p>
+      {/*<p className="text-center">{toastMessage}</p>*/}
     </div>
   );
 }

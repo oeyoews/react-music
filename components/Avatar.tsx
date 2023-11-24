@@ -1,15 +1,11 @@
-'use client';
-
 import Image from 'next/image';
-import { useUserData } from '~lib/hooks';
-import Spinner from './Spinner';
+import { getUserDetail } from '~lib/login';
 
-export default function Avatar({ uid }: { uid: number }) {
-  const { data, isLoading } = useUserData(uid);
+export default async function Avatar({ uid }: { uid: number }) {
+  const userData = await getUserDetail(uid);
+  const data = userData.body as unknown as IUserDetail;
   const size = 22;
-  return isLoading ? (
-    <Spinner center={false} size={size} />
-  ) : (
+  return (
     <Image
       src={data?.profile.avatarUrl!}
       alt={data?.profile.nickname!}

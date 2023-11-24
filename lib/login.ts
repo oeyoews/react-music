@@ -1,6 +1,7 @@
 'use server';
 
 import { customfetch as fetch } from './fetchData';
+import app from "NeteaseCloudMusicApi";
 
 /**
  * 01: generate qr code key
@@ -109,11 +110,14 @@ export const getLevel = async (cookie: string): Promise<ILevel> => {
 };
 
 // need login
-export const getUserDetail = async (uid: Id): Promise<IUserDetail> => {
-  return await fetch({
-    url: '/user/detail',
-    params: { uid },
-  });
+export const getUserDetail = async (uid: Id) => {
+  return await app.user_detail({
+    uid
+  })
+  // return await fetch({
+  //   url: '/user/detail',
+  //   params: { uid },
+  // });
 };
 
 export const logout = async (): Promise<any> => {
