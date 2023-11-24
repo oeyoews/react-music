@@ -34,14 +34,12 @@ export default async function Page({ params }: { params: Params }) {
       const lyric = await getLyric(slug);
       return (
         <div>
-          {typeof window !== undefined && (
-            <APlayer
-              slug={slug}
-              data={songDetailData.body}
-              lyric={lyric.body.lrc.lyric}
-              arId={arId}
-            />
-          )}
+          <APlayer
+            slug={slug}
+            data={songDetailData.body}
+            lyric={lyric.body.lrc.lyric}
+            arId={arId}
+          />
           <h2>歌曲名</h2>
           <div className="inline font-semibold">{song?.name}</div>
           {vip && (
@@ -141,7 +139,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <div className="my-2">
-      {/* <MusicPlayer /> */}
+      <MusicPlayer />
       <div className="space-x-2 my-4">
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo />

@@ -1,10 +1,10 @@
 'use client';
 
+import Spinner from '~components/Spinner';
+
 import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
-import { useMusicURL, useLyric, useArtistData } from '~lib/hooks';
-import Spinner from '../Spinner';
 import { getMusicURL } from '~lib/search';
 
 // https://react.dev/reference/react/lazy#troubleshooting
@@ -37,7 +37,7 @@ export default function APlayer({
       document.title = vanillaTitle;
       apRef.current?.destroy();
     };
-  }, [data]);
+  }, [data.songs]);
 
   useEffect(() => {
     const cookie = localStorage.cookie;
@@ -47,18 +47,16 @@ export default function APlayer({
 
     fetch('/api/artist_detail', {
       method: 'POST',
-      // arid
       body: JSON.stringify({ cookie, id: arId }),
       credentials: 'include',
     })
       .then((res) => {
-        if (!res.ok) return res.statusText;
         return res.json();
       })
       .then((data) => {
-        setArtistData(data);
+        setArtistData(data.data);
       });
-  }, [slug, arId]);
+  }, [arId, slug]);
 
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
@@ -70,13 +68,16 @@ export default function APlayer({
     // apRef.current.on('loadstart', () => toast('hhh'));
   };
 
+  const url = musicURL?.data[0].url;
+  const artist = artistData?.data.artist.name;
+  const cover = artistData?.data.artist.cover;
   const audio = [
     {
       name: data?.songs?.[0].name,
-      url: musicURL?.data[0].url,
+      url,
       lrc: lyric,
-      artist: artistData?.data.artist.name,
-      // cover: artistData?.data.artist.cover,
+      artist,
+      cover: artistData?.data.artist.cover,
     },
   ];
 
@@ -103,9 +104,10 @@ export default function APlayer({
 
   /* TODO: add copybutton or download url */
   return (
-    // TODO: stick absolute
+    // TODO: 这里的数据必须要等待完全获取, 在进行渲染, 直接修改 变量是不会刷新的
     <div className="w-full top-[52px]">
-      <ReactAplayer {...options} />
+      {(!url || !cover || !artist) && <Spinner size={68}/>}
+      {url && cover && artist && <ReactAplayer {...options} />}
     </div>
   );
 }
