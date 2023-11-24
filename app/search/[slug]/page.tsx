@@ -1,26 +1,23 @@
 import Link from 'next/link';
 import Badge from '~components/Badge';
-import { useSearch } from '~lib/hooks';
-import toast from 'react-hot-toast';
+import { search } from '~lib/search';
 
-export default function page({ params }: { params: Params }) {
+export default async function page({ params }: { params: Params }) {
   const { slug } = params;
+  const keywords = decodeURIComponent(slug);
 
-  const SearchResult = () => {
-    const { data, isLoading } = useSearch(slug);
-    if (data.code !== 200) {
-      toast.error(`搜索结果: ${data.message}`);
-    }
+  try {
+    const data = await search(keywords);
 
-    const vipids = data.result.songs
+    const vipids = data.body.result?.songs
       ?.filter((song) => song.fee == 1)
       .map((song) => song.id);
 
     return (
       <div>
-        <h2>{decodeURIComponent(slug)}</h2>
+        <h2>{keywords}</h2>
         <ol className="columns-1 md:columns-2">
-          {data.result.songs?.map((song) => {
+          {data.body.result.songs?.map((song) => {
             return (
               <li className="" key={song.id}>
                 <Link href={`/song/${song.id}`}>
@@ -44,7 +41,8 @@ export default function page({ params }: { params: Params }) {
         </ol>
       </div>
     );
-  };
-
-  return <SearchResult />;
+  } catch (e) {
+    // @ts-ignore
+    return <div className="text-center text-red-400">{e.body.message}</div>;
+  }
 }

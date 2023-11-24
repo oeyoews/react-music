@@ -105,6 +105,7 @@ export default function APlayer({
   /* TODO: add copybutton or download url */
   return (
     // TODO: 这里的数据必须要等待完全获取, 在进行渲染, 直接修改 变量是不会刷新的
+    // feat: use swr
     <div className="w-full top-[52px]">
       {(!url || !cover || !artist) && <Spinner size={68}/>}
       {url && cover && artist && <ReactAplayer {...options} />}

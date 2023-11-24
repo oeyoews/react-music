@@ -43,12 +43,12 @@ export const useLyric = (id: Id) => {
   });
 };
 
-export const useSearch = (keyword: string) => {
-  const searchKeyword = decodeURIComponent(keyword.trim());
-  return useSWRImmutable([searchKeyword], search, {
-    suspense: true,
-  });
-};
+// export const useSearch = (keyword: string) => {
+//   const searchKeyword = decodeURIComponent(keyword.trim());
+//   return useSWRImmutable([searchKeyword], search, {
+//     suspense: true,
+//   });
+// };
 
 // export const useSongComment = (id: Id) => {
 //   const songCommendata  = await getSongComment(Number(id))
@@ -85,7 +85,6 @@ export const useMusicURL = (id: Id) => {
 
 // TODO: https://swr.vercel.app/zh-CN/docs/with-nextjs.zh-CN#server-components
 export const useArtistData = (arId: Id) => {
-
   return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
 };
 

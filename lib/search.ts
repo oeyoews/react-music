@@ -34,13 +34,16 @@ export const checkMusic = async (id: Id, cookie: string) =>
   })) as unknown as { status: number; body: ICheckMusic };
 
 // offset 分页
+// 依赖fs
 export const search = async (
   keywords: string,
-  types?: SearchTypes,
+  type?: SearchTypes,
   offset?: number,
 ) =>
   (await app.search({
     keywords,
+    limit: 30,
+    type, offset
   })) as unknown as { status: number; body: ISearch };
 
 export const searchDefault = async () =>
@@ -83,11 +86,11 @@ export const searchHotDetail = async () => {
 
 // 播放地址有效期 25 min
 export const getMusicURL = async (id: Id, cookie?: string) =>
-  await app.song_url({
+  (await app.song_url({
     id,
     cookie,
     realIP: process.env.NEXT_PUBLIC_REALIP,
-  }) as unknown as { status: number; body: IMusicURL };
+  })) as unknown as { status: number; body: IMusicURL };
 
 export const getSongDetail = async (ids: string) =>
   (await app.song_detail({

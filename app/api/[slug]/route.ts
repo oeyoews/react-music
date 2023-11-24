@@ -21,6 +21,10 @@ export async function POST(request: Request, { params }: { params: Params }) {
     id,
   });
 
+  const searchData = await app.search({
+    keywords: res.keywords,
+  });
+
   let data;
 
   if (slug === 'recommend_songs') {
@@ -29,6 +33,10 @@ export async function POST(request: Request, { params }: { params: Params }) {
 
   if (slug === 'artist_detail') {
     data = artistDetailData.body as unknown as IArtistDetail;
+  }
+
+  if (slug === 'search') {
+    data = searchData.body as unknown as ISearch;
   }
 
   // 支持跨域
