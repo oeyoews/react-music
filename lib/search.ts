@@ -59,12 +59,11 @@ export const searchSuggest = async (keywords: string) => {
   });
 };
 
-export const getRecommendations = async (cookie: string) => {
+export const getRecommendations = async (cookie: string) =>
   // NOTE: need login
-  return await app.recommend_songs({
+  (await app.recommend_songs({
     cookie: cookie,
-  });
-};
+  })) as unknown as { status: number; body: IRecommendSongs };
 
 export const getBanners = async () => {
   return await app.banner({
@@ -87,7 +86,7 @@ export const getMusicURL = async (id: Id, cookie?: string) => {
   return await app.song_url({
     id,
     cookie,
-    realIP: process.env.NEXT_PUBLIC_REALIP
+    realIP: process.env.NEXT_PUBLIC_REALIP,
   });
 };
 

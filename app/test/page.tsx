@@ -2,16 +2,27 @@
 
 import React, { useEffect, useState } from 'react';
 import Banners from '~components/Banners';
-import { useStarPick } from '~lib/hooks';
+import RecommendSongs from '~components/RecommendSongs';
 
 export default function page() {
   const Test = () => {
-	const [data, setData] = useState<Banner[]>([]);
+    const [data, setData] = useState();
     useEffect(() => {
-      fetch('/api/music').then((res) => res.json()).then((data) =>  setData(data) );
+		const cookie = localStorage.cookie;
+
+      fetch('/api/recommend_songs', {
+        method: 'POST',
+        body: JSON.stringify({ cookie }),
+        credentials: 'include',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+			setData(data)
+        });
     }, []);
-	return <Banners data={data} />
+    // return <Banners data={data} />;
+	  return <>{JSON.stringify(data)}</>
   };
 
-return <Test />
+  return <Test />;
 }
