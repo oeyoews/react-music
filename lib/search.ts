@@ -9,49 +9,45 @@ import app from 'NeteaseCloudMusicApi';
 export const getArtistDetail = async (arId: Id) =>
   await app.artist_detail({
     id: arId,
-  });
+  }) as unknown as {
+    status: number, body: IArtistDetail
+  };
 
 export const getSimiSong = async (id: number) =>
   (await app.simi_song({
     id,
   })) as unknown as { status: number; body: ISimiSong };
 
-export const getLyric = async (id: Id) => {
-  return await app.lyric({
+export const getLyric = async (id: Id) =>
+  await app.lyric({
     id,
-  });
-};
+  }) as unknown as { status: number; body: ILyric };
 
 // TODO: br
-export const checkSong = async (id: Id, cookie: string) => {
-  return await app.check_music({
+export const checkMusic = async (id: Id, cookie: string) =>
+  await app.check_music({
     id,
     cookie,
     br: 999000,
-  });
-};
+  }) as unknown as { status: number; body: ICheckMusic };
 
 // offset 分页
 export const search = async (
   keywords: string,
   types?: SearchTypes,
   offset?: number,
-) => {
-  return await app.search({
+) =>
+  await app.search({
     keywords,
-  });
-};
+  }) as unknown as { status: number; body: ISearch };
 
-export const searchDefault = async () => {
-  return await app.search_default({});
-};
+export const searchDefault = async () =>
+  await app.search_default({}) as unknown as { status: number; body: ISearchDefault };
 
-// TODO
-export const searchCloud = async (keywords: string) => {
-  return await app.cloudsearch({
+export const searchCloud = async (keywords: string) =>
+  await app.cloudsearch({
     keywords,
-  });
-};
+  }) as unknown as { status: number; body: ISearch };
 
 export const searchSuggest = async (keywords: string) => {
   return await app.search_suggest({

@@ -987,7 +987,8 @@ interface Info {
   shareCount: number;
   threadId: string;
 }
-interface CheckSong {
+
+interface ICheckMusic {
   success: string;
   message: string;
   code: number;
