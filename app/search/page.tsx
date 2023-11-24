@@ -2,7 +2,6 @@ import Search from '~components/Search';
 import HotSongs from '~components/HotSongs';
 import { searchHotDetail } from '~lib/search';
 
-// TODO: more element
 export default function page() {
   const HotSongComponent = async () => {
     const searchHotDetailData = await searchHotDetail();
