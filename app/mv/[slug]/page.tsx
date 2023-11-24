@@ -23,8 +23,7 @@ export default function VideoPage({ params }: { params: Params }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setMvComment(data.body);
+        setMvComment(data);
       });
   }, [slug]);
 
@@ -37,7 +36,7 @@ export default function VideoPage({ params }: { params: Params }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setMvDetailData(data.body);
+        setMvDetailData(data);
       });
     const mvName = mvDetailData?.data?.name;
     const artistName = mvDetailData?.data?.artistName;

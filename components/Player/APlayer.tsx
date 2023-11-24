@@ -44,10 +44,10 @@ export default function APlayer({
           return res.json();
         })
         .then((data) => {
-          setArtistData(data.data);
+          setArtistData(data);
         });
     } catch (e) {
-      console.log(e.body.message as string);
+      console.log(e.message as string);
     }
   }, [arId, slug]);
 

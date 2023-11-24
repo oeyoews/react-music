@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Banners from '~components/Banners';
-import RecommendSongs from '~components/RecommendSongs';
 
 export default function page() {
   const Test = () => {
     const [data, setData] = useState();
     useEffect(() => {
-		const cookie = localStorage.cookie;
+      const cookie = localStorage.cookie;
 
       fetch('/api/artist_detail', {
         method: 'POST',
@@ -18,10 +16,10 @@ export default function page() {
       })
         .then((res) => res.json())
         .then((data) => {
-			setData(data)
+          setData(data);
         });
     }, []);
-	  return <>{JSON.stringify(data)}</>
+    return <>{JSON.stringify(data)}</>;
   };
 
   return <Test />;
