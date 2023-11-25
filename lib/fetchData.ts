@@ -14,7 +14,7 @@ function addParams(
   if (params) {
     // Include timestamp only if not already present in params
     if (!params.hasOwnProperty('realIp')) {
-      params.realIp = process.env.NEXT_PUBLIC_REALIP as string;
+      params.realIp = process.env.REALIP as string;
     }
     const queryString = Object.keys(params)
       .map(
@@ -52,14 +52,15 @@ async function fetchData(
 
   try {
     const res = await fetch(urlWithParams, mergedOptions);
-    return await res.json();
+    const data = await res.json();
+    return data.body;
   } catch (error) {
     console.error('Error in fetchData:', error);
     throw error;
   }
 }
 
-export const create = (baseURL: string) => {
+const create = (baseURL: string) => {
   return (config: Config): Promise<any> => {
     const { url, params, options } = config;
     const finalURL = url ? baseURL + url : baseURL;
@@ -67,4 +68,4 @@ export const create = (baseURL: string) => {
   };
 };
 
-export const customfetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
+export const customfetch = create(process.env.MUSIC_API as string);

@@ -3,13 +3,13 @@ import { getRoute } from '~lib/getRoute';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Route } from 'next';
-export default function Banners({ data }: { data: Banner[] }) {
+export default function Banners({ data }: { data: IBanner }) {
   return (
     <div className="mt-14">
       {/* sticky 对于framermotion bug, 需要多加一个div */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose ">
         {/* NOTE: 数量不固定 */}
-        {data.slice(0, 8).map((banner) => (
+        {data.banners.slice(0, 8).map((banner) => (
           <div
             key={banner.pic} // TODO: targetid is empty sometimes, use pic instead
             // variants={item}

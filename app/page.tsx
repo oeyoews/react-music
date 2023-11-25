@@ -4,25 +4,20 @@ import RecommendSongs from '~components/RecommendSongs';
 import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
+import { customfetch as fetch } from '~lib/fetchData';
 
 export const revalidate = 3600;
 
 export default async function Home() {
-  const baseURL = process.env.MUSIC_API;
+  const personalizedPlaylistData = await fetch({ url: '/api/personalized' });
 
-  const personalizedPlaylistRes = await fetch(baseURL + '/api/personalized');
-  const personalizedPlaylistData = await personalizedPlaylistRes.json();
+  const starpickData = await fetch({
+    url: '/api/starpick',
+  });
 
-  const starpickRes = await fetch(baseURL + '/api/starpick');
-  const starpickData = await starpickRes.json();
+  const bannerData = await fetch({ url: '/api/banner', params: { type: 1 } });
 
-  const bannerres = await fetch('http://localhost:3000/api/banner');
-  const bannerdata = await bannerres.json();
-
-  const top_playlist_res = await fetch(
-    'http://localhost:3000/api/top_playlist',
-  );
-  const top_playlist_data = await top_playlist_res.json();
+  const topPlaylistData = await fetch({ url: '/api/top_playlist' });
 
   return (
     <div className="p-2 mb-16">
@@ -32,12 +27,12 @@ export default async function Home() {
         icon={'🎉'}
         position="top-center"
       />
-      <Banners data={bannerdata.body.banners} />
+      <Banners data={bannerData} />
 
-      <StarPick data={starpickData.body} />
+      <StarPick data={starpickData} />
       <RecommendSongs />
-      <PlaylistPersonalized data={personalizedPlaylistData.body} />
-      <Playlist data={top_playlist_data.body.playlists} />
+      <PlaylistPersonalized data={personalizedPlaylistData} />
+      <Playlist data={topPlaylistData.playlists} />
     </div>
   );
 }
