@@ -102,6 +102,7 @@ export default async function Page({ params }: { params: Params }) {
         <div>
           <div className="flex justify-start items-center space-x-2">
             <h2 className="my-2">评论区</h2>
+            <div className="text-rose-400">{songCommentData?.message}</div>
             <div>共 {songCommentData?.total?.toLocaleString() || 0} 条评论</div>
           </div>
           <SongCommentTab

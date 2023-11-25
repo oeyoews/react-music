@@ -25,18 +25,18 @@ export default function APlayer({
   const apRef = useRef<AplayerMethods | null>();
 
   const [artistData, setArtistData] = useState<IArtistDetail>();
-  // const [musicURL, setMusicURL] = useState<IMusicURL>();
+  const [musicURL, setMusicURL] = useState<IMusicURL>();
 
   // 需要cookie , 如何分离出去
   useEffect(() => {
     const cookie = localStorage.cookie;
-    // getMusicURL(slug, cookie).then((res) => {
-    //   setMusicURL(res);
-    // });
+    getMusicURL(slug, cookie).then((res) => {
+      setMusicURL(res);
+    });
 
-    // getArtistDetail(arId).then((res) => {
-    //   setArtistData(res);
-    // });
+    getArtistDetail(arId).then((res) => {
+      setArtistData(res);
+    });
   }, [arId, slug]);
 
   useEffect(() => {
@@ -61,14 +61,14 @@ export default function APlayer({
     // apRef.current.on('loadstart', () => toast('hhh'));
   };
 
-  // const url = musicURL?.data[0].url;
+  const url = musicURL?.data[0].url;
   const artist = artistData?.data.artist?.name;
   const cover = artistData?.data.artist?.cover;
   const audio = [
     {
       name: data?.songs?.[0].name,
-      // url,
-      // lrc: lyric,
+      url,
+      lrc: lyric,
       artist,
       cover: artistData?.data.artist.cover,
     },

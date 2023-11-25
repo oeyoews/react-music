@@ -1,5 +1,5 @@
 // https://nextjs.org/docs/app/building-your-application/routing/route-handlers#convention
-import app from 'NeteaseCloudMusicApi';
+import app, { type SoundQualityType } from 'NeteaseCloudMusicApi';
 import chalk from 'chalk';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 1 : 0;
@@ -50,13 +50,32 @@ export async function GET(
       });
       break;
     case 'comment_music':
-      data = await app.comment_music({ id });
+      try {
+        data = await app.comment_music({ id });
+        console.log(data);
+      } catch (e) {
+        console.log(chalk.red(slug, '->', e.body.message));
+        data = e;
+      }
       break;
     case 'song_url':
-      data = await app.song_url({
-        br: 9999000,
-        id,
-      });
+      try {
+        data = await app.song_url({ id });
+      } catch (e) {
+        console.log(chalk.red(slug, '->', e.body.message));
+        data = e;
+      }
+      break;
+    case 'song_url_v1':
+      try {
+        data = app.song_url_v1({
+          id,
+          level: 'standard' as SoundQualityType,
+        });
+      } catch (e) {
+        console.log(chalk.red(slug, '->', e.body.message));
+        data = e;
+      }
       break;
     case 'simi_song':
       data = await app.simi_song({

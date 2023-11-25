@@ -23,6 +23,7 @@ export default function VideoPage({ params }: { params: Params }) {
     return (
       <div className="">
         <Suspense fallback={<Spinner />}>
+          {mvDetailData?.data.message}
           <h2 className="text-center">
             {mvName} {mvName && '--'} {artistName}
           </h2>

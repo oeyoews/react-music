@@ -148,7 +148,7 @@ export const getMusicURL = async (
     return null;
   }
   return fetch({
-    url: '/song/url',
+    url: '/song/url/v1',
     params: {
       id,
       cookie,
