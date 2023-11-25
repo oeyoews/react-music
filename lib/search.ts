@@ -106,7 +106,6 @@ export const getRecommendations = async (
     url: '/recommend/songs',
     params: { cookie },
   });
-  console.log(data);
   return data;
 };
 

@@ -35,7 +35,6 @@ export default function VideoPage({ params }: { params: Params }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMvDetailData(data);
       });
     const mvName = mvDetailData?.data?.name;
