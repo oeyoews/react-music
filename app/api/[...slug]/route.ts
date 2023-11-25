@@ -3,7 +3,8 @@ import app from 'NeteaseCloudMusicApi';
 import chalk from 'chalk';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 1 : 0;
-export const runtime = 'nodejs'; // 'nodejs' is the default, edge no fs
+// export const runtime = 'nodejs'; // 'nodejs' is the default, edge no fs
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: Request,
