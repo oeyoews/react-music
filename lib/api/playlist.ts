@@ -1,8 +1,6 @@
 'use server';
 
-import { create } from '~lib/fetchData';
-
-const fetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
+import { customfetch as fetch } from '~lib/fetchData';
 
 /**
  * Retrieves the songs of a playlist.
@@ -26,9 +24,9 @@ export const getPlayListSongs = async (id: Id): Promise<PlaylistSong> => {
  *
  * @return {Promise<IPlaylist>} A promise that resolves to the hot playlist.
  */
-export const getHotPlayList = async (): Promise<IPlaylist> => {
+export const getTopPlayList = async (): Promise<IPlaylist> => {
   return await fetch({
-    url: '/top/playlist',
+    url: '/top_playlist',
   });
 };
 

@@ -1,122 +1,210 @@
 'use server';
 
 // NOTE: 注意这里必须要明确指定use server, 这里的代码依赖node, 所以必须跑在server上面, 对于服务端渲染 @NeteaseMusicApi
-
 import { customfetch as fetch } from './fetchData';
-import app from 'NeteaseCloudMusicApi';
 
 // id: 歌手id
-// 需要fs, 不能使用use client
-export const getArtistDetail = async (arId: Id) =>
-  (await app.artist_detail({
-    id: arId,
-  })) as unknown as {
-    status: number;
-    body: IArtistDetail;
+export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
+  const warn = {
+    message: '缺少歌手id',
+    code: 400,
   };
-
-export const getSimiSong = async (id: Id) =>
-  (await app.simi_song({
-    id,
-  })) as unknown as { status: number; body: ISimiSong };
-
-export const getLyric = async (id: Id) =>
-  (await app.lyric({
-    id,
-  })) as unknown as { status: number; body: ILyric };
-
-// TODO: br
-export const checkMusic = async (id: Id, cookie: string) =>
-  (await app.check_music({
-    id,
-    cookie,
-    br: 999000,
-  })) as unknown as { status: number; body: ICheckMusic };
-
-// offset 分页
-// 依赖fs
-export const search = async (
-  keywords: string,
-  type?: SearchTypes,
-  offset?: number,
-) =>
-  (await app.search({
-    keywords,
-    limit: 30,
-    type, offset
-  })) as unknown as { status: number; body: ISearch };
-
-export const searchDefault = async () =>
-  (await app.search_default({})) as unknown as {
-    status: number;
-    body: ISearchDefault;
-  };
-
-export const searchCloud = async (keywords: string) =>
-  (await app.cloudsearch({
-    keywords,
-  })) as unknown as { status: number; body: ISearch };
-
-export const searchSuggest = async (keywords: string) => {
-  return await app.search_suggest({
-    keywords,
+  // TODO
+  if (!id) {
+    // console.warn(warn.message);
+    // @ts-ignore
+    return warn;
+  }
+  return await fetch({
+    url: '/artist/detail',
+    params: {
+      id,
+    },
   });
 };
 
-export const getRecommendations = async (cookie: string) =>
-  // NOTE: need login
-  (await app.recommend_songs({
-    cookie: cookie,
-  })) as unknown as { status: number; body: IRecommendSongs };
+export const getSimiSong = async (id: Id): Promise<ISimiSong> => {
+  return await fetch({
+    url: '/simi/song',
+    params: {
+      id,
+    },
+  });
+};
 
-export const getBanners = async () => {
-  return await app.banner({
-    type: 1,
+export const getLyric = async (id: Id): Promise<ILyric> => {
+  return await fetch({
+    url: '/lyric',
+    params: {
+      id,
+    },
+  });
+};
+
+export const checkSong = async (
+  id: Id,
+  cookie: string,
+): Promise<ICheckMusic> => {
+  return await fetch({
+    url: '/check/music',
+    params: {
+      id,
+    },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
+  });
+};
+
+// offset 分页
+export const search = async (
+  keywords: string,
+  types?: SearchTypes,
+  offset?: number,
+): Promise<ISearch> => {
+  return await fetch({
+    url: '/search',
+    params: {
+      keywords,
+    },
+  });
+};
+
+export const searchDefault = async (): Promise<ISearchDefault> => {
+  return await fetch({
+    url: '/search/default',
+  });
+};
+
+// TODO
+export const searchCloud = async (keywords: string): Promise<ISearch> => {
+  return await fetch({
+    url: '/cloudsearch',
+    params: {
+      keywords,
+    },
+  });
+};
+
+export const searchSuggest = async (keywords: string): Promise<ISearch> => {
+  return await fetch({
+    url: '/search/suggest',
+    params: {
+      keywords,
+    },
+  });
+};
+
+/**
+ * Retrieves a list of recommended songs.
+ *
+ * @return {Promise<IRecommendSongs>} A promise that resolves to an object containing recommended songs.
+ */
+export const getRecommendations = async (
+  cookie: string,
+): Promise<IRecommendSongs> => {
+  // NOTE: need login
+  return await fetch({
+    url: '/recommend_songs',
+    params: {},
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
+  });
+};
+
+/**
+ * Retrieves the banners from the server.
+ *
+ * @return {Promise<IBanner>} A promise that resolves with the banners.
+ */
+export const getBanner = async (): Promise<IBanner> => {
+  return await fetch({
+    url: '/banner',
+    params: {
+      type: 1,
+    },
   });
 };
 
 // TODO:
 export const searchHot = async (): Promise<any> => {
-  return await app.search_hot({});
-};
-
-export const searchHotDetail = async () => {
-  return await app.search_hot_detail({});
-};
-
-// 播放地址有效期 25 min
-export const getMusicURL = async (id: Id, cookie?: string) =>
-  (await app.song_url({
-    id,
-    cookie,
-    realIP: process.env.NEXT_PUBLIC_REALIP,
-  })) as unknown as { status: number; body: IMusicURL };
-
-export const getSongDetail = async (ids: string) =>
-  (await app.song_detail({
-    ids,
-  })) as unknown as { status: number; body: ISongDetail };
-
-export const getAlbumDetail = async (id: Id) => {
-  return await app.album({
-    id,
+  return await fetch({
+    url: '/search/hot',
   });
 };
 
-export const getSongComment = async (id: Id) => {
-  return await app.comment_music({
-    id,
+export const searchHotDetail = async (): Promise<IHotDetail> => {
+  return await fetch({
+    url: '/search/hot/detail',
+  });
+};
+
+// 播放地址有效期 25 min
+export const getMusicURL = async (
+  id: Id,
+  cookie: string,
+  // level: any = 'standard',
+): Promise<IMusicURL> => {
+  return fetch({
+    url: '/song/url',
+    params: {
+      id,
+    },
+    options: {
+      method: 'POST',
+      body: JSON.stringify({ cookie }),
+    },
+  });
+};
+
+export const getSongDetail = async (ids: Id): Promise<ISongDetail> => {
+  if (!ids) console.warn('请传入歌曲id');
+  return await fetch({
+    url: '/song/detail',
+    params: {
+      ids,
+    },
+  });
+};
+
+export const getAlbumDetail = async (id: Id): Promise<IAlbumDetail> => {
+  return await fetch({
+    url: '/album',
+    params: {
+      id,
+    },
+  });
+};
+
+export const getSongComment = async (id: Id): Promise<ISongComment> => {
+  return await fetch({
+    url: '/comment/music',
+    params: {
+      id,
+      limit: 30,
+    },
   });
 };
 
 // NOTE: 需要cookie(游客cookie 也可以); 有时没有cookie 也可以???
-export const getStarPick = async (cookie: string): Promise<IStarPick> => {
-  // @ts-ignore
-  return await app.starpick_comments_summary();
+export const getStarPick = async (): Promise<IStarPick> => {
+  return await fetch({
+    url: '/starpick_comments_summary',
+    options: {
+      method: 'POST',
+      // body: JSON.stringify({ cookie }),
+    },
+  });
 };
 
 export const getDownloadURL = async (id: Id): Promise<any> => {
-  return await app.song_download_url({
-    id,
+  return await fetch({
+    url: '/song/download/url',
+    params: {
+      id,
+    },
   });
 };

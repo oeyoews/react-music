@@ -1,38 +1,26 @@
 import Banners from '~components/Banners';
 import Playlist from '~components/Playlist';
 import RecommendSongs from '~components/RecommendSongs';
-import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
+import { getBanner, getStarPick } from '~lib/search';
+import { getPlayListPersonalized, getTopPlayList } from '~lib/api/playlist';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
-import { customfetch as fetch } from '~lib/fetchData';
 
 export const revalidate = 3600;
 
 export default async function Home() {
-  const personalizedPlaylistData = await fetch({ url: '/api/personalized' });
-
-  const starpickData = await fetch({
-    url: '/api/starpick',
-  });
-
-  const bannerData = await fetch({ url: '/api/banner', params: { type: 1 } });
-
-  const topPlaylistData = await fetch({ url: '/api/top_playlist' });
+  const personalizedPlaylistData = await getPlayListPersonalized('');
+  const starpickData = await getStarPick();
+  const bannerData = await getBanner();
+  const topPlaylistData = await getTopPlayList();
 
   return (
     <div className="p-2 mb-16">
-      <Announcement
-        text="重构中..."
-        store={true}
-        icon={'🎉'}
-        position="top-center"
-      />
       <Banners data={bannerData} />
-
       <StarPick data={starpickData} />
       <RecommendSongs />
-      <PlaylistPersonalized data={personalizedPlaylistData} />
       <Playlist data={topPlaylistData.playlists} />
+      <PlaylistPersonalized data={personalizedPlaylistData} />
     </div>
   );
 }

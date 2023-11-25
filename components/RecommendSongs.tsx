@@ -13,7 +13,7 @@ export default function RecommendSongs() {
     getRecommendations(localStorage.cookie),
   );
 
-  const data = recommendations?.body?.data?.dailySongs;
+  const data = recommendations?.data?.dailySongs;
 
   useEffect(() => {
     if (!localStorage.cookie) {

@@ -33,9 +33,6 @@ export async function GET(request: Request, { params }: { params: Params }) {
       // @ts-ignore
       data = await app.starpick_comments_summary();
       break;
-    case 'personalized':
-      data = await app.personalized({ limit: 10 });
-      break;
     case 'top_playlist':
       data = await app.top_playlist({
         limit: 10,
@@ -57,8 +54,44 @@ export async function GET(request: Request, { params }: { params: Params }) {
         id,
       });
       break;
+  }
+
+  // 支持跨域
+  return Response.json(data, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  });
+}
+
+export async function POST(request: Request, { params }: { params: Params }) {
+  const { slug } = params;
+
+  console.log(
+    chalk.cyan.bold.underline(request.url, '->', new Date().toLocaleString()),
+  );
+
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id') || 1;
+  const type = searchParams.get('type') || 1;
+
+  // params
+  // console.log(id, type);
+
+  let data;
+
+  switch (slug) {
+    case 'starpick_comments_summary':
+      // @ts-ignore
+      data = await app.starpick_comments_summary();
+      break;
     case 'recommend_songs':
       data = await app.recommend_songs({});
+    case 'personalized':
+      data = await app.personalized({ limit: 10 });
+      break;
   }
 
   // 支持跨域
