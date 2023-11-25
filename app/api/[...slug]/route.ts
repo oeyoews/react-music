@@ -54,6 +54,7 @@ export async function GET(
       break;
     case 'song_url':
       data = await app.song_url({
+        br: 9999000,
         id,
       });
       break;
@@ -101,6 +102,18 @@ export async function GET(
       break;
     case 'personalized':
       data = await app.personalized({ limit: 10 });
+      break;
+    case 'mv_first':
+      data = await app.mv_first({});
+      break;
+    case 'mv_exclusive_rcmd':
+      data = await app.mv_exclusive_rcmd({});
+      break;
+    case 'comment_mv':
+      data = await app.comment_mv({
+        id,
+        limit: 99,
+      });
       break;
     default:
       data = { msg: '暂不支持 ' + slug };

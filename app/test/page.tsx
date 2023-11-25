@@ -12,12 +12,19 @@ export default function Page() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    fetch('/api/song/url?id=31460206')
+    fetch('http://localhost:3000/api/lyric?id=33894312', {
+      method: 'GET',
+      // cache: 'no-store',
+    })
       .then((res) => res.json())
       .then((data) => {
         setData(data);
       });
-  });
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   console.log(data);
+    // });
+  }, []);
 
   return <div>{data && JSON.stringify(data)}</div>;
 }

@@ -1,3 +1,5 @@
+'use server';
+
 import { customfetch as fetch } from './fetchData';
 
 export const getSiMiMV = async (mvid: Id): Promise<IArtistMV> => {

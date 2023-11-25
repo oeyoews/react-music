@@ -56,8 +56,9 @@ async function fetchData(
     const data = await res.json();
     return data.body;
   } catch (error) {
-    console.error(chalk.red.bold(finalURL, 'Error in fetchData:', error));
-    throw error;
+    console.error(
+      chalk.red.bold(finalURL, JSON.stringify(params), 'Error in fetchData:'),
+    );
   }
 }
 

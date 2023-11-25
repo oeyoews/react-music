@@ -7,7 +7,7 @@ export default async function MVPage() {
 
   return (
     <div className="p-2 mb-16">
-      {mvrcmd && <MV data={mvfirst.body.data} total={16} />}
+      {mvrcmd && <MV data={mvfirst.data} total={16} />}
     </div>
   );
 }

@@ -24,15 +24,15 @@ export default function APlayer({
 }) {
   const apRef = useRef<AplayerMethods | null>();
 
-  // const [artistData, setArtistData] = useState<IArtistDetail>();
-  const [musicURL, setMusicURL] = useState<IMusicURL>();
+  const [artistData, setArtistData] = useState<IArtistDetail>();
+  // const [musicURL, setMusicURL] = useState<IMusicURL>();
 
   // 需要cookie , 如何分离出去
   useEffect(() => {
     const cookie = localStorage.cookie;
-    getMusicURL(slug, cookie).then((res) => {
-      setMusicURL(res);
-    });
+    // getMusicURL(slug, cookie).then((res) => {
+    //   setMusicURL(res);
+    // });
 
     // getArtistDetail(arId).then((res) => {
     //   setArtistData(res);
@@ -61,16 +61,16 @@ export default function APlayer({
     // apRef.current.on('loadstart', () => toast('hhh'));
   };
 
-  const url = musicURL?.data[0].url;
-  // const artist = artistData?.data.artist?.name;
-  // const cover = artistData?.data.artist?.cover;
+  // const url = musicURL?.data[0].url;
+  const artist = artistData?.data.artist?.name;
+  const cover = artistData?.data.artist?.cover;
   const audio = [
     {
       name: data?.songs?.[0].name,
-      url,
+      // url,
       // lrc: lyric,
-      // artist,
-      // cover: artistData?.data.artist.cover,
+      artist,
+      cover: artistData?.data.artist.cover,
     },
   ];
 
@@ -101,7 +101,7 @@ export default function APlayer({
     // feat: use swr
     <div className="w-full top-[52px]">
       {/* {(!url || !cover || !artist) && <Spinner size={68} />} */}
-      {url && <ReactAplayer {...options} />}
+      {cover && <ReactAplayer {...options} />}
     </div>
   );
 }

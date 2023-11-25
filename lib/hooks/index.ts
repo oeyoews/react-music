@@ -11,7 +11,7 @@ import {
   getLyric,
 } from '~lib/search';
 
-import { getMVComment, getArtistMV, getSiMiMV } from '~lib/mv';
+import { getMVComment, getArtistMV, getSiMiMV, getMvDetail } from '~lib/mv';
 import { getPlayListPersonalized } from '~lib/api/playlist';
 
 export const useSiMiMV = (mvId: Id) => {
@@ -30,6 +30,11 @@ export const usePlaylistPersonalized = () => {
 
 export const useMvComment = (id: Id) => {
   const data = useSWRImmutable(id + 'mvcomment', () => getMVComment(id), {});
+  return data;
+};
+
+export const useMvDetail = (id: Id) => {
+  const data = useSWRImmutable(id + 'mvdetail', () => getMvDetail(id), {});
   return data;
 };
 
