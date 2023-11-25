@@ -148,6 +148,7 @@ export const getMusicURL = async (
 ): Promise<IMusicURL> => {
   if (!id) {
     console.log(chalk.red.bold('no id for music url', id));
+    // @ts-ignore
     return null;
   }
   return fetch({
