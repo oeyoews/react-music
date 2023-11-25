@@ -34,6 +34,10 @@ export async function GET(
       // @ts-ignore
       data = await app.banner({ type });
       break;
+    case 'search':
+      // @ts-ignore
+      data = await app.search({ keywords });
+      break;
     case 'search_default':
       data = await app.search_default({});
       break;
