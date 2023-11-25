@@ -85,7 +85,7 @@ export async function GET(
       try {
         data = await app.comment_music({ id });
       } catch (e) {
-        console.log(chalk.red(slug, '->', e.body.message));
+        console.log(chalk.red(slug, '->', e.?body?.message));
         data = e;
       }
       break;
@@ -93,7 +93,7 @@ export async function GET(
       try {
         data = await app.song_url({ id });
       } catch (e) {
-        console.log(chalk.red(slug, '->', e.body.message));
+        console.log(chalk.red(slug, '->', e?.body?.message));
         data = e;
       }
       break;
@@ -104,7 +104,7 @@ export async function GET(
           level: 'standard' as SoundQualityType,
         });
       } catch (e) {
-        console.log(chalk.red(slug, '->', e.body.message));
+        console.log(chalk.red(slug, '->', e?.body?.message));
         data = e;
       }
       break;
