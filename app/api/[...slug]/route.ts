@@ -2,7 +2,8 @@
 import app from 'NeteaseCloudMusicApi';
 import chalk from 'chalk';
 
-// export const runtime = 'edge'; // 'nodejs' is the default, edge no fs
+// export const revalidate = process.env.NODE_ENV === 'production' ? 1 : 0;
+export const runtime = 'nodejs'; // 'nodejs' is the default, edge no fs
 
 export async function GET(
   request: Request,
@@ -59,11 +60,13 @@ export async function GET(
       // @ts-ignore
       data = await app.starpick_comments_summary();
       break;
-    // TODO: 不知道为什么总是得到推荐歌单
     case 'recommend_songs':
       data = await app.recommend_songs({});
+      break;
     case 'personalized':
       data = await app.personalized({ limit: 10 });
+      break;
+    default:
       break;
   }
 

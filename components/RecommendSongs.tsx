@@ -16,7 +16,7 @@ export default function RecommendSongs() {
 
   console.log(recommendations);
 
-  const data = recommendations?.result?.dailySongs;
+  const data = recommendations?.data?.dailySongs;
 
   useEffect(() => {
     if (!localStorage.cookie) {

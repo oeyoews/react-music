@@ -39,7 +39,7 @@ async function fetchData(
     mode: 'cors',
     // cache: 'force-cache',
     next: {
-      revalidate: 3600,
+      revalidate: process.env.NODE_ENV === 'development' ? 0 : 3600,
     },
     // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
     headers: {
