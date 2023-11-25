@@ -1,4 +1,3 @@
-import { searchDefault } from '~lib/search';
 // https://nextjs.org/docs/app/building-your-application/routing/route-handlers#convention
 import app, { type SoundQualityType } from 'NeteaseCloudMusicApi';
 import chalk from 'chalk';
