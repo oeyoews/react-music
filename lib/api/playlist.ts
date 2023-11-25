@@ -37,10 +37,7 @@ export const getPlayListPersonalized = async (
     url: '/personalized',
     params: {
       limit: 12,
-    },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
+      cookie,
     },
   });
 };

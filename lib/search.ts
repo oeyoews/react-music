@@ -49,10 +49,7 @@ export const checkSong = async (
     url: '/check/music',
     params: {
       id,
-    },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
+      cookie,
     },
   });
 };
@@ -104,15 +101,13 @@ export const searchSuggest = async (keywords: string): Promise<ISearch> => {
 export const getRecommendations = async (
   cookie: string,
 ): Promise<IRecommendSongs> => {
-  // NOTE: need login
-  return await fetch({
-    url: '/recommend_songs',
-    params: {},
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+  // NOTE: need cookie
+  const data = await fetch({
+    url: '/recommend/songs',
+    params: { cookie },
   });
+  console.log(data);
+  return data;
 };
 
 /**
@@ -152,10 +147,7 @@ export const getMusicURL = async (
     url: '/song/url',
     params: {
       id,
-    },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
+      cookie,
     },
   });
 };
@@ -190,12 +182,11 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
 };
 
 // NOTE: 需要cookie(游客cookie 也可以); 有时没有cookie 也可以???
-export const getStarPick = async (): Promise<IStarPick> => {
+export const getStarPick = async (cookie: string): Promise<IStarPick> => {
   return await fetch({
     url: '/starpick/comments/summary',
-    options: {
-      method: 'POST',
-      // body: JSON.stringify({ cookie }),
+    params: {
+      cookie,
     },
   });
 };

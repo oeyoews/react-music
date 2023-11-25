@@ -6,18 +6,15 @@ import { SlEarphones } from 'react-icons/sl';
 import { usePlaylistPersonalized } from '~lib/hooks';
 
 // TODO 合并类型
-export default function PlaylistPersonalized({data}: {data: IPlaylistPersonalized}) {
-  // const { data: playlistData } = usePlaylistPersonalized();
-  const playlist = data
+export default function PlaylistPersonalized() {
+  const { data: playlist } = usePlaylistPersonalized();
   return (
     <div>
       <h2>推荐歌单</h2>
       {/* TODO: add more */}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-6 my-4">
         {playlist?.result.slice(0, 12).map((item) => (
-          <div
-            key={item.name}
-            className="hover:cursor-pointer flex flex-col">
+          <div key={item.name} className="hover:cursor-pointer flex flex-col">
             <Link href={`/playlist/${item.id}`} className="rounded-md">
               <div className="flex overflow-hidden rounded-md relative">
                 <div className="not-prose group">

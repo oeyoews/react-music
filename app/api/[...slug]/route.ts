@@ -4,26 +4,24 @@ import chalk from 'chalk';
 
 // export const runtime = 'edge'; // 'nodejs' is the default, edge no fs
 
-interface Params {
-  slug: string;
-}
-
 export async function GET(
   request: Request,
   { params }: { params: { slug: string[] } },
 ) {
   const slug = params.slug?.join('_');
+  const { searchParams } = new URL(request.url);
+  const cookie = searchParams.get('cookie');
+  let url = request.url;
+  if (cookie) {
+    url = request.url.replace(encodeURIComponent(cookie), 'xxxxxxxx(hiddened)');
+  }
 
   console.log(
-    chalk.cyan.bold.underline(request.url, '->', new Date().toLocaleString()),
+    chalk.cyan.bold.underline(url, '->', new Date().toLocaleString()),
   );
 
-  const { searchParams } = new URL(request.url);
   const id = searchParams.get('id') || 1;
   const type = searchParams.get('type') || 1;
-
-  // params
-  // console.log(id, type);
 
   let data;
 
@@ -57,42 +55,11 @@ export async function GET(
         id,
       });
       break;
-  }
-
-  // 支持跨域
-  return Response.json(data, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
-}
-
-export async function POST(
-  request: Request,
-  { params }: { params: { slug: string[] } },
-) {
-  const slug = params.slug?.join('_');
-
-  console.log(
-    chalk.cyan.bold.underline(request.url, '->', new Date().toLocaleString()),
-  );
-
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id') || 1;
-  const type = searchParams.get('type') || 1;
-
-  // params
-  // console.log(id, type);
-
-  let data;
-
-  switch (slug) {
     case 'starpick_comments_summary':
       // @ts-ignore
       data = await app.starpick_comments_summary();
       break;
+    // TODO: 不知道为什么总是得到推荐歌单
     case 'recommend_songs':
       data = await app.recommend_songs({});
     case 'personalized':

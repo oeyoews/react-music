@@ -42,7 +42,6 @@ async function fetchData(
       revalidate: 3600,
     },
     // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
-    // method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     }, // cookie on header auto on same domain???

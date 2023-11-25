@@ -9,8 +9,7 @@ import PlaylistPersonalized from '~components/PlaylistPersonalized';
 export const revalidate = 3600;
 
 export default async function Home() {
-  const personalizedPlaylistData = await getPlayListPersonalized('');
-  const starpickData = await getStarPick();
+  const starpickData = await getStarPick('');
   const bannerData = await getBanner();
   const topPlaylistData = await getTopPlayList();
 
@@ -20,7 +19,7 @@ export default async function Home() {
       <StarPick data={starpickData} />
       <RecommendSongs />
       <Playlist data={topPlaylistData.playlists} />
-      <PlaylistPersonalized data={personalizedPlaylistData} />
+      {/* <PlaylistPersonalized /> */}
     </div>
   );
 }

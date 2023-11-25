@@ -9,11 +9,14 @@ import useSWR from 'swr';
 export default function RecommendSongs() {
   const [hasCookie, setHasCookie] = useState(true);
 
-  const { data: recommendations, isLoading } = useSWR('recommendations', () =>
-    getRecommendations(localStorage.cookie),
+  const { data: recommendations, isLoading } = useSWR(
+    'recommendationssongs',
+    () => getRecommendations(localStorage.cookie),
   );
 
-  const data = recommendations?.data?.dailySongs;
+  console.log(recommendations);
+
+  const data = recommendations?.result?.dailySongs;
 
   useEffect(() => {
     if (!localStorage.cookie) {
