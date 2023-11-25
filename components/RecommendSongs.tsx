@@ -5,11 +5,13 @@ import { getRecommendations } from '~lib/search';
 import Link from 'next/link';
 import Spinner from './Spinner';
 import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
+// TODO: cookie 似乎没有生效
 export default function RecommendSongs() {
   const [hasCookie, setHasCookie] = useState(true);
 
-  const { data: recommendations, isLoading } = useSWR(
+  const { data: recommendations, isLoading } = useSWRImmutable(
     'recommendationssongs',
     () => getRecommendations(localStorage.cookie),
   );

@@ -1,7 +1,6 @@
 'use server';
 
 import { customfetch as fetch } from './fetchData';
-import app from 'NeteaseCloudMusicApi';
 
 /**
  * 01: generate qr code key
@@ -12,9 +11,6 @@ export const getqrKey = async (): Promise<IQRCode> => {
   return await fetch({
     url: '/login/qr/key',
     params: { timestamp: Date.now() },
-    options: {
-      method: 'POST',
-    },
   });
 };
 
@@ -31,9 +27,6 @@ export const qrCreate = async (key: string): Promise<IQRCodeData> => {
       qrimg: true,
       timestamp: Date.now(),
     },
-    options: {
-      method: 'POST',
-    },
   });
 };
 
@@ -49,9 +42,6 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
       key,
       timestamp: Date.now(),
     },
-    options: {
-      method: 'POST',
-    },
   });
 };
 
@@ -62,11 +52,7 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
 export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
   return await fetch({
     url: '/login/status',
-    params: { timestamp: Date.now() },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+    params: { timestamp: Date.now(), cookie },
   });
 };
 
@@ -89,11 +75,7 @@ export const refreshLogin = async () => {
 export const getAccount = async (cookie: string): Promise<IUserAccount> => {
   return await fetch({
     url: '/user/account',
-    params: { timestamp: Date.now() },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+    params: { timestamp: Date.now(), cookie },
   });
 };
 
@@ -101,23 +83,16 @@ export const getAccount = async (cookie: string): Promise<IUserAccount> => {
 export const getLevel = async (cookie: string): Promise<ILevel> => {
   return await fetch({
     url: '/user/level',
-    params: { timestamp: Date.now() },
-    options: {
-      method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+    params: { timestamp: Date.now(), cookie },
   });
 };
 
 // need login
 export const getUserDetail = async (uid: Id) => {
-  return await app.user_detail({
-    uid,
+  return await fetch({
+    url: '/user/detail',
+    params: { uid },
   });
-  // return await fetch({
-  //   url: '/user/detail',
-  //   params: { uid },
-  // });
 };
 
 export const logout = async (): Promise<any> => {

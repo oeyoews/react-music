@@ -3,7 +3,7 @@ import { getUserDetail } from '~lib/login';
 
 export default async function Avatar({ uid }: { uid: number }) {
   const userData = await getUserDetail(uid);
-  const data = userData.body as unknown as IUserDetail;
+  const data = userData as unknown as IUserDetail;
   const size = 22;
   return (
     <Image

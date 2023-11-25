@@ -105,7 +105,10 @@ export const getRecommendations = async (
   // NOTE: need cookie
   const data = await fetch({
     url: '/recommend/songs',
-    params: { cookie },
+    params: {
+      cookie,
+      noCookie: true,
+    },
   });
   return data;
 };

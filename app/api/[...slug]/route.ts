@@ -26,10 +26,34 @@ export async function GET(
   const type = searchParams.get('type') || 1;
   const ids = searchParams.get('ids');
   const keywords = searchParams.get('keywords');
+  const key = searchParams.get('key');
+  const uid = searchParams.get('uid');
 
   let data;
 
   switch (slug) {
+    case 'user_detail':
+      // @ts-ignore
+      data = await app.user_detail({ uid });
+      break;
+    case 'login_status':
+      data = await app.login_status({});
+      break;
+    case 'user_account':
+      data = await app.user_account({});
+      break;
+    case 'login_qr_key':
+      data = await app.login_qr_key({});
+      break;
+
+    case 'login_qr_create':
+      // @ts-ignore
+      data = await app.login_qr_create({ key });
+      break;
+    case 'login_qr_check':
+      // @ts-ignore
+      data = await app.login_qr_check({ key });
+      break;
     case 'banner':
       // @ts-ignore
       data = await app.banner({ type });
