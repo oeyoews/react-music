@@ -146,11 +146,11 @@ export const getMusicURL = async (
   cookie: string,
   // level: any = 'standard',
 ): Promise<IMusicURL> => {
-  if (!id) {
-    console.log(chalk.red.bold('no id for music url', id));
-    // @ts-ignore
-    return null;
-  }
+  // if (!id) {
+  //   console.log(chalk.red.bold('no id for music url', id));
+  //   // @ts-ignore
+  //   return null;
+  // }
   return fetch({
     url: '/song/url/v1',
     params: {
