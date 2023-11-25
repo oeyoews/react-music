@@ -1,32 +1,28 @@
-import app from 'NeteaseCloudMusicApi';
 import Banners from '~components/Banners';
 import Playlist from '~components/Playlist';
 import RecommendSongs from '~components/RecommendSongs';
 import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
-import {getBanners} from '~lib/search';
 
 export const revalidate = 3600;
 
 export default async function Home() {
+  const baseURL = process.env.MUSIC_API;
 
-  const personalizedData = await app.personalized({
-    limit: 10,
-  });
-  const personalizedPlaylist =
-    personalizedData.body as unknown as IPlaylistPersonalized;
-  // @ts-ignore
-    const starpickData= await app.starpick_comments_summary()
+  const personalizedPlaylistRes = await fetch(baseURL + '/api/personalized');
+  const personalizedPlaylistData = await personalizedPlaylistRes.json();
 
-  // hot playlist
-  const playlistData = await app.top_playlist({
-    limit: 10,
-  });
-  const playlist = playlistData.body as unknown as IPlaylist;
+  const starpickRes = await fetch(baseURL + '/api/starpick');
+  const starpickData = await starpickRes.json();
 
-  const bannersData = await getBanners();
-  const banners = (await bannersData.body) as unknown as IBanner;
+  const bannerres = await fetch('http://localhost:3000/api/banner');
+  const bannerdata = await bannerres.json();
+
+  const top_playlist_res = await fetch(
+    'http://localhost:3000/api/top_playlist',
+  );
+  const top_playlist_data = await top_playlist_res.json();
 
   return (
     <div className="p-2 mb-16">
@@ -36,12 +32,12 @@ export default async function Home() {
         icon={'🎉'}
         position="top-center"
       />
-      <Banners data={banners.banners} />
+      <Banners data={bannerdata.body.banners} />
 
-      <StarPick data={starpickData.body}/>
+      <StarPick data={starpickData.body} />
       <RecommendSongs />
-      <PlaylistPersonalized data={personalizedPlaylist} />
-      <Playlist data={playlist.playlists} />
+      <PlaylistPersonalized data={personalizedPlaylistData.body} />
+      <Playlist data={top_playlist_data.body.playlists} />
     </div>
   );
 }
