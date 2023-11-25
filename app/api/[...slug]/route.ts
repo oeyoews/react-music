@@ -1,3 +1,4 @@
+import { searchDefault } from '~lib/search';
 // https://nextjs.org/docs/app/building-your-application/routing/route-handlers#convention
 import app, { type SoundQualityType } from 'NeteaseCloudMusicApi';
 import chalk from 'chalk';
@@ -24,6 +25,7 @@ export async function GET(
   const id = searchParams.get('id') || '1';
   const type = searchParams.get('type') || 1;
   const ids = searchParams.get('ids');
+  const keywords = searchParams.get('keywords');
 
   let data;
 
@@ -31,6 +33,9 @@ export async function GET(
     case 'banner':
       // @ts-ignore
       data = await app.banner({ type });
+      break;
+    case 'search_default':
+      data = await app.search_default({});
       break;
     case 'search_hot_detail':
       data = await app.search_hot_detail({});

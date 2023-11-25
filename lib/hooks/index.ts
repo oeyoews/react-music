@@ -9,6 +9,7 @@ import {
   getMusicURL,
   search,
   getLyric,
+  searchDefault,
 } from '~lib/search';
 
 import { getMVComment, getArtistMV, getSiMiMV, getMvDetail } from '~lib/mv';
@@ -48,6 +49,12 @@ export const useLyric = (id: Id) => {
 export const useSearch = (keyword: string) => {
   const searchKeyword = decodeURIComponent(keyword.trim());
   return useSWRImmutable([searchKeyword], search, {
+    suspense: true,
+  });
+};
+
+export const useSearchDefault = () => {
+  return useSWRImmutable('searchdefault', searchDefault, {
     suspense: true,
   });
 };

@@ -1,14 +1,15 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import useStore from '~lib/store';
 import toast from 'react-hot-toast';
-import useSWR from 'swr';
-import { searchDefault } from '~lib/search';
 import { FaSearch } from 'react-icons/fa';
+import { useSearchDefault } from '~lib/hooks';
 
-export default async function Search() {
+export default function Search() {
   const statusStore = useStore();
   const router = useRouter();
-  const searchDefaultData = await searchDefault();
+  const { data: searchDefaultData } = useSearchDefault();
   const searchWord = searchDefaultData.data.showKeyword;
 
   const handleSearch = (e: React.FormEvent) => {
