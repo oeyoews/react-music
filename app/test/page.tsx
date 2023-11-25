@@ -55,6 +55,7 @@ export default function Page() {
     axios({
       url: songurl,
     }).then((res) => {
+      // @ts-ignore
       setData(res);
     });
   }, []);
