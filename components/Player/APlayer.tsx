@@ -62,12 +62,14 @@ export default function APlayer({
   };
 
   const url = musicURL?.data[0].url;
+  const tempouterurl = (id: Id) =>
+    `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
   const artist = artistData?.data.artist?.name;
   const cover = artistData?.data.artist?.cover;
   const audio = [
     {
       name: data?.songs?.[0].name,
-      url,
+      url: url || tempouterurl(slug),
       lrc: lyric,
       artist,
       cover: artistData?.data.artist.cover,
@@ -101,7 +103,7 @@ export default function APlayer({
     // feat: use swr
     <div className="w-full top-[52px]">
       {/* {(!url || !cover || !artist) && <Spinner size={68} />} */}
-      {cover && <ReactAplayer {...options} />}
+      {cover && lyric && <ReactAplayer {...options} />}
     </div>
   );
 }
