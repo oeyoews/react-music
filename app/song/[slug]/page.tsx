@@ -24,20 +24,20 @@ export default async function Page({ params }: { params: Params }) {
   const { slug } = params;
 
   const songDetailData = await getSongDetail(slug);
-  const arId = songDetailData.body?.songs?.[0].ar?.[0].id;
+  const arId = songDetailData?.songs?.[0].ar?.[0].id;
 
   const MusicPlayer = async () => {
     try {
-      const song = songDetailData.body.songs[0];
-      const previleges = songDetailData?.body.privileges[0];
+      const song = songDetailData.songs[0];
+      const previleges = songDetailData?.privileges[0];
       const vip = previleges?.fee === 1 ? true : false;
       const lyric = await getLyric(slug);
       return (
         <div>
           <APlayer
             slug={slug}
-            data={songDetailData.body}
-            lyric={lyric.body.lrc.lyric}
+            data={songDetailData}
+            lyric={lyric.lrc.lyric}
             arId={arId}
           />
           <h2>歌曲名</h2>
@@ -54,7 +54,8 @@ export default async function Page({ params }: { params: Params }) {
       return (
         <div className="flex justify-center items-center">
           {JSON.stringify(e)}
-          <div className="text-rose-500 font-bold">{e?.body?.message}</div>
+          {/* @ts-ignore */}
+          <div className="text-rose-500 font-bold">{e?.message}</div>
           <Link href={'/'} className="bg-neutral-200 rounded p-2">
             返回主页
           </Link>
@@ -67,14 +68,14 @@ export default async function Page({ params }: { params: Params }) {
     const artistMVs = await getArtistMV(arId);
     return (
       <div>
-        <MV data={artistMVs.body?.mvs!} />
+        <MV data={artistMVs?.mvs!} />
       </div>
     );
   };
 
   const ArtistInfo = async () => {
     const artistBodyData = await getArtistDetail(arId);
-    const artistData = artistBodyData.body as unknown as IArtistDetail;
+    const artistData = artistBodyData as unknown as IArtistDetail;
     return (
       <div className="my-4">
         {artistData?.data && (
@@ -101,17 +102,16 @@ export default async function Page({ params }: { params: Params }) {
         <div>
           <div className="flex justify-start items-center space-x-2">
             <h2 className="my-2">评论区</h2>
-            <div>
-              共 {songCommentData.body?.total?.toLocaleString() || 0} 条评论
-            </div>
+            <div>共 {songCommentData?.total?.toLocaleString() || 0} 条评论</div>
           </div>
           <SongCommentTab
-            songComment={songCommentData.body as unknown as ISongComment}
+            songComment={songCommentData as unknown as ISongComment}
           />
         </div>
       );
     } catch (e) {
-      return <div className="text-red-400">{e?.body?.message}</div>;
+      // @ts-ignore
+      return <div className="text-red-400">{e?.message}</div>;
     }
   };
 
@@ -122,7 +122,7 @@ export default async function Page({ params }: { params: Params }) {
         <hr />
         <h2 className="my-2">相似歌曲</h2>
         <ol className="columns-2">
-          {data.body?.songs.map((song) => {
+          {data?.songs.map((song) => {
             return (
               <li key={song.id}>
                 <Link href={`/song/${song.id}`} className="no-underline">

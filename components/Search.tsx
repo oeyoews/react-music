@@ -8,8 +8,8 @@ import { FaSearch } from 'react-icons/fa';
 export default async function Search() {
   const statusStore = useStore();
   const router = useRouter();
-  const searchDefaultData = await searchDefault()
-  const searchWord = searchDefaultData.body?.data.showKeyword;
+  const searchDefaultData = await searchDefault();
+  const searchWord = searchDefaultData.data.showKeyword;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,5 +1,6 @@
 'use server';
 
+import chalk from 'chalk';
 // NOTE: 注意这里必须要明确指定use server, 这里的代码依赖node, 所以必须跑在server上面, 对于服务端渲染 @NeteaseMusicApi
 import { customfetch as fetch } from './fetchData';
 
@@ -142,6 +143,10 @@ export const getMusicURL = async (
   cookie: string,
   // level: any = 'standard',
 ): Promise<IMusicURL> => {
+  if (!id) {
+    console.log(chalk.red.bold('no id for music url', id));
+    return null;
+  }
   return fetch({
     url: '/song/url',
     params: {

@@ -21,8 +21,9 @@ export async function GET(
     chalk.cyan.bold.underline(url, '->', new Date().toLocaleString()),
   );
 
-  const id = searchParams.get('id') || 1;
+  const id = searchParams.get('id') || '1';
   const type = searchParams.get('type') || 1;
+  const ids = searchParams.get('ids');
 
   let data;
 
@@ -30,6 +31,40 @@ export async function GET(
     case 'banner':
       // @ts-ignore
       data = await app.banner({ type });
+      break;
+    case 'search_hot_detail':
+      data = await app.search_hot_detail({});
+      break;
+    case 'search_default':
+      data = await app.search_default({});
+      break;
+    case 'song_detail':
+      data = await app.song_detail({
+        ids: ids!,
+      });
+      break;
+    case 'artist_mv':
+      data = await app.artist_mv({
+        id,
+      });
+      break;
+    case 'comment_music':
+      data = await app.comment_music({ id });
+      break;
+    case 'song_url':
+      data = await app.song_url({
+        id,
+      });
+      break;
+    case 'simi_song':
+      data = await app.simi_song({
+        id,
+      });
+      break;
+    case 'lyric':
+      data = await app.lyric({
+        id,
+      });
       break;
     case 'starpick':
       // @ts-ignore
@@ -67,7 +102,8 @@ export async function GET(
       data = await app.personalized({ limit: 10 });
       break;
     default:
-      break;
+      data = { msg: '暂不支持 ' + slug };
+      console.log(chalk.red.bold(slug, '暂时不支持'));
   }
 
   // 支持跨域

@@ -5,7 +5,7 @@ import Spinner from '~components/Spinner';
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
-import { getMusicURL } from '~lib/search';
+import { getArtistDetail, getMusicURL } from '~lib/search';
 
 // https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
@@ -24,31 +24,19 @@ export default function APlayer({
 }) {
   const apRef = useRef<AplayerMethods | null>();
 
-  const [artistData, setArtistData] = useState<IArtistDetail>();
+  // const [artistData, setArtistData] = useState<IArtistDetail>();
   const [musicURL, setMusicURL] = useState<IMusicURL>();
 
   // 需要cookie , 如何分离出去
   useEffect(() => {
     const cookie = localStorage.cookie;
     getMusicURL(slug, cookie).then((res) => {
-      setMusicURL(res.body);
+      setMusicURL(res);
     });
 
-    try {
-      fetch('/api/artist_detail', {
-        method: 'POST',
-        body: JSON.stringify({ cookie, id: arId }),
-        credentials: 'include',
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setArtistData(data);
-        });
-    } catch (e) {
-      console.log(e.message as string);
-    }
+    // getArtistDetail(arId).then((res) => {
+    //   setArtistData(res);
+    // });
   }, [arId, slug]);
 
   useEffect(() => {
@@ -74,15 +62,15 @@ export default function APlayer({
   };
 
   const url = musicURL?.data[0].url;
-  const artist = artistData?.data.artist.name;
-  const cover = artistData?.data.artist.cover;
+  // const artist = artistData?.data.artist?.name;
+  // const cover = artistData?.data.artist?.cover;
   const audio = [
     {
       name: data?.songs?.[0].name,
       url,
-      lrc: lyric,
-      artist,
-      cover: artistData?.data.artist.cover,
+      // lrc: lyric,
+      // artist,
+      // cover: artistData?.data.artist.cover,
     },
   ];
 
@@ -112,8 +100,8 @@ export default function APlayer({
     // TODO: 这里的数据必须要等待完全获取, 在进行渲染, 直接修改 变量是不会刷新的
     // feat: use swr
     <div className="w-full top-[52px]">
-      {(!url || !cover || !artist) && <Spinner size={68} />}
-      {url && cover && artist && <ReactAplayer {...options} />}
+      {/* {(!url || !cover || !artist) && <Spinner size={68} />} */}
+      {url && <ReactAplayer {...options} />}
     </div>
   );
 }

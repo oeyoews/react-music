@@ -1,6 +1,9 @@
 import useSWRImmutable from 'swr/immutable';
 import { getUserDetail } from '~lib/login';
 import {
+  getSongComment,
+  getSongDetail,
+  getSimiSong,
   getStarPick,
   getArtistDetail,
   getMusicURL,
@@ -15,9 +18,9 @@ export const useSiMiMV = (mvId: Id) => {
   return useSWRImmutable(mvId + 'simimv', () => getSiMiMV(mvId));
 };
 
-// export const useArtistMV = (arId: Id) => {
-//   return useSWRImmutable(arId + 'artistmv', () => getArtistMV(arId));
-// };
+export const useArtistMV = (arId: Id) => {
+  return useSWRImmutable(arId + 'artistmv', () => getArtistMV(arId));
+};
 
 export const usePlaylistPersonalized = () => {
   return useSWRImmutable('playlistpersonalized', () =>
@@ -37,17 +40,18 @@ export const useLyric = (id: Id) => {
   });
 };
 
-// export const useSearch = (keyword: string) => {
-//   const searchKeyword = decodeURIComponent(keyword.trim());
-//   return useSWRImmutable([searchKeyword], search, {
-//     suspense: true,
-//   });
-// };
+export const useSearch = (keyword: string) => {
+  const searchKeyword = decodeURIComponent(keyword.trim());
+  return useSWRImmutable([searchKeyword], search, {
+    suspense: true,
+  });
+};
 
-// export const useSongComment = (id: Id) => {
-//   const songCommendata  = await getSongComment(Number(id))
-//   return data;
-// };
+export const useSongComment = (id: Id) => {
+  return useSWRImmutable(id + 'songcomment', () => getSongComment(id), {
+    suspense: true,
+  });
+};
 
 export const useUserData = (uid: number) => {
   return useSWRImmutable([uid], () => getUserDetail(uid));
@@ -60,30 +64,31 @@ export const useStarPick = () => {
   });
 };
 
+// 为什么有时候会为空
 export const useMusicURL = (id: Id) => {
   return useSWRImmutable(
     [id, localStorage.cookie],
-    () => getMusicURL(id, localStorage.cookie),
+    ([id]) => getMusicURL(id, localStorage.cookie),
     {
-      suspense: true,
+      suspense: false,
       refreshInterval: 3600000,
     },
   );
 };
 
-// export const useSongDetailData = (slug: Id) => {
-//   return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
-//     refreshInterval: 3600000,
-//   });
-// };
+export const useSongDetailData = (slug: Id) => {
+  return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
+    refreshInterval: 3600000,
+  });
+};
 
 // TODO: https://swr.vercel.app/zh-CN/docs/with-nextjs.zh-CN#server-components
 export const useArtistData = (arId: Id) => {
   return useSWRImmutable(arId + 'artist', () => getArtistDetail(arId));
 };
 
-// export const useSiMiSong = (slug: Id) => {
-//   return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
-//     refreshInterval: 3600000,
-//   });
-// };
+export const useSiMiSong = (slug: Id) => {
+  return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
+    refreshInterval: 3600000,
+  });
+};

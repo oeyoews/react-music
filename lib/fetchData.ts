@@ -5,6 +5,8 @@ type Config = {
   options?: RequestInit;
 };
 
+import chalk from 'chalk';
+
 function addParams(
   finalURL: string,
   params?: Record<string, string | number | boolean>,
@@ -39,7 +41,7 @@ async function fetchData(
     mode: 'cors',
     // cache: 'force-cache',
     next: {
-      revalidate: process.env.NODE_ENV === 'development' ? 0 : 3600,
+      revalidate: process.env.NODE_ENV === 'development' ? 1 : 3600,
     },
     // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
     headers: {
@@ -54,7 +56,7 @@ async function fetchData(
     const data = await res.json();
     return data.body;
   } catch (error) {
-    console.error('Error in fetchData:', error);
+    console.error(chalk.red.bold(finalURL, 'Error in fetchData:', error));
     throw error;
   }
 }

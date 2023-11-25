@@ -9,7 +9,7 @@ export default async function page({ params }: { params: Params }) {
   try {
     const data = await search(keywords);
 
-    const vipids = data.body.result?.songs
+    const vipids = data.result?.songs
       ?.filter((song) => song.fee == 1)
       .map((song) => song.id);
 
@@ -17,7 +17,7 @@ export default async function page({ params }: { params: Params }) {
       <div>
         <h2>{keywords}</h2>
         <ol className="columns-1 md:columns-2">
-          {data.body.result.songs?.map((song) => {
+          {data.result.songs?.map((song) => {
             return (
               <li className="" key={song.id}>
                 <Link href={`/song/${song.id}`}>
@@ -43,6 +43,6 @@ export default async function page({ params }: { params: Params }) {
     );
   } catch (e) {
     // @ts-ignore
-    return <div className="text-center text-red-400">{e.body.message}</div>;
+    return <div className="text-center text-red-400">{e.message}</div>;
   }
 }

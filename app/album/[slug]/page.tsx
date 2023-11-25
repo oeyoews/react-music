@@ -12,17 +12,17 @@ export default async function Album({ params }: { params: Params }) {
     <>
       <div className="justify-center items-center flex">
         <Image
-          src={albumDetail.body.album.picUrl}
+          src={albumDetail.album.picUrl}
           width={256}
           height={256}
           alt="img"
           className="rounded-full shadow-lg w-96"
         />
       </div>
-      <div className="line-clamp-2">{albumDetail.body.album.description}</div>
+      <div className="line-clamp-2">{albumDetail.album.description}</div>
       {/* TODO: center */}
       <ol className="columns-1 md:columns-2">
-        {albumDetail.body.songs.map((song) => {
+        {albumDetail.songs.map((song) => {
           return (
             <Link
               href={`/song/${song.id}`}

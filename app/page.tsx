@@ -4,7 +4,7 @@ import RecommendSongs from '~components/RecommendSongs';
 import StarPick from '~components/StarPick';
 import { getBanner, getStarPick } from '~lib/search';
 import { getPlayListPersonalized, getTopPlayList } from '~lib/api/playlist';
-// import PlaylistPersonalized from '~components/PlaylistPersonalized';
+import PlaylistPersonalized from '~components/PlaylistPersonalized';
 
 export const revalidate = 3600;
 
