@@ -8,8 +8,11 @@ interface Params {
   slug: string;
 }
 
-export async function GET(request: Request, { params }: { params: Params }) {
-  const { slug } = params;
+export async function GET(
+  request: Request,
+  { params }: { params: { slug: string[] } },
+) {
+  const slug = params.slug?.join('_');
 
   console.log(
     chalk.cyan.bold.underline(request.url, '->', new Date().toLocaleString()),
@@ -66,8 +69,11 @@ export async function GET(request: Request, { params }: { params: Params }) {
   });
 }
 
-export async function POST(request: Request, { params }: { params: Params }) {
-  const { slug } = params;
+export async function POST(
+  request: Request,
+  { params }: { params: { slug: string[] } },
+) {
+  const slug = params.slug?.join('_');
 
   console.log(
     chalk.cyan.bold.underline(request.url, '->', new Date().toLocaleString()),

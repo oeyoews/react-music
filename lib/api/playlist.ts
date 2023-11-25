@@ -26,7 +26,7 @@ export const getPlayListSongs = async (id: Id): Promise<PlaylistSong> => {
  */
 export const getTopPlayList = async (): Promise<IPlaylist> => {
   return await fetch({
-    url: '/top_playlist',
+    url: '/top/playlist',
   });
 };
 
