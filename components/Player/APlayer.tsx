@@ -6,11 +6,8 @@ import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import { getArtistDetail, getMusicURL } from '~lib/search';
+import ReactAplayer from 'react-aplayer';
 
-// https://react.dev/reference/react/lazy#troubleshooting
-const ReactAplayer = lazy(() => import('react-aplayer'));
-
-// 由于要获取cookie, 所以只能在client
 export default function APlayer({
   data,
   slug,
@@ -47,7 +44,8 @@ export default function APlayer({
     });
     return () => {
       document.title = vanillaTitle;
-      apRef.current?.destroy();
+      // TODO: 开发, 刷新后, 会丢失
+      // apRef.current?.destroy();
     };
   }, [data.songs]);
 
@@ -55,10 +53,6 @@ export default function APlayer({
     if (!apRef.current) {
       apRef.current = aplayer;
     }
-    // apRef.current.on('error', () => toast.error('歌曲加载失败'));
-    // apRef.current?.on('loadeddata', () => toast('歌曲加载成功'));
-    // apRef.current.on('loadedmetadata', () => toast('歌曲信息加载成功'));
-    // apRef.current.on('loadstart', () => toast('hhh'));
   };
 
   const url = musicURL?.data[0].url;
@@ -91,18 +85,14 @@ export default function APlayer({
     },
     onPause: () => {
       document.title = `暂停播放 ${data?.songs?.[0].name}`;
-      // apRef.current?.on('pause', () => toast('歌曲播放暂停'));
-      // apRef.current?.on('ended', () => toast('歌曲播放完毕'));
       toast('歌曲暂停');
     },
   };
 
-  /* TODO: add copybutton or download url */
   return (
     // TODO: 这里的数据必须要等待完全获取, 在进行渲染, 直接修改 变量是不会刷新的
-    // feat: use swr
     <div className="w-full top-[52px]">
-      {/* {(!url || !cover || !artist) && <Spinner size={68} />} */}
+      {(!cover || !artist) && <Spinner size={68} />}
       {cover && lyric && <ReactAplayer {...options} />}
     </div>
   );

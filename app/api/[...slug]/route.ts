@@ -4,7 +4,6 @@ import chalk from 'chalk';
 
 // export const revalidate = process.env.NODE_ENV === 'production' ? 1 : 0;
 // export const runtime = 'nodejs'; // 'nodejs' is the default, edge no fs
-export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: Request,
@@ -52,7 +51,6 @@ export async function GET(
     case 'comment_music':
       try {
         data = await app.comment_music({ id });
-        console.log(data);
       } catch (e) {
         console.log(chalk.red(slug, '->', e.body.message));
         data = e;

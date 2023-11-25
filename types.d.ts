@@ -1,8 +1,8 @@
 interface APP {
-  status: number
+  status: number;
   body: {
-    message?: string
-  }
+    message?: string;
+  };
 }
 
 interface IArtistMV {
@@ -1793,7 +1793,9 @@ declare module 'react-aplayer' {
       // audios: { id: string; name: string; url: string }[];
     };
   }
-  export default class Aplayer extends React.Component<Partial<AplayerProps>> {}
+  export default class ReactAplayer extends React.Component<
+    Partial<AplayerProps>
+  > {}
 }
 
 interface IVideosAll {
