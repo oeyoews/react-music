@@ -34,5 +34,5 @@ export default function SongComment({
       );
     });
 
-  return <div className="min-h-screen">{commentList}</div>;
+  return <div>{commentList}</div>;
 }

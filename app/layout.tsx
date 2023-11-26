@@ -5,6 +5,7 @@ import Nav from '~components/Nav/Nav';
 import { Sidebar } from '~components/Nav/Sidebar';
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'react-hot-toast';
+import clsx from 'clsx';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,8 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased `}>
-        {/* TODO: 修复加载问题 */}
+      <body className={clsx('antialiased min-h-screen', inter.className)}>
         <NextTopLoader />
         <Toaster />
         <Nav />
