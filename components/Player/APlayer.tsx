@@ -10,9 +10,10 @@ import {
   useLyric,
 } from '~lib/hooks';
 import Spinner from '../Spinner';
+import ReactAplayer from 'react-aplayer';
 
 // https://react.dev/reference/react/lazy#troubleshooting
-const ReactAplayer = lazy(() => import('react-aplayer'));
+// const ReactAplayer = lazy(() => import('react-aplayer'));
 
 export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
@@ -66,7 +67,7 @@ export default function APlayer({ slug }: { slug: string }) {
 
   // 关于artplayer 提到的刷新问题
   const options: Partial<AplayerProps> = {
-    theme: 'red',
+    theme: 'green',
     // mini: true,
     // fixed: true, // if fixed, not destroy
     lrcType: 1, // 1: lrc 内容 3: file

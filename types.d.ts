@@ -1784,7 +1784,9 @@ declare module 'react-aplayer' {
       // audios: { id: string; name: string; url: string }[];
     };
   }
-  export default class Aplayer extends React.Component<Partial<AplayerProps>> {}
+  export default class ReactAplayer extends React.Component<
+    Partial<AplayerProps>
+  > {}
 }
 
 interface IVideosAll {
