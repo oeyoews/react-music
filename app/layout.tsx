@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import '~app/globals.css';
 import Nav from '~components/Nav/Nav';
 import { Sidebar } from '~components/Nav/Sidebar';
-import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'react-hot-toast';
 import clsx from 'clsx';
 
@@ -24,7 +23,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx('antialiased min-h-screen', inter.className)}>
-        <NextTopLoader />
         <Toaster />
         <Nav />
         <Sidebar />
