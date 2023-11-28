@@ -123,7 +123,6 @@ export const MusicPlayer = ({ slug }: { slug: string }) => {
 };
 
 import DrawserComponent from '~components/DrawserComponent';
-import { error } from 'console';
 
 export default function SongPage({ slug }: { slug: string }) {
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, lazy, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
@@ -21,8 +21,6 @@ export default function APlayer({ slug }: { slug: string }) {
     useSongDetailData(slug);
 
   const apRef = useRef<AplayerMethods | null>();
-
-  // NOTE: 不能使用useeffect here
 
   useEffect(() => {
     const vanillaTitle = document.title;
@@ -67,7 +65,9 @@ export default function APlayer({ slug }: { slug: string }) {
 
   // 关于artplayer 提到的刷新问题
   const options: Partial<AplayerProps> = {
-    theme: 'green',
+    theme: '#b7daff',
+    storageName: 'react-aplayer-setting',
+    // theme: '#F57F17',
     // mini: true,
     // fixed: true, // if fixed, not destroy
     lrcType: 1, // 1: lrc 内容 3: file

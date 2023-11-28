@@ -1743,6 +1743,7 @@ declare module 'react-aplayer' {
   }
 
   interface AplayerProps {
+    storageName: string;
     audio: Partial<AplayerAudio>[];
     theme: string;
     lrcType: number;

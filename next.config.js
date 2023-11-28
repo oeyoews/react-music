@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   crossOrigin: 'anonymous',
   // https://github.com/vercel/next.js/discussions/34810
   // https://nextjs.org/docs/architecture/nextjs-compiler
