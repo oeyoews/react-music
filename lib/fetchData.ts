@@ -1,3 +1,5 @@
+import chalk from 'chalk';
+
 type Params = Record<string, any>;
 type Config = {
   url?: string;
@@ -49,6 +51,11 @@ async function fetchData(
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
   const urlWithParams = addParams(finalURL, params);
+  console.log(
+    chalk.green(finalURL),
+    params ? chalk.cyan.bold(JSON.stringify(params)) : '',
+    new Date().toLocaleTimeString(),
+  );
 
   try {
     const res = await fetch(urlWithParams, mergedOptions);
