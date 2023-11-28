@@ -15,9 +15,9 @@ import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
-  const { data: songData } = useSongDetailData(slug);
-  const arId = songData?.songs[0].ar[0].id;
+  const { error, data: songData, isLoading } = useSongDetailData(slug);
 
+  const arId = songData?.songs[0].ar?.[0].id;
   const { data: artistMVs, isLoading: isloadingMv } = useArtistMV(arId!);
 
   return <div>{!isloadingMv && <MV data={artistMVs?.mvs!} />}</div>;
@@ -96,29 +96,34 @@ export const MusicPlayer = ({ slug }: { slug: string }) => {
     isLoading: isLoadingSong,
     error,
   } = useSongDetailData(slug);
-  const song = songDetailData?.songs[0];
-  const previleges = songDetailData?.privileges[0];
-  const vip = previleges?.fee === 1 ? true : false;
+  try {
+    const song = songDetailData?.songs[0];
+    const previleges = songDetailData?.privileges[0];
+    const vip = previleges?.fee === 1 ? true : false;
 
-  if (error) {
+    if (error) {
+      return <div className="text-red-500">加载错误</div>;
+    }
+
+    return (
+      <div>
+        {isLoadingSong ? <Spinner /> : <APlayer slug={slug} />}
+        <h2>歌曲名</h2>
+        <div className="inline font-semibold">{song?.name}</div>
+        {vip && (
+          <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
+            VIP
+          </sup>
+        )}
+      </div>
+    );
+  } catch (e) {
     return <div className="text-red-500">加载错误</div>;
   }
-
-  return (
-    <div>
-      {isLoadingSong ? <Spinner size={88} /> : <APlayer slug={slug} />}
-      <h2>歌曲名</h2>
-      <div className="inline font-semibold">{song?.name}</div>
-      {vip && (
-        <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
-          VIP
-        </sup>
-      )}
-    </div>
-  );
 };
 
 import DrawserComponent from '~components/DrawserComponent';
+import { error } from 'console';
 
 export default function SongPage({ slug }: { slug: string }) {
   return (

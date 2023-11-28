@@ -18,9 +18,6 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
-  const arId = songData?.songs[0].ar[0].id;
-  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
-  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   const apRef = useRef<AplayerMethods | null>();
 
@@ -38,6 +35,14 @@ export default function APlayer({ slug }: { slug: string }) {
       // toast('退出播放');
     };
   }, [songData]);
+
+  const arId = songData?.songs[0]?.ar[0].id;
+  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
+  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
+
+  if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
+    return <Spinner />;
+  }
 
   const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
