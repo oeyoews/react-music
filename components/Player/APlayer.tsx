@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { lazy, useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
@@ -10,10 +10,9 @@ import {
   useLyric,
 } from '~lib/hooks';
 import Spinner from '../Spinner';
-import ReactAplayer from 'react-aplayer';
 
 // https://react.dev/reference/react/lazy#troubleshooting
-// const ReactAplayer = lazy(() => import('react-aplayer'));
+const ReactAplayer = lazy(() => import('react-aplayer'));
 
 export default function APlayer({ slug }: { slug: string }) {
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
