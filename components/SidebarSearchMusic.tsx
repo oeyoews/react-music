@@ -7,17 +7,17 @@ import useSWRImmutable from 'swr/immutable';
 import DrawserComponent from '~components/DrawserComponent';
 import { FaSearch } from 'react-icons/fa';
 
+const HotSongComponent = () => {
+  const { data, isLoading } = useSWRImmutable(
+    '/search/hot/detail',
+    searchHotDetail,
+  );
+
+  return !isLoading && <HotSongs data={data?.data!} />;
+};
+
 // TODO: more element
 export default function SidebarSearchMusic() {
-  const HotSongComponent = () => {
-    const { data, isLoading } = useSWRImmutable(
-      '/search/hot/detail',
-      searchHotDetail,
-    );
-
-    return !isLoading && <HotSongs data={data?.data!} />;
-  };
-
   return (
     <DrawserComponent
       text={
