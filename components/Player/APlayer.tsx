@@ -1,6 +1,6 @@
 'use client';
 
-import { lazy, useEffect, useRef } from 'react';
+import { lazy, useCallback, useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
@@ -20,8 +20,15 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
 
-  const apRef = useRef<AplayerMethods | null>();
+  let apRef = useRef<AplayerMethods | null>();
 
+  const onInit = useCallback((aplayer: AplayerMethods) => {
+    if (!apRef.current) {
+      apRef.current = aplayer;
+    }
+  }, []);
+
+  // 现在useeffect 跑两次, 导致apRef.current 为null
   useEffect(() => {
     const vanillaTitle = document.title;
     apRef.current?.on('ended', () => {
@@ -31,9 +38,9 @@ export default function APlayer({ slug }: { slug: string }) {
     return () => {
       document.title = vanillaTitle;
       apRef.current?.destroy();
-      // toast('退出播放');
+      toast('退出播放');
     };
-  }, [songData]);
+  }, [songData, onInit]);
 
   const arId = songData?.songs[0]?.ar[0].id;
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
@@ -42,16 +49,6 @@ export default function APlayer({ slug }: { slug: string }) {
   if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
     return <Spinner />;
   }
-
-  const onInit = (aplayer: AplayerMethods) => {
-    if (!apRef.current) {
-      apRef.current = aplayer;
-    }
-    // apRef.current.on('error', () => toast.error('歌曲加载失败'));
-    // apRef.current?.on('loadeddata', () => toast('歌曲加载成功'));
-    // apRef.current.on('loadedmetadata', () => toast('歌曲信息加载成功'));
-    // apRef.current.on('loadstart', () => toast('hhh'));
-  };
 
   const audio = [
     {
