@@ -27,10 +27,6 @@ export default function APlayer({ slug }: { slug: string }) {
     }
   };
 
-  const arId = songData?.songs[0]?.ar[0].id;
-  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
-  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
-
   useEffect(() => {
     const vanillaTitle = document.title;
     return () => {
@@ -48,6 +44,10 @@ export default function APlayer({ slug }: { slug: string }) {
     toast('歌曲播放完毕');
     document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
   });
+
+  const arId = songData?.songs[0]?.ar[0].id;
+  const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
+  const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
   if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
     return <Spinner />;
