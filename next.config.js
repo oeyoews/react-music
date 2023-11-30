@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    ppr: true,
+  },
   reactStrictMode: true,
   crossOrigin: 'anonymous',
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   // https://github.com/vercel/next.js/discussions/34810
   // https://nextjs.org/docs/architecture/nextjs-compiler
   compiler: {

@@ -1,6 +1,6 @@
 'use client';
 
-import useStore from '~lib/store';
+import { useMusicStore } from '~lib/store';
 import Image from 'next/image';
 
 // TODO: 重构登录
@@ -23,7 +23,9 @@ const LoginPage = () => {
   const [qrurl, setQrURL] = useState('');
   const [key, setKey] = useState('');
   const [loading, setLoading] = useState(true);
-  const statusStore = useStore();
+  const setCookie = useMusicStore.use.setCookie();
+  const setLoginStatus = useMusicStore.use.setLoginStatus();
+  const setUserInfo = useMusicStore.use.setUserInfo();
 
   const btnClass = 'bg-neutral-200 shadow p-2 rounded-sm font-bold';
 
@@ -32,7 +34,7 @@ const LoginPage = () => {
   const checkQr = async (key: string) => {
     const checkResult = await qrCheck(key);
     if (checkResult.code === 803) {
-      statusStore.setCookie(checkResult.cookie);
+      setCookie(checkResult.cookie);
       localStorage.setItem('cookie', checkResult.cookie);
       router.push('/');
       toast.success('登录成功');
@@ -43,13 +45,13 @@ const LoginPage = () => {
 
   const updateStatus = async () => {
     const loginStatus = await getLoginStatus(localStorage.cookie);
-    statusStore.setLoginStatus(loginStatus);
+    setLoginStatus(loginStatus);
   };
 
   useEffect(() => {
     const getUserInfo = async () => {
       const userInfo = await getAccount(localStorage.cookie);
-      statusStore.setUserInfo(userInfo);
+      setUserInfo(userInfo);
       localStorage.userData = JSON.stringify(userInfo);
     };
     const handleLogin = async () => {
@@ -68,7 +70,7 @@ const LoginPage = () => {
       });
     };
 
-    statusStore.setCookie(localStorage.cookie);
+    setCookie(localStorage.cookie);
 
     if (!localStorage.cookie) {
       handleLogin();
@@ -108,7 +110,7 @@ const LoginPage = () => {
                 className={btnClass}
                 onClick={() => {
                   loginAnonymous().then((res) => {
-                    statusStore.setCookie(res.cookie);
+                    setCookie(res.cookie);
                     localStorage.setItem('cookie', res.cookie);
                     toast('游客登录成功');
                   });

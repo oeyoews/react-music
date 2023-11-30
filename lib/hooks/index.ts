@@ -14,13 +14,14 @@ import {
 
 import { getMVComment, getArtistMV, getSiMiMV } from '~lib/mv';
 import { getPlayListPersonalized } from '~lib/api/playlist';
+import useSWR from 'swr';
 
 export const useSiMiMV = (mvId: Id) => {
   return useSWRImmutable(mvId + 'simimv', () => getSiMiMV(mvId));
 };
 
 export const useArtistMV = (arId: Id) => {
-  return useSWRImmutable(arId + 'artistmv', () => getArtistMV(arId));
+  return useSWR(arId + 'artistmv', () => getArtistMV(arId));
 };
 
 export const usePlaylistPersonalized = () => {
@@ -55,7 +56,7 @@ export const useSearch = (keyword: string) => {
 };
 
 export const useSongComment = (id: Id) => {
-  const data = useSWRImmutable(id + 'comment', () => getSongComment(id), {
+  const data = useSWR(id + 'comment', () => getSongComment(id), {
     // suspense: true,
   });
   if (data.data?.code !== 200 && data.data?.message) {
@@ -80,12 +81,12 @@ export const useStarPick = () => {
 export const useMusicURL = (id: Id) => {
   // [id, localStorage.cookie]
   // TODO: 为什么不能直接传
-  return useSWRImmutable(
+  return useSWR(
     [id, localStorage.cookie],
     () => getMusicURL(id, localStorage.cookie),
     {
       suspense: true,
-      refreshInterval: 3600000,
+      revalidateOnFocus: false,
     },
   );
 };

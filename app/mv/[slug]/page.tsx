@@ -36,12 +36,8 @@ export default function VideoPage({ params }: { params: Params }) {
   };
 
   const VideoPlayer = () => {
-    const { data: mvURLData, isLoading } = useSWRImmutable(
-      slug + 'mvurl',
-      () => getMvURL(slug, localStorage.cookie),
-      {
-        refreshInterval: 3600000, // 1小时
-      },
+    const { data: mvURLData, isLoading } = useSWRImmutable(slug + 'mvurl', () =>
+      getMvURL(slug, localStorage.cookie),
     );
 
     return (

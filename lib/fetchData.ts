@@ -41,7 +41,7 @@ async function fetchData(
     mode: 'cors',
     // cache: 'force-cache',
     next: {
-      revalidate: 3600,
+      revalidate: 3600 * 24,
     },
     // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
     // method: 'POST',

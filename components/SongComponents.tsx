@@ -118,6 +118,7 @@ export const MusicPlayer = ({ slug }: { slug: string }) => {
       </div>
     );
   } catch (e) {
+    console.warn(e);
     return <div className="text-red-500">加载错误</div>;
   }
 };
