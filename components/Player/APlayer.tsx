@@ -99,7 +99,7 @@ export default function APlayer({ slug }: { slug: string }) {
         <div>
           {/* TODO: 更像是内部的ref问题 */}
           <ReactAplayer {...options} />
-          {JSON.stringify(audio)}
+          {/* {JSON.stringify(audio)} */}
         </div>
       )}
     </div>
