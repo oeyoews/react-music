@@ -29,6 +29,11 @@ export default function APlayer({ slug }: { slug: string }) {
 
   useEffect(() => {
     const vanillaTitle = document.title;
+    apRef.current?.on('ended', () => {
+      toast('歌曲播放完毕');
+      document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
+    });
+
     return () => {
       document.title = vanillaTitle;
       if (apRef.current) {
@@ -39,11 +44,6 @@ export default function APlayer({ slug }: { slug: string }) {
       }
     };
   }, [songData]);
-
-  apRef.current?.on('ended', () => {
-    toast('歌曲播放完毕');
-    document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
-  });
 
   const arId = songData?.songs[0]?.ar[0].id;
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
@@ -56,10 +56,10 @@ export default function APlayer({ slug }: { slug: string }) {
   const audio = [
     {
       name: songData?.songs?.[0].name,
-      url: musicData.data?.[0].url,
-      lrc:
-        lyric?.lrc?.lyric ||
+      url:
+        musicData.data?.[0].url ||
         `//music.163.com/song/media/outer/url?id=${slug}.mp3`,
+      lrc: lyric?.lrc?.lyric,
       artist: artistData?.data.artist.name,
       cover: artistData?.data.artist.cover,
     },
@@ -99,6 +99,7 @@ export default function APlayer({ slug }: { slug: string }) {
         <div>
           {/* TODO: 更像是内部的ref问题 */}
           <ReactAplayer {...options} />
+          {JSON.stringify(audio)}
         </div>
       )}
     </div>
