@@ -1,26 +1,28 @@
 import { useRouter } from 'next/navigation';
-import useStore from '~lib/store';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import { searchDefault } from '~lib/search';
 import { FaSearch } from 'react-icons/fa';
+import { useMusicStore } from '~lib/store';
 
 export default function Search() {
-  const statusStore = useStore();
+  const defaultSearchWord = useMusicStore.use.defaultSearchWord();
+  const setDefaultSearch = useMusicStore.use.setDefaultSearchWord();
+
   const router = useRouter();
   const { data } = useSWR('/search/default', searchDefault);
   const searchWord = data?.data.showKeyword;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!statusStore.searchWord && !searchWord) {
+    if (!defaultSearchWord && !searchWord) {
       toast.error('请输入关键字');
       return;
     }
     toast.loading('搜索中...', {
       duration: 500,
     });
-    router.push(`/search/${statusStore.searchWord || searchWord}`);
+    router.push(`/search/${defaultSearchWord || searchWord}`);
   };
 
   return (
@@ -29,8 +31,8 @@ export default function Search() {
         <input
           autoFocus
           type="text"
-          value={statusStore.searchWord}
-          onChange={(e) => statusStore.setSearchWord(e.target.value)}
+          value={defaultSearchWord}
+          onChange={(e) => setDefaultSearch(e.target.value)}
           placeholder={searchWord}
           className="border border-gray-500 rounded-l-lg p-2 focus:outline-none w-full"
         />

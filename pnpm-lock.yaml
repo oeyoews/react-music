@@ -23,6 +23,9 @@ dependencies:
   artplayer-plugin-control:
     specifier: ^2.0.0
     version: 2.0.0
+  auto-zustand-selectors-hook:
+    specifier: ^2.0.0
+    version: 2.0.0(zustand@4.4.6)
   chalk:
     specifier: '4'
     version: 4.1.2
@@ -1220,6 +1223,15 @@ packages:
 
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
+    dev: false
+
+  /auto-zustand-selectors-hook@2.0.0(zustand@4.4.6):
+    resolution: {integrity: sha512-QPmI3PUgTW3np6coV+ffIP/yygYPvi8qWXezPW82u9cVLr79Tsf2TkH5/auFdhnL5iAyLOk4Sjk7XQwnmDsbSw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      zustand: '>=4'
+    dependencies:
+      zustand: 4.4.6(@types/react@18.2.37)(react@18.2.0)
     dev: false
 
   /autoprefixer@10.4.16(postcss@8.4.31):

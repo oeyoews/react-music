@@ -2,15 +2,15 @@
 
 import { getRoute } from '~lib/getRoute';
 
-import useStore from '~lib/store';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Route } from 'next';
+import { useMusicStore } from '~lib/store';
 // TODO: click events
 // @see-also https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/components/Banner/index.vue#L38
 export default function Banners({ data }: { data: Banner[] }) {
-  const firstLoading = useStore((state) => state.firstLoading);
+  const firstLoading = useMusicStore.use.firstLoading();
 
   const container = {
     hidden: { opacity: 1, scale: 0 },

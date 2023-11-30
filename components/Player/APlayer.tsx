@@ -1,6 +1,6 @@
 'use client';
 
-import { lazy, useCallback, useEffect, useRef } from 'react';
+import { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
@@ -9,6 +9,7 @@ import {
   useSongDetailData,
   useLyric,
 } from '~lib/hooks';
+
 import Spinner from '../Spinner';
 
 // TODO: 如何重新加载aplayer on failed
@@ -20,35 +21,35 @@ export default function APlayer({ slug }: { slug: string }) {
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(slug);
 
-  let apRef = useRef<AplayerMethods | null>();
+  const apRef = useRef<AplayerMethods | null>();
 
-  const onInit = useCallback((aplayer: AplayerMethods) => {
+  const onInit = (aplayer: AplayerMethods) => {
     if (!apRef.current) {
       apRef.current = aplayer;
     }
-  }, []);
-
-  // 现在useeffect 跑两次, 导致apRef.current 为null
-  useEffect(() => {
-    const vanillaTitle = document.title;
-    apRef.current?.on('ended', () => {
-      toast('歌曲播放完毕');
-      document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
-    });
-    return () => {
-      document.title = vanillaTitle;
-      apRef.current?.destroy();
-      toast('退出播放');
-    };
-  }, [songData, onInit]);
+  };
 
   const arId = songData?.songs[0]?.ar[0].id;
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
   const { data: lyric, isLoading: isLoadingLyric } = useLyric(slug);
 
-  if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
-    return <Spinner />;
-  }
+  useEffect(() => {
+    const vanillaTitle = document.title;
+    return () => {
+      document.title = vanillaTitle;
+      if (apRef.current) {
+        apRef.current.destroy();
+        toast('退出播放');
+      } else {
+        console.warn('apRef.current is null');
+      }
+    };
+  }, [songData]);
+
+  apRef.current?.on('ended', () => {
+    toast('歌曲播放完毕');
+    document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
+  });
 
   const audio = [
     {
@@ -62,11 +63,9 @@ export default function APlayer({ slug }: { slug: string }) {
     },
   ];
 
-  // 关于artplayer 提到的刷新问题
   const options: Partial<AplayerProps> = {
     theme: '#b7daff',
     storageName: 'react-aplayer-setting',
-    // theme: '#F57F17',
     // mini: true,
     // fixed: true, // if fixed, not destroy
     lrcType: 1, // 1: lrc 内容 3: file
@@ -85,6 +84,10 @@ export default function APlayer({ slug }: { slug: string }) {
     },
   };
 
+  if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
+    return <Spinner />;
+  }
+
   /* TODO: add copybutton or download url */
   return (
     // TODO: stick absolute
@@ -95,7 +98,10 @@ export default function APlayer({ slug }: { slug: string }) {
       isLoadingLyric ? (
         <Spinner />
       ) : (
-        <ReactAplayer {...options} />
+        <div>
+          {/* TODO: 更像是内部的ref问题 */}
+          <ReactAplayer {...options} />
+        </div>
       )}
     </div>
   );

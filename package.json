@@ -16,6 +16,7 @@
     "NeteaseCloudMusicApi": "^4.13.6",
     "artplayer": "^5.0.9",
     "artplayer-plugin-control": "^2.0.0",
+    "auto-zustand-selectors-hook": "^2.0.0",
     "chalk": "4",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
