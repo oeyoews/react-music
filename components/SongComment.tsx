@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { FaThumbsUp } from 'react-icons/fa';
 import RelativeTime from './RelativeTime';
 
+// TODO: 歌词分页, 或者滚动到底更新
 export default function SongComment({
   comments,
 }: {
