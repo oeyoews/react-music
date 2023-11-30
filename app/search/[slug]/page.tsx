@@ -1,5 +1,6 @@
 'use client';
 
+import Spinner from '~components/Spinner';
 import Link from 'next/link';
 import Badge from '~components/Badge';
 import { useSearch } from '~lib/hooks';
@@ -7,10 +8,13 @@ import toast from 'react-hot-toast';
 
 const SearchResult = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useSearch(slug);
-  if (data.code !== 200) {
-    toast.error(`搜索结果: ${data.message}`);
+  if (isLoading) {
+    return <Spinner />;
   }
-  const vipids = data.result.songs
+  if (data?.code !== 200) {
+    toast.error(`搜索结果: ${data?.message}`);
+  }
+  const vipids = data?.result.songs
     ?.filter((song) => song.fee == 1)
     .map((song) => song.id);
 
@@ -18,13 +22,13 @@ const SearchResult = ({ slug }: { slug: string }) => {
     <div>
       <h2>{decodeURIComponent(slug)}</h2>
       <ol className="columns-1 md:columns-2">
-        {data.result.songs?.map((song) => {
+        {data?.result.songs?.map((song) => {
           return (
             <li className="" key={song.id}>
               <Link href={`/song/${song.id}`}>
                 <div className="flex">
                   {song.name} -- {song.artists[0].name}
-                  {vipids.includes(song.id) ? (
+                  {vipids?.includes(song.id) ? (
                     <div>
                       <Badge
                         text={'VIP'}

@@ -51,7 +51,7 @@ export const useLyric = (id: Id) => {
 export const useSearch = (keyword: string) => {
   const searchKeyword = decodeURIComponent(keyword.trim());
   return useSWRImmutable([searchKeyword], search, {
-    suspense: true,
+    // suspense: true,
   });
 };
 

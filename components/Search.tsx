@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
