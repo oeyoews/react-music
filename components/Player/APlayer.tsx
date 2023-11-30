@@ -56,7 +56,9 @@ export default function APlayer({ slug }: { slug: string }) {
     {
       name: songData?.songs?.[0].name,
       url: musicData.data?.[0].url,
-      lrc: lyric?.lrc?.lyric,
+      lrc:
+        lyric?.lrc?.lyric ||
+        `//music.163.com/song/media/outer/url?id=${slug}.mp3`,
       artist: artistData?.data.artist.name,
       cover: artistData?.data.artist.cover,
     },
