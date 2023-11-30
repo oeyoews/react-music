@@ -12,8 +12,6 @@ import {
 
 import Spinner from '../Spinner';
 
-// TODO: 如何重新加载aplayer on failed
-// https://react.dev/reference/react/lazy#troubleshooting
 const ReactAplayer = lazy(() => import('react-aplayer'));
 
 export default function APlayer({ slug }: { slug: string }) {
@@ -51,6 +49,10 @@ export default function APlayer({ slug }: { slug: string }) {
     document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
   });
 
+  if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
+    return <Spinner />;
+  }
+
   const audio = [
     {
       name: songData?.songs?.[0].name,
@@ -83,10 +85,6 @@ export default function APlayer({ slug }: { slug: string }) {
       toast('歌曲暂停');
     },
   };
-
-  if (isLoadingArtist || isLoadingLyric || isLoadingURL || isLoadingSongData) {
-    return <Spinner />;
-  }
 
   /* TODO: add copybutton or download url */
   return (
