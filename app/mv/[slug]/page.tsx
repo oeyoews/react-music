@@ -25,15 +25,15 @@ export default function VideoPage({ params }: { params: Params }) {
       return <Spinner />;
     }
     const {
-      name: mvName = '',
+      name = '',
       artistName = '',
       desc = '暂无描述',
-    } = mvDetailData?.data as IMvDetailData;
+    } = (mvDetailData?.data as IMvDetailData) || {};
     return (
       <div className="">
         <Suspense fallback={<Spinner />}>
           <h2 className="text-center">
-            {mvName} {mvName && '--'} {artistName}
+            {name} {name && '--'} {artistName}
           </h2>
           <p className="font-normal text-sm">{desc}</p>
         </Suspense>
