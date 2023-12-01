@@ -24,9 +24,11 @@ export default function VideoPage({ params }: { params: Params }) {
     if (isLoading) {
       return <Spinner />;
     }
-    const mvName = mvDetailData?.data?.name;
-    const artistName = mvDetailData?.data?.artistName;
-    const desc = mvDetailData?.data.desc;
+    const {
+      name: mvName = '',
+      artistName = '',
+      desc = '暂无描述',
+    } = mvDetailData?.data as IMvDetailData;
     return (
       <div className="">
         <Suspense fallback={<Spinner />}>
