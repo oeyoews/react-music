@@ -17,9 +17,13 @@ export default function VideoPage({ params }: { params: Params }) {
 
   // TODO: 支持选择分辨率 /mv/url
   const VideoTitle = () => {
-    const { data: mvDetailData } = useSWRImmutable(slug + 'detail', () =>
-      getMvDetail(slug),
+    const { data: mvDetailData, isLoading } = useSWRImmutable(
+      slug + 'detail',
+      () => getMvDetail(slug),
     );
+    if (isLoading) {
+      return <Spinner />;
+    }
     const mvName = mvDetailData?.data?.name;
     const artistName = mvDetailData?.data?.artistName;
     const desc = mvDetailData?.data.desc;
