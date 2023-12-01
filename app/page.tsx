@@ -7,8 +7,6 @@ import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
 
-export const revalidate = 86400;
-
 export default async function Home() {
   const bannerData = await getBanners();
   const PlaylistData = await getHotPlayList();
