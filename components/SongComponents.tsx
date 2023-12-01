@@ -1,5 +1,6 @@
 'use client';
 
+import DrawserComponent from '~components/DrawserComponent';
 import {
   useSongDetailData,
   useArtistData,
@@ -122,8 +123,6 @@ export const MusicPlayer = ({ slug }: { slug: string }) => {
     return <div className="text-red-500">加载错误</div>;
   }
 };
-
-import DrawserComponent from '~components/DrawserComponent';
 
 export default function SongPage({ slug }: { slug: string }) {
   return (
