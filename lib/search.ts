@@ -120,11 +120,6 @@ export const getBanners = async (): Promise<IBanner> => {
     params: {
       type: 0,
     },
-    options: {
-      next: {
-        revalidate: 3600 * 24,
-      },
-    },
   });
 };
 
