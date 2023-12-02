@@ -14,7 +14,7 @@ export const getRoute = (banner: Banner) => {
     [TargetType.song]: `/song/${targetId}`,
     [TargetType.album]: `/album/${targetId}`,
     [TargetType.playlist]: `/playlist/${targetId}`,
-    [TargetType.mv]: `/mv/${targetId}`, // video
+    [TargetType.mv]: '#', // TODO: coming
     [TargetType.external]: url as string,
   };
 
