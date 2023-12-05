@@ -1,7 +1,7 @@
 'use client';
 
 import useTitle from '~lib/hooks/useTitle';
-import { lazy, useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
