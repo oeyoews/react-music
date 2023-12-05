@@ -16,6 +16,7 @@ export default function Playlist({ data }: { data: Playlist[] }) {
               <div className="flex overflow-hidden rounded-md relative">
                 <div className="not-prose group">
                   <Image
+                    unoptimized
                     title="点击进入歌单"
                     src={playlist.coverImgUrl}
                     alt={playlist.name}

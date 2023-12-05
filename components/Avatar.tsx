@@ -11,6 +11,7 @@ export default function Avatar({ uid }: { uid: number }) {
     <Spinner center={false} size={size} />
   ) : (
     <Image
+      unoptimized
       src={data?.profile.avatarUrl!}
       alt={data?.profile.nickname!}
       width={size}
