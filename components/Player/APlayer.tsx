@@ -1,5 +1,6 @@
 'use client';
 
+import useTitle from '~lib/hooks/useTitle';
 import { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
@@ -27,15 +28,16 @@ export default function APlayer({ slug }: { slug: string }) {
     }
   };
 
+  const { setTitle, setVanillaTitle } = useTitle();
+
   useEffect(() => {
-    const vanillaTitle = document.title;
     apRef.current?.on('ended', () => {
       toast('歌曲播放完毕');
-      document.title = `${songData?.songs[0].name} - 歌曲播放结束`;
+      setTitle(`${songData?.songs[0].name} - 歌曲播放结束`);
     });
 
     return () => {
-      document.title = vanillaTitle;
+      setVanillaTitle();
       if (apRef.current) {
         apRef.current.destroy();
         toast('退出播放');
@@ -43,7 +45,7 @@ export default function APlayer({ slug }: { slug: string }) {
         console.warn('apRef.current is null');
       }
     };
-  }, [songData]);
+  }, [setTitle, setVanillaTitle, songData]);
 
   const arId = songData?.songs[0]?.ar[0].id;
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
@@ -75,11 +77,11 @@ export default function APlayer({ slug }: { slug: string }) {
     onInit,
     loop: 'none',
     onPlay: () => {
-      document.title = `正在播放 ${songData?.songs?.[0].name}`;
+      setTitle(`正在播放 ${songData?.songs?.[0].name}`);
       toast.success('播放歌曲');
     },
     onPause: () => {
-      document.title = `暂停播放 ${songData?.songs?.[0].name}`;
+      setTitle(`暂停播放 ${songData?.songs?.[0].name}`);
       // apRef.current?.on('pause', () => toast('歌曲播放暂停'));
       // apRef.current?.on('ended', () => toast('歌曲播放完毕'));
       toast('歌曲暂停');
