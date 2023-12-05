@@ -38,14 +38,10 @@ export default function APlayer({ slug }: { slug: string }) {
 
     return () => {
       setVanillaTitle();
-      if (apRef.current) {
-        apRef.current.destroy();
-        toast('退出播放');
-      } else {
-        console.warn('apRef.current is null');
-      }
+      apRef.current?.destroy();
     };
-  }, [setTitle, setVanillaTitle, songData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [songData]);
 
   const arId = songData?.songs[0]?.ar[0].id;
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
