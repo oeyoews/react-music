@@ -30,12 +30,12 @@ export default function APlayer({ slug }: { slug: string }) {
 
   const { setTitle, setVanillaTitle } = useTitle();
 
-  useEffect(() => {
-    apRef.current?.on('ended', () => {
-      toast('歌曲播放完毕');
-      setTitle(`${songData?.songs[0].name} - 歌曲播放结束`);
-    });
+  apRef.current?.on('ended', () => {
+    toast('歌曲播放完毕');
+    setTitle(`${songData?.songs[0].name} - 歌曲播放结束`);
+  });
 
+  useEffect(() => {
     return () => {
       setVanillaTitle();
       apRef.current?.destroy();
