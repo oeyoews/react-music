@@ -5,8 +5,8 @@ export default function SkeletonAvatar({ size = 22 }: { size?: number }) {
     <div
       className={clsx(
         'bg-gray-300 rounded-full animate-pulse shadow-lg my-0',
-        `w-${size}px`,
-        `h-${size}px`,
+        `w-[${size}px]`,
+        `h-[${size}px]`,
       )}
     />
   );
