@@ -21,7 +21,7 @@ const SearchResult = ({ slug }: { slug: string }) => {
   return (
     <div>
       <h2>{decodeURIComponent(slug)}</h2>
-      <ol className="columns-1 md:columns-2">
+      <ul className="columns-1 md:columns-2">
         {data?.result.songs?.map((song) => {
           return (
             <li className="mt-1" key={song.id}>
@@ -43,7 +43,7 @@ const SearchResult = ({ slug }: { slug: string }) => {
             </li>
           );
         })}
-      </ol>
+      </ul>
     </div>
   );
 };
