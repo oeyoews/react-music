@@ -82,10 +82,10 @@ export const useMusicURL = (id: Id) => {
   // [id, localStorage.cookie]
   // TODO: 为什么不能直接传
   return useSWR(
-    [id, localStorage.cookie],
+    [id, localStorage?.cookie],
     () => getMusicURL(id, localStorage?.cookie || ''),
     {
-      suspense: true, // NOTE: localStorage not suitable for suspense on server, so this prerender will error without no suspense
+      suspense: false, // NOTE: localStorage not suitable for suspense on server, so this prerender will error without no suspense
       revalidateOnFocus: false,
     },
   );
