@@ -14,7 +14,7 @@ const SkeletonSongComment = ({ count }: SkeletonSongCommentProps) => {
         <div className="bg-gray-200 w-4 h-4 animate-pulse" />
         <div className="bg-gray-200 w-6 h-4 animate-pulse" />
       </div>
-      <div className="bg-gray-200 h-4 mb-2" />
+      <div className="bg-gray-200 h-4 mb-2 rounded" />
       <hr className="not-prose my-2" />
     </div>
   ));
