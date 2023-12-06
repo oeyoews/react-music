@@ -15,12 +15,12 @@ export default async function Home() {
 
   return (
     <div className="p-2 mb-16">
-      <Announcement
+      {/* <Announcement
         text="重构中..."
         store={true}
         icon={'🎉'}
         position="top-center"
-      />
+      /> */}
       <Banners data={bannerData.banners} />
       <RecommendSongs />
       <PlaylistPersonalized />
