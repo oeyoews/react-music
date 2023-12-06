@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSiMiMV } from '~lib/hooks';
 import Spinner from '~components/Spinner';
 import MV from './MV';
