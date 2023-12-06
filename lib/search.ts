@@ -139,7 +139,7 @@ export const searchHotDetail = async (): Promise<IHotDetail> => {
 // 播放地址有效期 25 min
 export const getMusicURL = async (
   id: Id,
-  cookie: string,
+  cookie?: string,
   // level: any = 'standard',
 ): Promise<IMusicURL> => {
   return fetch({
