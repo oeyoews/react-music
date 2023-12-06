@@ -14,11 +14,11 @@ import Link from 'next/link';
 import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
 import dynamic from 'next/dynamic';
-import APlayer from './Player/APlayer';
+// import APlayer from './Player/APlayer';
 
-// const APlayer = dynamic(() => import('~components/Player/APlayer'), {
-//   ssr: false,
-// });
+const APlayer = dynamic(() => import('~components/Player/APlayer'), {
+  ssr: false,
+});
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
@@ -106,7 +106,6 @@ export default function SongPage({ slug }: { slug: string }) {
   return (
     <>
       <div className="space-x-2 my-4">
-        <APlayer slug={slug} />
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo slug={slug} />
         </DrawserComponent>
@@ -120,6 +119,7 @@ export default function SongPage({ slug }: { slug: string }) {
           <ArtistMVS slug={slug} />
         </DrawserComponent>
       </div>
+      <APlayer slug={slug} />
     </>
   );
 }
