@@ -15,6 +15,7 @@ import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
 import dynamic from 'next/dynamic';
 import SkeletonSongComment from './ui/CommentSkeleton';
+import SkeletonSongs from './ui/SkeletonSongs';
 
 const APlayer = dynamic(() => import('~components/Player/APlayer'), {
   ssr: false,
@@ -43,12 +44,12 @@ export const SimiSong = ({ slug }: { slug: string }) => {
       <hr />
       <h2 className="my-2">相似歌曲</h2>
       {isLoading ? (
-        <Spinner />
+        <SkeletonSongs count={8} />
       ) : (
-        <ul className="columns-2">
+        <ul className="columns-1 md:columns-2">
           {data?.songs?.map((song) => {
             return (
-              <li key={song.id}>
+              <li key={song.id} className="mt-0">
                 <Link href={`/song/${song.id}`} className="no-underline">
                   {song.name} -- {song.artists?.[0].name}
                 </Link>

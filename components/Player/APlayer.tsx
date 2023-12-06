@@ -10,7 +10,7 @@ import {
   useSongDetailData,
   useLyric,
 } from '~lib/hooks';
-import APlayerSkeleton from '~components/ui/AplayerSkelelon';
+import APlayerSkeleton from '~components/ui/AplayerSkeleton';
 
 import ReactAplayer from 'react-aplayer';
 
