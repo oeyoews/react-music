@@ -14,6 +14,7 @@ import Link from 'next/link';
 import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
 import dynamic from 'next/dynamic';
+import SkeletonSongComment from './ui/CommentSkeleton';
 
 const APlayer = dynamic(() => import('~components/Player/APlayer'), {
   ssr: false,
@@ -93,7 +94,7 @@ export const SongComment = ({ slug }: { slug: string }) => {
         <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
       </div>
       {isLoading ? (
-        <Spinner />
+        <SkeletonSongComment count={5} />
       ) : (
         <SongCommentTab songComment={data as ISongComment} />
       )}

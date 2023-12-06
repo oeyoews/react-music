@@ -35,5 +35,5 @@ export default function SongComment({
       );
     });
 
-  return <div>{commentList}</div>;
+  return <>{commentList} </>;
 }

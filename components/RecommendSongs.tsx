@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { getRecommendations } from '~lib/search';
 import Link from 'next/link';
-import Spinner from './Spinner';
 import useSWR from 'swr';
+import SkeletonSongs from './ui/SkeletonSongs';
 
 export default function RecommendSongs() {
   const [hasCookie, setHasCookie] = useState(true);
@@ -25,7 +25,7 @@ export default function RecommendSongs() {
     <ul className="columns-1 md:columns-2">
       {hasCookie &&
         data?.slice(0, 20).map(({ name, id, recommendReason }) => (
-          <li key={id}>
+          <li key={id} className="mt-0">
             <Link href={`/song/${id}`}>
               <div className="flex space-x-2 items-center">
                 <div>{name}</div>
@@ -40,11 +40,10 @@ export default function RecommendSongs() {
   return (
     <div>
       <h2>每日推荐</h2>
-      {!isLoading && content}
       <div className="flex justify-center items-center">
-        {hasCookie && isLoading && <Spinner />}
         {!hasCookie && <div className="text-rose-400 font-bold">需要登录</div>}
       </div>
+      {isLoading ? <SkeletonSongs count={20} /> : content}
     </div>
   );
 }

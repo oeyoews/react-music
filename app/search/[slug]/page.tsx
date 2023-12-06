@@ -24,7 +24,7 @@ const SearchResult = ({ slug }: { slug: string }) => {
       <ol className="columns-1 md:columns-2">
         {data?.result.songs?.map((song) => {
           return (
-            <li className="" key={song.id}>
+            <li className="mt-1" key={song.id}>
               <Link href={`/song/${song.id}`}>
                 <div className="flex">
                   {song.name} -- {song.artists[0].name}

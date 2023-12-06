@@ -45,9 +45,9 @@ export default async function Page({ params }: any) {
         <div>更新时间: {getTime(updateTime)}</div>
       </div>
       <hr />
-      <ol className="md:columns-2">
+      <ol className="columns-1 md:columns-2">
         {songs.map(({ id, name }) => (
-          <li key={id}>
+          <li key={id} className="mt-0">
             <Link href={`/song/${id}`} className="no-underline">
               {name}
               {vipids.includes(id) && (
