@@ -1,15 +1,15 @@
 'use client';
 
-import Spinner from '~components/Spinner';
 import Link from 'next/link';
 import Badge from '~components/Badge';
 import { useSearch } from '~lib/hooks';
 import toast from 'react-hot-toast';
+import SkeletonSongs from '~components/ui/SkeletonSongs';
 
 const SearchResult = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useSearch(slug);
   if (isLoading) {
-    return <Spinner />;
+    return <SkeletonSongs count={10} />;
   }
   if (data?.code !== 200) {
     toast.error(`搜索结果: ${data?.message}`);
