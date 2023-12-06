@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 import { useUserData } from '~lib/hooks';
-import Spinner from './Spinner';
+import SkeletonAvatar from './ui/SkeletonAvatar';
 
 export default function Avatar({ uid }: { uid: number }) {
   const { data, isLoading } = useUserData(uid);
   const size = 22;
   return isLoading ? (
-    <Spinner center={false} size={size} />
+    <SkeletonAvatar />
   ) : (
     <Image
       unoptimized
