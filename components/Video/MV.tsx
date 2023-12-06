@@ -9,6 +9,8 @@ export default function MV({
   data: MvFirst[] | ArtistMV[] | any[];
   total?: number;
 }) {
+  if (data.length === 0) return <div>暂无MV</div>;
+
   const videos = data?.slice(0, total)?.map((mv) => {
     return (
       <div key={mv.id} title={mv.name}>
@@ -38,9 +40,9 @@ export default function MV({
   });
 
   return (
-    <div>
+    <>
       <h2>MV</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">{videos}</div>
-    </div>
+    </>
   );
 }
