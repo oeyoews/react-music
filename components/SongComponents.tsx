@@ -106,7 +106,7 @@ export default function SongPage({ slug }: { slug: string }) {
   return (
     <>
       <div className="space-x-2 my-4">
-        {typeof window !== undefined && <APlayer slug={slug} />}
+        <APlayer slug={slug} />
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo slug={slug} />
         </DrawserComponent>

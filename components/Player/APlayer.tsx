@@ -2,7 +2,7 @@
 
 import useTitle from '~lib/hooks/useTitle';
 import { useEffect, useRef } from 'react';
-import ReactAplayer from 'react-aplayer';
+// import ReactAplayer from 'react-aplayer';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
 import { toast } from 'react-hot-toast';
 import {
@@ -12,6 +12,9 @@ import {
   useLyric,
 } from '~lib/hooks';
 import APlayerSkeleton from '~components/ui/AplayerSkelelon';
+import dynamic from 'next/dynamic';
+
+const ReactAplayer = dynamic(() => import('react-aplayer'), { ssr: false });
 
 export default function APlayer({ slug }: { slug: string }) {
   const apRef = useRef<AplayerMethods | null>();
