@@ -12,9 +12,8 @@ import {
   useLyric,
 } from '~lib/hooks';
 import APlayerSkeleton from '~components/ui/AplayerSkelelon';
-import dynamic from 'next/dynamic';
 
-const ReactAplayer = dynamic(() => import('react-aplayer'), { ssr: false });
+import ReactAplayer from 'react-aplayer';
 
 export default function APlayer({ slug }: { slug: string }) {
   const apRef = useRef<AplayerMethods | null>();
