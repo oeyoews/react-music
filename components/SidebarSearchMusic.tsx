@@ -6,6 +6,7 @@ import { searchHotDetail } from '~lib/search';
 import useSWRImmutable from 'swr/immutable';
 import DrawserComponent from '~components/DrawserComponent';
 import { FaSearch } from 'react-icons/fa';
+import SkeletonSongs from './ui/SkeletonSongs';
 
 const HotSongComponent = () => {
   const { data, isLoading } = useSWRImmutable(
@@ -13,7 +14,11 @@ const HotSongComponent = () => {
     searchHotDetail,
   );
 
-  return !isLoading && <HotSongs data={data?.data!} />;
+  return isLoading ? (
+    <SkeletonSongs count={20} />
+  ) : (
+    <HotSongs data={data?.data!} />
+  );
 };
 
 // TODO: more element
