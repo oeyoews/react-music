@@ -11,9 +11,13 @@ import {
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
 
-import APlayer from '~components/Player/APlayer';
 import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
+import dynamic from 'next/dynamic';
+
+const APlayer = dynamic(() => import('~components/Player/APlayer'), {
+  ssr: false,
+});
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
