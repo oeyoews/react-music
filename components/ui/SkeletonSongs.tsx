@@ -8,6 +8,6 @@ const SkeletonSongs = ({ count = 1 }: { count: number }) => {
     </li>
   ));
 
-  return <ul className="columns-1 md:columns-2">{loader}</ul>;
+  return <ul className="columns-1 md:columns-2 list-none">{loader}</ul>;
 };
 export default SkeletonSongs;
