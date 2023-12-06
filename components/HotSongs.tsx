@@ -4,9 +4,9 @@ export default function HotSongs({ data }: { data: HotDetail[] }) {
   return (
     <div>
       <h2>热门歌曲</h2>
-      <ol className="columns-1 md:columns-2">
+      <ul className="columns-1 md:columns-2">
         {data.map((song) => (
-          <li key={song.searchWord}>
+          <li key={song.searchWord} className="mt-0">
             <Link
               className="flex items-center"
               href={`/search/${song.searchWord}`}>
@@ -15,7 +15,7 @@ export default function HotSongs({ data }: { data: HotDetail[] }) {
             </Link>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   );
 }
