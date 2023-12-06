@@ -20,8 +20,15 @@ export const ArtistMVS = ({ slug }: { slug: string }) => {
 
   const arId = songData?.songs[0].ar?.[0].id;
   const { data: artistMVs, isLoading: isloadingMv } = useArtistMV(arId!);
+  if (error) {
+    return null;
+  }
 
-  return <div>{!isloadingMv && <MV data={artistMVs?.mvs!} />}</div>;
+  if (isloadingMv || isLoading) {
+    return <Spinner />;
+  }
+
+  return <MV data={artistMVs?.mvs!} />;
 };
 
 export const SimiSong = ({ slug }: { slug: string }) => {
@@ -33,18 +40,17 @@ export const SimiSong = ({ slug }: { slug: string }) => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <ol className="columns-2">
+        <ul className="columns-2">
           {data?.songs?.map((song) => {
             return (
               <li key={song.id}>
                 <Link href={`/song/${song.id}`} className="no-underline">
                   {song.name} -- {song.artists?.[0].name}
-                  {/* {song.artists[0].id} */}
                 </Link>
               </li>
             );
           })}
-        </ol>
+        </ul>
       )}
     </div>
   );
@@ -91,47 +97,10 @@ export const SongComment = ({ slug }: { slug: string }) => {
   );
 };
 
-export const MusicPlayer = ({ slug }: { slug: string }) => {
-  const {
-    data: songDetailData,
-    isLoading: isLoadingSong,
-    error,
-  } = useSongDetailData(slug);
-  try {
-    const song = songDetailData?.songs[0];
-    const previleges = songDetailData?.privileges[0];
-    const vip = previleges?.fee === 1 ? true : false;
-
-    if (error) {
-      return <div className="text-red-500">加载错误</div>;
-    }
-
-    return (
-      <div>
-        {isLoadingSong ? <Spinner /> : <APlayer slug={slug} />}
-        <h2>歌曲名</h2>
-        <div className="inline font-semibold">{song?.name}</div>
-        {vip && (
-          <sup className="bg-rose-400 text-black rounded-sm px-0.5 font-normal text-sm mx-2">
-            VIP
-          </sup>
-        )}
-      </div>
-    );
-  } catch (e) {
-    console.warn(e);
-    return <div className="text-red-500">加载错误</div>;
-  }
-};
-
 export default function SongPage({ slug }: { slug: string }) {
   return (
-    <div className="my-2">
-      {/* <h1> 歌曲详情 - {songInfo.name} {songInfo.id}{' '} </h1> */}
-      {/* TODO */}
-      {/* <div>音质: {musicInfo.level}</div> */}
-      {/* TODO: 有渲染问题 */}
-      <MusicPlayer slug={slug} />
+    <>
+      <APlayer slug={slug} />
       <div className="space-x-2 my-4">
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo slug={slug} />
@@ -146,6 +115,6 @@ export default function SongPage({ slug }: { slug: string }) {
           <ArtistMVS slug={slug} />
         </DrawserComponent>
       </div>
-    </div>
+    </>
   );
 }

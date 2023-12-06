@@ -85,14 +85,14 @@ export const useMusicURL = (id: Id) => {
     [id, localStorage.cookie],
     () => getMusicURL(id, localStorage.cookie),
     {
-      suspense: true,
+      // suspense: true, // NOTE: localStorage not suitable for suspense on server
       revalidateOnFocus: false,
     },
   );
 };
 
 export const useSongDetailData = (slug: Id) => {
-  return useSWRImmutable(slug + 'detail', () => getSongDetail(slug), {
+  return useSWR(slug + 'detail', () => getSongDetail(slug), {
     refreshInterval: 3600000,
   });
 };

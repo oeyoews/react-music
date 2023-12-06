@@ -22,9 +22,9 @@ export default function RecommendSongs() {
   }, []);
 
   const content = (
-    <ol className="columns-1 md:columns-2">
+    <ul className="columns-1 md:columns-2">
       {hasCookie &&
-        data?.map(({ name, id, recommendReason }) => (
+        data?.slice(0, 20).map(({ name, id, recommendReason }) => (
           <li key={id}>
             <Link href={`/song/${id}`}>
               <div className="flex space-x-2 items-center">
@@ -34,7 +34,7 @@ export default function RecommendSongs() {
             </Link>
           </li>
         ))}
-    </ol>
+    </ul>
   );
 
   return (
