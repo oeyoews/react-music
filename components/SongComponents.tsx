@@ -14,7 +14,6 @@ import Link from 'next/link';
 import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
 import dynamic from 'next/dynamic';
-// import APlayer from './Player/APlayer';
 
 const APlayer = dynamic(() => import('~components/Player/APlayer'), {
   ssr: false,
