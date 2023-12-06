@@ -11,7 +11,7 @@ const APlayerSkeleton = () => {
         </div>
         <div className="bg-gray-300 w-8 h-8 rounded-full animate-pulse"></div>
       </div>
-      <div className="w-full bg-gray-300 h-2 rounded-full shadow-inner mb-4 animate-pulse">
+      <div className="w-full bg-gray-300 h-2 rounded-full shadow-inner animate-pulse mt-2 mb-0">
         <div
           className="bg-gray-400 h-2 rounded-full"
           style={{ width: '0%' }}></div>
