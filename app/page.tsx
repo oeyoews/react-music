@@ -22,9 +22,9 @@ export default async function Home() {
         position="top-center"
       /> */}
       <Banners data={bannerData.banners} />
+      <Playlist data={PlaylistData.playlists} />
       <RecommendSongs />
       <PlaylistPersonalized />
-      <Playlist data={PlaylistData.playlists} />
       <StarPick />
     </div>
   );
