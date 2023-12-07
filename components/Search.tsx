@@ -1,4 +1,5 @@
 'use client';
+import { CgSpinner } from 'react-icons/cg';
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -15,7 +16,7 @@ export default function Search() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { data } = useSWR('/search/default', searchDefault);
+  const { data, isLoading } = useSWR('/search/default', searchDefault);
   const searchWord = data?.data.showKeyword;
   const params = new URLSearchParams(searchParams);
   params.set('searchWord', defaultSearchWord || searchWord || '');
@@ -26,9 +27,9 @@ export default function Search() {
       toast.error('请输入关键字');
       return;
     }
-    toast.loading('搜索中...', {
-      duration: 500,
-    });
+    // toast.loading('搜索中...', {
+    //   duration: 500,
+    // });
     // TODO: use update url search params(简单的其实没必要使用replace, 比如searchparams 没有很多变化)
     // router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
     router.replace(`${pathname}?${params.toString()}`);
@@ -42,14 +43,23 @@ export default function Search() {
           type="text"
           value={defaultSearchWord}
           onChange={(e) => setDefaultSearch(e.target.value)}
-          placeholder={searchWord}
+          placeholder={isLoading ? '加载中...' : searchWord}
           className="border border-gray-500 rounded-l-lg p-2 focus:outline-none w-full"
         />
-        <button
-          type="submit"
-          className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
-          <FaSearch className="inline" />
-        </button>
+        {isLoading ? (
+          <button
+            type="submit"
+            disabled
+            className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
+            <CgSpinner className="inline animate-spin" />
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
+            <FaSearch className="inline" />
+          </button>
+        )}
       </form>
     </div>
   );
