@@ -38,7 +38,7 @@ export default function Banners({ data }: { data: Banner[] }) {
         className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose "
         variants={container}
         // initial={firstLoading ? 'hidden' : 'visible'}
-        initial="visible"
+        initial="hidden"
         animate={'visible'}>
         {/* NOTE: 数量不固定 */}
         {data.slice(0, 8).map((banner) => (
