@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import { searchDefault } from '~lib/search';
@@ -12,8 +12,13 @@ export default function Search() {
   const setDefaultSearch = useMusicStore.use.setDefaultSearchWord();
 
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const { data } = useSWR('/search/default', searchDefault);
   const searchWord = data?.data.showKeyword;
+  const params = new URLSearchParams(searchParams);
+  params.set('searchWord', defaultSearchWord || searchWord || '');
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +29,9 @@ export default function Search() {
     toast.loading('搜索中...', {
       duration: 500,
     });
-    // TODO: use update url search params
-    router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
+    // TODO: use update url search params(简单的其实没必要使用replace, 比如searchparams 没有很多变化)
+    // router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (
