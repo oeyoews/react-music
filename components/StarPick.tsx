@@ -20,7 +20,7 @@ export default function StarPick({ number = 6 }: { number?: number }) {
             const uid = users[0].userId;
             return (
               <Link
-                href={`/song/${songData.id}`}
+                href={`/song?id=${songData.id}`}
                 key={creative.creativeId}
                 title={songData.name}
                 className="hover:scale-105 transition-all duration-500">

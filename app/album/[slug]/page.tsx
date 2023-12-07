@@ -25,7 +25,7 @@ export default async function Album({ params }: { params: Params }) {
         {albumDetail.songs.map((song) => {
           return (
             <Link
-              href={`/song/${song.id}`}
+              href={`/song?id=${song.id}`}
               key={song.id.toString()}
               className="no-underline">
               <li>{song.name}</li>

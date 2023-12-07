@@ -11,7 +11,7 @@ enum TargetType {
 export const getRoute = (banner: Banner) => {
   const { targetId, targetType, url } = banner;
   const targetMap: Record<number, Route> = {
-    [TargetType.song]: `/song/${targetId}`,
+    [TargetType.song]: `/song?id=${targetId}`,
     [TargetType.album]: `/album/${targetId}`,
     [TargetType.playlist]: `/playlist/${targetId}`,
     [TargetType.mv]: '#', // TODO: coming

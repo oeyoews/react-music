@@ -50,7 +50,7 @@ export const SimiSong = ({ slug }: { slug: string }) => {
           {data?.songs?.map((song) => {
             return (
               <li key={song.id} className="mt-0">
-                <Link href={`/song/${song.id}`} className="no-underline">
+                <Link href={`/song?id=${song.id}`} className="no-underline">
                   {song.name} -- {song.artists?.[0].name}
                 </Link>
               </li>

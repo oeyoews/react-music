@@ -5,6 +5,7 @@ import HotSongs from '~components/HotSongs';
 import { searchHotDetail } from '~lib/search';
 import useSWR from 'swr';
 import SkeletonSongs from '~components/ui/SkeletonSongs';
+import { SearchResult } from '~components/Search/SearchResult';
 
 const HotSongComponent = () => {
   const { data, isLoading } = useSWR('/search/hot/detail', searchHotDetail);
@@ -16,11 +17,21 @@ const HotSongComponent = () => {
   );
 };
 
-export default function page() {
+export default function SearchPage({
+  searchParams,
+}: {
+  searchParams: {
+    searchWord: string;
+  };
+}) {
   return (
     <>
       <Search />
-      <HotSongComponent />
+      {!searchParams.searchWord ? (
+        <HotSongComponent />
+      ) : (
+        <SearchResult searchWord={searchParams.searchWord} />
+      )}
     </>
   );
 }

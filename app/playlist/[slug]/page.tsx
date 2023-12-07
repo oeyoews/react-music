@@ -48,7 +48,7 @@ export default async function Page({ params }: any) {
       <ol className="columns-1 md:columns-2">
         {songs.map(({ id, name }) => (
           <li key={id} className="mt-0">
-            <Link href={`/song/${id}`} className="no-underline">
+            <Link href={`/song?id=${id}`} className="no-underline">
               {name}
               {vipids.includes(id) && (
                 <Badge
