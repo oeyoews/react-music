@@ -2,7 +2,7 @@ import { getRoute } from '~lib/getRoute';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { MotionDiv as motion } from './framer-motion';
+import { MotionDiv } from './framer-motion';
 import { Route } from 'next';
 // import { useMusicStore } from '~lib/store';
 // TODO: click events
@@ -33,7 +33,7 @@ export default function Banners({ data }: { data: Banner[] }) {
   return (
     <div className="mt-14">
       {/* sticky 对于framermotion bug, 需要多加一个div */}
-      <motion.div
+      <MotionDiv
         // md:[&>*:nth-child(2)]:col-span-2
         className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose "
         variants={container}
@@ -42,7 +42,7 @@ export default function Banners({ data }: { data: Banner[] }) {
         animate={'visible'}>
         {/* NOTE: 数量不固定 */}
         {data.slice(0, 8).map((banner) => (
-          <motion.div
+          <MotionDiv
             key={banner.imageUrl}
             variants={item}
             // md:first:col-span-2
@@ -62,9 +62,9 @@ export default function Banners({ data }: { data: Banner[] }) {
                 height={480}
               />
             </Link>
-          </motion.div>
+          </MotionDiv>
         ))}
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 }
