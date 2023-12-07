@@ -24,7 +24,8 @@ export default function Search() {
     toast.loading('搜索中...', {
       duration: 500,
     });
-    router.push(`/search/${defaultSearchWord || searchWord}`);
+    // TODO: use update url search params
+    router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
   };
 
   return (

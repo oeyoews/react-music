@@ -1,3 +1,4 @@
+import SidebarSearchMusic from '~components/SidebarSearchMusic';
 import SongPage from '~components/SongComponents';
 import { getBanners } from '~lib/search';
 
@@ -11,5 +12,6 @@ export async function generateStaticParams() {
 }
 
 export default function Page({ searchParams }: { searchParams: SearchParams }) {
+  if (!searchParams.id) return <SidebarSearchMusic />;
   return <SongPage slug={searchParams.id} />;
 }
