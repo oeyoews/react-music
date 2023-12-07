@@ -37,7 +37,7 @@ export const ArtistMVS = ({ slug }: { slug: string }) => {
   return <MV data={artistMVs?.mvs!} />;
 };
 
-// NOTE: 点击链接后, 路由没有发生变化, 所以 aplayer不会自动卸载
+// TODO: 点击链接后, 路由没有发生变化, 所以 aplayer不会自动卸载, 之后即使切换路由也不会自动卸载
 export const SimiSong = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useSiMiSong(slug);
   return (
