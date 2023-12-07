@@ -22,6 +22,7 @@ export default function Playlist({ data }: { data: Playlist[] }) {
                     alt={playlist.name}
                     width={256}
                     height={256}
+                    priority={true}
                     className="rounded-md hover:scale-125 transition-all duration-500"
                   />
                   <div className="rounded-tl-md flex items-center justify-end absolute bottom-0 right-0 group-hover:invisible backdrop-blur-md px-1 transition-all">
