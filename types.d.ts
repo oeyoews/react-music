@@ -996,6 +996,10 @@ interface CheckSong {
 interface Params {
   slug: string;
 }
+interface SearchParams {
+  id: string;
+}
+
 interface PlaylistSong {
   songs: SongDetail[];
   privileges: Privilege[];

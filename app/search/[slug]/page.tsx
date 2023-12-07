@@ -25,7 +25,7 @@ const SearchResult = ({ slug }: { slug: string }) => {
         {data?.result.songs?.map((song) => {
           return (
             <li className="mt-1" key={song.id}>
-              <Link href={`/song/${song.id}`}>
+              <Link href={`/song?id=${song.id}`}>
                 <div className="flex">
                   {song.name} -- {song.artists[0].name}
                   {vipids?.includes(song.id) ? (

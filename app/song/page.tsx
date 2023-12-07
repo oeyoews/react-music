@@ -10,8 +10,6 @@ export async function generateStaticParams() {
   });
 }
 
-export default function Page({ params }: { params: Params }) {
-  const { slug } = params;
-
-  return <SongPage slug={slug} />;
+export default function Page({ searchParams }: { searchParams: SearchParams }) {
+  return <SongPage slug={searchParams.id} />;
 }
