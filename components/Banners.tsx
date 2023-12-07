@@ -1,16 +1,14 @@
-'use client';
-
 import { getRoute } from '~lib/getRoute';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { MotionDiv as motion } from './framer-motion';
 import { Route } from 'next';
-import { useMusicStore } from '~lib/store';
+// import { useMusicStore } from '~lib/store';
 // TODO: click events
 // @see-also https://github.com/imsyy/SPlayer/blob/9fa59359290558347ba86f03da699738e7398e44/src/components/Banner/index.vue#L38
 export default function Banners({ data }: { data: Banner[] }) {
-  const firstLoading = useMusicStore.use.firstLoading();
+  // const firstLoading = useMusicStore.use.firstLoading();
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -39,7 +37,8 @@ export default function Banners({ data }: { data: Banner[] }) {
         // md:[&>*:nth-child(2)]:col-span-2
         className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose "
         variants={container}
-        initial={firstLoading ? 'hidden' : 'visible'}
+        // initial={firstLoading ? 'hidden' : 'visible'}
+        initial="visible"
         animate={'visible'}>
         {/* NOTE: 数量不固定 */}
         {data.slice(0, 8).map((banner) => (
