@@ -17,9 +17,7 @@ export default async function Page({
   if (!isVaildateSong.success) {
     return (
       <>
-        <div className="absolute mx-auto top-1/2 left-1/2 -translate-x-1/2 text-rose-500">
-          无效的id: {searchParams.id}
-        </div>
+        <div className="text-rose-500">无效的id: {searchParams.id}</div>
         <SidebarSearchMusic />
       </>
     );
