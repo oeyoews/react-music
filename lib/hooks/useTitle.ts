@@ -1,5 +1,5 @@
 export default function useTitle() {
-  const defaultTitle = document.title;
+  const defaultTitle = document?.title;
 
   const setVanillaTitle = () => {
     document.title = defaultTitle;

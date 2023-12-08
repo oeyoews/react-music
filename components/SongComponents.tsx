@@ -102,8 +102,7 @@ export const SongComment = ({ slug }: { slug: string }) => {
 export default function SongPage({ slug }: { slug: string }) {
   return (
     <>
-      <div className="space-x-2 my-4">
-        <APlayer slug={slug} />
+      <div className="space-x-2 my-4 flex justify-center items-center">
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo slug={slug} />
         </DrawserComponent>
@@ -117,6 +116,7 @@ export default function SongPage({ slug }: { slug: string }) {
           <ArtistMVS slug={slug} />
         </DrawserComponent>
       </div>
+      <APlayer slug={slug} />
     </>
   );
 }

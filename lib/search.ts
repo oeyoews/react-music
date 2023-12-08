@@ -38,7 +38,10 @@ export const getLyric = async (id: Id): Promise<ILyric> => {
   });
 };
 
-export const checkSong = async (id: Id, cookie: string): Promise<CheckSong> => {
+export const checkSong = async (
+  id: Id,
+  cookie?: string,
+): Promise<CheckSong> => {
   return await fetch({
     url: '/check/music',
     params: {
