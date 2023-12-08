@@ -13,13 +13,9 @@ import Link from 'next/link';
 
 import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
-import dynamic from 'next/dynamic';
 import SkeletonSongComment from './ui/CommentSkeleton';
 import SkeletonSongs from './ui/SkeletonSongs';
-
-const APlayer = dynamic(() => import('~components/Player/APlayer'), {
-  ssr: false,
-});
+import APlayer from './Player/APlayer';
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
