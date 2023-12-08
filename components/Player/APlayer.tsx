@@ -3,7 +3,7 @@
 import useTitle from '~lib/hooks/useTitle';
 import { useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
-import { toast } from 'react-hot-toast';
+// import { toast } from 'react-hot-toast';
 import {
   useArtistData,
   useMusicURL,
@@ -49,7 +49,7 @@ export default function APlayer({ slug }: { slug: string }) {
   }
 
   apRef.current?.on('ended', () => {
-    toast('歌曲播放完毕');
+    // toast('歌曲播放完毕');
     setTitle(`${songData?.songs[0].name} - 歌曲播放结束`);
   });
 
@@ -74,7 +74,7 @@ export default function APlayer({ slug }: { slug: string }) {
     loop: 'none',
     onPlay: () => {
       setTitle(`正在播放 ${songData?.songs?.[0].name}`);
-      toast.success('播放歌曲');
+      // toast.success('播放歌曲');
     },
     onPause: () => {
       setTitle(`暂停播放 ${songData?.songs?.[0].name}`);

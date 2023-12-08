@@ -27,17 +27,15 @@ export default function VideoPage({ params }: { params: Params }) {
     const {
       name = '',
       artistName = '',
-      desc = '暂无描述',
+      desc,
     } = (mvDetailData?.data as IMvDetailData) || {};
     return (
-      <div className="">
-        <Suspense fallback={<Spinner />}>
-          <h2 className="text-center">
-            {name} {name && '--'} {artistName}
-          </h2>
-          <p className="font-normal text-sm">{desc}</p>
-        </Suspense>
-      </div>
+      <>
+        <h2 className="text-center">
+          {name} {name && '--'} {artistName}
+        </h2>
+        <p className="font-normal text-sm">{desc}</p>
+      </>
     );
   };
 
@@ -48,8 +46,9 @@ export default function VideoPage({ params }: { params: Params }) {
 
     return (
       <div className="flex justify-center items-center my-4">
-        {isLoading && <Spinner />}
-        {!isLoading && (
+        {!isLoading ? (
+          <Spinner />
+        ) : (
           <ArtPlayer
             // id={mvURLData?.data.id.toString()}
             url={mvURLData?.data.url!}
