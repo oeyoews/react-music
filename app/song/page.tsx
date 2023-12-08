@@ -1,4 +1,3 @@
-import SidebarSearchMusic from '~components/SidebarSearchMusic';
 import SongPage from '~components/SongComponents';
 
 export default async function Page({
