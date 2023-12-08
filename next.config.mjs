@@ -1,4 +1,10 @@
-/** @type {import('next').NextConfig} */
+import million from 'million/compiler';
+
+const millionConfig = {
+  auto: { rsc: true },
+};
+
+// /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     ppr: true,
@@ -37,4 +43,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default million.next(nextConfig, millionConfig);

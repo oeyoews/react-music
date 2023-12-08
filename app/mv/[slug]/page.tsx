@@ -67,7 +67,7 @@ export default function VideoPage({ params }: { params: Params }) {
       <DrawserComponent text="查看评论区">
         <div className="flex justify-start items-center space-x-2 mt-8">
           <h2 className="my-2">评论区</h2>
-          <div>共 {mvComment?.total?.toLocaleString() || 0} 条评论</div>
+          <div>共 {mvComment?.total?.toLocaleString()} 条评论</div>
         </div>
         <SongCommentTab songComment={mvComment as ISongComment} />
       </DrawserComponent>

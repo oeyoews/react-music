@@ -4,7 +4,7 @@ import React from 'react';
 
 import Link from 'next/link';
 import { RiNeteaseCloudMusicFill } from 'react-icons/ri';
-import { FaComment, FaSearch, FaStar, FaUser, FaVideo } from 'react-icons/fa';
+import { FaComment, FaStar, FaUser, FaVideo } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import SidebarSearchMusic from '~components/SidebarSearchMusic';
 
