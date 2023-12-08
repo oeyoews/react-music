@@ -44,7 +44,7 @@ export const useMvComment = (id: Id) => {
 // 不要使用id, 作为key, 因为一个页面如果使用id作为路由, 多个数据会错乱
 export const useLyric = (id: Id) => {
   return useSWRImmutable(id + 'lyric', () => getLyric(id), {
-    suspense: true,
+    suspense: false,
   });
 };
 

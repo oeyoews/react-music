@@ -19,7 +19,7 @@ export default async function Page({
   if (!searchParams.id)
     return (
       <div>
-        <SidebarSearchMusic />;
+        <SidebarSearchMusic />
       </div>
     );
   const isVaildateSong = await checkSong(searchParams.id);
