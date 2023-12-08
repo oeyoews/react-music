@@ -89,17 +89,16 @@ export const ArtistInfo = ({ slug }: { slug: string }) => {
 
 export const SongComment = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useSongComment(slug);
+  if (isLoading) {
+    return <SkeletonSongComment count={5} />;
+  }
   return (
     <div>
       <div className="flex justify-start items-center space-x-2">
         <h2 className="my-2">评论区</h2>
         <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
       </div>
-      {isLoading ? (
-        <SkeletonSongComment count={5} />
-      ) : (
-        <SongCommentTab songComment={data as ISongComment} />
-      )}
+      <SongCommentTab songComment={data as ISongComment} />
     </div>
   );
 };

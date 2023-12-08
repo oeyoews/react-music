@@ -37,7 +37,7 @@ export default function RootLayout({
       <body className={clsx('antialiased min-h-screen', inter.className)}>
         <Toaster />
         <Nav />
-        <NextTopLoader color="#eb6864" height={1} />
+        <NextTopLoader color="#eb6864" height={1} showSpinner={false} />
         <Sidebar />
         <div className="mt-6 prose ml-2 md:ml-56 mr-2 max-w-none px-2">
           {children}

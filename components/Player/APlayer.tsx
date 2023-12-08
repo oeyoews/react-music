@@ -75,7 +75,7 @@ export default function APlayer({ slug }: { slug: string }) {
     },
     onPause: () => {
       setTitle(`暂停播放 ${songData?.songs?.[0].name}`);
-      toast('歌曲暂停');
+      // toast('歌曲暂停');
     },
   };
 
