@@ -1,15 +1,6 @@
 import SidebarSearchMusic from '~components/SidebarSearchMusic';
 import SongPage from '~components/SongComponents';
-import { checkSong, getBanners } from '~lib/search';
-
-export async function generateStaticParams() {
-  const bannerData = await getBanners();
-  return bannerData.banners.map((banner) => {
-    return {
-      slug: banner.targetId.toString(),
-    };
-  });
-}
+import { checkSong } from '~lib/search';
 
 export default async function Page({
   searchParams,
