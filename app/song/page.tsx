@@ -13,15 +13,8 @@ export default async function Page({
         <SidebarSearchMusic />
       </div>
     );
-  const isVaildateSong = await checkSong(searchParams.id);
-  if (!isVaildateSong.success) {
-    return (
-      <>
-        <div className="text-rose-500">无效的id: {searchParams.id}</div>
-        <SidebarSearchMusic />
-      </>
-    );
-  }
 
+  // 注意: vip 也会false, 需要带上localstorage, 可以放在songpage 里面进行判断, 或者使用rsc 传递localstorage to server
+  // TOD: check wrong url
   return <SongPage slug={searchParams.id} />;
 }
