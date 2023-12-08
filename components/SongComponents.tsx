@@ -16,6 +16,7 @@ import MV from '~components/Video/MV';
 import SkeletonSongComment from './ui/CommentSkeleton';
 import SkeletonSongs from './ui/SkeletonSongs';
 import APlayer from './Player/APlayer';
+import SidebarSearchMusic from './SidebarSearchMusic';
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
@@ -99,24 +100,27 @@ export const SongComment = ({ slug }: { slug: string }) => {
   );
 };
 
-export default function SongPage({ slug }: { slug: string }) {
+export default function SongPage({ id }: { id: string }) {
+  if (!id) {
+    return <SidebarSearchMusic />;
+  }
   return (
     <>
       <div className="space-x-2 my-4 flex justify-center items-center">
         <DrawserComponent text="查看歌手信息">
-          <ArtistInfo slug={slug} />
+          <ArtistInfo slug={id} />
         </DrawserComponent>
         <DrawserComponent text="查看相似歌曲">
-          <SimiSong slug={slug} />
+          <SimiSong slug={id} />
         </DrawserComponent>
         <DrawserComponent text="查看评论区">
-          <SongComment slug={slug} />
+          <SongComment slug={id} />
         </DrawserComponent>
         <DrawserComponent text="查看歌手MV">
-          <ArtistMVS slug={slug} />
+          <ArtistMVS slug={id} />
         </DrawserComponent>
       </div>
-      <APlayer slug={slug} />
+      <APlayer slug={id} />
     </>
   );
 }

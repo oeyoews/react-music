@@ -7,7 +7,7 @@ const millionConfig = {
 // /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    ppr: false,
+    ppr: true,
   },
   reactStrictMode: true,
   crossOrigin: 'anonymous',
