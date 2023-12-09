@@ -9,7 +9,7 @@ const nextConfig = {
   experimental: {
     ppr: false,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   crossOrigin: 'anonymous',
   logging: {
     fetches: {

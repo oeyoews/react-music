@@ -31,8 +31,9 @@ export default function Search() {
     //   duration: 500,
     // });
     // TODO: use update url search params(简单的其实没必要使用replace, 比如searchparams 没有很多变化)
-    // router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
-    router.replace(`${pathname}?${params.toString()}`);
+    // NOTE: 当前组件可以在任何路由触发, 不要使用当前路径
+    router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
+    // router.replace(`${pathname}?${params.toString()}`);
   };
 
   return (

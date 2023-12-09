@@ -3,7 +3,6 @@
 import useTitle from '~lib/hooks/useTitle';
 import { useEffect, useRef } from 'react';
 import { AplayerMethods, AplayerProps } from 'react-aplayer';
-// import { toast } from 'react-hot-toast';
 import {
   useArtistData,
   useMusicURL,
@@ -31,7 +30,9 @@ export default function APlayer({ slug }: { slug: string }) {
     }
   };
 
+  // NOTE: 本地useeffect跑两次, 导致 apref 丢失???
   useEffect(() => {
+    console.log('updated', window.location.href);
     return () => {
       setVanillaTitle();
       apRef.current?.destroy();
