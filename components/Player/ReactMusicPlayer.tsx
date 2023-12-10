@@ -42,6 +42,8 @@ function ReactMusicPlayer({ id }: { id: string }) {
       onload: () => {
         // TODO: check duration is valid, such as zero
         setDuration(sound.duration());
+        // setCurrentTime(0);
+        // setDuration(0);
       },
       onplay: () => {
         const progressInterval = setInterval(() => {
