@@ -19,11 +19,7 @@ function addParams(
       params.realIp = process.env.NEXT_PUBLIC_REALIP as string;
     }
     const queryString = Object.keys(params)
-      .map(
-        (key) =>
-          // `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
-          `${key}=${params[key]}`,
-      )
+      .map((key) => `${key}=${params[key]}`)
       .join('&');
     apiURL += `?${queryString}`;
   }
