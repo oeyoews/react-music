@@ -59,12 +59,13 @@ function ReactMusicPlayer({ id }: { id: string }) {
 
     apRef.current = sound;
 
-    // 前进或者后退时, 状态会乱掉(route.replace 导致的)
     return () => {
       if (apRef.current) {
         apRef.current.stop();
         apRef.current.unload();
         setIsPlaying(false);
+        setCurrentTime(0);
+        setDuration(0);
       }
     };
   }, [musicData]);
