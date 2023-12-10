@@ -16,7 +16,6 @@ import Spinner from '~components/Spinner';
 import MV from '~components/Video/MV';
 import SkeletonSongComment from './ui/CommentSkeleton';
 import SkeletonSongs from './ui/SkeletonSongs';
-import APlayer from './Player/APlayer';
 import SidebarSearchMusic from './SidebarSearchMusic';
 import ReactMusicPlayer from './Player/ReactMusicPlayer';
 
