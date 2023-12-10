@@ -1,4 +1,5 @@
 import { Drawer } from 'vaul';
+import Button from './ui/Button';
 
 // 监听点击事件, 对于搜索歌曲
 // click to close params
@@ -12,9 +13,7 @@ export default function DrawserComponent({
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <button className="bg-zinc-200 rounded px-2 py-1 mx-2 my-2">
-          {text}
-        </button>
+        <Button>{text} </Button>
       </Drawer.Trigger>
       <Drawer.Portal>
         {/* NOTE: aplayer 的z-index 过高 */}

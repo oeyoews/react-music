@@ -19,6 +19,12 @@ import SkeletonSongComment from './ui/CommentSkeleton';
 import SkeletonSongs from './ui/SkeletonSongs';
 import SidebarSearchMusic from './SidebarSearchMusic';
 import ReactMusicPlayer from './Player/ReactMusicPlayer';
+import { useMusicStore } from '~lib/store';
+
+import dynamic from 'next/dynamic';
+import Button from './ui/Button';
+
+const APlayer = dynamic(() => import('./Player/APlayer'), { ssr: false });
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
@@ -105,13 +111,21 @@ export const SongComment = ({ slug }: { slug: string }) => {
 export default function SongPage() {
   const params = useSearchParams();
   const id = params.get('id');
+  const player = useMusicStore.use.player();
+  const togglePlayer = useMusicStore.use.togglePlayer();
 
   if (!id) {
     return <SidebarSearchMusic />;
   }
+
+  // TODO: player 组件卸载
+  // NOTE: app-index.js:32 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
   return (
     <>
       <div className="space-x-2 my-4 flex justify-center items-center">
+        {/* <Button className="font-bold capitalize" onClick={togglePlayer}>
+          Toggle Player
+        </Button> */}
         <DrawserComponent text="查看歌手信息">
           <ArtistInfo slug={id} />
         </DrawserComponent>
@@ -126,7 +140,11 @@ export default function SongPage() {
         </DrawserComponent>
       </div>
       {/* <APlayer slug={id} /> */}
-      <ReactMusicPlayer id={id} />
+      {player === 'cloud' ? (
+        <APlayer slug={id} />
+      ) : (
+        <ReactMusicPlayer id={id} />
+      )}
     </>
   );
 }

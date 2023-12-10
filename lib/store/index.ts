@@ -7,6 +7,8 @@ type Store = {
   userInfo: IUserAccount;
   firstLoading: boolean;
   defaultSearchWord: string;
+  player: 'default' | 'cloud';
+  togglePlayer: () => void;
 
   setCookie: (cookie: string) => void;
   setUserId: (userId: string) => void;
@@ -16,7 +18,7 @@ type Store = {
   setDefaultSearchWord: (searchWord: string) => void;
 };
 
-const useStoreBase = create<Store>((set) => ({
+const useStoreBase = create<Store>((set, get) => ({
   cookie: '',
   userId: '',
   // @ts-ignore
@@ -25,6 +27,7 @@ const useStoreBase = create<Store>((set) => ({
   userInfo: {},
   firstLoading: true,
   defaultSearchWord: '',
+  player: 'default',
 
   setCookie: (cookie: string) => set({ cookie }),
   setUserId: (userId: string) => set({ userId }),
@@ -33,6 +36,14 @@ const useStoreBase = create<Store>((set) => ({
   setFirstLoading: (firstLoading: boolean) => set({ firstLoading }),
   setDefaultSearchWord: (defaultSearchWord: string) =>
     set({ defaultSearchWord }),
+  togglePlayer: () => {
+    const player = get().player;
+    if (player === 'cloud') {
+      set({ player: 'default' });
+    } else {
+      set({ player: 'cloud' });
+    }
+  },
 }));
 
 export const useMusicStore = createSelectorFunctions(useStoreBase);
