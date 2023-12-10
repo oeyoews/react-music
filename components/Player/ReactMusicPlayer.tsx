@@ -124,10 +124,11 @@ function ReactMusicPlayer({ id }: { id: string }) {
           )}
         </button>
       </div>
-      <div className="flex text-gray-400 flex-row items-center space-x-2">
-        <span className="text-sm">{formatTime(currentTime)}</span>
+      <div className="flex text-gray-400 flex-row items-center space-x-1 text-sm">
         <progress value={currentTime} max={duration} id="om-progress" />
-        <span className="text-sm">{formatTime(duration)}</span>
+        <span className="">{formatTime(currentTime)}</span>
+        <span>/</span>
+        <span className="">{formatTime(duration)}</span>
       </div>
     </div>
   );

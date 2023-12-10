@@ -69,7 +69,7 @@ scrollbar-width {
 } */
 
 #om-progress {
-  height: 4px;
+  height: 3px;
   width: 100%;
   border-radius: 9px;
   overflow: hidden;
