@@ -69,7 +69,7 @@ scrollbar-width {
 } */
 
 #om-progress {
-  height: 7px;
+  height: 4px;
   width: 100%;
   border-radius: 9px;
   overflow: hidden;
@@ -100,4 +100,23 @@ scrollbar-width {
 
 h2 {
   text-wrap: balance;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animated {
+  animation-duration: 20s; /* 可以根据需要调整动画的持续时间 */
+  animation-timing-function: linear; /* 调整动画的缓动函数 */
+  animation-iteration-count: infinite; /* 使动画无限循环 */
+}
+
+.rotate {
+  animation-name: rotate; /* 使用定义的 rotate 关键帧动画 */
 }

@@ -13,11 +13,13 @@ export default function Search() {
   const setDefaultSearch = useMusicStore.use.setDefaultSearchWord();
 
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const { data, isLoading } = useSWR('/search/default', searchDefault);
-  const searchWord = data?.data.showKeyword;
+  let searchWord = data?.data.showKeyword.split(' ')[0];
+  if (searchWord?.length! < 2) {
+    searchWord = '';
+  }
   const params = new URLSearchParams(searchParams);
   params.set('searchWord', defaultSearchWord || searchWord || '');
 
