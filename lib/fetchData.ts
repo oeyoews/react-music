@@ -21,7 +21,8 @@ function addParams(
     const queryString = Object.keys(params)
       .map(
         (key) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+          // `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+          `${key}=${params[key]}`,
       )
       .join('&');
     apiURL += `?${queryString}`;
