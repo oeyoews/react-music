@@ -1,4 +1,5 @@
 'use client';
+
 import { CgSpinner } from 'react-icons/cg';
 
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -7,6 +8,7 @@ import useSWR from 'swr';
 import { searchDefault } from '~lib/search';
 import { FaSearch } from 'react-icons/fa';
 import { useMusicStore } from '~lib/store';
+import { useEffect } from 'react';
 
 export default function Search() {
   const defaultSearchWord = useMusicStore.use.defaultSearchWord();
@@ -31,6 +33,12 @@ export default function Search() {
     }
     router.replace(`/search?${params.toString()}`);
   };
+  useEffect(() => {
+    toast.error('在线搜索接口异常, 暂时不建议使用 2023-12-10');
+    return () => {
+      toast.dismiss();
+    };
+  }, []);
 
   return (
     <div className="my-8">
