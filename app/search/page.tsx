@@ -31,9 +31,7 @@ export default function SearchPage({
       {!searchParams.searchWord ? (
         <HotSongComponent />
       ) : (
-        <SearchResult
-          searchWord={decodeURIComponent(searchParams.searchWord)}
-        />
+        <SearchResult searchWord={searchParams.searchWord} />
       )}
     </>
   );

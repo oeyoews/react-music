@@ -49,7 +49,7 @@ export const useLyric = (id: Id) => {
 };
 
 export const useSearch = (keyword: string) => {
-  return useSWR([keyword], () => search(keyword));
+  return useSWR([keyword], () => search(encodeURIComponent(keyword)));
 };
 
 export const useSongComment = (id: Id) => {
