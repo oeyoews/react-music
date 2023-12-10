@@ -112,8 +112,8 @@ function ReactMusicPlayer({ id }: { id: string }) {
             )}
           </div>
           <div className="ml-2">
-            {musicName}
-            <span className="text-gray-400 text-sm">{artistName}</span>
+            <span>{musicName}</span>
+            <span className="text-gray-400 text-sm ml-2">{artistName}</span>
           </div>
         </div>
         <button onClick={handleToggle} className="">
@@ -125,9 +125,9 @@ function ReactMusicPlayer({ id }: { id: string }) {
         </button>
       </div>
       <div className="flex text-gray-400 flex-row items-center space-x-2">
-        <span>{formatTime(currentTime)}</span>
+        <span className="text-sm">{formatTime(currentTime)}</span>
         <progress value={currentTime} max={duration} id="om-progress" />
-        <span>{formatTime(duration)}</span>
+        <span className="text-sm">{formatTime(duration)}</span>
       </div>
     </div>
   );
