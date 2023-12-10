@@ -18,7 +18,6 @@ function addParams(
     if (!params.hasOwnProperty('realIp')) {
       params.realIp = process.env.NEXT_PUBLIC_REALIP as string;
     }
-    // NOTE: dev 环境下即使encodeURIComponent也会正常, online 就不行
     const queryString = Object.keys(params)
       .map(
         (key) =>
