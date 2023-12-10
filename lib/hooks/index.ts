@@ -49,10 +49,7 @@ export const useLyric = (id: Id) => {
 };
 
 export const useSearch = (keyword: string) => {
-  // const searchKeyword = decodeURIComponent(keyword.trim());
-  return useSWRImmutable([keyword], search, {
-    // suspense: true,
-  });
+  return useSWR([keyword], () => search(keyword));
 };
 
 export const useSongComment = (id: Id) => {
