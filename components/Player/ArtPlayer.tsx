@@ -15,7 +15,6 @@ export default function ArtPlayer({
   id?: string;
 }) {
   const artRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     !url && toast.error('未找到播放源');
 

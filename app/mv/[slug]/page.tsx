@@ -5,10 +5,9 @@ import ArtPlayer from '~components/Player/ArtPlayer';
 import Spinner from '~components/Spinner';
 import SongCommentTab from '~components/SongCommentTab';
 import useSWRImmutable from 'swr/immutable';
-import { Suspense } from 'react';
 import { useMvComment } from '~lib/hooks';
 import DrawserComponent from '~components/DrawserComponent';
-import SiMiMV from '~components/Video/SiMiMV';
+import { notFound } from 'next/navigation';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
@@ -22,7 +21,7 @@ export default function VideoPage({ params }: { params: Params }) {
       () => getMvDetail(slug),
     );
     if (isLoading) {
-      return <Spinner />;
+      return null;
     }
     const {
       name = '',
@@ -40,13 +39,21 @@ export default function VideoPage({ params }: { params: Params }) {
   };
 
   const VideoPlayer = () => {
-    const { data: mvURLData, isLoading } = useSWRImmutable(slug + 'mvurl', () =>
+    const {
+      error,
+      data: mvURLData,
+      isLoading,
+    } = useSWRImmutable(slug + 'mvurl', () =>
       getMvURL(slug, localStorage.cookie),
     );
 
+    if (!mvURLData?.data.url) {
+      return <div>加载错误</div>;
+    }
+
     return (
       <div className="flex justify-center items-center my-4">
-        {!isLoading ? (
+        {isLoading ? (
           <Spinner />
         ) : (
           <ArtPlayer
