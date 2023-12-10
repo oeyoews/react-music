@@ -19,7 +19,7 @@ export const SearchResult = ({ searchWord }: { searchWord: string }) => {
 
   return (
     <>
-      <h2>{decodeURIComponent(searchWord)}</h2>
+      <h2>{searchWord}</h2>
       <ul className="columns-1 md:columns-2">
         {data?.result.songs?.map((song) => {
           return (
