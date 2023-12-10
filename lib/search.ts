@@ -53,13 +53,18 @@ export const checkSong = async (
     },
   });
 };
+// offset 分页
+export const multiSearch = async (keywords: string): Promise<ISearch> => {
+  return await fetch({
+    url: '/search/multimatch',
+    params: {
+      keywords,
+    },
+  });
+};
 
 // offset 分页
-export const search = async (
-  keywords: string,
-  types?: SearchTypes,
-  offset?: number,
-): Promise<ISearch> => {
+export const search = async (keywords: string): Promise<ISearch> => {
   return await fetch({
     url: '/search',
     params: {

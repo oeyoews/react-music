@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useStarPick } from '~lib/hooks';
 import { search } from '~lib/search';
 
+// production 的结果完全不对
 export default function Page() {
   const [data, setData] = useState<any>();
   useEffect(() => {

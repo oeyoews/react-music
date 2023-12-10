@@ -1899,3 +1899,145 @@ declare module '*.mp3' {
   const src: string;
   export default src;
 }
+
+interface MultiMatchSearch {
+  result: Result;
+  code: number;
+}
+
+interface Result {
+  new_mlog: NewMlog[];
+  playlist: Playlist[];
+  artist: ResultArtist[];
+  album: Album[];
+  orders: string[];
+}
+
+interface AlbumArtist {
+  name: string;
+  id: number;
+  picId: number;
+  img1v1Id: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  albumSize: number;
+  alias: string[];
+  trans: string;
+  musicSize: number;
+  topicPerson: number;
+  picId_str?: string;
+  img1v1Id_str: string;
+}
+
+interface ResultArtist {
+  name: string;
+  id: number;
+  picId: number;
+  img1v1Id: number;
+  briefDesc: string;
+  picUrl: string;
+  img1v1Url: string;
+  albumSize: number;
+  alias: any[];
+  trans: string;
+  musicSize: number;
+  picId_str: string;
+  img1v1Id_str: string;
+  transNames: string[];
+  mvSize: number;
+  alg: string;
+  fansSize: number;
+  videoSize: number;
+  officialTags: any[];
+  searchCircle: null;
+  occupation: string;
+}
+
+interface NewMlog {
+  resourceId: string;
+  resourceType: string;
+  internalType: null;
+  resourceName: string;
+  baseInfo: BaseInfo;
+  alg: string;
+}
+
+interface BaseInfo {
+  id: string;
+  type: number;
+  mlogBaseDataType: number;
+  position: null;
+  resource: MultiSearchResource;
+  alg: null;
+  reason: null;
+  matchField: number;
+  matchFieldContent: null;
+  sameCity: boolean;
+}
+
+interface MultiSearchResource {
+  mlogBaseData: MlogBaseData;
+  mlogExtVO: MlogEXTVO;
+  userProfile: UserProfile;
+  status: number;
+  shareUrl: string;
+}
+
+interface MlogBaseData {
+  id: string;
+  type: number;
+  text: string;
+  interveneText: string;
+  pubTime: number;
+  coverUrl: string;
+  coverHeight: number;
+  coverWidth: number;
+  coverColor: number;
+  coverPicKey: string;
+  coverDynamicUrl: null;
+  audio: null;
+  threadId: string;
+  duration: number;
+}
+
+interface MlogEXTVO {
+  likedCount: number;
+  commentCount: number;
+  playCount: number;
+  song: Song;
+  canCollect: boolean;
+  artistName: null;
+  rcmdInfo: null;
+  strongPushMark: null;
+  strongPushIcon: null;
+  specialTag: null;
+  channelTag: null;
+  artists: any[];
+}
+
+interface MultiSearchSong {
+  id: number;
+  name: string;
+  coverUrl: string;
+  duration: number;
+  artists: SongArtist[];
+  privilege: null;
+  albumName: string;
+  startTime: null;
+  endTime: null;
+}
+
+interface SongArtist {
+  artistId: number;
+  artistName: string;
+}
+
+interface UserProfile {
+  userId: number;
+  nickname: string;
+  avatarUrl: string;
+  followed: boolean;
+  userType: number;
+  isAnchor: boolean;
+}
