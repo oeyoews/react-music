@@ -1,4 +1,5 @@
 'use client';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import DrawserComponent from '~components/DrawserComponent';
 import {
@@ -100,7 +101,10 @@ export const SongComment = ({ slug }: { slug: string }) => {
   );
 };
 
-export default function SongPage({ id }: { id: string }) {
+export default function SongPage() {
+  const params = useSearchParams();
+  const id = params.get('id');
+
   if (!id) {
     return <SidebarSearchMusic />;
   }
