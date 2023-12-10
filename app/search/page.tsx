@@ -26,7 +26,6 @@ export default function SearchPage({
 }) {
   return (
     <>
-      {JSON.stringify(searchParams, null, 2)}
       <Search />
       {!searchParams.searchWord ? (
         <HotSongComponent />
