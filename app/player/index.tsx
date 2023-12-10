@@ -8,8 +8,6 @@ import { FaRegCirclePlay, FaRegCirclePause } from 'react-icons/fa6';
 import APlayerSkeleton from '~components/ui/AplayerSkeleton';
 import SkeletonAvatar from '~components/ui/SkeletonAvatar';
 
-// TODO: 暂停有杂音 https://github.com/imsyy/SPlayer/blob/b811b00b9f328bf8fcd6b65cc83d02530ec60dbe/src/utils/Player.js#L428
-// TODO: 多音频禁止同时播放
 // TODO: check url is valid
 function ReactMusicPlayer({ id }: { id: string }) {
   const [duration, setDuration] = useState(0);
