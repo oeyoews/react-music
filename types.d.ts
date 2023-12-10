@@ -1894,3 +1894,8 @@ interface VideoGroup {
   name: string;
   alg: null;
 }
+
+declare module '*.mp3' {
+  const src: string;
+  export default src;
+}
