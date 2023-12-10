@@ -13,6 +13,7 @@ import formatTime from '~lib/formatTime';
 // TODO: check url is validate
 // TODO: 支持进度条拖放
 // TODO: 支持歌词滚动
+// TODO: remove aplayer
 function ReactMusicPlayer({ id }: { id: string }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
