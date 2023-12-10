@@ -1,7 +1,7 @@
 'use client';
 import { CgSpinner } from 'react-icons/cg';
 
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import useSWR from 'swr';
 import { searchDefault } from '~lib/search';
@@ -29,13 +29,7 @@ export default function Search() {
       toast.error('请输入关键字');
       return;
     }
-    // toast.loading('搜索中...', {
-    //   duration: 500,
-    // });
-    // TODO: use update url search params(简单的其实没必要使用replace, 比如searchparams 没有很多变化)
-    // NOTE: 当前组件可以在任何路由触发, 不要使用当前路径
-    router.push(`/search?searchWord=${defaultSearchWord || searchWord}`);
-    // router.replace(`${pathname}?${params.toString()}`);
+    router.replace(`/search?${params.toString()}`);
   };
 
   return (

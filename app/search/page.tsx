@@ -21,7 +21,7 @@ export default function SearchPage({
   searchParams,
 }: {
   searchParams: {
-    searchWord: string;
+    searchWord?: string;
   };
 }) {
   return (
