@@ -6,10 +6,20 @@ const millionConfig = {
 
 // /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // webpack: (config) => {
+  //   config.module.rules.push({
+  //     test: /\.mp3$/,
+  //     type: 'asset/resource',
+  //     generator: {
+  //       filename: 'static/chunks/[path][name].[hash][ext]',
+  //     },
+  //   });
+  //   return config;
+  // },
   experimental: {
     ppr: true,
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   crossOrigin: 'anonymous',
   logging: {
     fetches: {
@@ -25,7 +35,8 @@ const nextConfig = {
   // / -> /home
   // redirects: { },
   images: {
-    unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
+    // unoptimized: process.env.NODE_ENV === 'production' && true, // banner 消耗额度过快
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'http',

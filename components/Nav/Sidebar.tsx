@@ -23,7 +23,7 @@ const pcSidebarItems = [
 export const Sidebar = () => {
   const pathname = usePathname();
   return (
-    <div className="select-none hidden md:flex fixed left-0 top-0 bg-slate-100/70 backdrop-blur-sm p-4 h-screen space-y-2 bgblack flex-col w-52">
+    <div className="sticky w-1/6 select-none hidden lg:block left-0 top-0 bg-slate-100/70 backdrop-blur-sm p-4 h-screen space-y-2 bgblack flex-col">
       <Link href={'/'}>
         <div className="flex mb-8">
           <RiNeteaseCloudMusicFill className="w-8 h-8 mr-2 text-rose-500/95" />

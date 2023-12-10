@@ -121,7 +121,7 @@ export const getBanners = async (): Promise<IBanner> => {
   return await fetch({
     url: '/banner',
     params: {
-      type: 0,
+      type: 0, // TODO: 1 will cause motiondiv error ???
     },
   });
 };

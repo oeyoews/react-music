@@ -3,7 +3,6 @@ import Banners from '~components/Banners';
 import Playlist from '~components/Playlist';
 import RecommendSongs from '~components/RecommendSongs';
 import { getHotPlayList } from '~lib/api/playlist';
-import Announcement from '~components/Announcement';
 import StarPick from '~components/StarPick';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
 
@@ -15,12 +14,6 @@ export default async function Home() {
 
   return (
     <div className="p-2 mb-16">
-      {/* <Announcement
-        text="重构中..."
-        store={true}
-        icon={'🎉'}
-        position="top-center"
-      /> */}
       <Banners data={bannerData.banners} />
       <Playlist data={PlaylistData.playlists} />
       <RecommendSongs />

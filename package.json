@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/howler": "^2.2.11",
     "NeteaseCloudMusicApi": "^4.13.6",
     "artplayer": "^5.0.9",
     "artplayer-plugin-control": "^2.0.0",
@@ -21,6 +22,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.5",
+    "howler": "^2.2.4",
     "million": "^2.6.4",
     "next": "14.0.4-canary.40",
     "nextjs-toploader": "^1.6.4",
@@ -32,6 +34,7 @@
     "react-icons": "^4.12.0",
     "react-loader-spinner": "^5.4.5",
     "swr": "^2.2.4",
+    "tailwind-merge": "^2.1.0",
     "vaul": "^0.7.9",
     "zustand": "^4.4.6"
   },
