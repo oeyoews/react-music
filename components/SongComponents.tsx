@@ -18,6 +18,7 @@ import SkeletonSongComment from './ui/CommentSkeleton';
 import SkeletonSongs from './ui/SkeletonSongs';
 import APlayer from './Player/APlayer';
 import SidebarSearchMusic from './SidebarSearchMusic';
+import ReactMusicPlayer from '~app/player';
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
@@ -124,7 +125,8 @@ export default function SongPage() {
           <ArtistMVS slug={id} />
         </DrawserComponent>
       </div>
-      <APlayer slug={id} />
+      {/* <APlayer slug={id} /> */}
+      <ReactMusicPlayer id={id} />
     </>
   );
 }
