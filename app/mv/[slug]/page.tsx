@@ -7,12 +7,11 @@ import SongCommentTab from '~components/SongCommentTab';
 import useSWRImmutable from 'swr/immutable';
 import { useMvComment } from '~lib/hooks';
 import DrawserComponent from '~components/DrawserComponent';
-import { notFound } from 'next/navigation';
 
 export default function VideoPage({ params }: { params: Params }) {
   const { slug } = params;
 
-  const { data: mvComment } = useMvComment(slug);
+  const { data: mvComment, isLoading } = useMvComment(slug);
 
   // TODO: 支持选择分辨率 /mv/url
   const VideoTitle = () => {
@@ -30,7 +29,7 @@ export default function VideoPage({ params }: { params: Params }) {
     } = (mvDetailData?.data as IMvDetailData) || {};
     return (
       <>
-        <h2 className="text-center">
+        <h2 className="">
           {name} {name && '--'} {artistName}
         </h2>
         <p className="font-normal text-sm">{desc}</p>
@@ -48,7 +47,7 @@ export default function VideoPage({ params }: { params: Params }) {
     );
 
     if (!mvURLData?.data.url) {
-      return <div>加载错误</div>;
+      return null;
     }
 
     return (
@@ -66,10 +65,14 @@ export default function VideoPage({ params }: { params: Params }) {
     );
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
-      <VideoTitle />
       <VideoPlayer />
+      <VideoTitle />
       <DrawserComponent text="查看评论区">
         <div className="flex justify-start items-center space-x-2 mt-8">
           <h2 className="my-2">评论区</h2>

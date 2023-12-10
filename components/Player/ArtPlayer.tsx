@@ -16,7 +16,7 @@ export default function ArtPlayer({
 }) {
   const artRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    !url && toast.error('未找到播放源');
+    // !url && toast.error('未找到播放源');
 
     const option: Option = {
       id,
@@ -48,13 +48,13 @@ export default function ArtPlayer({
     const art = new Artplayer(option);
 
     art.on('play', () => {
-      toast.success('开始播放');
+      // toast.success('开始播放');
     });
     art.on('ready', () => {
-      toast.success('视频加载成功');
+      // toast.success('视频加载成功');
     });
     art.on('pause', () => {
-      toast('暂停播放');
+      // toast('暂停播放');
     });
 
     // 但是事件上没有销毁, google 仍然可以进行小窗口播放
