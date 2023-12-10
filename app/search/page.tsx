@@ -6,6 +6,7 @@ import { searchHotDetail } from '~lib/search';
 import useSWR from 'swr';
 import SkeletonSongs from '~components/ui/SkeletonSongs';
 import { SearchResult } from '~components/Search/SearchResult';
+import { useSearchParams } from 'next/navigation';
 
 const HotSongComponent = () => {
   const { data, isLoading } = useSWR('/search/hot/detail', searchHotDetail);
@@ -17,20 +18,16 @@ const HotSongComponent = () => {
   );
 };
 
-export default function SearchPage({
-  searchParams,
-}: {
-  searchParams: {
-    searchWord?: string;
-  };
-}) {
+export default function SearchPage() {
+  const params = useSearchParams();
+  const searchWord = params.get('searchWord');
   return (
     <>
       <Search />
-      {!searchParams.searchWord ? (
+      {!searchWord ? (
         <HotSongComponent />
       ) : (
-        <SearchResult searchWord={searchParams.searchWord} />
+        <SearchResult searchWord={searchWord} />
       )}
     </>
   );
