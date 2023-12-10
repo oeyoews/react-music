@@ -14,6 +14,7 @@ import formatTime from '~lib/formatTime';
 // TODO: 支持进度条拖放
 // TODO: 支持歌词滚动
 // TODO: remove aplayer
+// NOTE: 有些歌曲如果没有cookie, 会加载失败
 function ReactMusicPlayer({ id }: { id: string }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -39,6 +40,7 @@ function ReactMusicPlayer({ id }: { id: string }) {
         setIsPlaying(false);
       },
       onload: () => {
+        // TODO: check duration is valid, such as zero
         setDuration(sound.duration());
       },
       onplay: () => {
