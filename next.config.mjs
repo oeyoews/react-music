@@ -17,7 +17,7 @@ const nextConfig = {
   //   return config;
   // },
   experimental: {
-    ppr: true,
+    ppr: false,
   },
   reactStrictMode: true,
   crossOrigin: 'anonymous',
