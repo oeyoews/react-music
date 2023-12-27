@@ -8,7 +8,7 @@ export default function Announcement({
   text,
   store,
   icon,
-  position = 'top-right',
+  position = 'top-right'
 }: {
   text: string;
   store: boolean;
@@ -22,7 +22,7 @@ export default function Announcement({
     if (firstLoading && process.env.NODE_ENV === 'production') {
       toast(text, {
         icon,
-        position,
+        position
       });
     }
     return () => {

@@ -5,7 +5,7 @@ import Button from './ui/Button';
 // click to close params
 export default function DrawserComponent({
   children,
-  text,
+  text
 }: {
   children: React.ReactNode;
   text: React.ReactNode;

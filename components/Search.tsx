@@ -55,13 +55,15 @@ export default function Search() {
           <button
             type="submit"
             disabled
-            className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
+            className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none"
+          >
             <CgSpinner className="inline animate-spin" />
           </button>
         ) : (
           <button
             type="submit"
-            className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none">
+            className="bg-gray-500 text-white py-2 px-4 rounded-r hover:bg-gray-700 focus:outline-none"
+          >
             <FaSearch className="inline" />
           </button>
         )}

@@ -11,7 +11,7 @@ import SkeletonSongs from './ui/SkeletonSongs';
 const HotSongComponent = () => {
   const { data, isLoading } = useSWRImmutable(
     '/search/hot/detail',
-    searchHotDetail,
+    searchHotDetail
   );
 
   return isLoading ? (
@@ -30,7 +30,8 @@ export default function SidebarSearchMusic() {
           <FaSearch className="inline mx-2" />
           搜索音乐
         </div>
-      }>
+      }
+    >
       <Search />
       <HotSongComponent />
     </DrawserComponent>

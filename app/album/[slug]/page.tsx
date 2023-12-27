@@ -27,7 +27,8 @@ export default async function Album({ params }: { params: Params }) {
             <Link
               href={`/song?id=${song.id}`}
               key={song.id.toString()}
-              className="no-underline">
+              className="no-underline"
+            >
               <li>{song.name}</li>
             </Link>
           );

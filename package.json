@@ -1,4 +1,7 @@
 {
+  "workspaces": [
+    "packages/*"
+  ],
   "name": "react-music",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +12,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prettier": "@oeyoews/prettier-config",
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@headlessui/tailwindcss": "^0.2.0",
@@ -39,6 +43,7 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
+    "@oeyoews/prettier-config": "^1.0.2",
     "@types/node": "^20.9.1",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",

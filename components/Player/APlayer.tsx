@@ -7,13 +7,13 @@ import {
   useArtistData,
   useMusicURL,
   useSongDetailData,
-  useLyric,
+  useLyric
 } from '~lib/hooks';
 import APlayerSkeleton from '~components/ui/AplayerSkeleton';
 import dynamic from 'next/dynamic';
 
 const ReactAplayer = dynamic(() => import('react-aplayer'), {
-  ssr: false,
+  ssr: false
 });
 
 export default function APlayer({ slug }: { slug: string }) {
@@ -62,8 +62,8 @@ export default function APlayer({ slug }: { slug: string }) {
         `//music.163.com/song/media/outer/url?id=${slug}.mp3`,
       lrc: lyric?.lrc?.lyric,
       artist: artistData?.data?.artist.name,
-      cover: artistData?.data?.artist.cover,
-    },
+      cover: artistData?.data?.artist.cover
+    }
   ];
 
   const options: Partial<AplayerProps> = {
@@ -80,7 +80,7 @@ export default function APlayer({ slug }: { slug: string }) {
     onPause: () => {
       setTitle(`暂停播放 ${songData?.songs?.[0].name}`);
       // toast('歌曲暂停');
-    },
+    }
   };
 
   return <ReactAplayer {...options} />;

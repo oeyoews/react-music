@@ -90,6 +90,9 @@ importers:
         specifier: ^4.4.6
         version: 4.4.6(@types/react@18.2.37)(react@18.2.0)
     devDependencies:
+      '@oeyoews/prettier-config':
+        specifier: ^1.0.2
+        version: 1.0.2(prettier@3.1.0)
       '@types/node':
         specifier: ^20.9.1
         version: 20.9.1
@@ -633,6 +636,14 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+
+  /@oeyoews/prettier-config@1.0.2(prettier@3.1.0):
+    resolution: {integrity: sha512-iMYNXU/eu3Bc1NJwXraVgPW6I1X8oWMKlVm5ry/KJrpJw8+B54emQG9t4TJGgLhd9kH8FMAteYou9cg7xmiOYw==}
+    peerDependencies:
+      prettier: ^2.6.0 || ^3.0.0
+    dependencies:
+      prettier: 3.1.0
+    dev: true
 
   /@radix-ui/primitive@1.0.1:
     resolution: {integrity: sha512-yQ8oGX2GVsEYMWGxcovu1uGWPCxV5BFfeeYxqPmuAzUyLT9qmaMXSAhXpb0WrspIeqYzdJpkh2vHModJPgRIaw==}

@@ -9,7 +9,8 @@ export default function HotSongs({ data }: { data: HotDetail[] }) {
           <li key={song.searchWord} className="mt-0">
             <Link
               className="flex items-center"
-              href={`/search?searchWord=${song.searchWord}`}>
+              href={`/search?searchWord=${song.searchWord}`}
+            >
               <div key={song.searchWord}>{song.searchWord}</div>
               {song.content && <div> -- {song.content}</div>}
             </Link>

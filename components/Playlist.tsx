@@ -11,7 +11,8 @@ export default function Playlist({ data }: { data: Playlist[] }) {
         {data.slice(0, 12).map((playlist) => (
           <div
             key={playlist.name}
-            className="hover:cursor-pointer flex flex-col">
+            className="hover:cursor-pointer flex flex-col"
+          >
             <Link href={`/playlist/${playlist.id}`} className="rounded-md">
               <div className="flex overflow-hidden rounded-md relative">
                 <div className="not-prose group">

@@ -4,7 +4,7 @@ import { customfetch as fetch } from './fetchData';
 export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
   const warn = {
     message: '缺少歌手 id',
-    code: 400,
+    code: 400
   };
   // TODO
   if (!id) {
@@ -15,8 +15,8 @@ export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
   return await fetch({
     url: '/artist/detail',
     params: {
-      id,
-    },
+      id
+    }
   });
 };
 
@@ -24,8 +24,8 @@ export const getSimiSong = async (id: Id): Promise<ISimiSong> => {
   return await fetch({
     url: '/simi/song',
     params: {
-      id,
-    },
+      id
+    }
   });
 };
 
@@ -33,24 +33,24 @@ export const getLyric = async (id: Id): Promise<ILyric> => {
   return await fetch({
     url: '/lyric',
     params: {
-      id,
-    },
+      id
+    }
   });
 };
 
 export const checkSong = async (
   id: Id,
-  cookie?: string,
+  cookie?: string
 ): Promise<CheckSong> => {
   return await fetch({
     url: '/check/music',
     params: {
-      id,
+      id
     },
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 // offset 分页
@@ -58,8 +58,8 @@ export const multiSearch = async (keywords: string): Promise<ISearch> => {
   return await fetch({
     url: '/search/multimatch',
     params: {
-      keywords,
-    },
+      keywords
+    }
   });
 };
 
@@ -68,14 +68,14 @@ export const search = async (keywords: string): Promise<ISearch> => {
   return await fetch({
     url: '/search',
     params: {
-      keywords,
-    },
+      keywords
+    }
   });
 };
 
 export const searchDefault = async (): Promise<ISearchDefault> => {
   return await fetch({
-    url: '/search/default',
+    url: '/search/default'
   });
 };
 
@@ -84,8 +84,8 @@ export const searchCloud = async (keywords: string): Promise<ISearch> => {
   return await fetch({
     url: '/cloudsearch',
     params: {
-      keywords,
-    },
+      keywords
+    }
   });
 };
 
@@ -93,8 +93,8 @@ export const searchSuggest = async (keywords: string): Promise<ISearch> => {
   return await fetch({
     url: '/search/suggest',
     params: {
-      keywords,
-    },
+      keywords
+    }
   });
 };
 
@@ -104,7 +104,7 @@ export const searchSuggest = async (keywords: string): Promise<ISearch> => {
  * @return {Promise<IRecommendSongs>} A promise that resolves to an object containing recommended songs.
  */
 export const getRecommendations = async (
-  cookie: string,
+  cookie: string
 ): Promise<IRecommendSongs> => {
   // NOTE: need login
   return await fetch({
@@ -112,8 +112,8 @@ export const getRecommendations = async (
     params: {},
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
@@ -126,39 +126,39 @@ export const getBanners = async (): Promise<IBanner> => {
   return await fetch({
     url: '/banner',
     params: {
-      type: 0, // TODO: 1 will cause motiondiv error ???
-    },
+      type: 0 // TODO: 1 will cause motiondiv error ???
+    }
   });
 };
 
 // TODO:
 export const searchHot = async (): Promise<any> => {
   return await fetch({
-    url: '/search/hot',
+    url: '/search/hot'
   });
 };
 
 export const searchHotDetail = async (): Promise<IHotDetail> => {
   return await fetch({
-    url: '/search/hot/detail',
+    url: '/search/hot/detail'
   });
 };
 
 // 播放地址有效期 25 min
 export const getMusicURL = async (
   id: Id,
-  cookie?: string,
+  cookie?: string
   // level: any = 'standard',
 ): Promise<IMusicURL> => {
   return fetch({
     url: '/song/url',
     params: {
-      id,
+      id
     },
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
@@ -167,8 +167,8 @@ export const getSongDetail = async (ids: Id): Promise<ISongDetail> => {
   return await fetch({
     url: '/song/detail',
     params: {
-      ids,
-    },
+      ids
+    }
   });
 };
 
@@ -176,8 +176,8 @@ export const getAlbumDetail = async (id: Id): Promise<IAlbumDetail> => {
   return await fetch({
     url: '/album',
     params: {
-      id,
-    },
+      id
+    }
   });
 };
 
@@ -186,8 +186,8 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
     url: '/comment/music',
     params: {
       id,
-      limit: 30,
-    },
+      limit: 30
+    }
   });
 };
 
@@ -197,8 +197,8 @@ export const getStarPick = async (cookie: string): Promise<IStarPick> => {
     url: '/starpick/comments/summary',
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
@@ -206,7 +206,7 @@ export const getDownloadURL = async (id: Id): Promise<any> => {
   return await fetch({
     url: '/song/download/url',
     params: {
-      id,
-    },
+      id
+    }
   });
 };

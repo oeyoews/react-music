@@ -9,7 +9,7 @@ type Config = {
 
 function addParams(
   finalURL: string,
-  params?: Record<string, string | number | boolean>,
+  params?: Record<string, string | number | boolean>
 ): string {
   // 添加参数到 URL
   let apiURL = finalURL;
@@ -31,27 +31,27 @@ function addParams(
 async function fetchData(
   finalURL: string,
   params?: Params,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<any> {
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
     // cache: 'force-cache',
     next: {
-      revalidate: 3600,
+      revalidate: 3600
     },
     // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
     // method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-    }, // cookie on header auto on same domain???
+      'Content-Type': 'application/json'
+    } // cookie on header auto on same domain???
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
   const urlWithParams = addParams(finalURL, params);
   console.log(
     chalk.green(finalURL),
     params ? chalk.cyan.bold(JSON.stringify(params)) : '',
-    new Date().toLocaleTimeString(),
+    new Date().toLocaleTimeString()
   );
 
   try {

@@ -12,8 +12,8 @@ export const getqrKey = async (): Promise<IQRCode> => {
     url: '/login/qr/key',
     params: { timestamp: Date.now() },
     options: {
-      method: 'POST',
-    },
+      method: 'POST'
+    }
   });
 };
 
@@ -28,11 +28,11 @@ export const qrCreate = async (key: string): Promise<IQRCodeData> => {
     params: {
       key,
       qrimg: true,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     },
     options: {
-      method: 'POST',
-    },
+      method: 'POST'
+    }
   });
 };
 
@@ -46,11 +46,11 @@ export const qrCheck = async (key: string): Promise<CheckQrcode> => {
     url: '/login/qr/check',
     params: {
       key,
-      timestamp: Date.now(),
+      timestamp: Date.now()
     },
     options: {
-      method: 'POST',
-    },
+      method: 'POST'
+    }
   });
 };
 
@@ -64,8 +64,8 @@ export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
     params: { timestamp: Date.now() },
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
@@ -73,14 +73,14 @@ export const getLoginStatus = async (cookie: string): Promise<ILoginStatus> => {
 export const loginAnonymous = async (): Promise<ICookieAnonymous> => {
   return await fetch({
     url: '/register/anonimous',
-    params: { timestamp: Date.now() },
+    params: { timestamp: Date.now() }
   });
 };
 
 export const refreshLogin = async () => {
   return await fetch({
     url: '/login/refresh',
-    params: { timestamp: Date.now() },
+    params: { timestamp: Date.now() }
   });
 };
 
@@ -91,8 +91,8 @@ export const getAccount = async (cookie: string): Promise<IUserAccount> => {
     params: { timestamp: Date.now() },
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
@@ -103,8 +103,8 @@ export const getLevel = async (cookie: string): Promise<ILevel> => {
     params: { timestamp: Date.now() },
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
@@ -112,13 +112,13 @@ export const getLevel = async (cookie: string): Promise<ILevel> => {
 export const getUserDetail = async (uid: Id): Promise<IUserDetail> => {
   return await fetch({
     url: '/user/detail',
-    params: { uid },
+    params: { uid }
   });
 };
 
 export const logout = async (): Promise<any> => {
   return await fetch({
-    url: '/logout',
+    url: '/logout'
   });
 };
 
@@ -126,12 +126,12 @@ export const logout = async (): Promise<any> => {
 
 export const getVipInfo = async (cookie: string): Promise<IVipInfo> => {
   return await fetch({
-    url: '/vip/info',
+    url: '/vip/info'
   });
 };
 
 export const getVersion = async (): Promise<IVersion> => {
   return await fetch({
-    url: '/inner/version',
+    url: '/inner/version'
   });
 };

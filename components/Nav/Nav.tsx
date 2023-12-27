@@ -5,7 +5,7 @@ import React from 'react';
 const mobNavItems = [
   { href: '/', title: 'home', icon: <FcMusic /> },
   { href: '/search', title: 'search', icon: <FcSearch /> },
-  { href: '/login', title: 'login', icon: <FcSettings /> },
+  { href: '/login', title: 'login', icon: <FcSettings /> }
 ];
 
 export default function MobNav() {

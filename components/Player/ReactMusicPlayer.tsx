@@ -21,7 +21,7 @@ function ReactMusicPlayer({ id }: { id: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const apRef = useRef<Howl>();
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(
-    id || '2102054543',
+    id || '2102054543'
   );
   const { data: songData, isLoading: isLoadingSongData } =
     useSongDetailData(id);
@@ -54,7 +54,7 @@ function ReactMusicPlayer({ id }: { id: string }) {
         apRef.current?.on('stop', () => {
           clearInterval(progressInterval);
         });
-      },
+      }
     };
 
     const sound = new Howl(options);
@@ -108,8 +108,8 @@ function ReactMusicPlayer({ id }: { id: string }) {
                 className={clsx(
                   'rounded-full object-cover object-center w-20 h-20 animated not-prose mb-2 cursor-pointer',
                   {
-                    rotate: isPlaying,
-                  },
+                    rotate: isPlaying
+                  }
                 )}
               />
             ) : (

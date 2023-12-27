@@ -4,7 +4,7 @@ import { FaPlay, FaVideo } from 'react-icons/fa';
 
 export default function MV({
   data,
-  total = 8,
+  total = 8
 }: {
   data: MvFirst[] | ArtistMV[] | any[];
   total?: number;

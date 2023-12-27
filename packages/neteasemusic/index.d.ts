@@ -470,7 +470,7 @@ declare global {
 
   enum Extension {
     FLAC = 'flac',
-    Mp3 = 'mp3',
+    Mp3 = 'mp3'
   }
 
   interface OriginSongSimpleData {
@@ -531,7 +531,7 @@ declare global {
   }
 
   enum RcmdShowType {
-    Default = 'DEFAULT',
+    Default = 'DEFAULT'
   }
 
   interface CrossPlatformConfig {
@@ -1095,7 +1095,7 @@ declare global {
     DailyAuditionRecentArtist = 'daily_audition_recentArtist',
     DailyAuditionRtLike = 'daily_audition_rt_like',
     ItembasedOn = 'itembased_on',
-    OnMind34 = 'on_mind3_4',
+    OnMind34 = 'on_mind3_4'
   }
 
   interface Ar {

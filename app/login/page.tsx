@@ -13,7 +13,7 @@ import {
   qrCreate,
   logout,
   getAccount,
-  loginAnonymous,
+  loginAnonymous
 } from '~lib/login'; // Assuming you have these API functions.
 import { toast } from 'react-hot-toast';
 import { QRCodeSVG } from 'qrcode.react';
@@ -66,7 +66,7 @@ const LoginPage = () => {
       toast.promise(qrCreate(key), {
         loading: '生成QRCode ...',
         success: '请使用手机扫描二维码登录',
-        error: 'QRCode 生成失败',
+        error: 'QRCode 生成失败'
       });
     };
 
@@ -103,7 +103,8 @@ const LoginPage = () => {
                 onClick={() => {
                   updateStatus();
                   checkQr(key);
-                }}>
+                }}
+              >
                 网易云账号扫码登录
               </button>
               <button
@@ -114,7 +115,8 @@ const LoginPage = () => {
                     localStorage.setItem('cookie', res.cookie);
                     toast('游客登录成功');
                   });
-                }}>
+                }}
+              >
                 游客登录
               </button>
             </div>

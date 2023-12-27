@@ -11,7 +11,7 @@ import DrawserComponent from '~components/DrawserComponent';
 const VideoTitle = ({ slug }: { slug: string }) => {
   const { data: mvDetailData, isLoading } = useSWRImmutable(
     slug + 'detail',
-    () => getMvDetail(slug),
+    () => getMvDetail(slug)
   );
   if (isLoading) {
     return null;
@@ -19,7 +19,7 @@ const VideoTitle = ({ slug }: { slug: string }) => {
   const {
     name = '',
     artistName = '',
-    desc,
+    desc
   } = (mvDetailData?.data as IMvDetailData) || {};
   return (
     <>
@@ -35,9 +35,9 @@ const VideoPlayer = ({ slug }: { slug: string }) => {
   const {
     error,
     data: mvURLData,
-    isLoading,
+    isLoading
   } = useSWRImmutable(slug + 'mvurl', () =>
-    getMvURL(slug, localStorage.cookie),
+    getMvURL(slug, localStorage.cookie)
   );
 
   if (!mvURLData?.data.url) {

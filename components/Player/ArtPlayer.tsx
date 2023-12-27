@@ -8,7 +8,7 @@ import Option from 'artplayer/types/option';
 export default function ArtPlayer({
   url,
   className,
-  id = url || '',
+  id = url || ''
 }: {
   url: string;
   className: string;
@@ -42,7 +42,7 @@ export default function ArtPlayer({
       fastForward: true,
       autoPlayback: true, // 保存在了localstorage
       autoOrientation: true,
-      airplay: true,
+      airplay: true
     };
 
     const art = new Artplayer(option);

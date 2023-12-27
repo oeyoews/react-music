@@ -1,7 +1,7 @@
 import million from 'million/compiler';
 
 const millionConfig = {
-  auto: { rsc: true },
+  auto: { rsc: true }
 };
 
 // /** @type {import('next').NextConfig} */
@@ -17,20 +17,20 @@ const nextConfig = {
   //   return config;
   // },
   experimental: {
-    ppr: false,
+    ppr: false
   },
   reactStrictMode: true,
   crossOrigin: 'anonymous',
   logging: {
     fetches: {
-      fullUrl: true,
-    },
+      fullUrl: true
+    }
   },
   // https://github.com/vercel/next.js/discussions/34810
   // https://nextjs.org/docs/architecture/nextjs-compiler
   compiler: {
     removeConsole:
-      process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+      process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false
   },
   // / -> /home
   // redirects: { },
@@ -42,16 +42,16 @@ const nextConfig = {
         protocol: 'http',
         hostname: '**',
         port: '',
-        pathname: '**',
+        pathname: '**'
       },
       {
         protocol: 'https',
         hostname: '**',
         port: '',
-        pathname: '**',
-      },
-    ],
-  },
+        pathname: '**'
+      }
+    ]
+  }
 };
 
 export default million.next(nextConfig, millionConfig);

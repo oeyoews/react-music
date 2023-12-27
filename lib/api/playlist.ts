@@ -16,8 +16,8 @@ export const getPlayListSongs = async (id: Id): Promise<PlaylistSong> => {
     params: {
       id,
       limit: 30,
-      offset: 0,
-    },
+      offset: 0
+    }
   });
 };
 
@@ -28,51 +28,51 @@ export const getPlayListSongs = async (id: Id): Promise<PlaylistSong> => {
  */
 export const getHotPlayList = async (): Promise<IPlaylist> => {
   return await fetch({
-    url: '/top/playlist',
+    url: '/top/playlist'
   });
 };
 
 export const getPlayListPersonalized = async (
-  cookie: string, // 可选
+  cookie: string // 可选
 ): Promise<IPlaylistPersonalized> => {
   return await fetch({
     url: '/personalized',
     params: {
-      limit: 12,
+      limit: 12
     },
     options: {
       method: 'POST',
-      body: JSON.stringify({ cookie }),
-    },
+      body: JSON.stringify({ cookie })
+    }
   });
 };
 
 export const getPlayListDetail = async (
-  id: number,
+  id: number
 ): Promise<IPlayListDetails> => {
   return await fetch({
     url: '/playlist/detail',
-    params: { id },
+    params: { id }
   });
 };
 
 export const getPlayListComment = async (id: Id): Promise<ISongComment> => {
   return await fetch({
     url: '/comment/playlist',
-    params: { id },
+    params: { id }
   });
 };
 
 export const getAlbumComment = async (id: Id): Promise<ISongComment> => {
   return await fetch({
     url: '/comment/album',
-    params: { id },
+    params: { id }
   });
 };
 
 export const getUserPlayList = async (uid: Id): Promise<IPlaylist> => {
   return await fetch({
     url: '/user/playlist',
-    params: { uid },
+    params: { uid }
   });
 };

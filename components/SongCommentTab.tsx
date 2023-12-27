@@ -5,7 +5,7 @@ import { Tab } from '@headlessui/react';
 import SongComment from './SongComment';
 
 export default function SongCommentTab({
-  songComment,
+  songComment
 }: {
   songComment: ISongComment;
 }) {

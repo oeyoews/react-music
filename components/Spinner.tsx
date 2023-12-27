@@ -5,7 +5,7 @@ import { ColorRing } from 'react-loader-spinner';
 
 export default function Spinner({
   center = true,
-  size = 40,
+  size = 40
 }: {
   center?: boolean;
   size?: number;

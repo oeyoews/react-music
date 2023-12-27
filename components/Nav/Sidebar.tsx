@@ -14,10 +14,10 @@ const pcSidebarItems = [
   {
     href: '/starpick',
     title: '云村星评馆',
-    icon: <FaComment />,
+    icon: <FaComment />
   },
   // { href: '/search', title: '搜索音乐', icon: <FaSearch /> },
-  { href: '/login', title: '用户', icon: <FaUser /> },
+  { href: '/login', title: '用户', icon: <FaUser /> }
 ];
 
 export const Sidebar = () => {
@@ -44,7 +44,8 @@ export const Sidebar = () => {
               pathname === item.href
                 ? 'bg-rose-500 text-white'
                 : 'hover:bg-slate-200/90'
-            }`}>
+            }`}
+          >
             {React.cloneElement(item.icon, { className: 'inline mx-2' })}
             {item.title}
           </div>

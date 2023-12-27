@@ -8,7 +8,7 @@ import {
   useArtistData,
   useSiMiSong,
   useSongComment,
-  useArtistMV,
+  useArtistMV
 } from '~lib/hooks';
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
@@ -81,7 +81,8 @@ export const ArtistInfo = ({ slug }: { slug: string }) => {
           <Link
             title="点击查看具体详情"
             href={`/artist/${artistData?.data?.artist?.id}`}
-            className="no-underline font-bold">
+            className="no-underline font-bold"
+          >
             {artistData?.data.artist?.name}
           </Link>
           <p className="my-2">{artistData?.data.artist?.briefDesc}</p>

@@ -43,7 +43,7 @@ const useStoreBase = create<Store>((set, get) => ({
     } else {
       set({ player: 'cloud' });
     }
-  },
+  }
 }));
 
 export const useMusicStore = createSelectorFunctions(useStoreBase);

@@ -1,6 +1,6 @@
 export default function Badge({
   text,
-  className,
+  className
 }: {
   text: string | number;
   className?: string;

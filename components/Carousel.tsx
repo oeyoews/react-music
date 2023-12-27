@@ -33,7 +33,8 @@ const Carousel = ({ data }: { data: Banner[] }) => {
             className={`${
               index === currentSlide ? 'block' : 'hidden'
             } duration-700 ease-in-out`}
-            data-carousel-item>
+            data-carousel-item
+          >
             <Link href={getRoute(banner)}>
               <Image
                 src={banner.imageUrl}
@@ -61,7 +62,8 @@ const Carousel = ({ data }: { data: Banner[] }) => {
             aria-label={`Slide ${index + 1}`}
             data-carousel-slide-to={index}
             onMouseEnter={() => handleSlideTo(index)}
-            onClick={() => handleSlideTo(index)}></button>
+            onClick={() => handleSlideTo(index)}
+          ></button>
         ))}
       </div>
       {/* Slider controls */}

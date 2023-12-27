@@ -5,7 +5,7 @@ enum TargetType {
   album = 10,
   playlist = 1000,
   mv = 1004,
-  external = 3000,
+  external = 3000
 }
 
 export const getRoute = (banner: Banner) => {
@@ -15,7 +15,7 @@ export const getRoute = (banner: Banner) => {
     [TargetType.album]: `/album/${targetId}`,
     [TargetType.playlist]: `/playlist/${targetId}`,
     [TargetType.mv]: '#', // TODO: coming
-    [TargetType.external]: url as string,
+    [TargetType.external]: url as string
   };
 
   return targetMap[targetType];

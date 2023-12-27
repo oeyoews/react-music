@@ -17,17 +17,17 @@ export default function Banners({ data }: { data: Banner[] }) {
       scale: 1,
       transition: {
         delayChildren: 0.2,
-        staggerChildren: 0.1,
-      },
-    },
+        staggerChildren: 0.1
+      }
+    }
   };
 
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
-      opacity: 1,
-    },
+      opacity: 1
+    }
   };
 
   return (
@@ -39,19 +39,22 @@ export default function Banners({ data }: { data: Banner[] }) {
         variants={container}
         // initial={firstLoading ? 'hidden' : 'visible'}
         initial="hidden"
-        animate={'visible'}>
+        animate={'visible'}
+      >
         {/* NOTE: 数量不固定 */}
         {data.slice(0, 8).map((banner) => (
           <MotionDiv
             key={banner.imageUrl}
             variants={item}
             // md:first:col-span-2
-            className="overflow-hidden rounded-md">
+            className="overflow-hidden rounded-md"
+          >
             {/* md:first:col-span-2 */}
             {/* <span>{banner.typeTitle}</span> */}
             <Link
               href={getRoute(banner) as Route}
-              target={getRoute(banner).startsWith('http') ? '_blank' : ''}>
+              target={getRoute(banner).startsWith('http') ? '_blank' : ''}
+            >
               <Image
                 src={banner.imageUrl}
                 alt={banner.typeTitle}

@@ -9,7 +9,7 @@ import {
   getSimiSong,
   getMusicURL,
   search,
-  getLyric,
+  getLyric
 } from '~lib/search';
 
 import { getMVComment, getArtistMV, getSiMiMV } from '~lib/mv';
@@ -26,7 +26,7 @@ export const useArtistMV = (arId: Id) => {
 
 export const usePlaylistPersonalized = () => {
   return useSWRImmutable('playlistpersonalized', () =>
-    getPlayListPersonalized(localStorage.cookie),
+    getPlayListPersonalized(localStorage.cookie)
   );
 };
 
@@ -44,7 +44,7 @@ export const useMvComment = (id: Id) => {
 // 不要使用id, 作为key, 因为一个页面如果使用id作为路由, 多个数据会错乱
 export const useLyric = (id: Id) => {
   return useSWRImmutable(id + 'lyric', () => getLyric(id), {
-    suspense: false,
+    suspense: false
   });
 };
 
@@ -58,7 +58,7 @@ export const useSongComment = (id: Id) => {
   });
   if (data.data?.code !== 200 && data.data?.message) {
     toast.error(`评论区: ${data.data?.message}` as string, {
-      position: 'bottom-right',
+      position: 'bottom-right'
     });
   }
   return data;
@@ -71,7 +71,7 @@ export const useUserData = (uid: number) => {
 export const useStarPick = () => {
   return useSWRImmutable('starpick', () => getStarPick(localStorage.cookie), {
     // suspense: true,
-    refreshInterval: 3600000,
+    refreshInterval: 3600000
   });
 };
 
@@ -83,14 +83,14 @@ export const useMusicURL = (id: Id) => {
     () => getMusicURL(id, localStorage?.cookie || ''),
     {
       suspense: false, // NOTE: localStorage not suitable for suspense on server, so this prerender will error without no suspense
-      revalidateOnFocus: false,
-    },
+      revalidateOnFocus: false
+    }
   );
 };
 
 export const useSongDetailData = (slug: Id) => {
   return useSWR(slug + 'detail', () => getSongDetail(slug), {
-    refreshInterval: 3600000,
+    refreshInterval: 3600000
   });
 };
 
@@ -101,6 +101,6 @@ export const useArtistData = (arId: number) => {
 
 export const useSiMiSong = (slug: Id) => {
   return useSWRImmutable(slug + 'simi', () => getSimiSong(slug), {
-    refreshInterval: 3600000,
+    refreshInterval: 3600000
   });
 };

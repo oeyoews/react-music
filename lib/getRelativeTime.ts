@@ -13,7 +13,7 @@ import { zhCN } from 'date-fns/locale'; // 引入中文本地化
 export default function getRelativeTime(timestamp: number) {
   const relativeTime = formatDistanceToNow(new Date(timestamp), {
     addSuffix: true, //大约...
-    locale: zhCN,
+    locale: zhCN
   });
   return relativeTime;
 }
