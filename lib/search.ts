@@ -1,9 +1,9 @@
 import { customfetch as fetch } from './fetchData';
 
-// id: 歌手id
+// id: 歌手 id
 export const getArtistDetail = async (id: Id): Promise<IArtistDetail> => {
   const warn = {
-    message: '缺少歌手id',
+    message: '缺少歌手 id',
     code: 400,
   };
   // TODO
@@ -163,7 +163,7 @@ export const getMusicURL = async (
 };
 
 export const getSongDetail = async (ids: Id): Promise<ISongDetail> => {
-  if (!ids) console.warn('请传入歌曲id');
+  if (!ids) console.warn('请传入歌曲 id');
   return await fetch({
     url: '/song/detail',
     params: {
@@ -191,7 +191,7 @@ export const getSongComment = async (id: Id): Promise<ISongComment> => {
   });
 };
 
-// NOTE: 需要cookie(游客cookie 也可以); 有时没有cookie 也可以???
+// NOTE: 需要 cookie(游客 cookie 也可以); 有时没有 cookie 也可以？??
 export const getStarPick = async (cookie: string): Promise<IStarPick> => {
   return await fetch({
     url: '/starpick/comments/summary',

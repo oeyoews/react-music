@@ -1,0 +1,10 @@
+{
+  "name": "aplayer-types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "types": "index.d.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

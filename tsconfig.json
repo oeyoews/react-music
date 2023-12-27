@@ -1,4 +1,7 @@
 {
+  "workspace": [
+    "packages/*"
+  ],
   "compilerOptions": {
     "target": "es5",
     "lib": [

@@ -34,7 +34,7 @@ export default function Search() {
     router.replace(`/search?${params.toString()}`);
   };
   useEffect(() => {
-    toast.error('在线搜索接口异常, 暂时不建议使用 2023-12-10');
+    // toast.error('在线搜索接口异常，暂时不建议使用 2023-12-10');
     return () => {
       toast.dismiss();
     };

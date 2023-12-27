@@ -3,7 +3,7 @@
 [preview page](https://nextjs-netease-music.vercel.app/)
 
 > [!TIP]
-> 由于线上API不够稳定且速度慢, 建议本地测试, 部分页面请求会加载失败, 可在开发者工具中查看具体原因
+> 由于线上 API 不够稳定且速度慢，建议本地测试，部分页面请求会加载失败，可在开发者工具中查看具体原因
 
 ## TODO
 
@@ -24,10 +24,10 @@
 - [x] 星评
 - [x] 歌曲 + 评论
 - [x] 相似歌曲
-- [x] 登录(二维码)
+- [x] 登录 (二维码)
 - [x] 歌曲搜索
 - [x] 每日推荐
-- [x] 热门歌曲,歌单
+- [x] 热门歌曲，歌单
 - [x] 首页轮播图
 - [x] 歌手信息
 - [x] use svg qrcode
@@ -45,6 +45,7 @@
 - [ ] update latest comment btn
 - [ ] 用户歌单 /user/playlist?uid=32953014
 - [ ] simi mv 结果相同
+- [x] 类型声明做成包
 
 <!-- - [x] [301](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/961) -->
 <!-- - [ ] 支持直接调用 [neteasemusicapi](https://github.com/Binaryify/NeteaseCloudMusicApi/issues/1842) -->
@@ -55,4 +56,4 @@
 Error: ENOENT: no such file or directory, scandir 'D:\Workspace\react-music\.next\server\vendor-chunks\module'
 ``` -->
 <!-- - mp3 cache -->
-<!-- - 跨域问题() -->
+<!-- - 跨域问题 () -->

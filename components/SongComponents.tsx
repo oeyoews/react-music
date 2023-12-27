@@ -22,7 +22,6 @@ import ReactMusicPlayer from './Player/ReactMusicPlayer';
 import { useMusicStore } from '~lib/store';
 
 import dynamic from 'next/dynamic';
-import Button from './ui/Button';
 
 const APlayer = dynamic(() => import('./Player/APlayer'), { ssr: false });
 
@@ -42,7 +41,7 @@ export const ArtistMVS = ({ slug }: { slug: string }) => {
   return <MV data={artistMVs?.mvs!} />;
 };
 
-// TODO: 点击链接后, 路由没有发生变化, 所以 aplayer不会自动卸载, 之后即使切换路由也不会自动卸载
+// TODO: 点击链接后，路由没有发生变化，所以 aplayer 不会自动卸载，之后即使切换路由也不会自动卸载
 export const SimiSong = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useSiMiSong(slug);
   return (
