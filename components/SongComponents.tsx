@@ -126,16 +126,16 @@ export default function SongPage() {
         {/* <Button className="font-bold capitalize" onClick={togglePlayer}>
           Toggle Player
         </Button> */}
-        <DrawserComponent text="查看歌手信息">
+        <DrawserComponent text="歌手信息" className="shrink">
           <ArtistInfo slug={id} />
         </DrawserComponent>
-        <DrawserComponent text="查看相似歌曲">
+        <DrawserComponent text="相似歌曲">
           <SimiSong slug={id} />
         </DrawserComponent>
-        <DrawserComponent text="查看评论区">
+        <DrawserComponent text="评论区">
           <SongComment slug={id} />
         </DrawserComponent>
-        <DrawserComponent text="查看歌手MV">
+        <DrawserComponent text="歌手MV">
           <ArtistMVS slug={id} />
         </DrawserComponent>
       </div>
