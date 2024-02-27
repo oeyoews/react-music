@@ -15,7 +15,7 @@ export default function DrawserComponent({
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <Button className={className}>{text} </Button>
+        <Button className={className}>{text}</Button>
       </Drawer.Trigger>
       <Drawer.Portal>
         {/* NOTE: aplayer 的 z-index 过高 */}
