@@ -26,11 +26,12 @@ export default function SidebarSearchMusic() {
   return (
     <DrawserComponent
       text={
-        <div>
+        <div className="flex justify-start items-center">
           <FaSearch className="inline mx-2" />
-          搜索音乐
+          音乐搜索
         </div>
       }
+      className="p-2 w-full mx-0 !my-0 bg-transparent"
     >
       <Search />
       <HotSongComponent />

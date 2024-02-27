@@ -1,22 +1,24 @@
 import { Drawer } from 'vaul';
 import Button from './ui/Button';
 
-// 监听点击事件, 对于搜索歌曲
+// 监听点击事件，对于搜索歌曲
 // click to close params
 export default function DrawserComponent({
   children,
-  text
+  text,
+  className
 }: {
   children: React.ReactNode;
   text: React.ReactNode;
+  className?: string;
 }) {
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <Button>{text} </Button>
+        <Button className={className}>{text} </Button>
       </Drawer.Trigger>
       <Drawer.Portal>
-        {/* NOTE: aplayer 的z-index 过高 */}
+        {/* NOTE: aplayer 的 z-index 过高 */}
         <Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] cursor-pointer" />
         {/* prose 不会继承 */}
         <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[80%] mt-24 fixed bottom-0 inset-x-0 z-[99999] prose max-w-none">

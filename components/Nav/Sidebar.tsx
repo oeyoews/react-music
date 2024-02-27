@@ -10,14 +10,14 @@ import SidebarSearchMusic from '~components/SidebarSearchMusic';
 
 const pcSidebarItems = [
   { href: '/', title: '为我推荐', icon: <FaStar /> },
-  { href: '/mv', title: 'MV视频', icon: <FaVideo /> },
+  { href: '/mv', title: 'MV 视频', icon: <FaVideo />, disable: true },
   {
     href: '/starpick',
-    title: '云村星评馆',
+    title: '云村星评',
     icon: <FaComment />
   },
   // { href: '/search', title: '搜索音乐', icon: <FaSearch /> },
-  { href: '/login', title: '用户', icon: <FaUser /> }
+  { href: '/login', title: '用户信息', icon: <FaUser /> }
 ];
 
 export const Sidebar = () => {
@@ -36,21 +36,23 @@ export const Sidebar = () => {
         </div>
       </Link>
 
-      {pcSidebarItems.map((item) => (
-        <Link href={item.href} key={item.title}>
-          <div
-            className={`p-2 rounded text-gray-500 m-0 transition-all ${
-              // pathname.includes(item.href)
-              pathname === item.href
-                ? 'bg-rose-500 text-white'
-                : 'hover:bg-slate-200/90'
-            }`}
-          >
-            {React.cloneElement(item.icon, { className: 'inline mx-2' })}
-            {item.title}
-          </div>
-        </Link>
-      ))}
+      {pcSidebarItems
+        .filter((item) => !item.disable)
+        .map((item) => (
+          <Link href={item.href} key={item.title}>
+            <div
+              className={`p-2 rounded text-gray-500 mx-0 mb-2 transition-all ${
+                // pathname.includes(item.href)
+                pathname === item.href
+                  ? 'bg-rose-500 text-white'
+                  : 'hover:bg-slate-200/90'
+              }`}
+            >
+              {React.cloneElement(item.icon, { className: 'inline mx-2' })}
+              {item.title}
+            </div>
+          </Link>
+        ))}
       <SidebarSearchMusic />
     </div>
   );
