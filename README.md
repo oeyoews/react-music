@@ -1,6 +1,6 @@
 ![](banner.png)
 
-[preview page](https://music.oeyoews.top)
+<!-- [preview page](https://music.oeyoews.top) -->
 
 > [!IMPORTANT]
 > 由于 NeteaseCloudMusicApi 项目已停止维护，由于接口状态的不可确定性，将无法保障功能的正常使用。
