@@ -18,5 +18,8 @@ export const getRoute = (banner: Banner) => {
     [TargetType.external]: url as string
   };
 
+  // delete targetMap[TargetType.mv];
+  // delete targetMap[TargetType.external];
+
   return targetMap[targetType];
 };

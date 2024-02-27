@@ -53,7 +53,7 @@ export default function Banners({ data }: { data: Banner[] }) {
             {/* <span>{banner.typeTitle}</span> */}
             <Link
               href={getRoute(banner) as Route}
-              target={getRoute(banner).startsWith('http') ? '_blank' : ''}
+              target={getRoute(banner)?.startsWith('http') ? '_blank' : ''}
             >
               <Image
                 src={banner.imageUrl}
