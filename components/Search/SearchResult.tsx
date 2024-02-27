@@ -11,7 +11,7 @@ export const SearchResult = ({ searchWord }: { searchWord: string }) => {
     return <SkeletonSongs count={10} />;
   }
   // if (data?.code !== 200) {
-  //   toast.error(`搜索结果: ${data?.message}`);
+  //   toast.error(`搜索结果：${data?.message}`);
   // }
   const vipids = data?.result.songs
     ?.filter((song) => song.fee == 1)
@@ -21,7 +21,7 @@ export const SearchResult = ({ searchWord }: { searchWord: string }) => {
     <>
       {/* {JSON.stringify(data, null, 2)} */}
       <h2>{searchWord}</h2>
-      <ul className="columns-1 md:columns-2">
+      <ul className="columns-1 md:columns-2 list-none">
         {data?.result.songs?.map((song) => {
           return (
             <li className="mt-1" key={song.id}>

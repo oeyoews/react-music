@@ -4,7 +4,7 @@ export default function HotSongs({ data }: { data: HotDetail[] }) {
   return (
     <div>
       <h2>热门歌曲</h2>
-      <ul className="columns-1 md:columns-2">
+      <ul className="columns-1 md:columns-2 list-none">
         {data.map((song) => (
           <li key={song.searchWord} className="mt-0">
             <Link
