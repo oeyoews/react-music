@@ -14,7 +14,8 @@ const pcSidebarItems = [
   {
     href: '/starpick',
     title: '云村星评',
-    icon: <FaComment />
+    icon: <FaComment />,
+    disable: true
   },
   // { href: '/search', title: '搜索音乐', icon: <FaSearch /> },
   { href: '/login', title: '用户信息', icon: <FaUser /> }
