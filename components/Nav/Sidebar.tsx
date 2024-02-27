@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import { FaHouse } from 'react-icons/fa6';
 import Link from 'next/link';
 import { RiNeteaseCloudMusicFill } from 'react-icons/ri';
 import { FaComment, FaStar, FaUser, FaVideo } from 'react-icons/fa';
@@ -9,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import SidebarSearchMusic from '~components/SidebarSearchMusic';
 
 const pcSidebarItems = [
-  { href: '/', title: '为我推荐', icon: <FaStar /> },
+  { href: '/', title: '为我推荐', icon: <FaHouse /> },
   { href: '/mv', title: 'MV 视频', icon: <FaVideo />, disable: true },
   {
     href: '/starpick',

@@ -1,9 +1,10 @@
-import { FaStar, FaSearch, FaUser } from 'react-icons/fa';
+import { FaSearch, FaUser } from 'react-icons/fa';
+import { FaHouse } from 'react-icons/fa6';
 import Link from 'next/link';
 import React from 'react';
 
 const mobNavItems = [
-  { href: '/', title: 'home', icon: <FaStar /> },
+  { href: '/', title: 'home', icon: <FaHouse /> },
   { href: '/search', title: 'search', icon: <FaSearch /> },
   { href: '/login', title: 'login', icon: <FaUser /> }
 ];
