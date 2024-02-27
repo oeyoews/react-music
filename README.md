@@ -1,6 +1,6 @@
 ![](banner.png)
 
-[preview page](https://nextjs-netease-music.vercel.app/)
+[preview page](https://music.oeyoews.top)
 
 > [!TIP]
 > 由于线上 API 不够稳定且速度慢，建议本地测试，部分页面请求会加载失败，可在开发者工具中查看具体原因
