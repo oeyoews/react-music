@@ -53,7 +53,7 @@ export const Sidebar = () => {
             </div>
           </Link>
         ))}
-      <SidebarSearchMusic />
+      {/* <SidebarSearchMusic /> */}
     </div>
   );
 };

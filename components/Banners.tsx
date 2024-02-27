@@ -32,20 +32,20 @@ export default function Banners({ data }: { data: Banner[] }) {
 
   return (
     <div className="mt-14">
-      {/* sticky 对于framermotion bug, 需要多加一个div */}
-      <MotionDiv
+      {/* sticky 对于 framermotion bug, 需要多加一个 div */}
+      <div
         // md:[&>*:nth-child(2)]:col-span-2
-        className="grid grid-cols-1 md:grid-cols-4 gap-3 not-prose "
-        variants={container}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 not-prose "
+        // variants={container}
         // initial={firstLoading ? 'hidden' : 'visible'}
-        initial="hidden"
-        animate={'visible'}
+        // initial="hidden"
+        // animate={'visible'}
       >
         {/* NOTE: 数量不固定 */}
-        {data.slice(0, 8).map((banner) => (
-          <MotionDiv
+        {data.slice(0, 4).map((banner) => (
+          <div
             key={banner.imageUrl}
-            variants={item}
+            // variants={item}
             // md:first:col-span-2
             className="overflow-hidden rounded-md"
           >
@@ -65,9 +65,9 @@ export default function Banners({ data }: { data: Banner[] }) {
                 height={480}
               />
             </Link>
-          </MotionDiv>
+          </div>
         ))}
-      </MotionDiv>
+      </div>
     </div>
   );
 }
