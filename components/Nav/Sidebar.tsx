@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import SidebarSearchMusic from '~components/SidebarSearchMusic';
 
 const pcSidebarItems = [
-  { href: '/', title: '为我推荐', icon: <FaHouse /> },
+  { href: '/', title: '音乐推荐', icon: <FaHouse /> },
   { href: '/mv', title: 'MV 视频', icon: <FaVideo />, disable: true },
   {
     href: '/starpick',
