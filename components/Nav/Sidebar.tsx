@@ -27,9 +27,9 @@ export const Sidebar = () => {
     <div className="sticky w-1/6 select-none hidden lg:block left-0 top-0 bg-slate-100/70 backdrop-blur-sm p-4 h-screen space-y-2 bgblack flex-col">
       <Link href={'/'}>
         <div className="flex mb-8">
-          <RiNeteaseCloudMusicFill className="w-8 h-8 mr-2 text-rose-500/95" />
+          {/* <RiNeteaseCloudMusicFill className="w-8 h-8 mr-2 text-rose-500/95" /> */}
           <div className="flex items-center space-x-2">
-            <div className="text-base font-semibold">网易云音乐</div>
+            <div className="text-base font-semibold">在线音乐</div>
             <button className="text-gray-800 border-gray-400 border p-0.5 rounded-sm font-bold text-[8px]">
               Beta
             </button>
@@ -45,7 +45,7 @@ export const Sidebar = () => {
               className={`p-2 rounded text-gray-500 mx-0 mb-2 transition-all ${
                 // pathname.includes(item.href)
                 pathname === item.href
-                  ? 'bg-rose-500 text-white'
+                  ? 'bg-black text-white'
                   : 'hover:bg-slate-200/90'
               }`}
             >
@@ -54,7 +54,7 @@ export const Sidebar = () => {
             </div>
           </Link>
         ))}
-      {/* <SidebarSearchMusic /> */}
+      <SidebarSearchMusic />
     </div>
   );
 };

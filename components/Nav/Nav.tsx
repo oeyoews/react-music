@@ -1,11 +1,11 @@
-import { FcMusic, FcSearch, FcSettings } from 'react-icons/fc';
+import { FaStar, FaSearch, FaUser } from 'react-icons/fa';
 import Link from 'next/link';
 import React from 'react';
 
 const mobNavItems = [
-  { href: '/', title: 'home', icon: <FcMusic /> },
-  { href: '/search', title: 'search', icon: <FcSearch /> },
-  { href: '/login', title: 'login', icon: <FcSettings /> }
+  { href: '/', title: 'home', icon: <FaStar /> },
+  { href: '/search', title: 'search', icon: <FaSearch /> },
+  { href: '/login', title: 'login', icon: <FaUser /> }
 ];
 
 export default function MobNav() {
