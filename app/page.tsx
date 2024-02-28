@@ -5,6 +5,7 @@ import RecommendSongs from '~components/RecommendSongs';
 import { getHotPlayList } from '~lib/api/playlist';
 import StarPick from '~components/StarPick';
 import PlaylistPersonalized from '~components/PlaylistPersonalized';
+import { LoginAnonymous } from '~components/Login/anonymous';
 export const revalidate = 3600;
 
 export default async function Home() {
@@ -13,6 +14,7 @@ export default async function Home() {
 
   return (
     <div className="p-2 mb-16">
+      <LoginAnonymous />
       <Banners data={bannerData.banners} />
       <Playlist data={PlaylistData.playlists} />
       <RecommendSongs />

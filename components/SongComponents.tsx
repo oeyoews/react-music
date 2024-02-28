@@ -22,6 +22,7 @@ import ReactMusicPlayer from './Player/ReactMusicPlayer';
 import { useMusicStore } from '~lib/store';
 
 import dynamic from 'next/dynamic';
+import { LoginAnonymous } from './Login/anonymous';
 
 const APlayer = dynamic(() => import('./Player/APlayer'), { ssr: false });
 
@@ -122,6 +123,7 @@ export default function SongPage() {
   // NOTE: app-index.js:32 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
   return (
     <>
+      <LoginAnonymous />
       <div className="space-x-2 my-4 flex justify-center items-center">
         {/* <Button className="font-bold capitalize" onClick={togglePlayer}>
           Toggle Player
