@@ -30,46 +30,50 @@ function ReactMusicPlayer({ id }: { id: string }) {
   const { data: artistData, isLoading: isLoadingArtist } = useArtistData(arId!);
 
   useEffect(() => {
-    const options = {
-      src: [musicData?.data[0].url!],
-      html5: true,
-      pool: 10,
-      preload: true,
-      rate: 1,
-      onend: () => {
-        setIsPlaying(false);
-      },
-      onload: () => {
-        // TODO: check duration is valid, such as zero
-        setDuration(sound.duration());
-        // setCurrentTime(0);
-        // setDuration(0);
-      },
-      onplay: () => {
-        const progressInterval = setInterval(() => {
-          const currentTime = apRef.current?.seek();
-          setCurrentTime(currentTime!);
-        }, 50);
+    try {
+      const options = {
+        src: [musicData?.data?.[0]?.url!],
+        html5: true,
+        pool: 10,
+        preload: true,
+        rate: 1,
+        onend: () => {
+          setIsPlaying(false);
+        },
+        onload: () => {
+          // TODO: check duration is valid, such as zero
+          setDuration(sound.duration());
+          // setCurrentTime(0);
+          // setDuration(0);
+        },
+        onplay: () => {
+          const progressInterval = setInterval(() => {
+            const currentTime = apRef.current?.seek();
+            setCurrentTime(currentTime!);
+          }, 50);
 
-        apRef.current?.on('stop', () => {
-          clearInterval(progressInterval);
-        });
-      }
-    };
+          apRef.current?.on('stop', () => {
+            clearInterval(progressInterval);
+          });
+        }
+      };
 
-    const sound = new Howl(options);
+      const sound = new Howl(options);
 
-    apRef.current = sound;
+      apRef.current = sound;
 
-    return () => {
-      if (apRef.current) {
-        apRef.current.stop();
-        apRef.current.unload();
-        setIsPlaying(false);
-        setCurrentTime(0);
-        setDuration(0);
-      }
-    };
+      return () => {
+        if (apRef.current) {
+          apRef.current.stop();
+          apRef.current.unload();
+          setIsPlaying(false);
+          setCurrentTime(0);
+          setDuration(0);
+        }
+      };
+    } catch (error) {
+      console.error(error);
+    }
   }, [musicData]);
 
   if (isLoadingURL) {

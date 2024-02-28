@@ -30,9 +30,9 @@ export default function APlayer({ slug }: { slug: string }) {
     }
   };
 
-  // NOTE: 本地useeffect跑两次, 导致 apref 丢失???
+  // NOTE: 本地 useeffect 跑两次，导致 apref 丢失？??
   useEffect(() => {
-    console.log('updated', window.location.href);
+    // console.log('updated', window.location.href);
     return () => {
       setVanillaTitle();
       apRef.current?.destroy();

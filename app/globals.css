@@ -121,6 +121,7 @@ h2 {
   animation-name: rotate; /* 使用定义的 rotate 关键帧动画 */
 }
 
+ol,
 ul {
   list-style-type: none !important;
 }
