@@ -3,7 +3,7 @@
     "packages/*"
   ],
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2017",
     "lib": [
       "dom",
       "dom.iterable",
@@ -21,7 +21,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -29,6 +29,9 @@
       }
     ],
     "paths": {
+      "@/*": [
+        "./*"
+      ],
       "~*": [
         "./*"
       ]
@@ -39,7 +42,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "types.d.ts"
+    "types.d.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

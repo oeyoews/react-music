@@ -1,12 +1,17 @@
 'use client';
 
+import { use } from 'react';
 import Link from 'next/link';
 import { useArtistData } from '~lib/hooks';
 import Image from 'next/image';
 import Spinner from '~components/Spinner';
 
-export default function page({ params }: { params: any }) {
-  const { slug } = params;
+export default function page({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = use(params);
 
   const ArtistData = () => {
     const { data: artistdata, isLoading } = useArtistData(slug);

@@ -1,6 +1,6 @@
 'use client';
 
-import { Tab } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 
 import SongComment from './SongComment';
 
@@ -10,25 +10,25 @@ export default function SongCommentTab({
   songComment: ISongComment;
 }) {
   const className =
-    'ui-selected:bg-neutral-200/80 ui-selected:text-black ui-not-selected:bg-white ui-not-selected:text-black m-1 p-1 rounded transition-all duration-500';
+    'ui-selected:bg-secondary ui-selected:text-secondary-foreground ui-not-selected:bg-muted/40 ui-not-selected:text-muted-foreground hover:text-foreground m-1 p-1 rounded transition-all duration-500';
   return (
     <div className="mb-8">
-      <Tab.Group>
-        <Tab.List>
+      <TabGroup>
+        <TabList>
           <Tab className={className}>最新评论</Tab>
           <Tab className={className}>最热评论</Tab>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
             <SongComment comments={songComment?.comments} />
-          </Tab.Panel>
-          <Tab.Panel>
+          </TabPanel>
+          <TabPanel>
             <SongComment comments={songComment?.hotComments} />
-          </Tab.Panel>
-          <Tab.Panel>Content 2</Tab.Panel>
-          <Tab.Panel>Content 3</Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+          </TabPanel>
+          <TabPanel>Content 2</TabPanel>
+          <TabPanel>Content 3</TabPanel>
+        </TabPanels>
+      </TabGroup>
     </div>
   );
 }

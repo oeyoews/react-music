@@ -16,7 +16,7 @@ export default function MV({
       <div key={mv.id} title={mv.name}>
         <Link href={`/mv/${mv.id}`}>
           <div className="overflow-hidden rounded-md relative group">
-            <div className="flex space-x-2 justify-between items-center text-sm text-black p-2 absolute backdrop-blur-md bg-white/10 w-full bottom-0 left-0 rounded-b-sm">
+            <div className="flex space-x-2 justify-between items-center text-sm text-white p-2 absolute backdrop-blur-md bg-black/40 w-full bottom-0 left-0 rounded-b-sm">
               <div className="truncate">{mv.name}</div>
               <div className="items-center flex space-x-2">
                 <FaVideo />

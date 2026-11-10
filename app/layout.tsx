@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import '~app/globals.css';
-import Nav from '~components/Nav/Nav';
 import NextTopLoader from 'nextjs-toploader';
-import { Sidebar } from '~components/Nav/Sidebar';
-import { Toaster } from 'react-hot-toast';
-import clsx from 'clsx';
+import { TooltipProvider } from '~components/ui/tooltip';
+import { Toaster } from '~components/ui/toaster';
+import { ThemeProvider } from '~components/theme-provider';
+import { cn } from '~lib/utils';
+import { DashboardShell } from './dashboard/layout';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'React Netease Cloud Music',
@@ -33,17 +34,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={clsx('antialiased', inter.className)}>
-        <Toaster />
-        <Nav />
-        <NextTopLoader color="#eb6864" height={1} showSpinner={false} />
-        <div className="flex">
-          <Sidebar />
-          <div className="mt-6 prose mx-2 w-full lg:w-5/6 max-w-none px-2">
-            {children}
-          </div>
-        </div>
+    <html
+      lang="en"
+      className={cn('font-sans', inter.variable)}
+      suppressHydrationWarning
+    >
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TooltipProvider>
+            <Toaster />
+            <NextTopLoader color="#eb6864" height={1} showSpinner={false} />
+            <DashboardShell>{children}</DashboardShell>
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

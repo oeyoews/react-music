@@ -1,8 +1,8 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import DrawserComponent from '~components/DrawserComponent';
 import {
   useSongDetailData,
   useArtistData,
@@ -10,6 +10,7 @@ import {
   useSongComment,
   useArtistMV
 } from '~lib/hooks';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~components/ui/tabs';
 import SongCommentTab from '~components/SongCommentTab';
 import Link from 'next/link';
 
@@ -18,13 +19,10 @@ import MV from '~components/Video/MV';
 import SkeletonSongComment from './ui/CommentSkeleton';
 import SkeletonSongs from './ui/SkeletonSongs';
 import SidebarSearchMusic from './SidebarSearchMusic';
-import ReactMusicPlayer from './Player/ReactMusicPlayer';
+import { toQueueSong } from '~lib/playlist-queue';
 import { useMusicStore } from '~lib/store';
 
-import dynamic from 'next/dynamic';
 import { LoginAnonymous } from './Login/anonymous';
-
-const APlayer = dynamic(() => import('./Player/APlayer'), { ssr: false });
 
 export const ArtistMVS = ({ slug }: { slug: string }) => {
   const { error, data: songData, isLoading } = useSongDetailData(slug);
@@ -45,20 +43,30 @@ export const ArtistMVS = ({ slug }: { slug: string }) => {
 // TODO: 点击链接后，路由没有发生变化，所以 aplayer 不会自动卸载，之后即使切换路由也不会自动卸载
 export const SimiSong = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useSiMiSong(slug);
+  const playSong = useMusicStore.use.playSong();
+  const songs = data?.songs ?? [];
+  const queue = songs.map((song) => toQueueSong(song));
+
   return (
     <div className="mt-4">
-      <hr />
-      <h2 className="my-2">相似歌曲</h2>
       {isLoading ? (
         <SkeletonSongs count={8} />
       ) : (
         <ul className="columns-1 md:columns-2">
-          {data?.songs?.map((song) => {
+          {songs.map((song, index) => {
             return (
               <li key={song.id} className="mt-0">
-                <Link href={`/song?id=${song.id}`} className="no-underline">
+                <button
+                  type="button"
+                  className="text-left hover:text-[var(--brand)]"
+                  onClick={() => {
+                    const target = queue[index];
+                    if (!target) return;
+                    playSong(target, queue);
+                  }}
+                >
                   {song.name} -- {song.artists?.[0].name}
-                </Link>
+                </button>
               </li>
             );
           })}
@@ -100,53 +108,61 @@ export const SongComment = ({ slug }: { slug: string }) => {
   }
   return (
     <div>
-      <div className="flex justify-start items-center space-x-2">
-        <h2 className="my-2">评论区</h2>
-        <div>共 {data?.total?.toLocaleString() || 0} 条评论</div>
-      </div>
+      <p className="my-2 text-sm text-muted-foreground">
+        共 {data?.total?.toLocaleString() || 0} 条评论
+      </p>
       <SongCommentTab songComment={data as ISongComment} />
     </div>
   );
 };
 
+function PlayInBar({ id }: { id: string }) {
+  const { data } = useSongDetailData(id);
+  const playSong = useMusicStore.use.playSong();
+  const started = useRef('');
+
+  useEffect(() => {
+    const song = data?.songs?.[0];
+    if (!song || started.current === String(song.id)) return;
+    started.current = String(song.id);
+    playSong(toQueueSong(song));
+  }, [data, playSong]);
+
+  return null;
+}
+
 export default function SongPage() {
   const params = useSearchParams();
   const id = params.get('id');
-  const player = useMusicStore.use.player();
-  const togglePlayer = useMusicStore.use.togglePlayer();
 
   if (!id) {
     return <SidebarSearchMusic />;
   }
 
-  // TODO: player 组件卸载
-  // NOTE: app-index.js:32 Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
   return (
     <>
       <LoginAnonymous />
-      <div className="space-x-2 my-4 flex justify-center items-center">
-        {/* <Button className="font-bold capitalize" onClick={togglePlayer}>
-          Toggle Player
-        </Button> */}
-        <DrawserComponent text="歌手信息" className="shrink">
+      <PlayInBar id={id} />
+      <Tabs defaultValue="artist" className="mt-8">
+        <TabsList className="max-w-full justify-start overflow-x-auto">
+          <TabsTrigger value="artist">歌手信息</TabsTrigger>
+          <TabsTrigger value="similar">相似歌曲</TabsTrigger>
+          <TabsTrigger value="comment">评论区</TabsTrigger>
+          <TabsTrigger value="mv">歌手 MV</TabsTrigger>
+        </TabsList>
+        <TabsContent value="artist" className="pt-2">
           <ArtistInfo slug={id} />
-        </DrawserComponent>
-        <DrawserComponent text="相似歌曲">
+        </TabsContent>
+        <TabsContent value="similar" className="pt-2">
           <SimiSong slug={id} />
-        </DrawserComponent>
-        <DrawserComponent text="评论区">
+        </TabsContent>
+        <TabsContent value="comment" className="pt-2">
           <SongComment slug={id} />
-        </DrawserComponent>
-        <DrawserComponent text="歌手MV">
+        </TabsContent>
+        <TabsContent value="mv" className="pt-2">
           <ArtistMVS slug={id} />
-        </DrawserComponent>
-      </div>
-      {/* <APlayer slug={id} /> */}
-      {player === 'cloud' ? (
-        <APlayer slug={id} />
-      ) : (
-        <ReactMusicPlayer id={id} />
-      )}
+        </TabsContent>
+      </Tabs>
     </>
   );
 }

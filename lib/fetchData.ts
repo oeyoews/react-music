@@ -7,21 +7,31 @@ type Config = {
   options?: RequestInit;
 };
 
+const DEFAULT_MUSIC_API = 'http://127.0.0.1:3001';
+
+export function getMusicApiBase() {
+  const fromEnv = process.env.NEXT_PUBLIC_MUSIC_API?.trim();
+  return fromEnv || DEFAULT_MUSIC_API;
+}
+
 function addParams(
   finalURL: string,
   params?: Record<string, string | number | boolean>
 ): string {
-  // 添加参数到 URL
   let apiURL = finalURL;
   if (params) {
-    // Include timestamp only if not already present in params
-    if (!params.hasOwnProperty('realIp')) {
-      params.realIp = process.env.NEXT_PUBLIC_REALIP as string;
+    if (!Object.prototype.hasOwnProperty.call(params, 'realIp')) {
+      const realIp = process.env.NEXT_PUBLIC_REALIP?.trim();
+      if (realIp) {
+        params.realIp = realIp;
+      }
     }
     const queryString = Object.keys(params)
       .map((key) => `${key}=${params[key]}`)
       .join('&');
-    apiURL += `?${queryString}`;
+    if (queryString) {
+      apiURL += `?${queryString}`;
+    }
   }
 
   return apiURL;
@@ -36,18 +46,21 @@ async function fetchData(
   const defaultOptions: RequestInit = {
     credentials: 'include',
     mode: 'cors',
-    // cache: 'force-cache',
     next: {
       revalidate: 3600
     },
-    // https://neteasecloudmusicapi-docs.4everland.app/#/?id=%e7%99%bb%e5%bd%95
-    // method: 'POST',
     headers: {
       'Content-Type': 'application/json'
-    } // cookie on header auto on same domain???
+    }
   };
   const mergedOptions: RequestInit = { ...defaultOptions, ...options };
   const urlWithParams = addParams(finalURL, params);
+
+  if (!URL.canParse(urlWithParams)) {
+    console.error('Invalid music API URL:', urlWithParams);
+    return null;
+  }
+
   console.log(
     chalk.green(finalURL),
     params ? chalk.cyan.bold(JSON.stringify(params)) : '',
@@ -56,19 +69,29 @@ async function fetchData(
 
   try {
     const res = await fetch(urlWithParams, mergedOptions);
+    if (!res.ok) {
+      console.error(
+        `Music API ${res.status} ${res.statusText}:`,
+        urlWithParams
+      );
+      return null;
+    }
     return await res.json();
   } catch (error) {
     console.error('Error in fetchData:', error);
-    throw error;
+    return null;
   }
 }
 
-export const create = (baseURL: string) => {
+export const create = (baseURL?: string) => {
   return (config: Config): Promise<any> => {
     const { url, params, options } = config;
-    const finalURL = url ? baseURL + url : baseURL;
+    const base = (baseURL || getMusicApiBase()).replace(/\/$/, '');
+    const finalURL = url ? `${base}${url}` : base;
     return fetchData(finalURL, params, options);
   };
 };
 
-export const customfetch = create(process.env.NEXT_PUBLIC_MUSIC_API as string);
+export const musicApiBase = getMusicApiBase();
+
+export const customfetch = create();

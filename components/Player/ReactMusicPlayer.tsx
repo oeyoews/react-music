@@ -1,6 +1,6 @@
 'use client';
 
-import clsx from 'clsx';
+import { cn } from '~lib/utils';
 import Image from 'next/image';
 import { Howl, Howler } from 'howler';
 import { useRef, useEffect, useState } from 'react';
@@ -19,7 +19,7 @@ function ReactMusicPlayer({ id }: { id: string }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const apRef = useRef<Howl>();
+  const apRef = useRef<Howl | undefined>(undefined);
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(
     id || '2102054543'
   );
@@ -109,7 +109,7 @@ function ReactMusicPlayer({ id }: { id: string }) {
                 alt="cover"
                 width={100}
                 height={100}
-                className={clsx(
+                className={cn(
                   'rounded-full object-cover object-center w-20 h-20 animated not-prose mb-2 cursor-pointer',
                   {
                     rotate: isPlaying
@@ -122,7 +122,9 @@ function ReactMusicPlayer({ id }: { id: string }) {
           </div>
           <div className="ml-2">
             <span>{musicName}</span>
-            <span className="text-gray-400 text-sm ml-2">{artistName}</span>
+            <span className="text-muted-foreground text-sm ml-2">
+              {artistName}
+            </span>
           </div>
         </div>
         <button onClick={handleToggle} className="">
@@ -133,7 +135,7 @@ function ReactMusicPlayer({ id }: { id: string }) {
           )}
         </button>
       </div>
-      <div className="flex text-gray-400 flex-row items-center space-x-1 text-sm">
+      <div className="flex text-muted-foreground flex-row items-center space-x-1 text-sm">
         <progress value={currentTime} max={duration} id="om-progress" />
         <span className="">{formatTime(currentTime)}</span>
         <span>/</span>

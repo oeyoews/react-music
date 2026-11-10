@@ -17,7 +17,7 @@ const ReactAplayer = dynamic(() => import('react-aplayer'), {
 });
 
 export default function APlayer({ slug }: { slug: string }) {
-  const apRef = useRef<AplayerMethods | null>();
+  const apRef = useRef<AplayerMethods | null>(null);
 
   const { data: musicData, isLoading: isLoadingURL } = useMusicURL(slug);
   const { data: songData, isLoading: isLoadingSongData } =

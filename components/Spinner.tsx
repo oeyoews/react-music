@@ -1,7 +1,4 @@
-'use client';
-
-import React from 'react';
-import { ColorRing } from 'react-loader-spinner';
+import { Spinner as SpinnerIcon } from '@/components/ui/spinner';
 
 export default function Spinner({
   center = true,
@@ -10,18 +7,9 @@ export default function Spinner({
   center?: boolean;
   size?: number;
 }) {
-  const classname = center ? 'flex justify-center items-center' : '';
   return (
-    <div className={classname}>
-      <ColorRing
-        visible={true}
-        height={size}
-        width={size}
-        ariaLabel="blocks-loading"
-        wrapperStyle={{}}
-        wrapperClass="blocks-wrapper"
-        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-      />
+    <div className={center ? 'flex items-center justify-center' : undefined}>
+      <SpinnerIcon style={{ width: size, height: size }} />
     </div>
   );
 }

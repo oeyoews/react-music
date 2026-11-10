@@ -15,7 +15,7 @@ export default function SongComment({
     .map((comment) => {
       return (
         <div key={comment.commentId} className="mb-4">
-          <div className="flex justify-start items-center space-x-1 text-sm text-gray-400 my-2">
+          <div className="flex justify-start items-center space-x-1 text-sm text-muted-foreground my-2">
             <Image
               src={comment.user.avatarUrl}
               alt={comment.user.nickname}

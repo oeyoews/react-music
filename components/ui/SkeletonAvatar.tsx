@@ -5,7 +5,7 @@ export default function SkeletonAvatar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'bg-gray-300 rounded-full animate-pulse shadow-lg my-0',
+        'bg-muted-foreground/20 rounded-full animate-pulse shadow-lg my-0',
         `w-[22px]`,
         `h-[22px]`,
         className

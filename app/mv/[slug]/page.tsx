@@ -1,12 +1,12 @@
 'use client';
 
+import { use } from 'react';
 import { getMvDetail, getMvURL } from '~lib/mv';
 import ArtPlayer from '~components/Player/ArtPlayer';
 import Spinner from '~components/Spinner';
 import SongCommentTab from '~components/SongCommentTab';
 import useSWRImmutable from 'swr/immutable';
 import { useMvComment } from '~lib/hooks';
-import DrawserComponent from '~components/DrawserComponent';
 
 const VideoTitle = ({ slug }: { slug: string }) => {
   const { data: mvDetailData, isLoading } = useSWRImmutable(
@@ -59,8 +59,12 @@ const VideoPlayer = ({ slug }: { slug: string }) => {
   );
 };
 
-export default function VideoPage({ params }: { params: Params }) {
-  const { slug } = params;
+export default function VideoPage({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = use(params);
 
   const { data: mvComment, isLoading } = useMvComment(slug);
 
@@ -73,16 +77,13 @@ export default function VideoPage({ params }: { params: Params }) {
     <>
       <VideoPlayer slug={slug} />
       <VideoTitle slug={slug} />
-      <DrawserComponent text="查看评论区">
-        <div className="flex justify-start items-center space-x-2 mt-8">
-          <h2 className="my-2">评论区</h2>
-          <div>共 {mvComment?.total?.toLocaleString()} 条评论</div>
-        </div>
+      <section className="mt-8">
+        <h2 className="text-base font-medium">评论</h2>
+        <p className="my-2 text-sm text-muted-foreground">
+          共 {mvComment?.total?.toLocaleString() || 0} 条评论
+        </p>
         <SongCommentTab songComment={mvComment as ISongComment} />
-      </DrawserComponent>
-      {/* <DrawserComponent text="查看相似MV">
-        <SiMiMV mvId={slug} />
-      </DrawserComponent> */}
+      </section>
     </>
   );
 }

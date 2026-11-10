@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "nextjs", "typescript"],
+  "categories": {
+    "correctness": "warn"
+  },
+  "rules": {
+    "react/no-unescaped-entities": "off"
+  }
+}

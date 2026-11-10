@@ -1,9 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Artplayer from 'artplayer';
-import toast from 'react-hot-toast';
-import Option from 'artplayer/types/option';
+import Artplayer, { type Option } from 'artplayer';
 
 export default function ArtPlayer({
   url,

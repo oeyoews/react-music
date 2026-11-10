@@ -89,11 +89,43 @@ export const searchCloud = async (keywords: string): Promise<ISearch> => {
   });
 };
 
-export const searchSuggest = async (keywords: string): Promise<ISearch> => {
+export const searchCloudTyped = async (
+  keywords: string,
+  type: SearchCloudType,
+  limit = 30,
+  offset = 0
+): Promise<ICloudSearch | null> => {
+  return await fetch({
+    url: '/cloudsearch',
+    params: {
+      keywords,
+      type,
+      limit,
+      offset
+    }
+  });
+};
+
+export const searchSuggest = async (
+  keywords: string
+): Promise<ISearchSuggest | null> => {
   return await fetch({
     url: '/search/suggest',
     params: {
       keywords
+    }
+  });
+};
+
+/** 移动端联想词（猜你想搜） */
+export const searchKeywordSuggest = async (
+  keywords: string
+): Promise<ISearchKeywordSuggest | null> => {
+  return await fetch({
+    url: '/search/suggest',
+    params: {
+      keywords,
+      type: 'mobile'
     }
   });
 };

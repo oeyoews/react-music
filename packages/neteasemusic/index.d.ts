@@ -311,6 +311,7 @@ declare global {
     creativeType: any;
     creativeId: string;
     actionType: any;
+    action?: string | null;
     uiElement: ResourceUIElement;
     resources: Resource[];
     alg: string;
@@ -325,7 +326,8 @@ declare global {
     resourceId: string;
     resourceUrl: null;
     resourceExtInfo: ResourceEXTInfo;
-    action: null;
+    action?: string | null;
+    name?: string | null;
     actionType: any;
     valid: boolean;
     alg: string;
@@ -339,10 +341,18 @@ declare global {
   }
 
   interface ResourceEXTInfo {
-    users: StarPickUser[];
-    songData: SongData;
-    hasListened: boolean;
-    threadId: string;
+    users?: StarPickUser[];
+    songData?: SongData;
+    hasListened?: boolean;
+    threadId?: string;
+    playCount?: number;
+    highQuality?: boolean;
+    specialType?: number;
+    artists?: unknown;
+    song?: unknown;
+    djProgram?: unknown;
+    eventMsg?: unknown;
+    user?: unknown;
   }
 
   interface Quality {
@@ -355,6 +365,7 @@ declare global {
 
   interface SongDetail {
     ar: Ar[];
+    al?: Al;
     name: string;
     id: number;
     fee: any;
@@ -518,8 +529,28 @@ declare global {
     anchor: boolean;
   }
 
+  interface HomepageImage {
+    imageUrl?: string;
+    imageUrl2?: string;
+    purePicture?: boolean;
+    action?: string;
+    title?: string;
+  }
+
+  interface HomepageButton {
+    action?: string;
+    actionType?: string;
+    text?: string;
+    iconUrl?: string | null;
+  }
+
   interface ResourceUIElement {
-    mainTitle: MainTitle;
+    mainTitle?: MainTitle;
+    subTitle?: SubTitle;
+    image?: HomepageImage;
+    labelTexts?: string[];
+    labelType?: string;
+    button?: HomepageButton;
     rcmdShowType: RcmdShowType;
   }
 
@@ -549,8 +580,9 @@ declare global {
   }
 
   interface BlockUIElement {
-    subTitle: SubTitle;
-    rcmdShowType: RcmdShowType;
+    subTitle?: SubTitle;
+    button?: HomepageButton;
+    rcmdShowType?: RcmdShowType;
   }
 
   interface SubTitle {
@@ -1416,10 +1448,83 @@ declare global {
   }
 
   // search
+  type SearchCloudType = 1 | 10 | 100 | 1000 | 1002 | 1004 | 1006 | 1009 | 1014;
+
   interface ISearch {
     result: Result;
     code: number;
     message?: string;
+  }
+
+  interface ICloudSearch {
+    code: number;
+    message?: string;
+    result?: CloudSearchResult;
+  }
+
+  interface CloudSearchResult {
+    songs?: Song[];
+    songCount?: number;
+    artists?: CloudSearchArtist[];
+    artistCount?: number;
+    playlists?: Playlist[];
+    playlistCount?: number;
+    albums?: Album[];
+    albumCount?: number;
+    hasMore?: boolean;
+  }
+
+  interface CloudSearchArtist {
+    id: number;
+    name: string;
+    picUrl?: string;
+    img1v1Url?: string;
+    alias?: string[];
+    albumSize?: number;
+    musicSize?: number;
+    fansSize?: number | null;
+    trans?: string | null;
+  }
+
+  interface ISearchSuggest {
+    code: number;
+    result: SearchSuggestResult;
+  }
+
+  interface ISearchKeywordSuggest {
+    code: number;
+    result: {
+      allMatch?: SearchKeywordMatch[];
+    };
+  }
+
+  interface SearchKeywordMatch {
+    keyword: string;
+    type: number;
+    alg?: string;
+    lastKeyword?: string;
+    feature?: string;
+  }
+
+  interface SearchSuggestResult {
+    order?: string[];
+    songs?: Song[];
+    artists?: SearchSuggestArtist[];
+    albums?: SearchSuggestAlbum[];
+  }
+
+  interface SearchSuggestArtist {
+    id: number;
+    name: string;
+    picUrl?: string | null;
+    alias?: string[];
+    trans?: string | null;
+  }
+
+  interface SearchSuggestAlbum {
+    id: number;
+    name: string;
+    artist?: { id: number; name: string };
   }
 
   interface Result {

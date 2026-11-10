@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import Search from '~components/Search';
 import HotSongs from '~components/HotSongs';
 import { searchHotDetail } from '~lib/search';
@@ -18,17 +19,25 @@ const HotSongComponent = () => {
   );
 };
 
-export default function SearchPage() {
+function SearchPageContent() {
   const params = useSearchParams();
   const searchWord = params.get('searchWord');
   return (
     <>
-      <Search />
+      {!searchWord ? <Search /> : null}
       {!searchWord ? (
         <HotSongComponent />
       ) : (
         <SearchResult searchWord={searchWord} />
       )}
     </>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SkeletonSongs count={20} />}>
+      <SearchPageContent />
+    </Suspense>
   );
 }

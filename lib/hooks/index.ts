@@ -13,7 +13,9 @@ import {
 } from '~lib/search';
 
 import { getMVComment, getArtistMV, getSiMiMV } from '~lib/mv';
-import { getPlayListPersonalized } from '~lib/api/playlist';
+import { getUserPlayList } from '~lib/api/playlist';
+import { isAccountCookie } from '~lib/cookie';
+import { useCookie } from '~lib/hooks/useCookie';
 import useSWR from 'swr';
 
 export const useSiMiMV = (mvId: Id) => {
@@ -22,12 +24,6 @@ export const useSiMiMV = (mvId: Id) => {
 
 export const useArtistMV = (arId: Id) => {
   return useSWR(arId + 'artistmv', () => getArtistMV(arId));
-};
-
-export const usePlaylistPersonalized = () => {
-  return useSWRImmutable('playlistpersonalized', () =>
-    getPlayListPersonalized(localStorage.cookie)
-  );
 };
 
 export const useMvComment = (id: Id) => {
@@ -43,7 +39,7 @@ export const useMvComment = (id: Id) => {
 
 // 不要使用id, 作为key, 因为一个页面如果使用id作为路由, 多个数据会错乱
 export const useLyric = (id: Id) => {
-  return useSWRImmutable(id + 'lyric', () => getLyric(id), {
+  return useSWRImmutable(id ? id + 'lyric' : null, () => getLyric(id), {
     suspense: false
   });
 };
@@ -68,19 +64,28 @@ export const useUserData = (uid: number) => {
   return useSWRImmutable([uid], () => getUserDetail(uid));
 };
 
+export const useUserPlaylists = (uid?: number) => {
+  const cookie = useCookie();
+  const signedIn = isAccountCookie(cookie);
+  return useSWRImmutable(
+    uid && signedIn ? ['user-playlists', uid, cookie] : null,
+    () => getUserPlayList(uid!, cookie)
+  );
+};
+
 export const useStarPick = () => {
-  return useSWRImmutable('starpick', () => getStarPick(localStorage.cookie), {
+  const cookie = useCookie();
+  return useSWRImmutable(['starpick', cookie], () => getStarPick(cookie), {
     // suspense: true,
     refreshInterval: 3600000
   });
 };
 
 export const useMusicURL = (id: Id) => {
-  // [id, localStorage.cookie]
-  // TODO: 为什么不能直接传
+  const cookie = useCookie();
   return useSWRImmutable(
-    id + 'musicurl',
-    () => getMusicURL(id, localStorage?.cookie || ''),
+    id ? [id, 'musicurl', cookie] : null,
+    () => getMusicURL(id, cookie),
     {
       suspense: false, // NOTE: localStorage not suitable for suspense on server, so this prerender will error without no suspense
       revalidateOnFocus: false
